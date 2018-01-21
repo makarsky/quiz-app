@@ -1,0 +1,41 @@
+{
+    "questions":
+        [
+            {
+                "question": "What is the output of the code? alert(typeof(NaN));",
+                "choices": ["number", "object", "string", "function"],
+                "type": "input",
+                "correctAnswer": "number"
+            },
+            {
+                "question": "You can’t delete variables declared with var keyword by ‘delete’ operator.",
+                "choices": ["true", "false"],
+                "type": "select",
+                "correctAnswer": "true"
+            },
+            {
+                "question": "What is the output of the code? alert(typeof([1, 2]) != (typeof {obg:23}));",
+                "choices": ["true", "false"],
+                "type": "select",
+                "correctAnswer": "false"
+            },
+            {
+                "question": "JS numbers are always stored as double precision floating point numbers.",
+                "choices": ["true", "false"],
+                "type": "select",
+                "correctAnswer": "true"
+            },
+            {
+                "question": "What is the output of the code? alert(0.1 + 0.2 == 0.3);",
+                "choices": ["true", "false"],
+                "type": "select",
+                "correctAnswer": "false"
+            },
+            {
+                "question": "What function is used to merge arrays?",
+                "choices": ["concat()", "merge()", "array_merge()", "add()"],
+                "type": "select",
+                "correctAnswer": "concat()"
+            }
+        ]
+}
