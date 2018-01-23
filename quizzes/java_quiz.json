@@ -7,5 +7,17 @@
                 "type": "select",
                 "correctAnswer": "true"
             },
+            {
+                "question": "An anonymous class cannot have an explicitly declared constructor.",
+                "choices": ["true", "false"],
+                "type": "select",
+                "correctAnswer": "true"
+            },
+            {
+                "question": "Java final class can be a superclass.",
+                "choices": ["true", "false"],
+                "type": "select",
+                "correctAnswer": "false"
+            },
         ]
 }
