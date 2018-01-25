@@ -30,6 +30,12 @@
                 "choices": ["true", "false"],
                 "type": "radio",
                 "correctAnswer": "true"
+            },
+            {
+                "question": "There can be only one public top-level class per .java file.",
+                "choices": ["true", "false"],
+                "type": "radio",
+                "correctAnswer": "true"
             }
         ]
 }
