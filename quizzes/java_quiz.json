@@ -25,5 +25,11 @@
                 "type": "radio",
                 "correctAnswer": "true"
             },
+            {
+                "question": "Super class reference variables can always point to subclass objects.",
+                "choices": ["true", "false"],
+                "type": "radio",
+                "correctAnswer": "true"
+            }
         ]
 }
