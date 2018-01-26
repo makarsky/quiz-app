@@ -38,6 +38,12 @@
                 "correctAnswer": ["int", "short", "long"]
             },
             {
+                "question": "The switch statement works with which of the following?",
+                "choices": ["int", "String", "float", "long"],
+                "type": "select",
+                "correctAnswer": ["int", "String"]
+            },
+            {
                 "question": "There can be only one public top-level class per .java file.",
                 "choices": ["true", "false"],
                 "type": "radio",
