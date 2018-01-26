@@ -4,7 +4,7 @@
             {
                 "question": "What is the output of the code? alert(typeof(NaN));",
                 "choices": ["number", "object", "string", "function"],
-                "type": "input",
+                "type": "radio",
                 "correctAnswer": "number"
             },
             {
