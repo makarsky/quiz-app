@@ -32,6 +32,12 @@
                 "correctAnswer": "true"
             },
             {
+                "question": "In which data types the number 132 can fit?",
+                "choices": ["int", "short", "long", "byte"],
+                "type": "select",
+                "correctAnswer": ["int", "short", "long"]
+            },
+            {
                 "question": "There can be only one public top-level class per .java file.",
                 "choices": ["true", "false"],
                 "type": "radio",
