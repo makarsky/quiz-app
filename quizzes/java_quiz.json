@@ -60,6 +60,12 @@
                 "description": "int arr[]={1, 2, 3, 4, 5};int x = 4;int y = 0;for(int i = 0; i < 5; i++)y += arr[x - i] * i;System.out.print(y);",
                 "type": "input",
                 "correctAnswer": "20"
+            },
+            {
+                "question": "What is the output?",
+                "description": "for (int i = 1, j = 10; i < j; i += i, i++)System.out.print(j - i);",
+                "type": "input",
+                "correctAnswer": "9985"
             }
         ]
 }
