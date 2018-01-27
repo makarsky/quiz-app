@@ -36,6 +36,12 @@
                 "choices": ["concat()", "merge()", "array_merge()", "add()"],
                 "type": "radio",
                 "correctAnswer": "concat()"
+            },
+            {
+                "question": "What is the output?",
+                "description": "function mlt(a, b) {if(!(a && b)) {return 0;} else if(b == 1) {return a;} else {return (a + mlt(a, b - 1));}}console.log(mlt(3, 11));console.log(mlt(7, 1));",
+                "type": "input",
+                "correctAnswer": "337"
             }
         ]
 }
