@@ -45,10 +45,17 @@
             },
             {
                 "question": "What is the output?",
-                "description": "(function(){alert(typeof arguments);})();"
+                "description": "(function(){alert(typeof arguments);})();",
                 "choices": ["object", "function", "undefined", "null"],
                 "type": "radio",
                 "correctAnswer": "object"
+            },
+            {
+                "question": "Choose the numbers that are present in the output.",
+                "description": "for(let i = 0; i < 100; i ++)<br>if(i % 10 == i - 10)<br>document.write(i + ',');",
+                "choices": ["14", "17", "27", "9"],
+                "type": "select",
+                "correctAnswer": ["14", "17"]
             }
         ]
 }
