@@ -63,6 +63,13 @@
                 "description": "var a = 5 && 8;<br>var b = 5 || 8;<br>console.log(a + b);",
                 "type": "input",
                 "correctAnswer": "13"
+            },
+            {
+                "question": "What is the output?",
+                "description": "console.log((true+false)>2+true);",
+                "choices": ["true", "false", "error"],
+                "type": "radio",
+                "correctAnswer": "false"
             }
         ]
 }
