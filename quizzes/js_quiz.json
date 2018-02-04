@@ -57,6 +57,12 @@
                 "choices": ["14", "17", "27", "9"],
                 "type": "select",
                 "correctAnswer": ["14", "17"]
+            },
+            {
+                "question": "What is the output?",
+                "description": "var a = 5 && 8;<br>var b = 5 || 8;<br>console.log(a + b);",
+                "type": "input",
+                "correctAnswer": "13"
             }
         ]
 }
