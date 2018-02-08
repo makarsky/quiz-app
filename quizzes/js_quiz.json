@@ -82,6 +82,13 @@
                 "description": "const mul = x => y => x * y;<br>const res = mul(2)(5);<br>console.log(res);",
                 "type": "input",
                 "correctAnswer": "10"
+            },
+            {
+                "question": "Is this code valid?",
+                "description": "a = 5;<br>alert(a);",
+                "choices": ["yes", "no"],
+                "type": "radio",
+                "correctAnswer": "yes"
             }
         ]
 }
