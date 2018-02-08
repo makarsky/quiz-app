@@ -76,6 +76,12 @@
                 "choices": ["true", "false", "error"],
                 "type": "radio",
                 "correctAnswer": "false"
+            },
+            {
+                "question": "What is the output?",
+                "description": "const mul = x => y => x * y;<br>const res = mul(2)(5);<br>console.log(res);",
+                "type": "input",
+                "correctAnswer": "10"
             }
         ]
 }
