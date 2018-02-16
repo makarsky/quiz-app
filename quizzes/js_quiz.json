@@ -15,7 +15,8 @@
                 "correctAnswer": "true"
             },
             {
-                "question": "What is the output of the code? alert(typeof([1, 2]) != (typeof {obg:23}));",
+                "question": "What is the output?",
+                "description": "alert(typeof([1, 2]) != (typeof {obg:23}));",
                 "choices": ["true", "false"],
                 "type": "radio",
                 "correctAnswer": "false"
