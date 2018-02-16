@@ -2,7 +2,8 @@
     "questions":
         [
             {
-                "question": "What is the output of the code? alert(typeof(NaN));",
+                "question": "What is the output?",
+                "description": "alert(typeof(NaN));",
                 "choices": ["number", "object", "string", "function"],
                 "type": "radio",
                 "correctAnswer": "number"
