@@ -9,7 +9,7 @@
                 "correctAnswer": "number"
             },
             {
-                "question": "You can’t delete variables declared with var keyword by ‘delete’ operator.",
+                "question": "You can’t delete variables declared with var keyword by 'delete' operator.",
                 "choices": ["true", "false"],
                 "type": "radio",
                 "correctAnswer": "true"
@@ -28,7 +28,7 @@
                 "correctAnswer": "true"
             },
             {
-                "question": "What is the output of the code?",
+                "question": "What is the output?",
                 "description": "alert(0.1 + 0.2 == 0.3);",
                 "choices": ["true", "false"],
                 "type": "radio",
