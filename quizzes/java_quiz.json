@@ -51,7 +51,7 @@
             },
             {
                 "question": "What is the output?",
-                "description": "int[] arr = {0,0,0,0,0};int x = 0;int y = 2;for (int i = 0; i < 10; i +=2) {arr[x] = y + i;x++;}System.out.print(arr[3]);",
+                "description": "int[] arr = {0,0,0,0,0};<br>int x = 0;int y = 2;<br>for (int i = 0; i < 10; i +=2) {arr[x] = y + i;x++;}<br>System.out.print(arr[3]);",
                 "type": "input",
                 "correctAnswer": "8"
             },
