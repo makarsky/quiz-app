@@ -1,0 +1,11 @@
+{
+    "questions":
+        [
+            {
+                "question": "How to select all the fields available in the table?",
+                "choices": ["SELECT * FROM table_name;", "SELECT ALL FROM table_name;", "SELECT FROM table_name;", "SELECT # FROM table_name;"],
+                "type": "radio",
+                "correctAnswer": "SELECT * FROM table_name;"
+            }
+        ]
+}
