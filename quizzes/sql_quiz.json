@@ -6,6 +6,12 @@
                 "choices": ["SELECT * FROM table_name;", "SELECT ALL FROM table_name;", "SELECT FROM table_name;", "SELECT # FROM table_name;"],
                 "type": "radio",
                 "correctAnswer": "SELECT * FROM table_name;"
+            },
+            {
+                "question": "Which word is used to filter records?",
+                "choices": ["WHERE", "IF", "CONDITION", "FROM"],
+                "type": "radio",
+                "correctAnswer": "WHERE"
             }
         ]
 }
