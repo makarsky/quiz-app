@@ -25,6 +25,12 @@
                 "choices": ["Relational Database Management System", "Relational Database Microsoft System", "Relational Database MySQL", "Relational Database MongoDB System"],
                 "type": "radio",
                 "correctAnswer": "Relational Database Management System"
+            },
+            {
+                "question": "What does SQL stand for?",
+                "choices": ["Structured Query Language", "Structured Query List", "System Query Language"],
+                "type": "radio",
+                "correctAnswer": "Structured Query Language"
             }
         ]
 }
