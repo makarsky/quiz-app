@@ -19,6 +19,12 @@
                 "choices": ["yes", "no"],
                 "type": "radio",
                 "correctAnswer": "yes"
+            },
+            {
+                "question": "What does RDBMS stand for?",
+                "choices": ["Relational Database Management System", "Relational Database Microsoft System", "Relational Database MySQL", "Relational Database MongoDB System"],
+                "type": "radio",
+                "correctAnswer": "Relational Database Management System"
             }
         ]
 }
