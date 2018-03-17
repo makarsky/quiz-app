@@ -63,7 +63,7 @@
             },
             {
                 "question": "What is the output?",
-                "description": "for (int i = 1, j = 10; i < j; i += i, i++)<br>System.out.print(j - i);",
+                "description": "for (int i = 1, j = 10; i < j; i += i, i++)System.out.print(j - i);",
                 "type": "input",
                 "correctAnswer": "9985"
             }
