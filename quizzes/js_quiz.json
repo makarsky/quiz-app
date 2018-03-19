@@ -87,7 +87,7 @@
             },
             {
                 "question": "Is this code valid?",
-                "description": "a = 5;<br>alert(a);",
+                "description": "a = 5;alert(a);",
                 "choices": ["yes", "no"],
                 "type": "radio",
                 "correctAnswer": "yes"
