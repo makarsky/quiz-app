@@ -42,7 +42,7 @@
             },
             {
                 "question": "What is the output?",
-                "description": "function mlt(a, b) {<br>&nbsp;&nbsp;if(!(a && b)) {<br>&nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>&nbsp;&nbsp;} else if(b == 1) {<br>&nbsp;&nbsp;&nbsp;&nbsp;return a;<br>&nbsp;&nbsp;} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;return (a + mlt(a, b - 1));<br>&nbsp;&nbsp;}<br>}<br>console.log(mlt(3, 11));<br>console.log(mlt(7, 1));",
+                "description": "function mlt(a, b) {if(!(a && b)) {return 0;} else if(b == 1) {return a;} else {return (a + mlt(a, b - 1));}}console.log(mlt(3, 11));console.log(mlt(7, 1));",
                 "type": "input",
                 "correctAnswer": "337"
             },
