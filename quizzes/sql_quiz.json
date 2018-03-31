@@ -15,7 +15,7 @@
             },
             {
                 "question": "Is this statement valid?",
-                "description": "SELECT LastName, FirstName, Address FROM Persons <br>WHERE Address IS NULL;",
+                "description": "SELECT LastName, FirstName, Address FROM Persons WHERE Address IS NULL;",
                 "choices": ["yes", "no"],
                 "type": "radio",
                 "correctAnswer": "yes"
