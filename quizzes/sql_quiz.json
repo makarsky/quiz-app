@@ -37,6 +37,12 @@
                 "choices": ["It can insert records in a database", "It can create views in a database", "It can create new databases", "It can be executed inside HTML document"],
                 "type": "select",
                 "correctAnswer": ["It can insert records in a database", "It can create views in a database", "It can create new databases"]
+            },
+            {
+                "question": "The OR operator displays a record if ANY conditions listed are true. The AND operator displays a record if ALL of the conditions listed are true.",
+                "choices": ["true", "false"],
+                "type": "radio",
+                "correctAnswer": "true"
             }
         ]
 }
