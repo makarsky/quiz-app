@@ -49,6 +49,11 @@
                 "choices": ["ORDER BY", "SORT BY", "SORT", "ORDER"],
                 "type": "radio",
                 "correctAnswer": "ORDER BY"
+            },
+            {
+                "question": "Which operator is used to select values within a range?",
+                "type": "input",
+                "correctAnswer": "BETWEEN"
             }
         ]
 }
