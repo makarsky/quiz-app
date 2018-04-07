@@ -43,6 +43,12 @@
                 "choices": ["true", "false"],
                 "type": "radio",
                 "correctAnswer": "true"
+            },
+            {
+                "question": "Which SQL keyword is used to sort the result-set?",
+                "choices": ["ORDER BY", "SORT BY", "SORT", "ORDER"],
+                "type": "radio",
+                "correctAnswer": "ORDER BY"
             }
         ]
 }
