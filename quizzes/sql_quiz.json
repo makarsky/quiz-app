@@ -59,6 +59,11 @@
                 "question": "Which operator is used in a WHERE clause to search for a specified pattern in a column?",
                 "type": "input",
                 "correctAnswer": "LIKE"
+            },
+            {
+                "question": "Which function returns the number of rows that matches a specified criteria?",
+                "type": "input",
+                "correctAnswer": "COUNT"
             }
         ]
 }
