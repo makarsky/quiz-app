@@ -64,6 +64,12 @@
                 "question": "Which function returns the number of rows that matches a specified criteria?",
                 "type": "input",
                 "correctAnswer": "COUNT"
+            },
+            {
+                "question": "Which operator displays a record if all the conditions separated by it is TRUE?",
+                "choices": ["AND", "&&", "OR", "||"],
+                "type": "radio",
+                "correctAnswer": "AND"
             }
         ]
 }
