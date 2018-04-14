@@ -70,6 +70,11 @@
                 "choices": ["AND", "&&", "OR", "||"],
                 "type": "radio",
                 "correctAnswer": "AND"
+            },
+            {
+                "question": "Write a query to select all columns from the city table",
+                "type": "input",
+                "correctAnswer": "SELECT * FROM city;"
             }
         ]
 }
