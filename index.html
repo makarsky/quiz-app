@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+  <link href="style.css" rel="stylesheet">
+  <script type='text/javascript' src='main.js'></script>
+</head>
+<body>
+<div id="content">
+    <div class="">
+        <div class="menu-container" onclick="toggleMenu(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <div style="text-align:center;margin-top:10px;margin-bottom:8px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div>
+    </div>
+    <div id="myProgress">
+        <div id="timeBar"></div>
+    </div>
+    
+<div id="regForm">
+
+  <div class="tab">
+    <h3>Final methods can be overloaded.</h3>
+    <div class="radio">
+        <label><input type="radio" name="answer">True</label>
+    </div>
+    <div class="radio">
+        <label><input type="radio" name="answer">False</label>
+    </div>
+    
+    <div style="overflow:auto;">
+        <div style="float:right;">
+          <button type="button" id="nextBtn" onclick="nextPrev(1)">Submit</button>
+        </div>
+    </div>
+  </div>
+  
+  <div class="tab">Contact Info:
+    <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
+    <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p>
+  </div>
+  
+  <div class="tab">Login Info:
+    <p><input placeholder="Username..." oninput="this.className = ''" name="uname"></p>
+    <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
+  </div>
+  
+  <div class="tab">Login Info:
+    <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
+  </div>
+  
+  <div class="tab">Login Info:
+    <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
+  </div>
+  
+</div>
+<button id="submitAnswer" onclick="move()">Submit</button>
+
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+  <div id="menu" class="overlay-content">
+    <a href="#" onclick="openLink('about')">Author</a>
+    <a href="#" onclick="openLink('challenges')">Challenges</a>
+  </div>
+  
+  <div id="about" class="overlay-content">
+    <a href="#" onclick="openLink('menu')">&larr; Back</a>
+    <br>
+
+    <div class="center-block">
+        <img src="https://api.sololearn.com/Uploads/Avatars/779917.jpg" class="img-circle"
+             style="width:80px">
+    </div>
+    <br>
+    <div style="color:#BBB">
+        <h4 class="media-heading">Igor Makarsky</h4>
+        <p>Belarusian. 23 years old. Full-stack PHP developer. Sololearn user.</p>
+        <p><a href="https://www.sololearn.com/Profile/779917">My Sololearn profile</a></p>
+    </div>
+  </div>
+  
+  <div id="challenges" class="overlay-content">
+    <a href="#" onclick="openLink('menu')">&larr; Back</a>
+    <br>
+    <a href="#" onclick="loadQuiz('javascript')">Javascript</a>
+    <a href="#" onclick="loadQuiz('java')">Java</a>
+  </div>
+
+</div>
+</div>
+
+<script>
+var currentTab = 0; // Current card
+showTab(currentTab); // Show the current card
+var timer = null;
+</script>
+
+</body>
+</html>

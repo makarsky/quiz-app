@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #f1f1f1;
+}
+
+#regForm {
+  background-color: #ffffff;
+  margin: 30px auto;
+  font-family: Arial;
+  padding: 20px 20px 20px 20px;
+  width: 90%;
+  min-width: 300px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+h1 {
+  text-align: center;  
+}
+
+/* Mark input boxes that gets an error on validation: */
+.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all cards by default: */
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.7;
+  transition: 0.7s;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step.correct {
+  background-color: #4CAF50;
+}
+
+.step.wrong {
+  background-color: #FD3A0F;
+}
+
+.removed-item {
+    animation: removed-item-animation 1s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
+    /*transform origin is moved to the bottom left corner*/
+    transform-origin: 0% 100%;
+}
+ 
+@keyframes removed-item-animation {
+    0% {
+        opacity: 1;
+        transform: rotateZ(0);
+    }
+ 
+    100% {
+        opacity: 0;
+        transform: translateY(600px) rotateZ(90deg);
+    }
+}
+
+.new-item {
+    opacity: 0;
+    animation: new-item-animation .3s linear forwards;
+}
+ 
+@keyframes new-item-animation {
+    from {
+        opacity: 0;
+        transform: translateY(-400px);
+    }
+ 
+    to {
+        opacity: 1;
+        transform : translateY(0);
+    }
+}
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#timeBar {
+  width: 100%;
+  height: 1.5vw;
+  background-color: #4CAF50;
+  /*transition: 1s;*/
+}
+
+#submitAnswer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border: 2px solid #ddd;
+}
+
+.menu-container {
+    position: absolute;
+    margin: -6px 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 30px;
+    height: 5px;
+    background-color: #bbbbbb;
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+.overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */    
+    height: 100%;
+    width: 0;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0); /* Black fallback color */
+    background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+    position: relative;
+    top: 25%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block; /* Display block instead of inline */
+    transition: 0.3s; /* Transition effects on hover (color) */
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+@media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
