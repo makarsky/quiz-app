@@ -80,6 +80,12 @@
                 "question": "Write a query to delete the city table from a database.",
                 "type": "input",
                 "correctAnswer": "DROP TABLE city;"
+            },
+            {
+                "question": "Choose correct MySQL text data types.",
+                "choices": ["LONGTEXT", "BLOB", "SMALLTEXT", "MIDDLEBLOB"],
+                "type": "select",
+                "correctAnswer": ["LONGTEXT", "BLOB"]
             }
         ]
 }
