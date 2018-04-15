@@ -86,6 +86,12 @@
                 "choices": ["LONGTEXT", "BLOB", "SMALLTEXT", "MIDDLEBLOB"],
                 "type": "select",
                 "correctAnswer": ["LONGTEXT", "BLOB"]
+            },
+            {
+                "question": "Choose correct MySQL number data types.",
+                "choices": ["TINYINT", "BIGINT", "MIDDLEINT", "LONG"],
+                "type": "select",
+                "correctAnswer": ["TINYINT", "BIGINT"]
             }
         ]
 }
