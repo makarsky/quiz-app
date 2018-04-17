@@ -1,3 +1,5 @@
+var randomQuizzes = [];
+
 function showTab(n) {
   // This function will display the specified tab of the form...
   var x = document.getElementsByClassName("tab");
@@ -113,4 +115,23 @@ function openLink(id) {
     var menuSections = document.getElementsByClassName("overlay-content");
     [].forEach.call(menuSections, (e) => e.style.display = "none");
     document.getElementById(id).style.display = "block";
+}
+
+function loadQuizzes(quizName) {
+  var request =  new XMLHttpRequest();
+  request.open('GET', 'https://raw.githubusercontent.com/makarsky/quiz-app/master/quizzes/sql_quiz.json');
+  request.onload = () => {
+    var loadedQuizzes = JSON.parse(request.responseText);
+
+    for (var i = 0; i < 5; i++) {
+      var randomNumber = Math.floor(Math.random() * loadedQuizzes.questions.length);
+      
+      var randomQuiz = loadedQuizzes.questions[randomNumber];
+      randomQuizzes.push(randomQuiz);
+      loadedQuizzes.questions.splice(randomNumber, 1);
+    }
+  };
+
+  request.onerror = () => console.log('Error');
+  request.send();
 }
