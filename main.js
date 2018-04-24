@@ -119,7 +119,7 @@ function openLink(id) {
 
 function loadQuizzes(quizName) {
   var request =  new XMLHttpRequest();
-  request.open('GET', 'https://raw.githubusercontent.com/makarsky/quiz-app/master/quizzes/sql_quiz.json');
+  request.open('GET', 'https://raw.githubusercontent.com/makarsky/quiz-app/master/quizzes/js_quiz.json');
   request.onload = () => {
     var loadedQuizzes = JSON.parse(request.responseText);
 
@@ -130,8 +130,58 @@ function loadQuizzes(quizName) {
       randomQuizzes.push(randomQuiz);
       loadedQuizzes.questions.splice(randomNumber, 1);
     }
+
+    addQuizzes(); // Add quizzes to the template
+    showTab(currentTab); // Show the current card
   };
 
   request.onerror = () => console.log('Error');
   request.send();
+}
+
+function addQuizzes() {
+  var card = document.getElementById("regForm");
+
+  card.innerHTML = randomQuizzes.map(buildQuiz).join('');
+}
+
+function buildQuiz(rawQuiz) {
+  var template;
+
+  switch (rawQuiz.type) {
+    case 'select':
+    case 'radio':
+      template = 
+      `<div class="tab">
+        <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
+        <div>${rawQuiz.description ? rawQuiz.description : ''}</div>
+        ${choiceBuilder(rawQuiz.type, rawQuiz.choices)}
+      </div>`;
+      break;
+    case 'input':
+      template = 
+      `<div class="tab">
+        <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
+        <div>${rawQuiz.description ? rawQuiz.description : ''}</div>
+        <p><input class="input" oninput="this.className = ''" name="answer" maxlength="${rawQuiz.correctAnswer.length}"></p>
+      </div>`;
+      break;
+  }
+
+  return template;
+}
+
+function choiceBuilder(type, choices) {
+  switch (type) {
+    case 'select':
+      return choices.map((type => choice => 
+        `<div class="checkbox">
+          <label><input type="checkbox" name="answer">${choice}</label>
+        </div>`)(type)).join('');
+    case 'radio':
+      return choices.map((type => choice => 
+        `<div class="radio">
+          <label><input type="radio" name="answer">${choice}</label>
+        </div>`)(type)).join('');
+  }
 }
