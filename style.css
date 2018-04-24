@@ -8,6 +8,12 @@ body {
     background-color: #f1f1f1;
 }
 
+input {
+    border: none;
+    border-bottom: 1px solid black;
+    outline-style: none;
+}
+
 #regForm {
   background-color: #ffffff;
   margin: 30px auto;

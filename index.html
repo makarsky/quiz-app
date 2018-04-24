@@ -36,12 +36,13 @@
   
   <div id="regForm">
     <div class="tab">
-      <h3>Final methods can be overloaded.</h3>
+      <h4>Question?</h4>
+      <div>Description</div>
       <div class="radio">
-          <label><input type="radio" name="answer">True</label>
+          <label><input type="radio" name="answer">answer1</label>
       </div>
       <div class="radio">
-          <label><input type="radio" name="answer">False</label>
+          <label><input type="radio" name="answer">answer2</label>
       </div>
       
       <div style="overflow:auto;">
@@ -70,7 +71,7 @@
     </div>
   </div>
 
-  <button id="submitAnswer" onclick="move()">Submit</button>
+  <button id="submitAnswer" onclick="nextPrev(1)">Submit</button>
 
   <!-- Navigation -->
   <div id="myNav" class="overlay">
@@ -112,9 +113,10 @@
 
 <script>
   var currentTab = 0; // Current card
-  showTab(currentTab); // Show the current card
+  
   var timer = null;
   loadQuizzes('quizName');
+  move();
 </script>
 
 </body>
