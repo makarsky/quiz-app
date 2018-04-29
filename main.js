@@ -23,10 +23,11 @@ function nextPrev(n) {
   clearInterval(timer);
   // This function will figure out which tab to display
   var x = document.getElementById("regForm");
+  var tabs = document.getElementsByClassName("tab");
   // Exit the function if any field in the current tab is invalid:
   if (n == 1 && !validateForm()) return false;
   // Hide the current tab:
-//   x[currentTab].style.display = "none";
+    tabs[currentTab].style.display = "none";
     x.classList.add("removed-item");
     x.classList.remove("new-item");
     setTimeout(function() {
