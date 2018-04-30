@@ -1,4 +1,5 @@
 var randomQuizzes = [];
+const quizTime = 40; // Quiz time in seconds
 
 function showTab(n) {
   // This function will display the specified tab of the form...
@@ -88,14 +89,17 @@ function fixStepIndicator(n) {
 
 function move() {
   var elem = document.getElementById("timeBar");
-//   elem.style.width ='100%';
-  var width = 100;
+  var quizTimeCopy = quizTime;
+
   timer = setInterval(frame, 5);
+  
   function frame() {
-    if (width <= 0) {
+    if (quizTimeCopy <= 0) {
       clearInterval(timer);
     } else {
-      width -= 0.0125; 
+      quizTimeCopy -= 0.005
+      
+      width = quizTimeCopy / quizTime * 100;
       elem.style.width = width + '%'; 
     }
   }
