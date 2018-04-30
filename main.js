@@ -190,3 +190,13 @@ function choiceBuilder(type, choices) {
         </div>`)(type)).join('');
   }
 }
+
+function countdown() {
+  var counter = 3;
+  var element = document.getElementById("countdown");
+
+  var countInterval = setInterval(() => {
+    element.innerHTML = counter--;
+    if (counter === 0) clearInterval(countInterval);
+  }, 700)
+}
