@@ -8,6 +8,13 @@ body {
     background-color: #f1f1f1;
 }
 
+#countdown {
+    position: absolute;
+    top: 30%;
+    left: 47%;
+    font-size: 10em
+}
+
 input {
     border: none;
     border-bottom: 1px solid black;
