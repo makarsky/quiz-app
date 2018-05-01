@@ -197,6 +197,9 @@ function countdown() {
 
   var countInterval = setInterval(() => {
     element.innerHTML = counter--;
-    if (counter === 0) clearInterval(countInterval);
+    if (counter === -1) {
+      clearInterval(countInterval);
+      element.innerHTML = "";
+    };
   }, 700)
 }
