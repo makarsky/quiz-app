@@ -203,3 +203,7 @@ function countdown() {
     };
   }, 700)
 }
+
+function start() {
+  
+}

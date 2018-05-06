@@ -15,6 +15,10 @@ body {
     font-size: 10em
 }
 
+#quiz {
+    display: none;
+}
+
 input {
     border: none;
     border-bottom: 1px solid black;
@@ -45,15 +49,19 @@ h1 {
   display: none;
 }
 
-button {
-  background-color: #4CAF50;
-  color: #ffffff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 17px;
-  font-family: Raleway;
-  cursor: pointer;
-  width: 100%;
+.submit {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border: 2px solid #ddd;
 }
 
 button:hover {
@@ -129,17 +137,13 @@ button:hover {
 }
 
 #timeBar {
-  width: 100%;
+  width: 0%;
   height: 1.5vw;
   background-color: #4CAF50;
-  /*transition: 1s;*/
 }
 
 #submitAnswer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    border: 2px solid #ddd;
+    
 }
 
 .menu-container {
