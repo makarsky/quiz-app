@@ -37,15 +37,16 @@
   <!-- Countdown -->
   <div id="countdown"></div>
 
-  <div id="quiz-info" class="card">
-    <div class="tab">
+  <div id="description">
+    <div id="quiz-info" class="card">
       <h4>JavaScript Quiz</h4>
       <div>5 questions</div>
+      <div>Are you ready?</div>
     </div>
-    <button class="submitAnswer" onclick="start()">Start</button>
+    <button class="submit" onclick="start()">Start</button>
   </div>
   
-  <div id="">
+  <div id="quiz">
     <div id="regForm" class="card">
       <div class="tab">
         <h4>JavaScript Quiz</h4>
@@ -69,7 +70,7 @@
       </div>
     </div>
 
-    <button id="submitAnswer" onclick="nextPrev(1)">Submit</button>
+    <button id="submitAnswer" class="submit" onclick="nextPrev(1)">Submit</button>
   </div>
 
   <!-- Navigation -->
@@ -88,14 +89,14 @@
       <a href="#" onclick="openLink('menu')">&larr; Back</a>
       <br>
       <div class="center-block">
-          <img src="https://api.sololearn.com/Uploads/Avatars/779917.jpg" class="img-circle"
-              style="width:80px">
+        <img src="https://api.sololearn.com/Uploads/Avatars/779917.jpg" class="img-circle"
+            style="width:80px">
       </div>
       <br>
       <div style="color:#BBB">
-          <h4 class="media-heading">Igor Makarsky</h4>
-          <p>Belarusian. 23 years old. Full-stack PHP developer. Sololearn user.</p>
-          <p><a href="https://www.sololearn.com/Profile/779917">My Sololearn profile</a></p>
+        <h4 class="media-heading">Igor Makarsky</h4>
+        <p>Belarusian. 23 years old. Full-stack PHP developer. Sololearn user.</p>
+        <p><a href="https://www.sololearn.com/Profile/779917">My Sololearn profile</a></p>
       </div>
     </div>
     
@@ -114,8 +115,8 @@
   var currentTab = 0; // Current card
   
   var timer = null;
-  loadQuizzes('quizName');
-  move();
+  // loadQuizzes('quizName');
+  // move();
 </script>
 
 </body>
