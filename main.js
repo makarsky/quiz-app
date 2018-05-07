@@ -1,5 +1,7 @@
 var randomQuizzes = [];
 const quizTime = 40; // Quiz time in seconds
+var currentTab = 0; // Current card
+var timer = null;
 
 function showTab(n) {
   // This function will display the specified tab of the form...
@@ -200,10 +202,17 @@ function countdown() {
     if (counter === -1) {
       clearInterval(countInterval);
       element.innerHTML = "";
+      
+      loadQuizzes('quizName');
+      document.querySelector("#quiz").classList.toggle('not-displayed');
+      move();
     };
   }, 700)
 }
 
 function start() {
-  
+  let element = document.querySelector("#description");
+  let button = element.querySelector('button').classList.toggle('not-displayed');
+  element.classList.toggle('removed-description');
+  countdown();
 }

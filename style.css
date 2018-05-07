@@ -1,5 +1,5 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
@@ -13,10 +13,6 @@ body {
     top: 30%;
     left: 47%;
     font-size: 10em
-}
-
-#quiz {
-    display: none;
 }
 
 input {
@@ -36,17 +32,21 @@ input {
 }
 
 h1 {
-  text-align: center;  
+    text-align: center;  
 }
 
 /* Mark input boxes that gets an error on validation: */
 .invalid {
-  background-color: #ffdddd;
+    background-color: #ffdddd;
 }
 
 /* Hide all cards by default: */
 .tab {
-  display: none;
+    display: none;
+}
+
+.not-displayed {
+    display: none;
 }
 
 .submit {
@@ -65,35 +65,35 @@ h1 {
 }
 
 button:hover {
-  opacity: 0.8;
+    opacity: 0.8;
 }
 
 #prevBtn {
-  background-color: #bbbbbb;
+    background-color: #bbbbbb;
 }
 
 .step {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbbbbb;
-  border: none;  
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0.7;
-  transition: 0.7s;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;  
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.7;
+    transition: 0.7s;
 }
 
 .step.active {
-  opacity: 1;
+    opacity: 1;
 }
 
 .step.correct {
-  background-color: #4CAF50;
+    background-color: #4CAF50;
 }
 
 .step.wrong {
-  background-color: #FD3A0F;
+    background-color: #FD3A0F;
 }
 
 .removed-item {
@@ -131,15 +131,32 @@ button:hover {
     }
 }
 
+.removed-description {
+    animation: removed-description-animation .6s cubic-bezier(.55,-0.04,.91,.94) forwards;
+    
+    display: none;
+}
+ 
+@keyframes removed-description-animation {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
 #myProgress {
-  width: 100%;
-  background-color: #ddd;
+    width: 100%;
+    background-color: #ddd;
 }
 
 #timeBar {
-  width: 0%;
-  height: 1.5vw;
-  background-color: #4CAF50;
+    width: 0%;
+    height: 1.5vw;
+    background-color: #4CAF50;
 }
 
 #submitAnswer {
