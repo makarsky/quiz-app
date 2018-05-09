@@ -13,11 +13,12 @@ function showTab(n) {
 //   } else {
 //     document.getElementById("prevBtn").style.display = "inline";
 //   }
-  if (n == (x.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit";
-  } else {
-    document.getElementById("nextBtn").innerHTML = "Submit";
-  }
+
+  // if (n == (x.length - 1)) {
+  //   document.getElementById("nextBtn").innerHTML = "Submit";
+  // } else {
+  //   document.getElementById("nextBtn").innerHTML = "Submit";
+  // }
 
   fixStepIndicator(n)
 }
@@ -28,7 +29,8 @@ function nextPrev(n) {
   var x = document.getElementById("regForm");
   var tabs = document.getElementsByClassName("tab");
   // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
+  // if (n == 1 && !validateForm()) return false;
+  validateForm();
   // Hide the current tab:
     tabs[currentTab].style.display = "none";
     x.classList.add("removed-item");
@@ -57,10 +59,15 @@ function nextPrev(n) {
 
 function validateForm() {
   // This function deals with validation of the form fields
-  var x, y, i, valid = true;
+  var x, y, i, valid = false;
   x = document.getElementsByClassName("tab");
   y = x[currentTab].querySelector("input");
   
+  switch (randomQuizzes[currentTab].type) {
+    case 'radio':
+      let answer = x[currentTab].querySelector('input[name=answer]:checked');
+      answer.value === randomQuizzes[currentTab].correctAnswer ? valid = true : null;
+  }
   // A loop that checks input fields in the current tab:
   // for (i = 0; i < y.length; i++) {
   //   // If a field is empty...
@@ -171,7 +178,7 @@ function buildQuiz(rawQuiz) {
       `<div class="tab">
         <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
         <div>${rawQuiz.description ? rawQuiz.description : ''}</div>
-        <p><input class="input" oninput="this.className = ''" name="answer" maxlength="${rawQuiz.correctAnswer.length}"></p>
+        <p><input class="input" name="answer" maxlength="${rawQuiz.correctAnswer.length}"></p>
       </div>`;
       break;
   }
@@ -184,12 +191,12 @@ function choiceBuilder(type, choices) {
     case 'select':
       return choices.map((type => choice => 
         `<div class="checkbox">
-          <label><input type="checkbox" name="answer">${choice}</label>
+          <label><input type="checkbox" name="answer" value="${choice}">${choice}</label>
         </div>`)(type)).join('');
     case 'radio':
       return choices.map((type => choice => 
         `<div class="radio">
-          <label><input type="radio" name="answer">${choice}</label>
+          <label><input type="radio" name="answer" value="${choice}">${choice}</label>
         </div>`)(type)).join('');
   }
 }
