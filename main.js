@@ -59,13 +59,16 @@ function nextPrev(n) {
 
 function validateForm() {
   // This function deals with validation of the form fields
-  var x, y, i, valid = false;
+  var x, y, i, answer, valid = false;
   x = document.getElementsByClassName("tab");
   y = x[currentTab].querySelector("input");
   
   switch (randomQuizzes[currentTab].type) {
     case 'radio':
-      let answer = x[currentTab].querySelector('input[name=answer]:checked');
+      answer = x[currentTab].querySelector('input[name=answer]:checked');
+      answer.value === randomQuizzes[currentTab].correctAnswer ? valid = true : null;
+    case 'input':
+      answer = x[currentTab].querySelector('input');
       answer.value === randomQuizzes[currentTab].correctAnswer ? valid = true : null;
   }
   // A loop that checks input fields in the current tab:
@@ -178,7 +181,7 @@ function buildQuiz(rawQuiz) {
       `<div class="tab">
         <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
         <div>${rawQuiz.description ? rawQuiz.description : ''}</div>
-        <p><input class="input" name="answer" maxlength="${rawQuiz.correctAnswer.length}"></p>
+        <p><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></p>
       </div>`;
       break;
   }
