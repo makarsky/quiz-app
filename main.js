@@ -67,9 +67,15 @@ function validateForm() {
     case 'radio':
       answer = x[currentTab].querySelector('input[name=answer]:checked');
       answer.value === randomQuizzes[currentTab].correctAnswer ? valid = true : null;
+      break;
     case 'input':
       answer = x[currentTab].querySelector('input');
       answer.value === randomQuizzes[currentTab].correctAnswer ? valid = true : null;
+      break;
+    case 'select':
+      answers = x[currentTab].querySelectorAll('input[name=answer]:checked');
+      answers = [].map.call(answers, (e) => e.value);
+      arraysEqual(answers, randomQuizzes[currentTab].correctAnswer) ? valid = true : null;
   }
   // A loop that checks input fields in the current tab:
   // for (i = 0; i < y.length; i++) {
@@ -133,6 +139,23 @@ function openLink(id) {
     var menuSections = document.getElementsByClassName("overlay-content");
     [].forEach.call(menuSections, (e) => e.style.display = "none");
     document.getElementById(id).style.display = "block";
+}
+
+function arraysEqual(arr1, arr2) {
+  arr1.sort();
+  arr2.sort();
+  
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+
+  for (var i = arr1.length; i--;) {
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 function loadQuizzes(quizName) {
