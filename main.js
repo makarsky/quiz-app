@@ -127,6 +127,7 @@ function move() {
   function frame() {
     if (quizTimeCopy <= 0) {
       clearInterval(timer);
+      nextPrev(1);
     } else {
       quizTimeCopy -= 0.005
       
