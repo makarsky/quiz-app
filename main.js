@@ -76,6 +76,11 @@ function validateForm() {
       answers = x[currentTab].querySelectorAll('input[name=answer]:checked');
       answers = [].map.call(answers, (e) => e.value);
       arraysEqual(answers, randomQuizzes[currentTab].correctAnswer) ? valid = true : null;
+      break;
+    case 'multi-input':
+      answers = x[currentTab].querySelectorAll('input');
+      answers = [].map.call(answers, (e) => e.value);
+      // todo: implement multi-input quizzes
   }
   // A loop that checks input fields in the current tab:
   // for (i = 0; i < y.length; i++) {
@@ -144,7 +149,7 @@ function openLink(id) {
 function arraysEqual(arr1, arr2) {
   arr1.sort();
   arr2.sort();
-  
+
   if (arr1.length !== arr2.length) {
     return false;
   }
