@@ -2,7 +2,7 @@ var randomQuizzes = [];
 const quizTime = 40; // Quiz time in seconds
 var currentTab = 0; // Current card
 var timer = null;
-var quizName = 'js';
+var quizName = 'js'; // default quiz
 const QUIZ_NAMES = {
   'js' : 'JavaScript',
   'java' : 'Java',
@@ -88,21 +88,12 @@ function validateForm() {
       answers = [].map.call(answers, (e) => e.value);
       // todo: implement multi-input quizzes
   }
-  // A loop that checks input fields in the current tab:
-  // for (i = 0; i < y.length; i++) {
-  //   // If a field is empty...
-  //   if (y[i].value === "") {
-  //     // add an "invalid" class to the field:
-  //     y[i].className += " invalid";
-  //     // and set the current valid status to false
-  //     valid = false;
-  //   }
-  // }
+
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {
-      document.getElementsByClassName("step")[currentTab].className += " correct";
+      document.getElementsByClassName("step")[currentTab].classList.add("correct");
   } else {
-      document.getElementsByClassName("step")[currentTab].className += " wrong";
+      document.getElementsByClassName("step")[currentTab].classList.add("wrong");
   }
 
   return valid; // return the valid status
@@ -110,12 +101,14 @@ function validateForm() {
 
 function fixStepIndicator(n) {
   // This function removes the "active" class of all steps...
-  var i, x = document.getElementsByClassName("step");
-  for (i = 0; i < x.length; i++) {
+  let x = document.getElementsByClassName("step");
+
+  for (let i = 0; i < x.length; i++) {
     x[i].className = x[i].className.replace(" active", "");
   }
+
   //... and adds the "active" class on the current step:
-  x[n].className += " active";
+  x[n].classList.add("active");
 }
 
 function move() {
