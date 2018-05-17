@@ -72,7 +72,7 @@ function validateForm() {
   switch (randomQuizzes[currentTab].type) {
     case 'radio':
       answer = x[currentTab].querySelector('input[name=answer]:checked');
-      answer.value === randomQuizzes[currentTab].correctAnswer ? valid = true : null;
+      answer ? answer.value === randomQuizzes[currentTab].correctAnswer ? valid = true : null : null;
       break;
     case 'input':
       answer = x[currentTab].querySelector('input');
