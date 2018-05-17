@@ -2,6 +2,12 @@ var randomQuizzes = [];
 const quizTime = 40; // Quiz time in seconds
 var currentTab = 0; // Current card
 var timer = null;
+var quizName = 'js';
+const QUIZ_NAMES = {
+  'js' : 'JavaScript',
+  'java' : 'Java',
+  'sql' : 'SQL',
+};
 
 function showTab(n) {
   // This function will display the specified tab of the form...
@@ -98,6 +104,7 @@ function validateForm() {
   } else {
       document.getElementsByClassName("step")[currentTab].className += " wrong";
   }
+
   return valid; // return the valid status
 }
 
@@ -163,9 +170,9 @@ function arraysEqual(arr1, arr2) {
   return true;
 }
 
-function loadQuizzes(quizName) {
+function loadQuizzes() {
   var request =  new XMLHttpRequest();
-  request.open('GET', 'https://raw.githubusercontent.com/makarsky/quiz-app/master/quizzes/js_quiz.json');
+  request.open('GET', `https://raw.githubusercontent.com/makarsky/quiz-app/master/quizzes/${quizName}_quiz.json`);
   request.onload = () => {
     var loadedQuizzes = JSON.parse(request.responseText);
 
@@ -242,7 +249,7 @@ function countdown() {
       clearInterval(countInterval);
       element.innerHTML = "";
       
-      loadQuizzes('quizName');
+      loadQuizzes();
       document.querySelector("#quiz").classList.toggle('not-displayed');
       move();
     };
@@ -254,4 +261,11 @@ function start() {
   let button = element.querySelector('button').classList.toggle('not-displayed');
   element.classList.toggle('removed-description');
   countdown();
+}
+
+function selectChallenge(name) {
+  quizName = name;
+
+  document.querySelector("#quiz-name").innerHTML = QUIZ_NAMES[name];
+  closeNav()
 }
