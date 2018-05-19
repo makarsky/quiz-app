@@ -50,8 +50,8 @@ function nextPrev(n) {
     document.body.style.height = "100%";
     document.body.style.width = "100%";
     document.getElementById("timeBar").style.width ='100%';
-    move()
-    }, 800);
+    move();
+    }, 2000);
     
   // Increase or decrease the current tab by 1:
   currentTab = currentTab + n;
