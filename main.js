@@ -213,7 +213,7 @@ function buildQuiz(rawQuiz) {
         <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
         <div>${rawQuiz.description ? rawQuiz.description : ''}</div>
         <br>
-        <p><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></p>
+        <div class="input-container"><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></div>
       </div>`;
       break;
   }

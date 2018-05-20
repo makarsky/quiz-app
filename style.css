@@ -21,6 +21,10 @@ input {
     outline-style: none;
 }
 
+.input-container {
+    text-align: center;
+}
+
 .card {
     background-color: #ffffff;
     margin: 30px auto;
