@@ -36,38 +36,38 @@ function nextPrev(n) {
   var tabs = document.getElementsByClassName("tab");
   // Exit the function if any field in the current tab is invalid:
   // if (n == 1 && !validateForm()) return false;
-  validateForm();
-  // Hide the current tab:
+  checkAnswer();
+
+  x.classList.add("removed-item");
+  x.classList.remove("new-item");
+
+  setTimeout(function() {
+    // Hide the current tab:
     tabs[currentTab].style.display = "none";
-    x.classList.add("removed-item");
-    x.classList.remove("new-item");
-    setTimeout(function() {
-  
+
+    // Increase or decrease the current tab by 1:
+    currentTab = currentTab + n;
+
+    // if you have reached the end of the form...
+    if (currentTab >= x.length) {
+      return false;
+    }
+    // Otherwise, display the correct tab:
+    showTab(currentTab);
+
     x.classList.add("new-item");
     x.classList.remove("removed-item");
     document.body.style.height = "99%";
     document.body.style.width = "99%";
     document.body.style.height = "100%";
     document.body.style.width = "100%";
-    document.getElementById("timeBar").style.width ='100%';
     move();
-    }, 2000);
-    
-  // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
-  // if you have reached the end of the form...
-  if (currentTab >= x.length) {
-    return false;
-  }
-  // Otherwise, display the correct tab:
-  showTab(currentTab);
+  }, 2000);
 }
 
-function validateForm() {
-  // This function deals with validation of the form fields
-  var x, y, i, answer, valid = false;
+function checkAnswer() {
+  var x, answer, valid = false;
   x = document.getElementsByClassName("tab");
-  y = x[currentTab].querySelector("input");
   
   switch (randomQuizzes[currentTab].type) {
     case 'radio':
@@ -112,7 +112,8 @@ function fixStepIndicator(n) {
 }
 
 function move() {
-  var elem = document.getElementById("timeBar");
+  var timeBar = document.getElementById("timeBar");
+  timeBar.style.width = '100%';
   var quizTimeCopy = quizTime;
 
   timer = setInterval(frame, 5);
@@ -125,7 +126,7 @@ function move() {
       quizTimeCopy -= 0.005
       
       width = quizTimeCopy / quizTime * 100;
-      elem.style.width = width + '%'; 
+      timeBar.style.width = width + '%'; 
     }
   }
 }
@@ -202,6 +203,7 @@ function buildQuiz(rawQuiz) {
       `<div class="tab">
         <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
         <div>${rawQuiz.description ? rawQuiz.description : ''}</div>
+        <br>
         ${choiceBuilder(rawQuiz.type, rawQuiz.choices)}
       </div>`;
       break;
@@ -210,6 +212,7 @@ function buildQuiz(rawQuiz) {
       `<div class="tab">
         <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
         <div>${rawQuiz.description ? rawQuiz.description : ''}</div>
+        <br>
         <p><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></p>
       </div>`;
       break;
