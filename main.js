@@ -1,8 +1,8 @@
-var randomQuizzes = [];
+let randomQuizzes = [];
 const quizTime = 40; // Quiz time in seconds
-var currentTab = 0; // Current card
-var timer = null;
-var quizName = 'js'; // default quiz
+let currentTab = 0; // Current card
+let timer = null;
+let quizName = 'js'; // default quiz
 const QUIZ_NAMES = {
   'js' : 'JavaScript',
   'java' : 'Java',
