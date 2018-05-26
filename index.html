@@ -4,6 +4,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
+  <!-- Custom -->
   <link href="style.css" rel="stylesheet">
   <script type='text/javascript' src='main.js'></script>
 </head>
@@ -18,12 +22,20 @@
     </div>
 
     <!-- Quiz Indicators -->
-    <div style="text-align:center;margin-top:10px;margin-bottom:8px;">
+    <div class="steps">
       <span class="step"></span>
       <span class="step"></span>
       <span class="step"></span>
       <span class="step"></span>
       <span class="step"></span>
+    </div>
+
+    <div class="steps swiper-custom-pagination">
+      <span class="step swiper-pagination-bullet"></span>
+      <span class="step swiper-pagination-bullet"></span>
+      <span class="step swiper-pagination-bullet"></span>
+      <span class="step swiper-pagination-bullet"></span>
+      <span class="step swiper-pagination-bullet"></span>
     </div>
   </div>
 
@@ -65,6 +77,56 @@
     <button class="submit" onclick="restart()">Restart</button>
   </div>
 
+  <div id="answers" class="not-displayed">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+          <!-- Slides -->
+          <div class="swiper-slide">
+            <div class="card">
+              <h1>Result1</h1>
+              <br>
+              <h1 id="result">1/5</h1>
+              <br>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card">
+              <h1>Result1</h1>
+              <br>
+              <h1 id="result">1/5</h1>
+              <br>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card">
+              <h1>Result1</h1>
+              <br>
+              <h1 id="result">1/5</h1>
+              <br>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card">
+              <h1>Result1</h1>
+              <br>
+              <h1 id="result">1/5</h1>
+              <br>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card">
+              <h1>Result1</h1>
+              <br>
+              <h1 id="result">1/5</h1>
+              <br>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <button class="submit" onclick="restart()">Restart</button>
+  </div>
+
   <!-- Navigation -->
   <div id="myNav" class="overlay">
     <!-- Close button -->
@@ -87,7 +149,6 @@
       <br>
       <div style="color:#BBB">
         <h4 class="media-heading">Igor Makarsky</h4>
-        <p>Belarusian. 23 years old. Full-stack PHP developer. Sololearn user.</p>
         <p><a href="https://www.sololearn.com/Profile/779917">My Sololearn profile</a></p>
       </div>
     </div>
@@ -102,5 +163,19 @@
 
   </div>
 </div>
+
+<script>
+  var mySwiper = new Swiper ('.swiper-container', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: false,
+
+    // If we need pagination
+    pagination: {
+      el: '.swiper-custom-pagination',
+      bulletClass:  'swiper-pagination-bullet'
+    },
+  });
+</script>
 </body>
 </html>
