@@ -6,6 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #f1f1f1;
+    overflow-x: hidden;
 }
 
 #countdown {
@@ -86,9 +87,15 @@ button:hover {
     background-color: #bbbbbb;
 }
 
+.steps {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
 .step {
-    height: 15px;
-    width: 15px;
+    height: 13px;
+    width: 13px;
     margin: 0 2px;
     background-color: #bbbbbb;
     border: none;  
@@ -237,4 +244,25 @@ button:hover {
         top: 15px;
         right: 35px;
     }
+}
+
+.swiper-container {
+    width: 100%;
+    height: 300px;
+}
+
+.swiper-pagination-bullet {
+    height: 13px;
+    width: 13px;
+    margin: 0 3px;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #818181;
+}
+
+.swiper-custom-pagination {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 8px;
 }
