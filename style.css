@@ -96,7 +96,7 @@ button:hover {
 .step {
     height: 13px;
     width: 13px;
-    margin: 0 2px;
+    margin: 0 1px;
     background-color: #bbbbbb;
     border: none;  
     border-radius: 50%;
