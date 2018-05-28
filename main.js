@@ -49,7 +49,7 @@ function nextPrev(n) {
     currentTab = currentTab + n;
 
     // if you have reached the end of the form...
-    if (currentTab >= x.length) {
+    if (currentTab >= tabs.length) {
       return false;
     }
     // Otherwise, display the correct tab:
