@@ -6,7 +6,7 @@ let quizName = 'js'; // default quiz
 const QUIZ_NAMES = {
   'js': 'JavaScript',
   'java': 'Java',
-  'sql': 'SQL',
+  'sql' : 'SQL',
 };
 
 function showTab(n) {
@@ -16,7 +16,7 @@ function showTab(n) {
   fixStepIndicator(n)
 }
 
-function nextPrev(n) {
+function submitAnswer() {
   clearInterval(timer);
   
   var x = document.getElementById("regForm");
@@ -32,7 +32,7 @@ function nextPrev(n) {
     tabs[currentTab].style.display = "none";
 
     // Increase or decrease the current tab by 1:
-    currentTab = currentTab + n;
+    currentTab = ++currentTab;
 
     // if you have reached the end of the form...
     if (currentTab >= tabs.length) {
@@ -107,7 +107,7 @@ function move() {
   function frame() {
     if (quizTimeCopy <= 0) {
       clearInterval(timer);
-      nextPrev(1);
+      submitAnswer();
     } else {
       quizTimeCopy -= 0.005
       
