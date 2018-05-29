@@ -4,38 +4,24 @@ let currentTab = 0; // Current card
 let timer = null;
 let quizName = 'js'; // default quiz
 const QUIZ_NAMES = {
-  'js' : 'JavaScript',
-  'java' : 'Java',
-  'sql' : 'SQL',
+  'js': 'JavaScript',
+  'java': 'Java',
+  'sql': 'SQL',
 };
 
 function showTab(n) {
-  // This function will display the specified tab of the form...
   var x = document.getElementsByClassName("tab");
   x[n].style.display = "block";
-  //... and fix the Previous/Next buttons:
-//   if (n == 0) {
-//     document.getElementById("prevBtn").style.display = "none";
-//   } else {
-//     document.getElementById("prevBtn").style.display = "inline";
-//   }
-
-  // if (n == (x.length - 1)) {
-  //   document.getElementById("nextBtn").innerHTML = "Submit";
-  // } else {
-  //   document.getElementById("nextBtn").innerHTML = "Submit";
-  // }
 
   fixStepIndicator(n)
 }
 
 function nextPrev(n) {
   clearInterval(timer);
-  // This function will figure out which tab to display
+  
   var x = document.getElementById("regForm");
   var tabs = document.getElementsByClassName("tab");
-  // Exit the function if any field in the current tab is invalid:
-  // if (n == 1 && !validateForm()) return false;
+  
   checkAnswer();
 
   x.classList.add("removed-item");
@@ -91,9 +77,9 @@ function checkAnswer() {
 
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {
-      document.getElementsByClassName("step")[currentTab].classList.add("correct");
+    document.getElementsByClassName("step")[currentTab].classList.add("correct");
   } else {
-      document.getElementsByClassName("step")[currentTab].classList.add("wrong");
+    document.getElementsByClassName("step")[currentTab].classList.add("wrong");
   }
 
   return valid; // return the valid status
