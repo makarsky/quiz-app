@@ -9,6 +9,9 @@ const QUIZ_NAMES = {
   'sql' : 'SQL',
 };
 
+var description = document.getElementById('description');
+description.addEventListener('webkitAnimationEnd', (event) => description.style.display = 'none', false);
+
 function showTab(n) {
   var x = document.getElementsByClassName("tab");
   x[n].style.display = "block";
