@@ -152,8 +152,6 @@ button:hover {
 
 .removed-description {
     animation: removed-description-animation .6s cubic-bezier(.55,-0.04,.91,.94) forwards;
-    
-    display: none;
 }
  
 @keyframes removed-description-animation {
