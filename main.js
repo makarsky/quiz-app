@@ -8,6 +8,7 @@ const QUIZ_NAMES = {
   'java': 'Java',
   'sql' : 'SQL',
 };
+let submitButton = document.querySelector('#submitAnswer');
 
 var description = document.getElementById('description');
 description.addEventListener('webkitAnimationEnd', (event) => description.style.display = 'none', false);
@@ -19,7 +20,12 @@ function showTab(n) {
   fixStepIndicator(n)
 }
 
+function toggleVisibility(element) {
+  element.classList.toggle('not-displayed');
+}
+
 function submitAnswer() {
+  toggleVisibility(submitButton);
   clearInterval(timer);
   
   var x = document.getElementById("regForm");
@@ -46,6 +52,7 @@ function submitAnswer() {
 
     x.classList.add("new-item");
     x.classList.remove("removed-item");
+    toggleVisibility(submitButton);
     fixView();
     move();
   }, 2000);
