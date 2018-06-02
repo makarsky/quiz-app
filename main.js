@@ -239,7 +239,7 @@ function choiceBuilder(type, choices) {
 
 function countdown() {
   var counter = 3;
-  var element = document.getElementById("countdown");
+  var element = document.querySelector("#countdown");
 
   var countInterval = setInterval(() => {
     element.innerHTML = counter--;
@@ -248,7 +248,7 @@ function countdown() {
       element.innerHTML = "";
       
       loadQuizzes();
-      document.querySelector("#quiz").classList.toggle('not-displayed');
+      toggleVisibility(document.querySelector("#quiz"));
       move();
     };
   }, 700)
@@ -256,7 +256,7 @@ function countdown() {
 
 function start() {
   let element = document.querySelector("#description");
-  let button = element.querySelector('button').classList.toggle('not-displayed');
+  toggleVisibility(document.querySelector("button"));
   element.classList.toggle('removed-description');
   countdown();
 }
