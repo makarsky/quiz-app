@@ -9,7 +9,6 @@ const QUIZ_NAMES = {
   'sql' : 'SQL',
 };
 let submitButton = document.querySelector('#submitAnswer');
-
 var description = document.getElementById('description');
 description.addEventListener('webkitAnimationEnd', (event) => description.style.display = 'none', false);
 
@@ -45,6 +44,7 @@ function submitAnswer() {
 
     // if you have reached the end of the form...
     if (currentTab >= tabs.length) {
+      showResult();
       return false;
     }
     // Otherwise, display the correct tab:
@@ -259,6 +259,10 @@ function start() {
   toggleVisibility(document.querySelector("button"));
   element.classList.toggle('removed-description');
   countdown();
+}
+
+function showResult() {
+  document.querySelector('#result-card').classList.toggle('not-displayed');
 }
 
 function selectChallenge(name) {
