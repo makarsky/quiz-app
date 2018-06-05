@@ -263,8 +263,16 @@ function start() {
 }
 
 function showResult() {
-  document.querySelector('#result-card').classList.toggle('not-displayed');
-  document.querySelector('#result').innerHTML =  randomQuizzes.filter(quiz => {return quiz.isCorrect;}).length;
+  toggleVisibility(document.querySelector('#quiz'));
+  document.querySelector('#result-card').classList.remove('not-displayed');
+
+  document.querySelector('#result').innerHTML = randomQuizzes.filter(quiz => {
+    return quiz.isCorrect;
+  }).length + '/5';
+}
+
+function viewAnswers() {
+  
 }
 
 function selectChallenge(name) {
