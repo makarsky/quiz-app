@@ -67,22 +67,22 @@ function fixView() {
 }
 
 function checkAnswer() {
-  var x, answer, valid = false;
+  var x, answer, isCorrect = false;
   x = document.getElementsByClassName("tab");
   
   switch (randomQuizzes[currentTab].type) {
     case 'radio':
       answer = x[currentTab].querySelector('input[name=answer]:checked');
-      answer ? answer.value === randomQuizzes[currentTab].correctAnswer ? valid = true : null : null;
+      answer ? answer.value === randomQuizzes[currentTab].correctAnswer ? isCorrect = true : null : null;
       break;
     case 'input':
       answer = x[currentTab].querySelector('input');
-      answer.value === randomQuizzes[currentTab].correctAnswer ? valid = true : null;
+      answer.value === randomQuizzes[currentTab].correctAnswer ? isCorrect = true : null;
       break;
     case 'select':
       answers = x[currentTab].querySelectorAll('input[name=answer]:checked');
       answers = [].map.call(answers, (e) => e.value);
-      arraysEqual(answers, randomQuizzes[currentTab].correctAnswer) ? valid = true : null;
+      arraysEqual(answers, randomQuizzes[currentTab].correctAnswer) ? isCorrect = true : null;
       break;
     case 'multi-input':
       answers = x[currentTab].querySelectorAll('input');
@@ -90,14 +90,15 @@ function checkAnswer() {
       // todo: implement multi-input quizzes
   }
 
-  // If the valid status is true, mark the step as finished and valid:
-  if (valid) {
+  randomQuizzes[currentTab].isCorrect = isCorrect;
+
+  if (isCorrect) {
     document.getElementsByClassName("step")[currentTab].classList.add("correct");
   } else {
     document.getElementsByClassName("step")[currentTab].classList.add("wrong");
   }
 
-  return valid; // return the valid status
+  return isCorrect; // return isCorrect status
 }
 
 function fixStepIndicator(n) {
@@ -263,6 +264,7 @@ function start() {
 
 function showResult() {
   document.querySelector('#result-card').classList.toggle('not-displayed');
+  document.querySelector('#result').innerHTML =  randomQuizzes.filter(quiz => {return quiz.isCorrect;}).length;
 }
 
 function selectChallenge(name) {
