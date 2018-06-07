@@ -21,7 +21,7 @@
     </div>
 
     <!-- Quiz Indicators -->
-    <div class="steps">
+    <div id="challenge-steps" class="steps">
       <span class="step"></span>
       <span class="step"></span>
       <span class="step"></span>
@@ -29,7 +29,7 @@
       <span class="step"></span>
     </div>
 
-    <div class="steps swiper-custom-pagination">
+    <div class="steps swiper-custom-pagination not-displayed">
       <span class="step swiper-pagination-bullet"></span>
       <span class="step swiper-pagination-bullet"></span>
       <span class="step swiper-pagination-bullet"></span>
@@ -164,17 +164,7 @@
 </div>
 
 <script>
-  var mySwiper = new Swiper ('.swiper-container', {
-    // Optional parameters
-    direction: 'horizontal',
-    loop: false,
-
-    // If we need pagination
-    pagination: {
-      el: '.swiper-custom-pagination',
-      bulletClass:  'swiper-pagination-bullet'
-    },
-  });
+  
 </script>
 <script type='text/javascript' src='main.js'></script>
 </body>

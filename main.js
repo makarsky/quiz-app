@@ -272,7 +272,22 @@ function showResult() {
 }
 
 function viewAnswers() {
-  
+  document.querySelector('#result-card').classList.add('not-displayed');
+  document.querySelector('#challenge-steps').classList.add('not-displayed');
+  document.querySelector('#answers').classList.remove('not-displayed');
+  document.querySelector('.swiper-custom-pagination').classList.remove('not-displayed');
+  initSwiper();
+}
+
+function initSwiper() {
+  var mySwiper = new Swiper ('.swiper-container', {
+    direction: 'horizontal',
+    loop: false,
+    pagination: {
+      el: '.swiper-custom-pagination',
+      bulletClass:  'swiper-pagination-bullet'
+    },
+  });
 }
 
 function selectChallenge(name) {
