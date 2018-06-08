@@ -3,6 +3,7 @@ const quizTime = 40; // Quiz time in seconds
 let currentTab = 0; // Current card
 let timer = null;
 let quizName = 'js'; // default quiz
+let mySwiper = null;
 const QUIZ_NAMES = {
   'js': 'JavaScript',
   'java': 'Java',
@@ -262,6 +263,12 @@ function start() {
   countdown();
 }
 
+function restart() {
+  destroySwiper();
+  document.querySelector('.swiper-custom-pagination').classList.add('not-displayed');
+  document.querySelector('#answers').classList.add('not-displayed');
+}
+
 function showResult() {
   toggleVisibility(document.querySelector('#quiz'));
   document.querySelector('#result-card').classList.remove('not-displayed');
@@ -280,7 +287,7 @@ function viewAnswers() {
 }
 
 function initSwiper() {
-  var mySwiper = new Swiper ('.swiper-container', {
+  mySwiper = new Swiper ('.swiper-container', {
     direction: 'horizontal',
     loop: false,
     pagination: {
@@ -288,6 +295,10 @@ function initSwiper() {
       bulletClass:  'swiper-pagination-bullet'
     },
   });
+}
+
+function destroySwiper() {
+  mySwiper !== null ? mySwiper.destroy(): null;
 }
 
 function selectChallenge(name) {
