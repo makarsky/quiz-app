@@ -287,7 +287,7 @@ function viewAnswers() {
 }
 
 function initSwiper() {
-  mySwiper = new Swiper ('.swiper-container', {
+  mySwiper = new Swiper('.swiper-container', {
     direction: 'horizontal',
     loop: false,
     pagination: {
@@ -298,7 +298,11 @@ function initSwiper() {
 }
 
 function destroySwiper() {
-  mySwiper !== null ? mySwiper.destroy(): null;
+  swiperExists() ? mySwiper.destroy(): null;
+}
+
+function swiperExists() {
+  return mySwiper !== null;
 }
 
 function selectChallenge(name) {
