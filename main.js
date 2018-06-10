@@ -239,6 +239,25 @@ function choiceBuilder(type, choices) {
   }
 }
 
+function buildCorrectQuizCard(quiz) {
+  var template;
+
+  switch (quiz.type) {
+    case 'select':
+    case 'radio':
+      template = 
+      `<div class="swiper-slide card">
+        <h4>${quiz.question ? quiz.question : ''}</h4>
+        <div>${quiz.description ? quiz.description : ''}</div>
+        <br>
+        ${choiceBuilder(quiz.type, quiz.choices)}
+      </div>`;
+      break;
+  }
+
+  return template;
+}
+
 function countdown() {
   var counter = 3;
   var element = document.querySelector("#countdown");
@@ -276,6 +295,8 @@ function showResult() {
   document.querySelector('#result').innerHTML = randomQuizzes.filter(quiz => {
     return quiz.isCorrect;
   }).length + '/5';
+
+  console.log(randomQuizzes);
 }
 
 function viewAnswers() {
