@@ -246,11 +246,24 @@ function buildCorrectQuizCard(quiz) {
     case 'select':
     case 'radio':
       template = 
-      `<div class="swiper-slide card">
-        <h4>${quiz.question ? quiz.question : ''}</h4>
-        <div>${quiz.description ? quiz.description : ''}</div>
-        <br>
-        ${choiceBuilder(quiz.type, quiz.choices)}
+      `<div class="swiper-slide">
+        <div class="card">
+          <h4>${quiz.question ? quiz.question : ''}</h4>
+          <div>${quiz.description ? quiz.description : ''}</div>
+          <br>
+          ${choiceBuilder(quiz.type, quiz.choices)}
+        </div>
+      </div>`;
+      break;
+    case 'input':
+      template = 
+      `<div class="swiper-slide">
+        <div class="card">
+          <h4>${quiz.question ? quiz.question : ''}</h4>
+          <div>${quiz.description ? quiz.description : ''}</div>
+          <br>
+          <div class="input-container"><input class="input" value="${quiz.correctAnswer}"></div>
+        </div>
       </div>`;
       break;
   }
@@ -295,6 +308,8 @@ function showResult() {
   document.querySelector('#result').innerHTML = randomQuizzes.filter(quiz => {
     return quiz.isCorrect;
   }).length + '/5';
+
+  document.querySelector('.swiper-wrapper').innerHTML = randomQuizzes.map(buildCorrectQuizCard).join('');
 
   console.log(randomQuizzes);
 }
