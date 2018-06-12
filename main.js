@@ -299,6 +299,7 @@ function restart() {
   destroySwiper();
   document.querySelector('.swiper-custom-pagination').classList.add('not-displayed');
   document.querySelector('#answers').classList.add('not-displayed');
+  document.querySelector('#challenge-steps').classList.remove('not-displayed');
 }
 
 function showResult() {
@@ -310,8 +311,6 @@ function showResult() {
   }).length + '/5';
 
   document.querySelector('.swiper-wrapper').innerHTML = randomQuizzes.map(buildCorrectQuizCard).join('');
-
-  console.log(randomQuizzes);
 }
 
 function viewAnswers() {
