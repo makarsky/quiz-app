@@ -311,6 +311,8 @@ function showResult() {
   }).length + '/5';
 
   document.querySelector('.swiper-wrapper').innerHTML = randomQuizzes.map(buildCorrectQuizCard).join('');
+  
+  document.querySelector('#timeBar').classList.add('remove-time');
 }
 
 function viewAnswers() {
