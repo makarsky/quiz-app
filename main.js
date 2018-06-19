@@ -102,7 +102,7 @@ function checkAnswer() {
   return isCorrect; // return isCorrect status
 }
 
-function fixStepIndicator(n) {
+function fixStepIndicator(n = null) {
   // This function removes the "active" class of all steps...
   let x = document.getElementsByClassName("step");
 
@@ -111,7 +111,7 @@ function fixStepIndicator(n) {
   }
 
   //... and adds the "active" class on the current step:
-  x[n].classList.add("active");
+  n === null ? null: x[n].classList.add("active");
 }
 
 function move() {
@@ -300,6 +300,8 @@ function restart() {
   document.querySelector('.swiper-custom-pagination').classList.add('not-displayed');
   document.querySelector('#answers').classList.add('not-displayed');
   document.querySelector('#challenge-steps').classList.remove('not-displayed');
+  let steps = document.querySelectorAll('#challenge-steps > .step');
+  [].map.call(steps, (e) => e.className = 'step');
 }
 
 function showResult() {
@@ -313,6 +315,7 @@ function showResult() {
   document.querySelector('.swiper-wrapper').innerHTML = randomQuizzes.map(buildCorrectQuizCard).join('');
   
   document.querySelector('#timeBar').classList.add('remove-time');
+  fixStepIndicator();
 }
 
 function viewAnswers() {
