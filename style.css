@@ -150,11 +150,11 @@ button:hover {
     }
 }
 
-.removed-description {
-    animation: removed-description-animation .6s cubic-bezier(.55,-0.04,.91,.94) forwards;
+.remove-scale {
+    animation: remove-scale-animation .6s cubic-bezier(.55,-0.04,.91,.94) forwards;
 }
  
-@keyframes removed-description-animation {
+@keyframes remove-scale-animation {
     from {
         opacity: 1;
         transform: scale(1);
