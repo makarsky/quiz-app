@@ -11,7 +11,7 @@ const QUIZ_NAMES = {
 };
 let submitButton = document.querySelector('#submitAnswer');
 var description = document.getElementById('description');
-description.addEventListener('webkitAnimationEnd', (event) => description.style.display = 'none', false);
+description.addEventListener('webkitAnimationEnd', (event) => toggleVisibility(description), false);
 
 function showTab(n) {
   var x = document.getElementsByClassName("tab");
@@ -291,7 +291,7 @@ function countdown() {
 function start() {
   let element = document.querySelector("#description");
   toggleVisibility(document.querySelector("button"));
-  element.classList.toggle('removed-description');
+  element.classList.toggle('remove-scale');
   countdown();
 }
 
@@ -300,8 +300,13 @@ function restart() {
   document.querySelector('.swiper-custom-pagination').classList.add('not-displayed');
   document.querySelector('#answers').classList.add('not-displayed');
   document.querySelector('#challenge-steps').classList.remove('not-displayed');
+  document.querySelector('#result-card').classList.add('not-displayed');
   let steps = document.querySelectorAll('#challenge-steps > .step');
   [].map.call(steps, (e) => e.className = 'step');
+  document.querySelector("#description").classList.remove('remove-scale');
+  document.querySelector("#description").style.display = 'block';
+  
+  toggleVisibility(document.querySelector('#description > button'));
 }
 
 function showResult() {
