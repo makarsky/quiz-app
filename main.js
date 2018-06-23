@@ -272,25 +272,25 @@ function buildCorrectQuizCard(quiz) {
 }
 
 function countdown() {
-  var counter = 3;
-  var element = document.querySelector("#countdown");
+  let counter = 3;
+  let element = document.querySelector("#countdown");
+  loadQuizzes();
 
-  var countInterval = setInterval(() => {
+  let countInterval = setInterval(() => {
     element.innerHTML = counter--;
     if (counter === -1) {
       clearInterval(countInterval);
       element.innerHTML = "";
       
-      loadQuizzes();
-      toggleVisibility(document.querySelector("#quiz"));
+      toggleVisibility(document.querySelector('#quiz'));
       move();
     };
   }, 700)
 }
 
 function start() {
-  let element = document.querySelector("#description");
-  toggleVisibility(document.querySelector("button"));
+  let element = document.querySelector('#description');
+  toggleVisibility(document.querySelector('#description > button'));
   element.classList.toggle('remove-scale');
   countdown();
 }
@@ -304,9 +304,9 @@ function restart() {
   let steps = document.querySelectorAll('#challenge-steps > .step');
   [].map.call(steps, (e) => e.className = 'step');
   document.querySelector("#description").classList.remove('remove-scale');
-  document.querySelector("#description").style.display = 'block';
-  
+  toggleVisibility(document.querySelector("#description"));
   toggleVisibility(document.querySelector('#description > button'));
+  toggleVisibility(submitButton);
 }
 
 function showResult() {
