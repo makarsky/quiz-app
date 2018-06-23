@@ -307,6 +307,11 @@ function restart() {
   toggleVisibility(document.querySelector("#description"));
   toggleVisibility(document.querySelector('#description > button'));
   toggleVisibility(submitButton);
+  document.querySelector('#timeBar').classList.remove('remove-time');
+  document.getElementById('regForm').classList.remove("removed-item");
+  randomQuizzes = [];
+  currentTab = 0; // Current card
+  timer = null;
 }
 
 function showResult() {
