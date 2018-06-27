@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/js/swiper.min.js"></script>
+  <!-- Custom -->
+  <link href="style.css" rel="stylesheet">
+  <title>Quiz App</title>
+</head>
+<body>
+<div id="content">
+  <div class="">
+    <!-- Menu Icon-->
+    <div class="menu-container" onclick="toggleMenu(this)">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+
+    <!-- Quiz Indicators -->
+    <div id="challenge-steps" class="steps">
+      <span class="step"></span>
+      <span class="step"></span>
+      <span class="step"></span>
+      <span class="step"></span>
+      <span class="step"></span>
+    </div>
+
+    <div class="steps swiper-custom-pagination not-displayed">
+      <span class="step swiper-pagination-bullet"></span>
+      <span class="step swiper-pagination-bullet"></span>
+      <span class="step swiper-pagination-bullet"></span>
+      <span class="step swiper-pagination-bullet"></span>
+      <span class="step swiper-pagination-bullet"></span>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div id="myProgress">
+    <div id="timeBar"></div>
+  </div>
+
+  <!-- Countdown -->
+  <div id="countdown"></div>
+
+  <!-- Challenge description -->
+  <div id="description">
+    <div id="quiz-info" class="card">
+      <h4><span id="quiz-name">JavaScript</span> Quiz</h4>
+      <div><span id="quiz-count">5</span> questions</div>
+      <div>Are you ready?</div>
+    </div>
+    <button class="submit" onclick="start()">Start</button>
+  </div>
+  
+  <div id="quiz" class="not-displayed">
+    <div id="regForm" class="card">
+    </div>
+
+    <button id="submitAnswer" class="submit" onclick="submitAnswer()">Submit</button>
+  </div>
+
+  <div id="result-card" class="not-displayed">
+    <div class="card">
+      <h1>Result</h1>
+      <br>
+      <h1 id="result">3/5</h1>
+      <br>
+      <div class="center">
+        <button class="button-default" onclick="viewAnswers()">View correct answers</button>
+      </div>
+    </div>
+
+    <button class="submit" onclick="restart()">Restart</button>
+  </div>
+
+  <!-- Slides with answers -->
+  <div id="answers" class="not-displayed">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+          <!-- Slides -->
+      </div>
+    </div>
+
+    <button class="submit" onclick="restart()">Restart</button>
+  </div>
+
+  <!-- Navigation -->
+  <div id="myNav" class="overlay">
+    <!-- Close button -->
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <!-- Menu -->
+    <div id="menu" class="overlay-content">
+      <a href="#" onclick="openLink('about')">Author</a>
+      <a href="#" onclick="openLink('challenges')">Challenges</a>
+    </div>
+    
+    <!-- About section -->
+    <div id="about" class="overlay-content">
+      <a href="#" onclick="openLink('menu')">&larr; Back</a>
+      <br>
+      <div class="center-block">
+        <img src="https://api.sololearn.com/Uploads/Avatars/779917.jpg" class="img-circle"
+            style="width:80px">
+      </div>
+      <br>
+      <div style="color:#BBB">
+        <h4 class="media-heading">Igor Makarsky</h4>
+        <p><a href="https://www.sololearn.com/Profile/779917">My Sololearn profile</a></p>
+      </div>
+    </div>
+    
+    <!-- Challenges section -->
+    <div id="challenges" class="overlay-content">
+      <a href="#" onclick="openLink('menu')">&larr; Back</a>
+      <br>
+      <a href="#" onclick="selectChallenge('js')">Javascript</a>
+      <a href="#" onclick="selectChallenge('java')">Java</a>
+    </div>
+
+  </div>
+</div>
+<script type='text/javascript' src='main.js'></script>
+</body>
+</html>
