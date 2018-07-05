@@ -1,5 +1,7 @@
 # quiz-app
 
+[Website](https://makarsky.github.io/quiz-app/index.html)
+
 ## Got a good quiz?
 
 Submit a Pull Request, with your quiz added to the quizzes/{language}.json file. Make sure the quiz is in this format:
