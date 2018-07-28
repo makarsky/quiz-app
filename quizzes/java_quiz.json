@@ -72,6 +72,13 @@
                 "choices": ["true", "false"],
                 "type": "radio",
                 "correctAnswer": "false"
+            },
+            {
+                "question": "What is the output?",
+                "description": "int x = 17 * 71; boolean y = (x * 8 + x - 1) % x == x - 1; System.out.println(y);",
+                "choices": ["true", "false"],
+                "type": "radio",
+                "correctAnswer": "true"
             }
         ]
 }
