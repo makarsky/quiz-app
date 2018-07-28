@@ -66,6 +66,12 @@
                 "description": "for (int i = 1, j = 10; i < j; i += i, i++)System.out.print(j - i);",
                 "type": "input",
                 "correctAnswer": "9985"
+            },
+            {
+                "question": "A method be private and abstract at the same time.",
+                "choices": ["true", "false"],
+                "type": "radio",
+                "correctAnswer": "false"
             }
         ]
 }
