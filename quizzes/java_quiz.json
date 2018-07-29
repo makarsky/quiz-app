@@ -79,6 +79,12 @@
                 "choices": ["true", "false"],
                 "type": "radio",
                 "correctAnswer": "true"
+            },
+            {
+                "question": "main() can be overloaded in Java.",
+                "choices": ["true", "false"],
+                "type": "radio",
+                "correctAnswer": "true"
             }
         ]
 }
