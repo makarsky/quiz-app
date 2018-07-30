@@ -85,6 +85,12 @@
                 "choices": ["true", "false"],
                 "type": "radio",
                 "correctAnswer": "true"
+            },
+            {
+                "question": "We can create an object of the Math class.",
+                "choices": ["true", "false"],
+                "type": "radio",
+                "correctAnswer": "false"
             }
         ]
 }
