@@ -91,6 +91,12 @@
                 "choices": ["true", "false"],
                 "type": "radio",
                 "correctAnswer": "false"
+            },
+            {
+                "question": "Java supports default parameter values.",
+                "choices": ["true", "false"],
+                "type": "radio",
+                "correctAnswer": "false"
             }
         ]
 }
