@@ -1,97 +1,94 @@
-{
-    "questions":
-        [
-            {
-                "question": "How to select all the fields available in the table?",
-                "choices": ["SELECT * FROM table_name;", "SELECT ALL FROM table_name;", "SELECT FROM table_name;", "SELECT # FROM table_name;"],
-                "type": "radio",
-                "correctAnswer": "SELECT * FROM table_name;"
-            },
-            {
-                "question": "Which word is used to filter records?",
-                "choices": ["WHERE", "IF", "CONDITION", "FROM"],
-                "type": "radio",
-                "correctAnswer": "WHERE"
-            },
-            {
-                "question": "Is this statement valid?",
-                "description": "SELECT LastName, FirstName, Address FROM Persons WHERE Address IS NULL;",
-                "choices": ["yes", "no"],
-                "type": "radio",
-                "correctAnswer": "yes"
-            },
-            {
-                "question": "What does RDBMS stand for?",
-                "choices": ["Relational Database Management System", "Relational Database Microsoft System", "Relational Database MySQL", "Relational Database MongoDB System"],
-                "type": "radio",
-                "correctAnswer": "Relational Database Management System"
-            },
-            {
-                "question": "What does SQL stand for?",
-                "choices": ["Structured Query Language", "Structured Query List", "System Query Language"],
-                "type": "radio",
-                "correctAnswer": "Structured Query Language"
-            },
-            {
-                "question": "What can SQL do?",
-                "choices": ["It can insert records in a database", "It can create views in a database", "It can create new databases", "It can be executed inside HTML document"],
-                "type": "select",
-                "correctAnswer": ["It can insert records in a database", "It can create views in a database", "It can create new databases"]
-            },
-            {
-                "question": "The OR operator displays a record if ANY conditions listed are true. The AND operator displays a record if ALL of the conditions listed are true.",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "true"
-            },
-            {
-                "question": "Which SQL keyword is used to sort the result-set?",
-                "choices": ["ORDER BY", "SORT BY", "SORT", "ORDER"],
-                "type": "radio",
-                "correctAnswer": "ORDER BY"
-            },
-            {
-                "question": "Which operator is used to select values within a range?",
-                "type": "input",
-                "correctAnswer": "BETWEEN"
-            },
-            {
-                "question": "Which operator is used in a WHERE clause to search for a specified pattern in a column?",
-                "type": "input",
-                "correctAnswer": "LIKE"
-            },
-            {
-                "question": "Which function returns the number of rows that matches a specified criteria?",
-                "type": "input",
-                "correctAnswer": "COUNT"
-            },
-            {
-                "question": "Which operator displays a record if all the conditions separated by it is TRUE?",
-                "choices": ["AND", "&&", "OR", "||"],
-                "type": "radio",
-                "correctAnswer": "AND"
-            },
-            {
-                "question": "Write a query to select all columns from the city table",
-                "type": "input",
-                "correctAnswer": "SELECT * FROM city;"
-            },
-            {
-                "question": "Write a query to delete the city table from a database.",
-                "type": "input",
-                "correctAnswer": "DROP TABLE city;"
-            },
-            {
-                "question": "Choose correct MySQL text data types.",
-                "choices": ["LONGTEXT", "BLOB", "SMALLTEXT", "MIDDLEBLOB"],
-                "type": "select",
-                "correctAnswer": ["LONGTEXT", "BLOB"]
-            },
-            {
-                "question": "Choose correct MySQL number data types.",
-                "choices": ["TINYINT", "BIGINT", "MIDDLEINT", "LONG"],
-                "type": "select",
-                "correctAnswer": ["TINYINT", "BIGINT"]
-            }
-        ]
-}
+[
+    {
+        "question": "How to select all the fields available in the table?",
+        "choices": ["SELECT * FROM table_name;", "SELECT ALL FROM table_name;", "SELECT FROM table_name;", "SELECT # FROM table_name;"],
+        "type": "radio",
+        "correctAnswer": "SELECT * FROM table_name;"
+    },
+    {
+        "question": "Which word is used to filter records?",
+        "choices": ["WHERE", "IF", "CONDITION", "FROM"],
+        "type": "radio",
+        "correctAnswer": "WHERE"
+    },
+    {
+        "question": "Is this statement valid?",
+        "description": "SELECT LastName, FirstName, Address FROM Persons WHERE Address IS NULL;",
+        "choices": ["yes", "no"],
+        "type": "radio",
+        "correctAnswer": "yes"
+    },
+    {
+        "question": "What does RDBMS stand for?",
+        "choices": ["Relational Database Management System", "Relational Database Microsoft System", "Relational Database MySQL", "Relational Database MongoDB System"],
+        "type": "radio",
+        "correctAnswer": "Relational Database Management System"
+    },
+    {
+        "question": "What does SQL stand for?",
+        "choices": ["Structured Query Language", "Structured Query List", "System Query Language"],
+        "type": "radio",
+        "correctAnswer": "Structured Query Language"
+    },
+    {
+        "question": "What can SQL do?",
+        "choices": ["It can insert records in a database", "It can create views in a database", "It can create new databases", "It can be executed inside HTML document"],
+        "type": "select",
+        "correctAnswer": ["It can insert records in a database", "It can create views in a database", "It can create new databases"]
+    },
+    {
+        "question": "The OR operator displays a record if ANY conditions listed are true. The AND operator displays a record if ALL of the conditions listed are true.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "Which SQL keyword is used to sort the result-set?",
+        "choices": ["ORDER BY", "SORT BY", "SORT", "ORDER"],
+        "type": "radio",
+        "correctAnswer": "ORDER BY"
+    },
+    {
+        "question": "Which operator is used to select values within a range?",
+        "type": "input",
+        "correctAnswer": "BETWEEN"
+    },
+    {
+        "question": "Which operator is used in a WHERE clause to search for a specified pattern in a column?",
+        "type": "input",
+        "correctAnswer": "LIKE"
+    },
+    {
+        "question": "Which function returns the number of rows that matches a specified criteria?",
+        "type": "input",
+        "correctAnswer": "COUNT"
+    },
+    {
+        "question": "Which operator displays a record if all the conditions separated by it is TRUE?",
+        "choices": ["AND", "&&", "OR", "||"],
+        "type": "radio",
+        "correctAnswer": "AND"
+    },
+    {
+        "question": "Write a query to select all columns from the city table",
+        "type": "input",
+        "correctAnswer": "SELECT * FROM city;"
+    },
+    {
+        "question": "Write a query to delete the city table from a database.",
+        "type": "input",
+        "correctAnswer": "DROP TABLE city;"
+    },
+    {
+        "question": "Choose correct MySQL text data types.",
+        "choices": ["LONGTEXT", "BLOB", "SMALLTEXT", "MIDDLEBLOB"],
+        "type": "select",
+        "correctAnswer": ["LONGTEXT", "BLOB"]
+    },
+    {
+        "question": "Choose correct MySQL number data types.",
+        "choices": ["TINYINT", "BIGINT", "MIDDLEINT", "LONG"],
+        "type": "select",
+        "correctAnswer": ["TINYINT", "BIGINT"]
+    }
+]
