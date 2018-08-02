@@ -1,102 +1,99 @@
-{
-    "questions":
-        [
-            {
-                "question": "Final methods can be overloaded.",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "true"
-            },
-            {
-                "question": "An anonymous class cannot have an explicitly declared constructor.",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "true"
-            },
-            {
-                "question": "Java final class can be a superclass.",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "false"
-            },
-            {
-                "question": "Methods that are declared as final or static cannot be overridden.",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "true"
-            },
-            {
-                "question": "Super class reference variables can always point to subclass objects.",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "true"
-            },
-            {
-                "question": "In which data types the number 132 can fit?",
-                "choices": ["int", "short", "long", "byte"],
-                "type": "select",
-                "correctAnswer": ["int", "short", "long"]
-            },
-            {
-                "question": "The switch statement works with which of the following?",
-                "choices": ["int", "String", "float", "long"],
-                "type": "select",
-                "correctAnswer": ["int", "String"]
-            },
-            {
-                "question": "There can be only one public top-level class per .java file.",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "true"
-            },
-            {
-                "question": "What is the output?",
-                "description": "int[] arr = {0,0,0,0,0};int x = 0;int y = 2;for (int i = 0; i < 10; i +=2) {arr[x] = y + i;x++;}System.out.print(arr[3]);",
-                "type": "input",
-                "correctAnswer": "8"
-            },
-            {
-                "question": "What is the output?",
-                "description": "int arr[]={1, 2, 3, 4, 5};int x = 4;int y = 0;for(int i = 0; i < 5; i++)y += arr[x - i] * i;System.out.print(y);",
-                "type": "input",
-                "correctAnswer": "20"
-            },
-            {
-                "question": "What is the output?",
-                "description": "for (int i = 1, j = 10; i < j; i += i, i++)System.out.print(j - i);",
-                "type": "input",
-                "correctAnswer": "9985"
-            },
-            {
-                "question": "A method be private and abstract at the same time.",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "false"
-            },
-            {
-                "question": "What is the output?",
-                "description": "int x = 17 * 71; boolean y = (x * 8 + x - 1) % x == x - 1; System.out.println(y);",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "true"
-            },
-            {
-                "question": "main() can be overloaded in Java.",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "true"
-            },
-            {
-                "question": "We can create an object of the Math class.",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "false"
-            },
-            {
-                "question": "Java supports default parameter values.",
-                "choices": ["true", "false"],
-                "type": "radio",
-                "correctAnswer": "false"
-            }
-        ]
-}
+[
+    {
+        "question": "Final methods can be overloaded.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "An anonymous class cannot have an explicitly declared constructor.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "Java final class can be a superclass.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "false"
+    },
+    {
+        "question": "Methods that are declared as final or static cannot be overridden.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "Super class reference variables can always point to subclass objects.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "In which data types the number 132 can fit?",
+        "choices": ["int", "short", "long", "byte"],
+        "type": "select",
+        "correctAnswer": ["int", "short", "long"]
+    },
+    {
+        "question": "The switch statement works with which of the following?",
+        "choices": ["int", "String", "float", "long"],
+        "type": "select",
+        "correctAnswer": ["int", "String"]
+    },
+    {
+        "question": "There can be only one public top-level class per .java file.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "What is the output?",
+        "description": "int[] arr = {0,0,0,0,0};int x = 0;int y = 2;for (int i = 0; i < 10; i +=2) {arr[x] = y + i;x++;}System.out.print(arr[3]);",
+        "type": "input",
+        "correctAnswer": "8"
+    },
+    {
+        "question": "What is the output?",
+        "description": "int arr[]={1, 2, 3, 4, 5};int x = 4;int y = 0;for(int i = 0; i < 5; i++)y += arr[x - i] * i;System.out.print(y);",
+        "type": "input",
+        "correctAnswer": "20"
+    },
+    {
+        "question": "What is the output?",
+        "description": "for (int i = 1, j = 10; i < j; i += i, i++)System.out.print(j - i);",
+        "type": "input",
+        "correctAnswer": "9985"
+    },
+    {
+        "question": "A method be private and abstract at the same time.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "false"
+    },
+    {
+        "question": "What is the output?",
+        "description": "int x = 17 * 71; boolean y = (x * 8 + x - 1) % x == x - 1; System.out.println(y);",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "main() can be overloaded in Java.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "We can create an object of the Math class.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "false"
+    },
+    {
+        "question": "Java supports default parameter values.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "false"
+    }
+]
