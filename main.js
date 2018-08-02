@@ -175,11 +175,11 @@ function loadQuizzes() {
     var loadedQuizzes = JSON.parse(request.responseText);
 
     for (var i = 0; i < 5; i++) {
-      var randomNumber = Math.floor(Math.random() * loadedQuizzes.questions.length);
+      var randomNumber = Math.floor(Math.random() * loadedQuizzes.length);
       
-      var randomQuiz = loadedQuizzes.questions[randomNumber];
+      var randomQuiz = loadedQuizzes[randomNumber];
       randomQuizzes.push(randomQuiz);
-      loadedQuizzes.questions.splice(randomNumber, 1);
+      loadedQuizzes.splice(randomNumber, 1);
     }
 
     addQuizzes(); // Add quizzes to the template
