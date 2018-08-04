@@ -1,0 +1,99 @@
+[
+    {
+        "question": "What is the output?",
+        "description": "alert(typeof(NaN));",
+        "choices": ["number", "object", "string", "function"],
+        "type": "radio",
+        "correctAnswer": "number"
+    },
+    {
+        "question": "You can’t delete variables declared with var keyword by 'delete' operator.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "What is the output?",
+        "description": "alert(typeof([1, 2]) != (typeof {obg:23}));",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "false"
+    },
+    {
+        "question": "JS numbers are always stored as double precision floating point numbers.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "What is the output?",
+        "description": "alert(0.1 + 0.2 == 0.3);",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "false"
+    },
+    {
+        "question": "What function is used to merge arrays?",
+        "choices": ["concat()", "merge()", "array_merge()", "add()"],
+        "type": "radio",
+        "correctAnswer": "concat()"
+    },
+    {
+        "question": "What is the output?",
+        "description": "function mlt(a, b) {\n  if(!(a && b)) {\n    return 0;\n  } else if(b == 1) {\n    return a;\n  } else {\n    return (a + mlt(a, b - 1));\n  }\n}\nconsole.log(mlt(3, 11));\nconsole.log(mlt(7, 1));",
+        "type": "input",
+        "correctAnswer": "337"
+    },
+    {
+        "question": "What is the output?",
+        "description": "(function(){alert(typeof arguments);})();",
+        "choices": ["object", "function", "undefined", "null"],
+        "type": "radio",
+        "correctAnswer": "object"
+    },
+    {
+        "question": "Choose the numbers that are present in the output.",
+        "description": "for(let i = 0; i < 100; i ++)\n  if(i % 10 == i - 10)\n    document.write(i + ',');",
+        "choices": ["14", "17", "27", "9"],
+        "type": "select",
+        "correctAnswer": ["14", "17"]
+    },
+    {
+        "question": "What is the output?",
+        "description": "var a = 5 && 8;\nvar b = 5 || 8;\nconsole.log(a + b);",
+        "type": "input",
+        "correctAnswer": "13"
+    },
+    {
+        "question": "What is the output?",
+        "description": "typeof(NaN);",
+        "type": "input",
+        "correctAnswer": "number"
+    },
+    {
+        "question": "What is the output?",
+        "description": "console.log((true+false)>2+true);",
+        "choices": ["true", "false", "error"],
+        "type": "radio",
+        "correctAnswer": "false"
+    },
+    {
+        "question": "What is the output?",
+        "description": "const mul = x => y => x * y;\nconst res = mul(2)(5);\nconsole.log(res);",
+        "type": "input",
+        "correctAnswer": "10"
+    },
+    {
+        "question": "Is this code valid?",
+        "description": "a = 5;alert(a);",
+        "choices": ["yes", "no"],
+        "type": "radio",
+        "correctAnswer": "yes"
+    },
+    {
+        "question": "What is the output?",
+        "description": "console.log((![]+[])[1]);",
+        "type": "input",
+        "correctAnswer": "a"
+    }
+]
