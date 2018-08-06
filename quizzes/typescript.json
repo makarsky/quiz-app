@@ -9,5 +9,11 @@
         "choices": ["true", "false"],
         "type": "radio",
         "correctAnswer": "false"
+    },
+    {
+        "question": "Typescript supports enums.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
     }
 ]
