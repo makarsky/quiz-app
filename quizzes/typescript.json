@@ -15,5 +15,10 @@
         "choices": ["true", "false"],
         "type": "radio",
         "correctAnswer": "true"
+    },
+    {
+        "question": "What is the return type of the function which does not return anything?",
+        "type": "input",
+        "correctAnswer": "void"
     }
 ]
