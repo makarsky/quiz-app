@@ -20,5 +20,11 @@
         "question": "What is the return type of the function which does not return anything?",
         "type": "input",
         "correctAnswer": "void"
+    },
+    {
+        "question": "Each optional property denoted by...",
+        "choices": ["?", "!", ".", "&"],
+        "type": "radio",
+        "correctAnswer": "?"
     }
 ]
