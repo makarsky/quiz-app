@@ -26,5 +26,12 @@
         "choices": ["?", "!", ".", "&"],
         "type": "radio",
         "correctAnswer": "?"
+    },
+    {
+        "question": "What is the output?",
+        "description": "let [first, ...rest] = [1, 2, 3, 4]; console.log(rest);",
+        "choices": ["[2, 3, 4]", "2", "error", "4"],
+        "type": "radio",
+        "correctAnswer": "[2, 3, 4]"
     }
 ]
