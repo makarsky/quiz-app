@@ -1,0 +1,33 @@
+[
+    {
+        "question": "What is the output?",
+        "description": "$str = 'peanut butter jelly time';$arr = explode(' ', $str, 3);echo count($arr);",
+        "type": "input",
+        "correctAnswer": "3"
+    },
+    {
+        "question": "What is the output?",
+        "description": "$a = 'foo';echo $GLOBALS['GLOBALS']['a'];",
+        "type": "input",
+        "correctAnswer": "foo"
+    },
+    {
+        "question": "A yield statement can be called without an argument.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "What is the output?",
+        "description": "echo "true" == 0;echo ((int)"true") == 0;",
+        "type": "input",
+        "correctAnswer": "11"
+    },
+    {
+        "question": "What is the output?",
+        "description": "function func() {} echo func() . '2';",
+        "choices": ["2", "error", "warning", "function2"],
+        "type": "radio",
+        "correctAnswer": "2"
+    }
+]
