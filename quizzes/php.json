@@ -29,5 +29,11 @@
         "choices": ["2", "error", "warning", "function2"],
         "type": "radio",
         "correctAnswer": "2"
+    },
+    {
+        "question": "What is the output?",
+        "description": "$a = 20;function foo() {global $a;unset($a);}foo();echo $a;",
+        "type": "input",
+        "correctAnswer": "20"
     }
 ]
