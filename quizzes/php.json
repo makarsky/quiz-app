@@ -35,5 +35,11 @@
         "description": "$a = 20;function foo() {global $a;unset($a);}foo();echo $a;",
         "type": "input",
         "correctAnswer": "20"
+    },
+    {
+        "question": "What function is used stop the execution of a php script?",
+        "choices": ["exit()", "stop()", "quit()", "drop()"],
+        "type": "radio",
+        "correctAnswer": "exit()"
     }
 ]
