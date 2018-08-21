@@ -41,5 +41,11 @@
         "choices": ["exit()", "stop()", "quit()", "drop()"],
         "type": "radio",
         "correctAnswer": "exit()"
+    },
+    {
+        "question": "Which magic constant returns the full path and filename of the file with symlinks resolved?",
+        "choices": ["_FILE_", "__DIR__", "__CLASS__", "__NAMESPACE__"],
+        "type": "radio",
+        "correctAnswer": "_FILE_"
     }
 ]
