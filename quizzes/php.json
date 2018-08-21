@@ -47,5 +47,11 @@
         "choices": ["_FILE_", "__DIR__", "__CLASS__", "__NAMESPACE__"],
         "type": "radio",
         "correctAnswer": "_FILE_"
+    },
+    {
+        "question": "Which magic constant returns the directory of the file?",
+        "choices": ["__DIR__", "_FILE_", "__CLASS__", "__NAMESPACE__"],
+        "type": "radio",
+        "correctAnswer": "__DIR__"
     }
 ]
