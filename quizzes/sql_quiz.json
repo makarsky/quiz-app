@@ -31,6 +31,18 @@
         "correctAnswer": "Structured Query Language"
     },
     {
+        "question": "What does DDL stand for?",
+        "choices": ["Data Definition Language", "Data Destruction Language", "Domain Definition Language"],
+        "type": "radio",
+        "correctAnswer": "Data Definition Language"
+    },
+    {
+        "question": "What does DML stand for?",
+        "choices": ["Data Manipulation Language", "Data Manifestation Language", "Domain Manipulation Language"],
+        "type": "radio",
+        "correctAnswer": "Data Manipulation Language"
+    },
+    {
         "question": "What can SQL do?",
         "choices": ["It can insert records in a database", "It can create views in a database", "It can create new databases", "It can be executed inside HTML document"],
         "type": "select",
