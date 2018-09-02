@@ -170,7 +170,7 @@ function arraysEqual(arr1, arr2) {
 
 function loadQuizzes() {
   var request =  new XMLHttpRequest();
-  request.open('GET', `https://raw.githubusercontent.com/makarsky/quiz-app/master/quizzes/${quizName}_quiz.json`);
+  request.open('GET', `https://raw.githubusercontent.com/makarsky/quiz-app/master/quizzes/${quizName}.json`);
   request.onload = () => {
     var loadedQuizzes = JSON.parse(request.responseText);
 
