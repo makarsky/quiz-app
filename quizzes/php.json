@@ -53,5 +53,24 @@
         "choices": ["__DIR__", "_FILE_", "__CLASS__", "__NAMESPACE__"],
         "type": "radio",
         "correctAnswer": "__DIR__"
+    },
+    {
+        "question": "What is the difference between Sessions and Cookies?",
+        "choices": ["Cookies are stored in browser.", "Cookies are stored in server side.", "Sessions are stored in server side.", "Sessions are stored in browser.", "A cookie can store limited amount of data. It only allows 4KB."],
+        "type": "select",
+        "correctAnswer": ["Cookies are stored in browser.", "Sessions are stored in server side.", "A cookie can store limited amount of data. It only allows 4KB."]
+    },
+    {
+        "question": "This code tests if there's any cookie enabled.",
+        "description": "if (count($_COOKIE) > 0)\n\techo 'cookies are enabled';\nelse\n\techo 'no cookie has been set';",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "Which one of these methods will make a cookie expire?",
+        "choices": ["Setting the expiration date a negative value.", "Calling cookie_destroy() function.", "It is impossible to make a cookie expire manually.", "Setting a cookie value to null."],
+        "type": "radio",
+        "correctAnswer": "Setting the expiration date a negative value."
     }
 ]
