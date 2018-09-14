@@ -19,7 +19,7 @@
     },
     {
         "question": "What is the output?",
-        "description": "echo "true" == 0;echo ((int)"true") == 0;",
+        "description": "echo 'true' == 0;echo ((int)'true') == 0;",
         "type": "input",
         "correctAnswer": "11"
     },
