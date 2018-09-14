@@ -7,7 +7,8 @@ let mySwiper = null;
 const QUIZ_NAMES = {
   'js': 'JavaScript',
   'java': 'Java',
-  'sql' : 'SQL',
+  'php': 'PHP',
+  'sql': 'SQL'
 };
 let submitButton = document.querySelector('#submitAnswer');
 var description = document.getElementById('description');
