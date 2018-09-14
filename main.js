@@ -171,7 +171,7 @@ function arraysEqual(arr1, arr2) {
 
 function loadQuizzes() {
   var request =  new XMLHttpRequest();
-  request.open('GET', `https://raw.githubusercontent.com/makarsky/quiz-app/master/quizzes/${quizName}.json`);
+  request.open('GET', `quizzes/${quizName}.json`);
   request.onload = () => {
     var loadedQuizzes = JSON.parse(request.responseText);
 
@@ -206,7 +206,7 @@ function buildQuiz(rawQuiz) {
       template = 
       `<div class="tab">
         <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
-        <div>${rawQuiz.description ? rawQuiz.description : ''}</div>
+        <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
         <br>
         ${choiceBuilder(rawQuiz.type, rawQuiz.choices)}
       </div>`;
@@ -215,7 +215,7 @@ function buildQuiz(rawQuiz) {
       template = 
       `<div class="tab">
         <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
-        <div>${rawQuiz.description ? rawQuiz.description : ''}</div>
+        <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
         <br>
         <div class="input-container"><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></div>
       </div>`;
