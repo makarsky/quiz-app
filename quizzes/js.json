@@ -46,7 +46,7 @@
     },
     {
         "question": "What is the output?",
-        "description": "(function(){alert(typeof arguments);})();",
+        "description": "(function(){\n  alert(typeof arguments);\n})();",
         "choices": ["object", "function", "undefined", "null"],
         "type": "radio",
         "correctAnswer": "object"
@@ -85,7 +85,7 @@
     },
     {
         "question": "Is this code valid?",
-        "description": "a = 5;alert(a);",
+        "description": "a = 5;\nalert(a);",
         "choices": ["yes", "no"],
         "type": "radio",
         "correctAnswer": "yes"
