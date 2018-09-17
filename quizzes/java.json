@@ -49,19 +49,19 @@
     },
     {
         "question": "What is the output?",
-        "description": "int[] arr = {0,0,0,0,0};int x = 0;int y = 2;for (int i = 0; i < 10; i +=2) {arr[x] = y + i;x++;}System.out.print(arr[3]);",
+        "description": "int[] arr = {0,0,0,0,0};\nint x = 0;\nint y = 2;\nfor (int i = 0; i < 10; i +=2) {\n\tarr[x] = y + i;\n\tx++;\n}\nSystem.out.print(arr[3]);",
         "type": "input",
         "correctAnswer": "8"
     },
     {
         "question": "What is the output?",
-        "description": "int arr[]={1, 2, 3, 4, 5};int x = 4;int y = 0;for(int i = 0; i < 5; i++)y += arr[x - i] * i;System.out.print(y);",
+        "description": "int arr[]={1, 2, 3, 4, 5};\nint x = 4;\nint y = 0;\nfor(int i = 0; i < 5; i++)\n\ty += arr[x - i] * i;\nSystem.out.print(y);",
         "type": "input",
         "correctAnswer": "20"
     },
     {
         "question": "What is the output?",
-        "description": "for (int i = 1, j = 10; i < j; i += i, i++)System.out.print(j - i);",
+        "description": "for (int i = 1, j = 10; i < j; i += i, i++)\n\tSystem.out.print(j - i);",
         "type": "input",
         "correctAnswer": "9985"
     },
@@ -73,7 +73,7 @@
     },
     {
         "question": "What is the output?",
-        "description": "int x = 17 * 71; boolean y = (x * 8 + x - 1) % x == x - 1; System.out.println(y);",
+        "description": "int x = 17 * 71;\nboolean y = (x * 8 + x - 1) % x == x - 1;\nSystem.out.println(y);",
         "choices": ["true", "false"],
         "type": "radio",
         "correctAnswer": "true"

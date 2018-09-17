@@ -1,13 +1,13 @@
 [
     {
         "question": "What is the output?",
-        "description": "$str = 'peanut butter jelly time';$arr = explode(' ', $str, 3);echo count($arr);",
+        "description": "$str = 'peanut butter jelly time';\n$arr = explode(' ', $str, 3);\necho count($arr);",
         "type": "input",
         "correctAnswer": "3"
     },
     {
         "question": "What is the output?",
-        "description": "$a = 'foo';echo $GLOBALS['GLOBALS']['a'];",
+        "description": "$a = 'foo';\necho $GLOBALS['GLOBALS']['a'];",
         "type": "input",
         "correctAnswer": "foo"
     },
@@ -19,20 +19,20 @@
     },
     {
         "question": "What is the output?",
-        "description": "echo 'true' == 0;echo ((int)'true') == 0;",
+        "description": "echo 'true' == 0;\necho ((int)'true') == 0;",
         "type": "input",
         "correctAnswer": "11"
     },
     {
         "question": "What is the output?",
-        "description": "function func() {} echo func() . '2';",
+        "description": "function func() {}\necho func() . '2';",
         "choices": ["2", "error", "warning", "function2"],
         "type": "radio",
         "correctAnswer": "2"
     },
     {
         "question": "What is the output?",
-        "description": "$a = 20;function foo() {global $a;unset($a);}foo();echo $a;",
+        "description": "$a = 20;\nfunction foo() {\n\tglobal $a;\n\tunset($a);\n}\nfoo();\necho $a;",
         "type": "input",
         "correctAnswer": "20"
     },

@@ -9,6 +9,10 @@ body {
     overflow-x: hidden;
 }
 
+.description {
+    white-space: pre-wrap;
+}
+
 #countdown {
     position: absolute;
     top: 30%;
