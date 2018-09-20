@@ -72,5 +72,11 @@
         "choices": ["Setting the expiration date a negative value.", "Calling cookie_destroy() function.", "It is impossible to make a cookie expire manually.", "Setting a cookie value to null."],
         "type": "radio",
         "correctAnswer": "Setting the expiration date a negative value."
+    },
+    {
+        "question": "Which function returns the type of interface between web server and PHP?",
+        "choices": ["php_sapi_name()", "php_api_name()", "sapi_name()", "api_name()"],
+        "type": "radio",
+        "correctAnswer": "php_sapi_name()"
     }
 ]
