@@ -66,12 +66,6 @@
     },
     {
         "question": "What is the output?",
-        "description": "typeof(NaN);",
-        "type": "input",
-        "correctAnswer": "number"
-    },
-    {
-        "question": "What is the output?",
         "description": "console.log((true+false)>2+true);",
         "choices": ["true", "false", "error"],
         "type": "radio",
