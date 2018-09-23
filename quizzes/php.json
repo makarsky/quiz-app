@@ -84,5 +84,11 @@
         "choices": ["chr()", "char()", "character()", "char_gen()"],
         "type": "radio",
         "correctAnswer": "chr()"
+    },
+    {
+        "question": "What is the output?",
+        "description": "echo substr('abcde', -4, -2);",
+        "type": "input",
+        "correctAnswer": "bc"
     }
 ]
