@@ -96,5 +96,12 @@
         "choices": ["echo str_replace(\"\n\", \"<br>\", $s);", "echo str_replace(\"<br>\", \"\n\", $s);", "echo str_replace($s, \"<br>\", \"\n\");"],
         "type": "radio",
         "correctAnswer": "echo str_replace(\"\n\", \"<br>\", $s);"
+    },
+    {
+        "question": "What is the output?",
+        "description": "$vars = ['{var1}', '{var2}'];\n$values = [2, 1];\n$template = '{var1}+{var2}=3';\necho str_replace($vars, $values, $template);",
+        "choices": ["2+1=3", "{var1}+{var2}=3", "3=3", "error"],
+        "type": "radio",
+        "correctAnswer": "2+1=3"
     }
 ]
