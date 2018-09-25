@@ -90,5 +90,11 @@
         "description": "echo substr('abcde', -4, -2);",
         "type": "input",
         "correctAnswer": "bc"
+    },
+    {
+        "question": "Choose equivalents of nl2br().",
+        "choices": [],
+        "type": "select",
+        "correctAnswer": []
     }
 ]
