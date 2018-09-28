@@ -360,5 +360,5 @@ function selectChallenge(name) {
   quizName = name;
 
   document.querySelector("#quiz-name").innerHTML = QUIZ_NAMES[name];
-  closeNav()
+  closeNav();
 }
