@@ -102,5 +102,12 @@
         "choices": ["TINYINT", "BIGINT", "MIDDLEINT", "LONG"],
         "type": "select",
         "correctAnswer": ["TINYINT", "BIGINT"]
+    },
+    {
+        "question": "Assuming a database has the following table. Choose valid INSERT statements.",
+        "description": "",
+        "choices": ["SELECT * FROM table_name;", "SELECT ALL FROM table_name;", "SELECT FROM table_name;", "SELECT # FROM table_name;"],
+        "type": "radio",
+        "correctAnswer": "SELECT * FROM table_name;"
     }
 ]
