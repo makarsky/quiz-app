@@ -109,5 +109,11 @@
         "choices": [16, "15", "14", "13", "12"],
         "type": "radio",
         "correctAnswer": 16
+    },
+    {
+        "question": "Which function generates a single-byte string from a number?",
+        "choices": ["json_encode()", "char()", "character()", "char_gen()"],
+        "type": "radio",
+        "correctAnswer": "json_encode()"
     }
 ]
