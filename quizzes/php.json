@@ -111,8 +111,8 @@
         "correctAnswer": 16
     },
     {
-        "question": "Which function generates a single-byte string from a number?",
-        "choices": ["json_encode()", "char()", "character()", "char_gen()"],
+        "question": "Which function encodes JSON data?",
+        "choices": ["json_encode()", "encode_json()", "json()", "json_parse()"],
         "type": "radio",
         "correctAnswer": "json_encode()"
     }
