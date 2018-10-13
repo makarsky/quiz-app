@@ -106,7 +106,7 @@
     },
     {
         "question": "How many error levels does PHP 5 have?",
-        "choices": [16, "15", "14", "13", "12"],
+        "choices": [16, 15, 14, 13, 12],
         "type": "radio",
         "correctAnswer": 16
     },
