@@ -93,9 +93,9 @@
     },
     {
         "question": "Choose the equivalent of nl2br($s).",
-        "choices": ["echo str_replace(\"\n\", \"<br>\", $s);", "echo str_replace(\"<br>\", \"\n\", $s);", "echo str_replace($s, \"<br>\", \"\n\");"],
+        "choices": ["echo str_replace(\"\\n\", \"<br>\", $s);", "echo str_replace(\"<br>\", \"\\n\", $s);", "echo str_replace($s, \"<br>\", \"\\n\");"],
         "type": "radio",
-        "correctAnswer": "echo str_replace(\"\n\", \"<br>\", $s);"
+        "correctAnswer": "echo str_replace(\"\\n\", \"<br>\", $s);"
     },
     {
         "question": "What is the output?",
