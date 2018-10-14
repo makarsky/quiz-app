@@ -93,7 +93,7 @@
     },
     {
         "question": "Choose the equivalent of nl2br($s).",
-        "choices": ["echo str_replace(\"\\n\", \"<br>\", $s);", "echo str_replace(\"<br>\", \"\\n\", $s);", "echo str_replace($s, \"<br>\", \"\\n\");"],
+        "choices": ["str_replace(\"\\n\", \"<br>\", $s);", "str_replace(\"<br>\", \"\\n\", $s);", "str_replace($s, \"<br>\", \"\\n\");"],
         "type": "radio",
         "correctAnswer": "echo str_replace(\"\\n\", \"<br>\", $s);"
     },
