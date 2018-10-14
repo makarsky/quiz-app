@@ -115,5 +115,11 @@
         "choices": ["json_encode()", "encode_json()", "json()", "json_parse()"],
         "type": "radio",
         "correctAnswer": "json_encode()"
+    },
+    {
+        "question": "What is the output?",
+        "description": "$str = '4 john male';\n$person = explode(' ', $str, 3);\nlist ($id, $name, $gender) = $person;\necho $name;",
+        "type": "input",
+        "correctAnswer": "john"
     }
 ]
