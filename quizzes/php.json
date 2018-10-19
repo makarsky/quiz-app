@@ -121,5 +121,11 @@
         "description": "$str = '4 john male';\n$person = explode(' ', $str, 3);\nlist ($id, $name, $gender) = $person;\necho $name;",
         "type": "input",
         "correctAnswer": "john"
+    },
+    {
+        "question": "What is the output if a file was uploaded without any errors?",
+        "description": "$_FILES[\"file\"][\"error\"];",
+        "type": "input",
+        "correctAnswer": "0"
     }
 ]
