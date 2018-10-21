@@ -127,5 +127,11 @@
         "description": "$_FILES[\"file\"][\"error\"];",
         "type": "input",
         "correctAnswer": "0"
+    },
+    {
+        "question": "Which function sorts associative arrays in ascending order, according to the key?",
+        "choices": ["ksort()", "krsort()", "arsort()", "asort()"],
+        "type": "radio",
+        "correctAnswer": "ksort()"
     }
 ]
