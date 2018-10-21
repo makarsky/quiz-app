@@ -133,5 +133,11 @@
         "choices": ["ksort()", "krsort()", "arsort()", "asort()"],
         "type": "radio",
         "correctAnswer": "ksort()"
+    },
+    {
+        "question": "Which function sorts associative arrays in descending order, according to the value?",
+        "choices": ["arsort()", "ksort()", "krsort()", "asort()"],
+        "type": "radio",
+        "correctAnswer": "arsort()"
     }
 ]
