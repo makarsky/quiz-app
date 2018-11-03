@@ -139,5 +139,11 @@
         "choices": ["arsort()", "ksort()", "krsort()", "asort()"],
         "type": "radio",
         "correctAnswer": "arsort()"
+    },
+    {
+        "question": "What is the opposite function to htmlentities()?",
+        "choices": ["html_entity_decode()", "html_entities_decode()", "decode_html_entity()", "decode_html_entities()"],
+        "type": "radio",
+        "correctAnswer": "html_entity_decode()"
     }
 ]
