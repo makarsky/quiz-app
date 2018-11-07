@@ -45,7 +45,7 @@
     {
         "question": "What can SQL do?",
         "choices": ["It can insert records in a database", "It can create views in a database", "It can create new databases", "It can be executed inside HTML document"],
-        "type": "select",
+        "type": "checkbox",
         "correctAnswer": ["It can insert records in a database", "It can create views in a database", "It can create new databases"]
     },
     {
@@ -94,13 +94,13 @@
     {
         "question": "Choose correct MySQL text data types.",
         "choices": ["LONGTEXT", "BLOB", "SMALLTEXT", "MIDDLEBLOB"],
-        "type": "select",
+        "type": "checkbox",
         "correctAnswer": ["LONGTEXT", "BLOB"]
     },
     {
         "question": "Choose correct MySQL number data types.",
         "choices": ["TINYINT", "BIGINT", "MIDDLEINT", "LONG"],
-        "type": "select",
+        "type": "checkbox",
         "correctAnswer": ["TINYINT", "BIGINT"]
     },
     {
