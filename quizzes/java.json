@@ -32,13 +32,13 @@
     {
         "question": "In which data types the number 132 can fit?",
         "choices": ["int", "short", "long", "byte"],
-        "type": "select",
+        "type": "checkbox",
         "correctAnswer": ["int", "short", "long"]
     },
     {
         "question": "The switch statement works with which of the following?",
         "choices": ["int", "String", "float", "long"],
-        "type": "select",
+        "type": "checkbox",
         "correctAnswer": ["int", "String"]
     },
     {

@@ -57,7 +57,7 @@
     {
         "question": "What is the difference between Sessions and Cookies?",
         "choices": ["Cookies are stored in browser.", "Cookies are stored in server side.", "Sessions are stored in server side.", "Sessions are stored in browser.", "A cookie can store limited amount of data. It only allows 4KB."],
-        "type": "select",
+        "type": "checkbox",
         "correctAnswer": ["Cookies are stored in browser.", "Sessions are stored in server side.", "A cookie can store limited amount of data. It only allows 4KB."]
     },
     {
