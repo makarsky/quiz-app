@@ -10,8 +10,8 @@ Submit a Pull Request, with your quiz added to the `quizzes/{language}.json` fil
 {
   "question": "Your question",
   "description": "Question description", - optional
-  "type": "input, select or radio",
-  "choices": ["array", "of", "choices"],  - for radio and select types
+  "type": "input, checkbox or radio",
+  "choices": ["array", "of", "choices"],  - for radio and checkbox types
   "correctAnswer": "a single string for input/radio type or an array for checkbox type"
 }
 ```
