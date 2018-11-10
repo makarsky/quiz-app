@@ -55,7 +55,7 @@
         "question": "Choose the numbers that are present in the output.",
         "description": "for(let i = 0; i < 100; i ++)\n  if(i % 10 == i - 10)\n    document.write(i + ',');",
         "choices": ["14", "17", "27", "9"],
-        "type": "select",
+        "type": "checkbox",
         "correctAnswer": ["14", "17"]
     },
     {
