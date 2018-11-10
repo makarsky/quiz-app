@@ -81,7 +81,7 @@ function checkAnswer() {
       answer = x[currentTab].querySelector('input');
       answer.value === randomQuizzes[currentTab].correctAnswer ? isCorrect = true : null;
       break;
-    case 'select':
+    case 'checkbox':
       answers = x[currentTab].querySelectorAll('input[name=answer]:checked');
       answers = [].map.call(answers, (e) => e.value);
       arraysEqual(answers, randomQuizzes[currentTab].correctAnswer) ? isCorrect = true : null;
@@ -201,7 +201,7 @@ function buildQuiz(rawQuiz) {
   var template;
 
   switch (rawQuiz.type) {
-    case 'select':
+    case 'checkbox':
     case 'radio':
       template = 
       `<div class="tab">
@@ -227,7 +227,7 @@ function buildQuiz(rawQuiz) {
 
 function choiceBuilder(type, choices) {
   switch (type) {
-    case 'select':
+    case 'checkbox':
       return choices.map((type => choice => 
         `<div class="checkbox">
           <label><input type="checkbox" name="answer" value="${choice}">${choice}</label>
@@ -244,7 +244,7 @@ function buildCorrectQuizCard(quiz) {
   var template;
 
   switch (quiz.type) {
-    case 'select':
+    case 'checkbox':
     case 'radio':
       template = 
       `<div class="swiper-slide">
