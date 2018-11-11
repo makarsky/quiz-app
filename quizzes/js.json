@@ -89,5 +89,11 @@
         "description": "console.log((![]+[])[1]);",
         "type": "input",
         "correctAnswer": "a"
+    },
+    {
+        "question": "List types of scopes available in Javascript?",
+        "choices": ["Global Scope", "Local Scope", "27", "9"],
+        "type": "checkbox",
+        "correctAnswer": ["Global Scope", "Local Scope"]
     }
 ]
