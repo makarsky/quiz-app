@@ -145,5 +145,12 @@
         "choices": ["html_entity_decode()", "html_entities_decode()", "decode_html_entity()", "decode_html_entities()"],
         "type": "radio",
         "correctAnswer": "html_entity_decode()"
+    },
+    {
+        "question": "What is the output?",
+        "description": "echo preg_match('/gi[tm]h.b/', 'github');",
+        "choices": ["true", "false", "1", "0"],
+        "type": "radio",
+        "correctAnswer": "1"
     }
 ]
