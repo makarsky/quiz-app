@@ -152,5 +152,11 @@
         "choices": ["true", "false", "1", "0"],
         "type": "radio",
         "correctAnswer": "1"
+    },
+    {
+        "question": "Which of the following functions explicitly triggers the destructor function of an object?",
+        "choices": ["unset()", "destroy()", "delete()"],
+        "type": "radio",
+        "correctAnswer": "unset()"
     }
 ]
