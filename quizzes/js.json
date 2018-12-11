@@ -95,5 +95,11 @@
         "choices": ["Global Scope", "Local Scope", "Function Scope", "Class Scope"],
         "type": "checkbox",
         "correctAnswer": ["Global Scope", "Local Scope"]
+    },
+    {
+        "question": "What is the output?",
+        "description": "console.log(parseInt('1001', 2));",
+        "type": "input",
+        "correctAnswer": "9"
     }
 ]
