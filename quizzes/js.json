@@ -101,5 +101,12 @@
         "description": "console.log(parseInt('1001', 2));",
         "type": "input",
         "correctAnswer": "9"
+    },
+    {
+        "question": "This code generates an error.",
+        "description": "'use strict';\nv = 17;",
+        "choices": ["yes", "no"],
+        "type": "radio",
+        "correctAnswer": "yes"
     }
 ]
