@@ -112,14 +112,14 @@
     {
         "question": "What is the output?",
         "description": "const createPerson = name => ({name});\nconsole.log(createPerson('John'));",
-        "choices": ["John", "undefined", "name", "object"],
+        "choices": ["{name: \"John\"}", "undefined", "name", "John"],
         "type": "radio",
-        "correctAnswer": "John"
+        "correctAnswer": "{name: \"John\"}"
     },
     {
         "question": "What is the output?",
         "description": "const createPerson = name => {name};\nconsole.log(createPerson('John'));",
-        "choices": ["John", "undefined", "name", "object"],
+        "choices": ["{name: \"John\"}", "undefined", "name", "John"],
         "type": "radio",
         "correctAnswer": "undefined"
     }
