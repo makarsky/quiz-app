@@ -108,5 +108,19 @@
         "choices": ["yes", "no"],
         "type": "radio",
         "correctAnswer": "yes"
+    },
+    {
+        "question": "What is the output?",
+        "description": "const createPerson = name => ({name});\nconsole.log(createPerson('John'));",
+        "choices": ["John", "undefined", "name", "object"],
+        "type": "radio",
+        "correctAnswer": "John"
+    },
+    {
+        "question": "What is the output?",
+        "description": "const createPerson = name => {name};\nconsole.log(createPerson('John'));",
+        "choices": ["John", "undefined", "name", "object"],
+        "type": "radio",
+        "correctAnswer": "undefined"
     }
 ]
