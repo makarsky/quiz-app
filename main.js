@@ -28,16 +28,16 @@ function toggleVisibility(element) {
 function submitAnswer() {
   toggleVisibility(submitButton);
   clearInterval(timer);
-  
+
   var x = document.getElementById("regForm");
   var tabs = document.getElementsByClassName("tab");
-  
+
   checkAnswer();
 
   x.classList.add("removed-item");
   x.classList.remove("new-item");
 
-  setTimeout(function() {
+  setTimeout(function () {
     // Hide the current tab:
     tabs[currentTab].style.display = "none";
 
@@ -71,7 +71,7 @@ function fixView() {
 function checkAnswer() {
   var x, answer, isCorrect = false;
   x = document.getElementsByClassName("tab");
-  
+
   switch (randomQuizzes[currentTab].type) {
     case 'radio':
       answer = x[currentTab].querySelector('input[name=answer]:checked');
@@ -89,7 +89,7 @@ function checkAnswer() {
     case 'multi-input':
       answers = x[currentTab].querySelectorAll('input');
       answers = [].map.call(answers, (e) => e.value);
-      // todo: implement multi-input quizzes
+    // todo: implement multi-input quizzes
   }
 
   randomQuizzes[currentTab].isCorrect = isCorrect;
@@ -112,7 +112,7 @@ function fixStepIndicator(n = null) {
   }
 
   //... and adds the "active" class on the current step:
-  n === null ? null: x[n].classList.add("active");
+  n === null ? null : x[n].classList.add("active");
 }
 
 function move() {
@@ -121,35 +121,35 @@ function move() {
   var quizTimeCopy = quizTime;
 
   timer = setInterval(frame, 5);
-  
+
   function frame() {
     if (quizTimeCopy <= 0) {
       clearInterval(timer);
       submitAnswer();
     } else {
       quizTimeCopy -= 0.005
-      
+
       width = quizTimeCopy / quizTime * 100;
-      timeBar.style.width = width + '%'; 
+      timeBar.style.width = width + '%';
     }
   }
 }
 
 function toggleMenu(element) {
-    // element.classList.toggle("change");
-    openLink('menu')
-    document.getElementById("myNav").style.width = "100%";
+  // element.classList.toggle("change");
+  openLink('menu')
+  document.getElementById("myNav").style.width = "100%";
 }
 
 function closeNav() {
-    document.getElementById("myNav").style.width = "0%";
-    openLink('menu')
+  document.getElementById("myNav").style.width = "0%";
+  openLink('menu')
 }
 
 function openLink(id) {
-    var menuSections = document.getElementsByClassName("overlay-content");
-    [].forEach.call(menuSections, (e) => e.style.display = "none");
-    document.getElementById(id).style.display = "block";
+  var menuSections = document.getElementsByClassName("overlay-content");
+  [].forEach.call(menuSections, (e) => e.style.display = "none");
+  document.getElementById(id).style.display = "block";
 }
 
 function arraysEqual(arr1, arr2) {
@@ -170,14 +170,14 @@ function arraysEqual(arr1, arr2) {
 }
 
 function loadQuizzes() {
-  var request =  new XMLHttpRequest();
+  var request = new XMLHttpRequest();
   request.open('GET', `quizzes/${quizName}.json`);
   request.onload = () => {
     var loadedQuizzes = JSON.parse(request.responseText);
 
     for (var i = 0; i < 5; i++) {
       var randomNumber = Math.floor(Math.random() * loadedQuizzes.length);
-      
+
       var randomQuiz = loadedQuizzes[randomNumber];
       randomQuizzes.push(randomQuiz);
       loadedQuizzes.splice(randomNumber, 1);
@@ -203,8 +203,8 @@ function buildQuiz(rawQuiz) {
   switch (rawQuiz.type) {
     case 'checkbox':
     case 'radio':
-      template = 
-      `<div class="tab">
+      template =
+        `<div class="tab">
         <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
         <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
         <br>
@@ -212,8 +212,8 @@ function buildQuiz(rawQuiz) {
       </div>`;
       break;
     case 'input':
-      template = 
-      `<div class="tab">
+      template =
+        `<div class="tab">
         <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
         <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
         <br>
@@ -228,12 +228,12 @@ function buildQuiz(rawQuiz) {
 function choiceBuilder(type, choices) {
   switch (type) {
     case 'checkbox':
-      return choices.map((type => choice => 
+      return choices.map((type => choice =>
         `<div class="checkbox">
           <label><input type="checkbox" name="answer" value="${choice}">${choice}</label>
         </div>`)(type)).join('');
     case 'radio':
-      return choices.map((type => choice => 
+      return choices.map((type => choice =>
         `<div class="radio">
           <label><input type="radio" name="answer" value="${choice}">${choice}</label>
         </div>`)(type)).join('');
@@ -246,8 +246,8 @@ function buildCorrectQuizCard(quiz) {
   switch (quiz.type) {
     case 'checkbox':
     case 'radio':
-      template = 
-      `<div class="swiper-slide">
+      template =
+        `<div class="swiper-slide">
         <div class="card">
           <h4>${quiz.question ? quiz.question : ''}</h4>
           <div>${quiz.description ? quiz.description : ''}</div>
@@ -257,8 +257,8 @@ function buildCorrectQuizCard(quiz) {
       </div>`;
       break;
     case 'input':
-      template = 
-      `<div class="swiper-slide">
+      template =
+        `<div class="swiper-slide">
         <div class="card">
           <h4>${quiz.question ? quiz.question : ''}</h4>
           <div>${quiz.description ? quiz.description : ''}</div>
@@ -282,7 +282,7 @@ function countdown() {
     if (counter === -1) {
       clearInterval(countInterval);
       element.innerHTML = "";
-      
+
       toggleVisibility(document.querySelector('#quiz'));
       move();
     };
@@ -324,7 +324,7 @@ function showResult() {
   }).length + '/5';
 
   document.querySelector('.swiper-wrapper').innerHTML = randomQuizzes.map(buildCorrectQuizCard).join('');
-  
+
   document.querySelector('#timeBar').classList.add('remove-time');
   fixStepIndicator();
 }
@@ -343,13 +343,13 @@ function initSwiper() {
     loop: false,
     pagination: {
       el: '.swiper-custom-pagination',
-      bulletClass:  'swiper-pagination-bullet'
+      bulletClass: 'swiper-pagination-bullet'
     },
   });
 }
 
 function destroySwiper() {
-  swiperExists() ? mySwiper.destroy(): null;
+  swiperExists() ? mySwiper.destroy() : null;
 }
 
 function swiperExists() {
