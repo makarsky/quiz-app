@@ -122,5 +122,24 @@
         "choices": ["true", "false"],
         "type": "radio",
         "correctAnswer": "true"
+    },
+    {
+        "question": "It is possible to test for NULL values with comparison operators, such as =, <, or <>.",
+        "choices": ["false", "true"],
+        "type": "radio",
+        "correctAnswer": "false"
+    },
+    {
+        "question": "If you omit the WHERE clause in the UPDATE statement, all records in the table will be updated.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "Is this statement valid?",
+        "description": "UPDATE Customers\nSET name = 'Alfred', city = 'NY'\nWHERE id = 1;",
+        "type": "radio",
+        "choices": ["yes", "no"],
+        "correctAnswer": "yes"
     }
 ]
