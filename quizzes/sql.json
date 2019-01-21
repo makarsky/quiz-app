@@ -141,5 +141,17 @@
         "type": "radio",
         "choices": ["yes", "no"],
         "correctAnswer": "yes"
+    },
+    {
+        "question": "If you omit the WHERE clause in the DELETE statement, all records in the table will be deleted.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "Choose the right MySQL clause to specify the number of records to return.",
+        "choices": ["LIMIT", "SELECT TOP", "ROWNUM"],
+        "type": "radio",
+        "correctAnswer": "LIMIT"
     }
 ]
