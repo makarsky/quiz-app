@@ -153,5 +153,24 @@
         "choices": ["LIMIT", "SELECT TOP", "ROWNUM"],
         "type": "radio",
         "correctAnswer": "LIMIT"
+    },
+    {
+        "question": "What is the equivalent of the following clause?",
+        "description": "LIMIT 10 OFFSET 5",
+        "choices": ["LIMIT 5, 10", "LIMIT 10, 5", "LIMIT 5 10", "LIMIT 10 5"],
+        "type": "radio",
+        "correctAnswer": "LIMIT 5, 10"
+    },
+    {
+        "question": "Choose the slowest clause.",
+        "choices": ["LIMIT 5000, 20", "LIMIT 0, 20", "LIMIT 100, 50", "LIMIT 500, 100"],
+        "type": "radio",
+        "correctAnswer": "LIMIT 5000, 20"
+    },
+    {
+        "question": "Choose functions which return the smallest and the largest value of the selected column.",
+        "choices": ["MIN()", "MAX()", "MIN_VALUE()", "MAX_VALUE()"],
+        "type": "checkbox",
+        "correctAnswer": ["MIN()", "MAX()"]
     }
 ]
