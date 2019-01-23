@@ -172,5 +172,17 @@
         "choices": ["MIN()", "MAX()", "MIN_VALUE()", "MAX_VALUE()"],
         "type": "checkbox",
         "correctAnswer": ["MIN()", "MAX()"]
+    },
+    {
+        "question": "Choose correct statements to insert data in a table.",
+        "choices": ["INSERT INTO tablename VALUES (1, 2);", "INSERT INTO tablename (col1, col2) VALUES (1, 2), (3, 4);", "INSERT INTO tablename (col1, col2) VALUES 1, 2;", "INSERT INTO tablename (col1, col2), (col1, col2) VALUES (1, 2), (3, 4);"],
+        "type": "checkbox",
+        "correctAnswer": ["INSERT INTO tablename VALUES (1, 2);", "INSERT INTO tablename (col1, col2) VALUES (1, 2), (3, 4);"]
+    },
+    {
+        "question": "Which field allows a unique number to be generated automatically when a new record is inserted into a MySQL table?",
+        "choices": ["AUTO_INCREMENT", "AUTO INCREMENT", "AUTOINCREMENT", "AUTO (INCREMENT)"],
+        "type": "radio",
+        "correctAnswer": "AUTO_INCREMENT"
     }
 ]
