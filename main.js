@@ -1,3 +1,11 @@
+class UI {
+
+}
+
+class Quiz {
+  
+}
+
 let randomQuizzes = [];
 const quizTime = 40; // Quiz time in seconds
 let currentTab = 0; // Current card
