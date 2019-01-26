@@ -1,5 +1,8 @@
 class UI {
-
+  constructor() {
+    this.menu = document.querySelector('.menu-container');
+    this.restart = document.getElementById('restart');
+  }
 }
 
 class Quiz {
