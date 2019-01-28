@@ -76,7 +76,7 @@
         "correctAnswer": "COUNT"
     },
     {
-        "question": "Which operator displays a record if all the conditions separated by it is TRUE?",
+        "question": "Which operator displays a record if all the conditions separated by it are TRUE?",
         "choices": ["AND", "&&", "OR", "||"],
         "type": "radio",
         "correctAnswer": "AND"
