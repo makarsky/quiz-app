@@ -1,6 +1,7 @@
 class UI {
   constructor() {
-    this.menu = document.getElementById('menuButton');
+    this.menuButton = document.getElementById('menuButton');
+    this.closeMenuButton = document.getElementById('closeMenuButton');
     this.restart = document.getElementById('restart');
   }
 }
