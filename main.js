@@ -67,17 +67,8 @@ function submitAnswer() {
     x.classList.add("new-item");
     x.classList.remove("removed-item");
     toggleVisibility(submitButton);
-    fixView();
     move();
   }, 2000);
-}
-
-// This function fixes mobile view
-function fixView() {
-  document.body.style.height = "99%";
-  document.body.style.width = "99%";
-  document.body.style.height = "100%";
-  document.body.style.width = "100%";
 }
 
 function checkAnswer() {
