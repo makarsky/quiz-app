@@ -158,5 +158,12 @@
         "choices": ["unset()", "destroy()", "delete()"],
         "type": "radio",
         "correctAnswer": "unset()"
+    },
+    {
+        "question": "What is the output?",
+        "description": "$x = 12;\n$x = boolval($x);\necho gettype($x);",
+        "choices": ["boolean", "bool", "int", "integer", "error"],
+        "type": "radio",
+        "correctAnswer": "boolean"
     }
 ]
