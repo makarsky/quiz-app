@@ -184,5 +184,12 @@
         "choices": ["AUTO_INCREMENT", "AUTO INCREMENT", "AUTOINCREMENT", "AUTO (INCREMENT)"],
         "type": "radio",
         "correctAnswer": "AUTO_INCREMENT"
+    },
+    {
+        "question": "The following statements will produce the same result set.",
+        "description": "SELECT * FROM students WHERE (class = 'first' AND age = 5);\n\nSELECT * FROM students WHERE class = 'first' && age = 5;",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
     }
 ]
