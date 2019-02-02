@@ -6,6 +6,14 @@ class UI {
   }
 }
 
+function eventListeners() {
+  const ui = new UI();
+  ui.menuButton.addEventListener('click', (e) => toggleMenu(e.target));
+  ui.closeMenuButton.onclick = (e) => closeNav();
+}
+
+document.addEventListener('DOMContentLoaded', () => eventListeners());
+
 class Quiz {
   
 }
