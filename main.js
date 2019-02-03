@@ -10,6 +10,7 @@ function eventListeners() {
   const ui = new UI();
   ui.menuButton.addEventListener('click', (e) => toggleMenu(e.target));
   ui.closeMenuButton.onclick = (e) => closeNav();
+  document.body.onkeyup = (e) => console.log(e);
 }
 
 document.addEventListener('DOMContentLoaded', () => eventListeners());
@@ -149,11 +150,11 @@ function move() {
 function toggleMenu(element) {
   // element.classList.toggle("change");
   openLink('menu')
-  document.getElementById("myNav").style.width = "100%";
+  document.getElementById("myNav").classList.toggle("overlay-opened");
 }
 
 function closeNav() {
-  document.getElementById("myNav").style.width = "0%";
+  document.getElementById("myNav").classList.toggle("overlay-opened");
   openLink('menu')
 }
 
