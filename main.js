@@ -8,9 +8,9 @@ class UI {
 
 function eventListeners() {
   const ui = new UI();
-  ui.menuButton.addEventListener('click', (e) => toggleMenu(e.target));
-  ui.closeMenuButton.onclick = (e) => closeNav();
-  document.body.onkeyup = (e) => console.log(e);
+  ui.menuButton.addEventListener('click', () => toggleMenu());
+  ui.closeMenuButton.onclick = () => toggleMenu();
+  document.body.onkeyup = (e) => e.key === "Escape" ? toggleMenu() : null;
 }
 
 document.addEventListener('DOMContentLoaded', () => eventListeners());
@@ -147,15 +147,9 @@ function move() {
   }
 }
 
-function toggleMenu(element) {
-  // element.classList.toggle("change");
-  openLink('menu')
-  document.getElementById("myNav").classList.toggle("overlay-opened");
-}
-
-function closeNav() {
-  document.getElementById("myNav").classList.toggle("overlay-opened");
-  openLink('menu')
+function toggleMenu() {
+  openLink('menu');
+  document.getElementById("navigation").classList.toggle("overlay-opened");
 }
 
 function openLink(id) {
@@ -372,5 +366,5 @@ function selectChallenge(name) {
   quizName = name;
 
   document.querySelector("#quiz-name").innerHTML = QUIZ_NAMES[name];
-  closeNav();
+  toggleMenu();
 }
