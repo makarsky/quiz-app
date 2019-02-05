@@ -2,20 +2,22 @@ class UI {
   constructor() {
     this.menuButton = document.getElementById('menuButton');
     this.closeMenuButton = document.getElementById('closeMenuButton');
+    this.startButton = document.getElementById('startButton');
     this.restart = document.getElementById('restart');
   }
 }
 
 function eventListeners() {
   const ui = new UI();
-  ui.menuButton.addEventListener('click', () => toggleMenu());
-  ui.closeMenuButton.onclick = () => toggleMenu();
+  ui.startButton.onclick = start;
+  ui.menuButton.addEventListener('click', toggleMenu);
+  ui.closeMenuButton.onclick = toggleMenu;
   document.body.onkeyup = (e) => e.key === "Escape" ? toggleMenu() : null;
 }
 
-document.addEventListener('DOMContentLoaded', () => eventListeners());
+document.addEventListener('DOMContentLoaded', eventListeners);
 
-class Quiz {
+class SwiperHandler {
   
 }
 
@@ -366,5 +368,5 @@ function selectChallenge(name) {
   quizName = name;
 
   document.querySelector("#quiz-name").innerHTML = QUIZ_NAMES[name];
-  toggleMenu();
+  toggleMenu(); // rewrite this with event. UI object catches this event and calls toggleMenu().
 }
