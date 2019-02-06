@@ -1,0 +1,8 @@
+[
+    {
+        "question": "Choose HTML valid directives.",
+        "choices": ["data-ng-app", "data-ng-bind", "ng-init", "ng-model"],
+        "type": "checkbox",
+        "correctAnswer": ["data-ng-app", "data-ng-bind"]
+    }
+]
