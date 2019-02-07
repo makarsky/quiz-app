@@ -4,5 +4,11 @@
         "choices": ["data-ng-app", "data-ng-bind", "ng-init", "ng-model"],
         "type": "checkbox",
         "correctAnswer": ["data-ng-app", "data-ng-bind"]
+    },
+    {
+        "question": "Choose valid ways to invoke the testDirective.",
+        "choices": ["&lt;w3-test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: w3-test-directive --&gt;"],
+        "type": "checkbox",
+        "correctAnswer": ["&lt;w3-test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: w3-test-directive --&gt;"]
     }
 ]
