@@ -16,5 +16,11 @@
         "choices": ["&lt;w3-test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: w3-test-directive --&gt;"],
         "type": "checkbox",
         "correctAnswer": ["&lt;w3-test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;"]
+    },
+    {
+        "question": "What directive repeats an HTML element?",
+        "choices": ["ng-repeat", "ng-for", "ng-while", "ng-loop"],
+        "type": "radio",
+        "correctAnswer": "ng-repeat"
     }
 ]
