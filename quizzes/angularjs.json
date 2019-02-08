@@ -22,5 +22,11 @@
         "choices": ["ng-repeat", "ng-for", "ng-while", "ng-loop"],
         "type": "radio",
         "correctAnswer": "ng-repeat"
+    },
+    {
+        "question": "What directive provides a two-way binding between the model and the view?",
+        "choices": ["ng-model", "ng-bind", "ng-link", "ng-controller"],
+        "type": "radio",
+        "correctAnswer": "ng-model"
     }
 ]
