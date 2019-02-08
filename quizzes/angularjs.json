@@ -7,15 +7,15 @@
     },
     {
         "question": "Choose valid ways to invoke the testDirective.",
-        "choices": ["&lt;w3-test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: w3-test-directive --&gt;"],
+        "choices": ["&lt;test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: test-directive --&gt;"],
         "type": "checkbox",
-        "correctAnswer": ["&lt;w3-test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: w3-test-directive --&gt;"]
+        "correctAnswer": ["&lt;test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: test-directive --&gt;"]
     },
     {
         "question": "Choose ways to invoke the testDirective which don't require any specified restrictions.",
-        "choices": ["&lt;w3-test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: w3-test-directive --&gt;"],
+        "choices": ["&lt;test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: test-directive --&gt;"],
         "type": "checkbox",
-        "correctAnswer": ["&lt;w3-test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;"]
+        "correctAnswer": ["&lt;test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;"]
     },
     {
         "question": "What directive repeats an HTML element?",
