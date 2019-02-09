@@ -37,7 +37,7 @@
     },
     {
         "question": "What is the $scope?",
-        "description": "If we consider an AngularJS application to consist of:\nView, which is the HTML.\nModel, which is the data available for the current view.\nController, which is the JavaScript function that makes/changes/removes/controls the data.".
+        "description": "If we consider an AngularJS application to consist of:\nView, which is the HTML.\nModel, which is the data available for the current view.\nController, which is the JavaScript function that makes/changes/removes/controls the data.",
         "choices": ["Model", "View", "Controller", "Neither"],
         "type": "radio",
         "correctAnswer": "Model"
