@@ -28,5 +28,24 @@
         "choices": ["ng-model", "ng-bind", "ng-link", "ng-controller"],
         "type": "radio",
         "correctAnswer": "ng-model"
+    },
+    {
+        "question": "What is the $scope?",
+        "choices": ["It is the application object; the owner of application variables and functions.", "It is a controller.", "It is a directive, which binds input fields to controller properties"],
+        "type": "radio",
+        "correctAnswer": "It is the application object; the owner of application variables and functions."
+    },
+    {
+        "question": "What is the $scope?",
+        "description": "If we consider an AngularJS application to consist of:\nView, which is the HTML.\nModel, which is the data available for the current view.\nController, which is the JavaScript function that makes/changes/removes/controls the data.".
+        "choices": ["Model", "View", "Controller", "Neither"],
+        "type": "radio",
+        "correctAnswer": "Model"
+    },
+    {
+        "question": "If a variable has the same name in both the current scope and in the rootScope, from which scope does the application use the variable?",
+        "choices": ["current scope", "rootScope"],
+        "type": "radio",
+        "correctAnswer": "current scope"
     }
 ]
