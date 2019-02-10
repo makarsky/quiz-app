@@ -47,5 +47,12 @@
         "choices": ["current scope", "rootScope"],
         "type": "radio",
         "correctAnswer": "current scope"
+    },
+    {
+        "question": "Is this a valid way to add the 'orderBy' filter?",
+        "description": "&lt;li ng-repeat=\"x in names | orderBy:'country'\"&gt;\n  {{ x.name + ', ' + x.country }}\n&lt;/li&gt;",
+        "choices": ["Yes.", "Yes, if user has implemented the 'orderBy' filter.", "No"],
+        "type": "radio",
+        "correctAnswer": "Yes."
     }
 ]
