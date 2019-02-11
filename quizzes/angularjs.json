@@ -54,5 +54,10 @@
         "choices": ["Yes.", "Yes, if user has implemented the 'orderBy' filter.", "No"],
         "type": "radio",
         "correctAnswer": "Yes."
+    },
+    {
+        "question": "What is the name of the method of the $location service, which returns the url of the current web page?",
+        "type": "input",
+        "correctAnswer": "absUrl"
     }
 ]
