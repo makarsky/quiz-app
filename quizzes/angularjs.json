@@ -65,5 +65,15 @@
         "choices": ["Define a service as a dependency.", "Simply access the service object.", "It is not possible"],
         "type": "radio",
         "correctAnswer": "Define a service as a dependency."
+    },
+    {
+        "question": "What service is AngularJS' version of the window.setTimeout function?",
+        "type": "input",
+        "correctAnswer": "$timeout"
+    },
+    {
+        "question": "What service is AngularJS' version of the window.setInterval function?",
+        "type": "input",
+        "correctAnswer": "$interval"
     }
 ]
