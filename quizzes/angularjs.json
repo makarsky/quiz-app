@@ -75,5 +75,11 @@
         "question": "What service is AngularJS' version of the window.setInterval function?",
         "type": "input",
         "correctAnswer": "$interval"
+    },
+    {
+        "question": "We can use a custom service inside a filter.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
     }
 ]
