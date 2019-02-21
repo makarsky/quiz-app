@@ -122,5 +122,17 @@
         "choices": ["{name: \"John\"}", "undefined", "name", "John"],
         "type": "radio",
         "correctAnswer": "undefined"
+    },
+    {
+        "question": "Which value of the 'position' parameter of the insertAdjacentElement() allows to insert a child element after the current element?",
+        "choices": ["afterend", "afterbegin", "beforeend", "beforebegin"],
+        "type": "radio",
+        "correctAnswer": "afterend"
+    },
+    {
+        "question": "Which value of the 'position' parameter of the insertAdjacentElement() allows to insert a child element before the end of the current element (as the last child)?",
+        "choices": ["beforeend", "beforebegin", "afterbegin", "afterend"],
+        "type": "radio",
+        "correctAnswer": "beforeend"
     }
 ]
