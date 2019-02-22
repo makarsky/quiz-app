@@ -51,7 +51,7 @@
     {
         "question": "Is this a valid way to add the 'orderBy' filter?",
         "description": "&lt;li ng-repeat=\"x in names | orderBy:'country'\"&gt;\n  {{ x.name + ', ' + x.country }}\n&lt;/li&gt;",
-        "choices": ["Yes.", "Yes, if user has implemented the 'orderBy' filter.", "No"],
+        "choices": ["Yes.", "Yes, if user has implemented the 'orderBy' filter.", "No."],
         "type": "radio",
         "correctAnswer": "Yes."
     },
@@ -62,7 +62,7 @@
     },
     {
         "question": "In order to use a service in a controller, what do you need to do?",
-        "choices": ["Define a service as a dependency.", "Simply access the service object.", "It is not possible"],
+        "choices": ["Define a service as a dependency.", "Simply access the service object.", "It is not possible."],
         "type": "radio",
         "correctAnswer": "Define a service as a dependency."
     },
@@ -81,5 +81,72 @@
         "choices": ["true", "false"],
         "type": "radio",
         "correctAnswer": "true"
+    },
+    {
+        "question": "What AngularJS service is used for reading data from remote servers?",
+        "type": "input",
+        "correctAnswer": "$http"
+    },
+    {
+        "question": "How to handle errors of $http service?",
+        "choices": ["Add the second callback to the .then() method.", "Call the .error() function right after .then().", "It is not possible."],
+        "type": "radio",
+        "correctAnswer": "Add the second callback to the .then() method."
+    },
+    {
+        "question": "Do we need to parse a JSON object received from a server with $http service?",
+        "choices": ["No, the data you get from the response is expected to be in JSON format.", "Yes, the data you get from the response is expected to be in string format."],
+        "type": "radio",
+        "correctAnswer": "No, the data you get from the response is expected to be in JSON format."
+    },
+    {
+        "question": "What do we need to insert into {{ }} To display the table row index?",
+        "type": "input",
+        "correctAnswer": "$index"
+    },
+    {
+        "question": "What does the following string mean, if 'names' is an array of strings?",
+        "description": "&lt;select ng-model=\"selectedName\" ng-options=\"x for x in names\"&gt;\n&lt;/select&gt;",
+        "choices": ["This will create a dropdown list, based on the 'names' array.", "ng-options directive is wrong, should be 'x in names'.", "ng-options directive is wrong, should be 'x for names'."],
+        "type": "radio",
+        "correctAnswer": "This will create a dropdown list, based on the 'names' array."
+    },
+    {
+        "question": "What does the following string mean, if 'cars' is an object which has other objects inside of it?",
+        "description": "&lt;select ng-model=\"selectedCar\" ng-options=\"y.color for (x, y) in cars\"&gt;\n&lt;/select&gt;",
+        "choices": ["This will create a dropdown list, based on the 'cars' object: {x1: {color: 'white'}}.", "ng-options directive is wrong, should be 'x.color for (x, y) in cars'.", "ng-options directive is wrong, should be 'y.color in cars'.", "This will create a dropdown list, based on the 'cars' object: {color: 'white'}."],
+        "type": "radio",
+        "correctAnswer": "This will create a dropdown list, based on the 'cars' object: {x1: {color: 'white'}}."
+    },
+    {
+        "question": "Is the following syntax valid?",
+        "description": "&lt;p ng-show=\"15 &gt; 12\"&gt;I am visible.&lt;/p&gt;",
+        "choices": ["Yes", "No"],
+        "type": "radio",
+        "correctAnswer": "Yes"
+    },
+    {
+        "question": "Which directive can be used to make a button disabled?",
+        "choices": ["ng-disabled", "ng-enabled", "ng-disable", "ng-enable"],
+        "type": "radio",
+        "correctAnswer": "ng-disabled"
+    },
+    {
+        "question": "Which directives can be used to hide an element?",
+        "choices": ["ng-show", "ng-hide", "ng-disabled", "ng-enabled", "ng-showed", "ng-hidden"],
+        "type": "checkbox",
+        "correctAnswer": ["ng-show", "ng-hide"]
+    },
+    {
+        "question": "Choose valid directives.",
+        "choices": ["ng-blur", "ng-paste", "ng-dblclick", "ng-cut", "ng-mouseenter", "ng-mousecenter", "ng-insert"],
+        "type": "checkbox",
+        "correctAnswer": ["ng-blur", "ng-paste", "ng-dblclick", "ng-cut", "ng-mouseenter"]
+    },
+    {
+        "question": "You can pass the $event object as an argument when calling the function.",
+        "choices": ["Yes", "No"],
+        "type": "radio",
+        "correctAnswer": "Yes"
     }
 ]
