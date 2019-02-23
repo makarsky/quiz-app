@@ -148,5 +148,48 @@
         "choices": ["Yes", "No"],
         "type": "radio",
         "correctAnswer": "Yes"
+    },
+    {
+        "question": "AngularJS holds information about whether input fields have been touched.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "How to find out whether the following input is valid?",
+        "description": "&lt;form name=\"my\"&gt;\n&lt;input name=\"x\" ng-model=\"y\" required&gt;\n&lt;/form&gt;",
+        "choices": ["my.x.$valid", "my.y.$valid", "x.$valid", "y.$valid"],
+        "type": "radio",
+        "correctAnswer": "my.x.$valid"
+    },
+    {
+        "question": "Choose existing form states.",
+        "choices": ["$pristine", "$dirty", "$submitted", "$invalid", "$valid", "$touched", "$untouched"],
+        "type": "checkbox",
+        "correctAnswer": ["$pristine", "$dirty", "$submitted", "$invalid", "$valid"]
+    },
+    {
+        "question": "Choose existing input states.",
+        "choices": ["$pristine", "$dirty", "$invalid", "$valid", "$touched", "$untouched", "$submitted"],
+        "type": "checkbox",
+        "correctAnswer": ["$pristine", "$dirty", "$invalid", "$valid", "$touched", "$untouched"]
+    },
+    {
+        "question": "AngularJS adds CSS classes to forms and input fields depending on their states.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "true"
+    },
+    {
+        "question": "How to implement custom input validation?",
+        "choices": ["You have to add a new directive, and deal with the validation inside a function.", "It is not possible.", "You have to implement validation outside of AngularJS."],
+        "type": "radio",
+        "correctAnswer": "You have to add a new directive, and deal with the validation inside a function."
+    },
+    {
+        "question": "Which function checks if a variable has string type?",
+        "choices": ["angular.isString()", "angular.hasString()", "angular.string?()", "There is no such function in AngularJS."],
+        "type": "radio",
+        "correctAnswer": "angular.isString()"
     }
 ]
