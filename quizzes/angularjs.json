@@ -191,5 +191,35 @@
         "choices": ["angular.isString()", "angular.hasString()", "angular.string?()", "There is no such function in AngularJS."],
         "type": "radio",
         "correctAnswer": "angular.isString()"
+    },
+    {
+        "question": "Choose the valid way of watching the 'pass' variable?",
+        "choices": ["$scope.$watch('pass', function() {$scope.test();});", "$scope.$watch('pass', $scope.test);", "$scope.$watch('pass', $scope.test(newValue, oldValue, scope));"],
+        "type": "radio",
+        "correctAnswer": "$scope.$watch('pass', function() {$scope.test();});"
+    },
+    {
+        "question": "Choose the correct way of inserting HTML from an external file.",
+        "choices": ["ng-include=\"'file.htm'\"", "ng-include=\"file.htm\"", "ng-insert=\"'file.htm'\"", "ng-insert=\"file.htm\"", "ng-require=\"'file.htm'\"", "ng-require=\"file.htm\""],
+        "type": "radio",
+        "correctAnswer": "ng-include=\"'file.htm'\""
+    },
+    {
+        "question": "What dependency should you add in your application module to add animations?",
+        "description": "The AngularJS Animate library is included.",
+        "type": "input",
+        "correctAnswer": "ngAnimate"
+    },
+    {
+        "question": "What dependency should you add in your application module to work with routing?",
+        "description": "The AngularJS Route module is included.",
+        "type": "input",
+        "correctAnswer": "ngRoute"
+    },
+    {
+        "question": "What service should you pass as a dependency to the application's configuration to configure routes?",
+        "choices": ["$routeProvider", "$routingProvider", "$router", "$route", "$routeService", "$routingService"],
+        "type": "radio",
+        "correctAnswer": "$routeProvider"
     }
 ]
