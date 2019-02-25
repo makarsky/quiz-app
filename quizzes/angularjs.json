@@ -80,7 +80,7 @@
         "question": "We can use a custom service inside a filter.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "What AngularJS service is used for reading data from remote servers?",
@@ -91,13 +91,13 @@
         "question": "How to handle errors of $http service?",
         "choices": ["Add the second callback to the .then() method.", "Call the .error() function right after .then().", "It is not possible."],
         "type": "radio",
-        "correctAnswer": "Add the second callback to the .then() method."
+        "correctAnswer": 0
     },
     {
         "question": "Do we need to parse a JSON object received from a server with $http service?",
         "choices": ["No, the data you get from the response is expected to be in JSON format.", "Yes, the data you get from the response is expected to be in string format."],
         "type": "radio",
-        "correctAnswer": "No, the data you get from the response is expected to be in JSON format."
+        "correctAnswer": 0
     },
     {
         "question": "What do we need to insert into {{ }} To display the table row index?",
@@ -109,100 +109,100 @@
         "description": "&lt;select ng-model=\"selectedName\" ng-options=\"x for x in names\"&gt;\n&lt;/select&gt;",
         "choices": ["This will create a dropdown list, based on the 'names' array.", "ng-options directive is wrong, should be 'x in names'.", "ng-options directive is wrong, should be 'x for names'."],
         "type": "radio",
-        "correctAnswer": "This will create a dropdown list, based on the 'names' array."
+        "correctAnswer": 0
     },
     {
         "question": "What does the following string mean, if 'cars' is an object which has other objects inside of it?",
         "description": "&lt;select ng-model=\"selectedCar\" ng-options=\"y.color for (x, y) in cars\"&gt;\n&lt;/select&gt;",
         "choices": ["This will create a dropdown list, based on the 'cars' object: {x1: {color: 'white'}}.", "ng-options directive is wrong, should be 'x.color for (x, y) in cars'.", "ng-options directive is wrong, should be 'y.color in cars'.", "This will create a dropdown list, based on the 'cars' object: {color: 'white'}."],
         "type": "radio",
-        "correctAnswer": "This will create a dropdown list, based on the 'cars' object: {x1: {color: 'white'}}."
+        "correctAnswer": 0
     },
     {
         "question": "Is the following syntax valid?",
         "description": "&lt;p ng-show=\"15 &gt; 12\"&gt;I am visible.&lt;/p&gt;",
         "choices": ["Yes", "No"],
         "type": "radio",
-        "correctAnswer": "Yes"
+        "correctAnswer": 0
     },
     {
         "question": "Which directive can be used to make a button disabled?",
         "choices": ["ng-disabled", "ng-enabled", "ng-disable", "ng-enable"],
         "type": "radio",
-        "correctAnswer": "ng-disabled"
+        "correctAnswer": 0
     },
     {
         "question": "Which directives can be used to hide an element?",
         "choices": ["ng-show", "ng-hide", "ng-disabled", "ng-enabled", "ng-showed", "ng-hidden"],
         "type": "checkbox",
-        "correctAnswer": ["ng-show", "ng-hide"]
+        "correctAnswer": [0, 1]
     },
     {
         "question": "Choose valid directives.",
         "choices": ["ng-blur", "ng-paste", "ng-dblclick", "ng-cut", "ng-mouseenter", "ng-mousecenter", "ng-insert"],
         "type": "checkbox",
-        "correctAnswer": ["ng-blur", "ng-paste", "ng-dblclick", "ng-cut", "ng-mouseenter"]
+        "correctAnswer": [0, 1, 2, 3, 4]
     },
     {
         "question": "You can pass the $event object as an argument when calling the function.",
         "choices": ["Yes", "No"],
         "type": "radio",
-        "correctAnswer": "Yes"
+        "correctAnswer": 0
     },
     {
         "question": "AngularJS holds information about whether input fields have been touched.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "How to find out whether the following input is valid?",
         "description": "&lt;form name=\"my\"&gt;\n&lt;input name=\"x\" ng-model=\"y\" required&gt;\n&lt;/form&gt;",
         "choices": ["my.x.$valid", "my.y.$valid", "x.$valid", "y.$valid"],
         "type": "radio",
-        "correctAnswer": "my.x.$valid"
+        "correctAnswer": 0
     },
     {
         "question": "Choose existing form states.",
         "choices": ["$pristine", "$dirty", "$submitted", "$invalid", "$valid", "$touched", "$untouched"],
         "type": "checkbox",
-        "correctAnswer": ["$pristine", "$dirty", "$submitted", "$invalid", "$valid"]
+        "correctAnswer": [0, 1, 2, 3, 4]
     },
     {
         "question": "Choose existing input states.",
         "choices": ["$pristine", "$dirty", "$invalid", "$valid", "$touched", "$untouched", "$submitted"],
         "type": "checkbox",
-        "correctAnswer": ["$pristine", "$dirty", "$invalid", "$valid", "$touched", "$untouched"]
+        "correctAnswer": [0, 1, 2, 3, 4, 5]
     },
     {
         "question": "AngularJS adds CSS classes to forms and input fields depending on their states.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "How to implement custom input validation?",
         "choices": ["You have to add a new directive, and deal with the validation inside a function.", "It is not possible.", "You have to implement validation outside of AngularJS."],
         "type": "radio",
-        "correctAnswer": "You have to add a new directive, and deal with the validation inside a function."
+        "correctAnswer": 0
     },
     {
         "question": "Which function checks if a variable has string type?",
         "choices": ["angular.isString()", "angular.hasString()", "angular.string?()", "There is no such function in AngularJS."],
         "type": "radio",
-        "correctAnswer": "angular.isString()"
+        "correctAnswer": 0
     },
     {
         "question": "Choose the valid way of watching the 'pass' variable?",
         "choices": ["$scope.$watch('pass', function() {$scope.test();});", "$scope.$watch('pass', $scope.test);", "$scope.$watch('pass', $scope.test(newValue, oldValue, scope));"],
         "type": "radio",
-        "correctAnswer": "$scope.$watch('pass', function() {$scope.test();});"
+        "correctAnswer": 0
     },
     {
         "question": "Choose the correct way of inserting HTML from an external file.",
         "choices": ["ng-include=\"'file.htm'\"", "ng-include=\"file.htm\"", "ng-insert=\"'file.htm'\"", "ng-insert=\"file.htm\"", "ng-require=\"'file.htm'\"", "ng-require=\"file.htm\""],
         "type": "radio",
-        "correctAnswer": "ng-include=\"'file.htm'\""
+        "correctAnswer": 0
     },
     {
         "question": "What dependency should you add in your application module to add animations?",
@@ -220,6 +220,6 @@
         "question": "What service should you pass as a dependency to the application's configuration to configure routes?",
         "choices": ["$routeProvider", "$routingProvider", "$router", "$route", "$routeService", "$routingService"],
         "type": "radio",
-        "correctAnswer": "$routeProvider"
+        "correctAnswer": 0
     }
 ]
