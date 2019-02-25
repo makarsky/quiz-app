@@ -3,57 +3,57 @@
         "question": "Choose HTML valid directives.",
         "choices": ["data-ng-app", "data-ng-bind", "ng-init", "ng-model"],
         "type": "checkbox",
-        "correctAnswer": ["data-ng-app", "data-ng-bind"]
+        "correctAnswer": [0, 1]
     },
     {
         "question": "Choose valid ways to invoke the testDirective.",
         "choices": ["&lt;test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: test-directive --&gt;"],
         "type": "checkbox",
-        "correctAnswer": ["&lt;test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: test-directive --&gt;"]
+        "correctAnswer": [0, 1, 2, 3]
     },
     {
         "question": "Choose ways to invoke the testDirective which don't require any specified restrictions.",
         "choices": ["&lt;test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: test-directive --&gt;"],
         "type": "checkbox",
-        "correctAnswer": ["&lt;test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;"]
+        "correctAnswer": [0, 1]
     },
     {
         "question": "What directive repeats an HTML element?",
         "choices": ["ng-repeat", "ng-for", "ng-while", "ng-loop"],
         "type": "radio",
-        "correctAnswer": "ng-repeat"
+        "correctAnswer": 0
     },
     {
         "question": "What directive provides a two-way binding between the model and the view?",
         "choices": ["ng-model", "ng-bind", "ng-link", "ng-controller"],
         "type": "radio",
-        "correctAnswer": "ng-model"
+        "correctAnswer": 0
     },
     {
         "question": "What is the $scope?",
         "choices": ["It is the application object; the owner of application variables and functions.", "It is a controller.", "It is a directive, which binds input fields to controller properties"],
         "type": "radio",
-        "correctAnswer": "It is the application object; the owner of application variables and functions."
+        "correctAnswer": 0
     },
     {
         "question": "What is the $scope?",
         "description": "If we consider an AngularJS application to consist of:\nView, which is the HTML.\nModel, which is the data available for the current view.\nController, which is the JavaScript function that makes/changes/removes/controls the data.",
         "choices": ["Model", "View", "Controller", "Neither"],
         "type": "radio",
-        "correctAnswer": "Model"
+        "correctAnswer": 0
     },
     {
         "question": "If a variable has the same name in both the current scope and in the rootScope, from which scope does the application use the variable?",
         "choices": ["current scope", "rootScope"],
         "type": "radio",
-        "correctAnswer": "current scope"
+        "correctAnswer": 0
     },
     {
         "question": "Is this a valid way to add the 'orderBy' filter?",
         "description": "&lt;li ng-repeat=\"x in names | orderBy:'country'\"&gt;\n  {{ x.name + ', ' + x.country }}\n&lt;/li&gt;",
-        "choices": ["Yes.", "Yes, if user has implemented the 'orderBy' filter.", "No."],
+        "choices": ["Yes", "Yes, if user has implemented the 'orderBy' filter", "No"],
         "type": "radio",
-        "correctAnswer": "Yes."
+        "correctAnswer": 0
     },
     {
         "question": "What is the name of the method of the $location service, which returns the url of the current web page?",
@@ -62,9 +62,9 @@
     },
     {
         "question": "In order to use a service in a controller, what do you need to do?",
-        "choices": ["Define a service as a dependency.", "Simply access the service object.", "It is not possible."],
+        "choices": ["Define a service as a dependency", "Simply access the service object", "It is not possible"],
         "type": "radio",
-        "correctAnswer": "Define a service as a dependency."
+        "correctAnswer": 0
     },
     {
         "question": "What service is AngularJS' version of the window.setTimeout function?",
