@@ -223,9 +223,9 @@
         "correctAnswer": 0
     },
     {
-        "question": "Which function creates a deep copy of an object or an array.",
-        "choices": ["data-ng-app", "data-ng-bind", "ng-init", "ng-model"],
+        "question": "What function creates a deep copy of an object or an array?",
+        "choices": ["angular.copy()", "angular.clone()", "angular.createCopy()", "angular.createClone()"],
         "type": "checkbox",
-        "correctAnswer": [0, 1]
+        "correctAnswer": [0]
     }
 ]
