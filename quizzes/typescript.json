@@ -6,15 +6,15 @@
     },
     {
         "question": "Type annotations are mandatory for use.",
-        "choices": ["true", "false"],
+        "choices": ["false", "true"],
         "type": "radio",
-        "correctAnswer": "false"
+        "correctAnswer": 0
     },
     {
         "question": "Typescript supports enums.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "What is the return type of the function which does not return anything?",
@@ -25,13 +25,13 @@
         "question": "Each optional property denoted by...",
         "choices": ["?", "!", ".", "&"],
         "type": "radio",
-        "correctAnswer": "?"
+        "correctAnswer": 0
     },
     {
         "question": "What is the output?",
         "description": "let [first, ...rest] = [1, 2, 3, 4];\nconsole.log(rest);",
         "choices": ["[2, 3, 4]", "2", "error", "4"],
         "type": "radio",
-        "correctAnswer": "[2, 3, 4]"
+        "correctAnswer": 0
     }
 ]
