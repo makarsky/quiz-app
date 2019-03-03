@@ -122,5 +122,17 @@
         "choices": ["{name: \"John\"}", "undefined", "name", "John"],
         "type": "radio",
         "correctAnswer": "undefined"
+    },
+    {
+        "question": "What is the difference between 'var' and 'let'?",
+        "choices": ["'var' declares a function-scoped variable.", "'let' declares a block-scoped variable.", "'let' declares a function-scoped variable.", "'var' declares a block-scoped variable."],
+        "type": "checkbox",
+        "correctAnswer": ["'var' declares a function-scoped variable.", "'let' declares a block-scoped variable."]
+    },
+    {
+        "question": "What is the difference between 'innerHTML' and 'textContent' properties of the Node interface?",
+        "choices": ["'textContent' can prevent XSS attacks.", "'innerHTML' parses content as HTML.", "'textContent' uses straight text, does not parse HTML.", "'textContent' is faster", "'innerHTML' is faster", "'innerHTML' can prevent XSS attacks."],
+        "type": "checkbox",
+        "correctAnswer": ["'textContent' can prevent XSS attacks.", "'innerHTML' parses content as HTML.", "'textContent' uses straight text, does not parse HTML.", "'textContent' is faster"]
     }
 ]
