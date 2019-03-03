@@ -1,8 +1,16 @@
+const QUIZ_NAMES = {
+  'js': 'JavaScript',
+  'java': 'Java',
+  'php': 'PHP',
+  'sql': 'SQL'
+};
+
 class UI {
   constructor() {
     this.menuButton = document.getElementById('menuButton');
     this.closeMenuButton = document.getElementById('closeMenuButton');
     this.startButton = document.getElementById('startButton');
+    this.submitButton = document.getElementById('submitButton');
     this.restart = document.getElementById('restart');
   }
 }
@@ -10,6 +18,7 @@ class UI {
 function eventListeners() {
   const ui = new UI();
   ui.startButton.onclick = start;
+  ui.submitButton.onclick = submitAnswer;
   ui.menuButton.addEventListener('click', toggleMenu);
   ui.closeMenuButton.onclick = toggleMenu;
   document.body.onkeyup = (e) => e.key === "Escape" ? toggleMenu() : null;
@@ -27,13 +36,6 @@ let currentTab = 0; // Current card
 let timer = null;
 let quizName = 'js'; // default quiz
 let mySwiper = null;
-const QUIZ_NAMES = {
-  'js': 'JavaScript',
-  'java': 'Java',
-  'php': 'PHP',
-  'sql': 'SQL'
-};
-let submitButton = document.querySelector('#submitAnswer');
 var description = document.getElementById('description');
 description.addEventListener('webkitAnimationEnd', (event) => toggleVisibility(description), false);
 
@@ -48,8 +50,8 @@ function toggleVisibility(element) {
   element.classList.toggle('not-displayed');
 }
 
-function submitAnswer() {
-  toggleVisibility(submitButton);
+function submitAnswer(e) {
+  toggleVisibility(e.target);
   clearInterval(timer);
 
   var x = document.getElementById("regForm");
@@ -77,7 +79,7 @@ function submitAnswer() {
 
     x.classList.add("new-item");
     x.classList.remove("removed-item");
-    toggleVisibility(submitButton);
+    toggleVisibility(e.target);
     move();
   }, 2000);
 }
@@ -139,7 +141,7 @@ function move() {
   function frame() {
     if (quizTimeCopy <= 0) {
       clearInterval(timer);
-      submitAnswer();
+      submitAnswer({target: document.querySelector('#submitButton')});
     } else {
       quizTimeCopy -= 0.005
 
@@ -315,7 +317,7 @@ function restart() {
   document.querySelector("#description").classList.remove('remove-scale');
   toggleVisibility(document.querySelector("#description"));
   toggleVisibility(document.querySelector('#description > button'));
-  toggleVisibility(submitButton);
+  toggleVisibility(document.querySelector('#submitButton'));
   document.querySelector('#timeBar').classList.remove('remove-time');
   document.getElementById('regForm').classList.remove("removed-item");
   randomQuizzes = [];
