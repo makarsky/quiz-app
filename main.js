@@ -12,16 +12,46 @@ class UI {
     this.startButton = document.getElementById('startButton');
     this.submitButton = document.getElementById('submitButton');
     this.restart = document.getElementById('restart');
+    this.navigation = document.getElementById("navigation");
+    this.menuSections = document.getElementsByClassName("overlay-content");
+  }
+
+  toggleMenu() {
+    this.openLink('menu');
+    this.navigation.classList.toggle("overlay-opened");
+  }
+
+  openLink(id) {
+    [].forEach.call(this.menuSections, (e) => e.style.display = "none");
+    document.getElementById(id).style.display = "block";
+  }
+}
+
+class Game {
+
+}
+
+class Controller {
+  constructor(ui, game) {
+    this.ui = ui;
+    this.game = game;
+  }
+
+  toggleMenu() {
+    this.ui.toggleMenu();
   }
 }
 
 function eventListeners() {
-  const ui = new UI();
+  const ui = new UI;
+  const game = new Game;
+  const controller = new Controller(ui, game);
+  
   ui.startButton.onclick = start;
   ui.submitButton.onclick = submitAnswer;
-  ui.menuButton.addEventListener('click', toggleMenu);
-  ui.closeMenuButton.onclick = toggleMenu;
-  document.body.onkeyup = (e) => e.key === "Escape" ? toggleMenu() : null;
+  ui.menuButton.addEventListener('click', () => controller.toggleMenu());
+  ui.closeMenuButton.onclick = () => controller.toggleMenu();
+  document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
 }
 
 document.addEventListener('DOMContentLoaded', eventListeners);
