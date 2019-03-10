@@ -14,6 +14,7 @@ class UI {
     this.restart = document.getElementById('restart');
     this.navigation = document.getElementById("navigation");
     this.menuSections = document.getElementsByClassName("overlay-content");
+    this.quizTypes = Array.from(document.getElementsByClassName("quiz-type"));
   }
 
   toggleMenu() {
@@ -52,6 +53,10 @@ function eventListeners() {
   ui.menuButton.addEventListener('click', () => controller.toggleMenu());
   ui.closeMenuButton.onclick = () => controller.toggleMenu();
   document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
+
+  ui.quizTypes.forEach((value) => {
+    value.onclick = selectChallenge.bind(this, value.getAttribute('data-quiz-type'));
+  });
 }
 
 document.addEventListener('DOMContentLoaded', eventListeners);
