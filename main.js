@@ -15,6 +15,7 @@ class UI {
     this.navigation = document.getElementById("navigation");
     this.menuSections = document.getElementsByClassName("overlay-content");
     this.quizTypes = Array.from(document.getElementsByClassName("quiz-type"));
+    this.backToMenuLinks = Array.from(document.getElementsByClassName("back-to-menu"));
   }
 
   toggleMenu() {
@@ -56,6 +57,10 @@ function eventListeners() {
 
   ui.quizTypes.forEach((value) => {
     value.onclick = selectChallenge.bind(this, value.getAttribute('data-quiz-type'));
+  });
+
+  ui.backToMenuLinks.forEach((value) => {
+    value.onclick = ui.openLink.bind(this, 'menu');
   });
 }
 
