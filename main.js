@@ -67,7 +67,28 @@ function eventListeners() {
 document.addEventListener('DOMContentLoaded', eventListeners);
 
 class SwiperHandler {
+  constructor() {
+    this.instance = null;
+  }
+
+  initSwiper() {
+    this.instance = new Swiper('.swiper-container', {
+      direction: 'horizontal',
+      loop: false,
+      pagination: {
+        el: '.swiper-custom-pagination',
+        bulletClass: 'swiper-pagination-bullet'
+      },
+    });
+  }
   
+  destroySwiper() {
+    this.swiperExists() ? this.instance.destroy() : null;
+  }
+  
+  swiperExists() {
+    return this.instance !== null;
+  }
 }
 
 let randomQuizzes = [];
@@ -75,7 +96,7 @@ const quizTime = 40; // Quiz time in seconds
 let currentTab = 0; // Current card
 let timer = null;
 let quizName = 'js'; // default quiz
-let mySwiper = null;
+const swiperHandler = new SwiperHandler;
 var description = document.getElementById('description');
 description.addEventListener('webkitAnimationEnd', (event) => toggleVisibility(description), false);
 
@@ -347,7 +368,7 @@ function start() {
 }
 
 function restart() {
-  destroySwiper();
+  swiperHandler.destroySwiper();
   document.querySelector('.swiper-custom-pagination').classList.add('not-displayed');
   document.querySelector('#answers').classList.add('not-displayed');
   document.querySelector('#challenge-steps').classList.remove('not-displayed');
@@ -384,26 +405,7 @@ function viewAnswers() {
   document.querySelector('#challenge-steps').classList.add('not-displayed');
   document.querySelector('#answers').classList.remove('not-displayed');
   document.querySelector('.swiper-custom-pagination').classList.remove('not-displayed');
-  initSwiper();
-}
-
-function initSwiper() {
-  mySwiper = new Swiper('.swiper-container', {
-    direction: 'horizontal',
-    loop: false,
-    pagination: {
-      el: '.swiper-custom-pagination',
-      bulletClass: 'swiper-pagination-bullet'
-    },
-  });
-}
-
-function destroySwiper() {
-  swiperExists() ? mySwiper.destroy() : null;
-}
-
-function swiperExists() {
-  return mySwiper !== null;
+  swiperHandler.initSwiper();
 }
 
 function selectChallenge(name) {
