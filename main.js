@@ -30,7 +30,9 @@ class UI {
 }
 
 class Game {
-
+  constructor() {
+    this.quizTime = 40;
+  }
 }
 
 class Controller {
