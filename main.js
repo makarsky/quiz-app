@@ -132,7 +132,7 @@ function showTab(n) {
 }
 
 function toggleVisibility(element) {
-  element.classList.toggle('not-displayed');
+  element.classList.toggle('hide');
 }
 
 function submitAnswer(e) {
@@ -393,10 +393,10 @@ function start() {
 
 function restart() {
   swiperHandler.destroySwiper();
-  document.querySelector('.swiper-custom-pagination').classList.add('not-displayed');
-  document.querySelector('#answers').classList.add('not-displayed');
-  document.querySelector('#challenge-steps').classList.remove('not-displayed');
-  document.querySelector('#result-card').classList.add('not-displayed');
+  document.querySelector('.swiper-custom-pagination').classList.add('hide');
+  document.querySelector('#answers').classList.add('hide');
+  document.querySelector('#challenge-steps').classList.remove('hide');
+  document.querySelector('#result-card').classList.add('hide');
   let steps = document.querySelectorAll('#challenge-steps > .step');
   [].map.call(steps, (e) => e.className = 'step');
   document.querySelector("#description").classList.remove('remove-scale');
@@ -412,7 +412,7 @@ function restart() {
 
 function showResult() {
   toggleVisibility(document.querySelector('#quiz'));
-  document.querySelector('#result-card').classList.remove('not-displayed');
+  document.querySelector('#result-card').classList.remove('hide');
 
   document.querySelector('#result').innerHTML = randomQuizzes.filter(quiz => {
     return quiz.isCorrect;
@@ -425,9 +425,9 @@ function showResult() {
 }
 
 function viewAnswers() {
-  document.querySelector('#result-card').classList.add('not-displayed');
-  document.querySelector('#challenge-steps').classList.add('not-displayed');
-  document.querySelector('#answers').classList.remove('not-displayed');
-  document.querySelector('.swiper-custom-pagination').classList.remove('not-displayed');
+  document.querySelector('#result-card').classList.add('hide');
+  document.querySelector('#challenge-steps').classList.add('hide');
+  document.querySelector('#answers').classList.remove('hide');
+  document.querySelector('.swiper-custom-pagination').classList.remove('hide');
   swiperHandler.initSwiper();
 }
