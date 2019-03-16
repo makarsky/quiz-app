@@ -14,6 +14,7 @@ class UI {
     this.restart = document.getElementById('restart');
     this.navigation = document.getElementById("navigation");
     this.menuSections = document.getElementsByClassName("overlay-content");
+    this.quizLabel = document.getElementById("quizLabel");
     this.quizTypes = Array.from(document.getElementsByClassName("quiz-type"));
     this.menuLinks = Array.from(document.getElementsByClassName("menu-link"));
   }
@@ -27,11 +28,24 @@ class UI {
     [].forEach.call(this.menuSections, (e) => e.style.display = "none");
     document.getElementById(id).style.display = "block";
   }
+
+  setQuizLabel(quizLabel) {
+    this.quizLabel.innerHTML = quizLabel;
+    this.toggleMenu();
+  }
 }
 
 class Game {
   constructor() {
     this.quizTime = 40;
+    this.quizType = 'js';
+    this.quizNames = Object.assign({}, QUIZ_NAMES);
+  }
+
+  setQuizType(quizType) {
+    this.quizType = quizType;
+
+    return this.quizNames[quizType];
   }
 }
 
@@ -43,6 +57,13 @@ class Controller {
 
   toggleMenu() {
     this.ui.toggleMenu();
+  }
+
+  setQuizType(quizType) {
+    this.ui.setQuizLabel(this.game.setQuizType(quizType));
+
+    // TODO: remove the statement below, when refactoring is finished.
+    quizName = quizType;
   }
 }
 
@@ -58,7 +79,8 @@ function eventListeners() {
   document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
 
   ui.quizTypes.forEach((value) => {
-    value.onclick = selectChallenge.bind(this, value.getAttribute('data-quiz-type'));
+    value.onclick = controller.setQuizType.bind(controller, value.getAttribute('data-quiz-type'));
+    // value.onclick = selectChallenge.bind(this, value.getAttribute('data-quiz-type'));
   });
 
   ui.menuLinks.forEach((value) => {
@@ -408,11 +430,4 @@ function viewAnswers() {
   document.querySelector('#answers').classList.remove('not-displayed');
   document.querySelector('.swiper-custom-pagination').classList.remove('not-displayed');
   swiperHandler.initSwiper();
-}
-
-function selectChallenge(name) {
-  quizName = name;
-
-  document.querySelector("#quiz-name").innerHTML = QUIZ_NAMES[name];
-  toggleMenu(); // rewrite this with event. UI object catches this event and calls toggleMenu().
 }
