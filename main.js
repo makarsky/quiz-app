@@ -117,7 +117,7 @@ class SwiperHandler {
 
 let randomQuizzes = [];
 const quizTime = 40; // Quiz time in seconds
-let currentTab = 0; // Current card
+let currentQuizIndex = 0; // Current card
 let timer = null;
 let quizName = 'js'; // default quiz
 const swiperHandler = new SwiperHandler;
@@ -149,18 +149,18 @@ function submitAnswer(e) {
 
   setTimeout(function () {
     // Hide the current tab:
-    tabs[currentTab].style.display = "none";
+    tabs[currentQuizIndex].style.display = "none";
 
     // Increase or decrease the current tab by 1:
-    currentTab = ++currentTab;
+    currentQuizIndex = ++currentQuizIndex;
 
     // if you have reached the end of the form...
-    if (currentTab >= tabs.length) {
+    if (currentQuizIndex >= tabs.length) {
       showResult();
       return false;
     }
     // Otherwise, display the correct tab:
-    showTab(currentTab);
+    showTab(currentQuizIndex);
 
     x.classList.add("new-item");
     x.classList.remove("removed-item");
@@ -173,32 +173,32 @@ function checkAnswer() {
   var x, answer, isCorrect = false;
   x = document.getElementsByClassName("tab");
 
-  switch (randomQuizzes[currentTab].type) {
+  switch (randomQuizzes[currentQuizIndex].type) {
     case 'radio':
-      answer = x[currentTab].querySelector('input[name=answer]:checked');
-      answer ? answer.value === randomQuizzes[currentTab].correctAnswer ? isCorrect = true : null : null;
+      answer = x[currentQuizIndex].querySelector('input[name=answer]:checked');
+      answer ? answer.value === randomQuizzes[currentQuizIndex].correctAnswer ? isCorrect = true : null : null;
       break;
     case 'input':
-      answer = x[currentTab].querySelector('input');
-      answer.value === randomQuizzes[currentTab].correctAnswer ? isCorrect = true : null;
+      answer = x[currentQuizIndex].querySelector('input');
+      answer.value === randomQuizzes[currentQuizIndex].correctAnswer ? isCorrect = true : null;
       break;
     case 'checkbox':
-      answers = x[currentTab].querySelectorAll('input[name=answer]:checked');
+      answers = x[currentQuizIndex].querySelectorAll('input[name=answer]:checked');
       answers = [].map.call(answers, (e) => e.value);
-      arraysEqual(answers, randomQuizzes[currentTab].correctAnswer) ? isCorrect = true : null;
+      arraysEqual(answers, randomQuizzes[currentQuizIndex].correctAnswer) ? isCorrect = true : null;
       break;
     case 'multi-input':
-      answers = x[currentTab].querySelectorAll('input');
+      answers = x[currentQuizIndex].querySelectorAll('input');
       answers = [].map.call(answers, (e) => e.value);
     // todo: implement multi-input quizzes
   }
 
-  randomQuizzes[currentTab].isCorrect = isCorrect;
+  randomQuizzes[currentQuizIndex].isCorrect = isCorrect;
 
   if (isCorrect) {
-    document.getElementsByClassName("step")[currentTab].classList.add("correct");
+    document.getElementsByClassName("step")[currentQuizIndex].classList.add("correct");
   } else {
-    document.getElementsByClassName("step")[currentTab].classList.add("wrong");
+    document.getElementsByClassName("step")[currentQuizIndex].classList.add("wrong");
   }
 
   return isCorrect; // return isCorrect status
@@ -279,7 +279,7 @@ function loadQuizzes() {
     }
 
     addQuizzes(); // Add quizzes to the template
-    showTab(currentTab); // Show the current card
+    showTab(currentQuizIndex); // Show the current card
   };
 
   request.onerror = () => console.log('Error');
@@ -406,7 +406,7 @@ function restart() {
   document.querySelector('#timeBar').classList.remove('remove-time');
   document.getElementById('regForm').classList.remove("removed-item");
   randomQuizzes = [];
-  currentTab = 0; // Current card
+  currentQuizIndex = 0;
   timer = null;
 }
 
