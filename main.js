@@ -265,25 +265,20 @@ function arraysEqual(arr1, arr2) {
 }
 
 function loadQuizzes() {
-  var request = new XMLHttpRequest();
-  request.open('GET', `quizzes/${quizName}.json`);
-  request.onload = () => {
-    var loadedQuizzes = JSON.parse(request.responseText);
+  fetch(`quizzes/${quizName}.json`)
+    .then((result) => result.json())
+    .then((quizzes) => {
+      for (var i = 0; i < 5; i++) {
+        var randomNumber = Math.floor(Math.random() * quizzes.length);
+  
+        var randomQuiz = quizzes[randomNumber];
+        randomQuizzes.push(randomQuiz);
+        quizzes.splice(randomNumber, 1);
+      }
 
-    for (var i = 0; i < 5; i++) {
-      var randomNumber = Math.floor(Math.random() * loadedQuizzes.length);
-
-      var randomQuiz = loadedQuizzes[randomNumber];
-      randomQuizzes.push(randomQuiz);
-      loadedQuizzes.splice(randomNumber, 1);
-    }
-
-    addQuizzes(); // Add quizzes to the template
-    showTab(currentQuizIndex); // Show the current card
-  };
-
-  request.onerror = () => console.log('Error');
-  request.send();
+      addQuizzes(); // Add quizzes to the template
+      showTab(currentQuizIndex); // Show the current card
+    })
 }
 
 function addQuizzes() {
