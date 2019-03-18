@@ -279,6 +279,7 @@ function loadQuizzes() {
       addQuizzes(); // Add quizzes to the template
       showTab(currentQuizIndex); // Show the current card
     })
+    .catch((error) => console.error(error));
 }
 
 function addQuizzes() {
