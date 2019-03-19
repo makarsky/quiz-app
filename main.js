@@ -268,18 +268,22 @@ function loadQuizzes() {
   fetch(`quizzes/${quizName}.json`)
     .then((result) => result.json())
     .then((quizzes) => {
-      for (var i = 0; i < 5; i++) {
-        var randomNumber = Math.floor(Math.random() * quizzes.length);
-  
-        var randomQuiz = quizzes[randomNumber];
-        randomQuizzes.push(randomQuiz);
-        quizzes.splice(randomNumber, 1);
-      }
+      shuffleQuizzes(quizzes);
 
       addQuizzes(); // Add quizzes to the template
       showTab(currentQuizIndex); // Show the current card
     })
     .catch((error) => console.error(error));
+}
+
+function shuffleQuizzes(quizzes) {
+  for (var i = 0; i < 5; i++) {
+    var randomNumber = Math.floor(Math.random() * quizzes.length);
+
+    var randomQuiz = quizzes[randomNumber];
+    randomQuizzes.push(randomQuiz);
+    quizzes.splice(randomNumber, 1);
+  }
 }
 
 function addQuizzes() {
