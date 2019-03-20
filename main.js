@@ -370,7 +370,7 @@ function buildCorrectQuizCard(quiz) {
 function countdown() {
   let counter = 3;
   let element = document.querySelector("#countdown");
-  loadQuizzes();
+  
 
   let countInterval = setInterval(() => {
     element.innerHTML = counter--;
@@ -388,6 +388,7 @@ function start() {
   let element = document.querySelector('#description');
   toggleVisibility(document.querySelector('#description > button'));
   element.classList.toggle('remove-scale');
+  loadQuizzes();
   countdown();
 }
 
