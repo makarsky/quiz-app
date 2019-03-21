@@ -44,8 +44,13 @@ class Game {
 
   setQuizType(quizType) {
     this.quizType = quizType;
+    this.loadQuizzes();
 
     return this.quizNames[quizType];
+  }
+
+  loadQuizzes() {
+    loadQuizzes();
   }
 }
 
@@ -80,7 +85,6 @@ function eventListeners() {
 
   ui.quizTypes.forEach((value) => {
     value.onclick = controller.setQuizType.bind(controller, value.getAttribute('data-quiz-type'));
-    // value.onclick = selectChallenge.bind(this, value.getAttribute('data-quiz-type'));
   });
 
   ui.menuLinks.forEach((value) => {
@@ -371,7 +375,6 @@ function countdown() {
   let counter = 3;
   let element = document.querySelector("#countdown");
   
-
   let countInterval = setInterval(() => {
     element.innerHTML = counter--;
     if (counter === -1) {
@@ -388,7 +391,7 @@ function start() {
   let element = document.querySelector('#description');
   toggleVisibility(document.querySelector('#description > button'));
   element.classList.toggle('remove-scale');
-  loadQuizzes();
+  
   countdown();
 }
 
