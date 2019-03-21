@@ -44,6 +44,9 @@ class Game {
 
   setQuizType(quizType) {
     this.quizType = quizType;
+    // TODO: remove the statement below, when refactoring is finished.
+    quizName = quizType;
+
     this.loadQuizzes();
 
     return this.quizNames[quizType];
@@ -66,9 +69,6 @@ class Controller {
 
   setQuizType(quizType) {
     this.ui.setQuizLabel(this.game.setQuizType(quizType));
-
-    // TODO: remove the statement below, when refactoring is finished.
-    quizName = quizType;
   }
 }
 
