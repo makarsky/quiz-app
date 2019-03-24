@@ -11,17 +11,22 @@ class UI {
     this.closeMenuButton = document.getElementById('closeMenuButton');
     this.startButton = document.getElementById('startButton');
     this.submitButton = document.getElementById('submitButton');
-    this.restart = document.getElementById('restart');
     this.navigation = document.getElementById("navigation");
     this.menuSections = document.getElementsByClassName("overlay-content");
     this.quizLabel = document.getElementById("quizLabel");
     this.quizTypes = Array.from(document.getElementsByClassName("quiz-type"));
     this.menuLinks = Array.from(document.getElementsByClassName("menu-link"));
+    this.restartButtons = Array.from(document.getElementsByClassName('restart'));
   }
 
   toggleMenu() {
     this.openLink('menu');
     this.navigation.classList.toggle("overlay-opened");
+  }
+
+  closeMenu() {
+    this.openLink('menu');
+    this.navigation.classList.remove("overlay-opened");
   }
 
   openLink(id) {
@@ -31,7 +36,29 @@ class UI {
 
   setQuizLabel(quizLabel) {
     this.quizLabel.innerHTML = quizLabel;
-    this.toggleMenu();
+    this.closeMenu();
+  }
+  
+  addQuizzes(randomQuizzes) {
+    var card = document.getElementById("regForm");
+    card.innerHTML = randomQuizzes.map(buildQuiz).join('');
+
+    showTab(currentQuizIndex); // Show the current card
+  }
+
+  restart() {
+    document.querySelector('.swiper-custom-pagination').classList.add('hide');
+    document.querySelector('#answers').classList.add('hide');
+    document.querySelector('#challenge-steps').classList.remove('hide');
+    document.querySelector('#result-card').classList.add('hide');
+    let steps = document.querySelectorAll('#challenge-steps > .step');
+    [].map.call(steps, (e) => e.className = 'step');
+    document.querySelector("#description").classList.remove('remove-scale');
+    toggleVisibility(document.querySelector("#description"));
+    toggleVisibility(document.querySelector('#description > button'));
+    toggleVisibility(document.querySelector('#submitButton'));
+    document.querySelector('#timeBar').classList.remove('remove-time');
+    document.getElementById('regForm').classList.remove("removed-item");
   }
 }
 
@@ -40,6 +67,7 @@ class Game {
     this.quizTime = 40;
     this.quizType = 'js';
     this.quizNames = Object.assign({}, QUIZ_NAMES);
+    this.randomQuizzes = [];
   }
 
   setQuizType(quizType) {
@@ -47,13 +75,42 @@ class Game {
     // TODO: remove the statement below, when refactoring is finished.
     quizName = quizType;
 
-    this.loadQuizzes();
-
     return this.quizNames[quizType];
   }
 
   loadQuizzes() {
-    loadQuizzes();
+    return fetch(`quizzes/${quizName}.json`)
+      .then((result) => result.json())
+      .then((quizzes) => {
+        return new Promise((resolve, reject) => resolve(this.shuffleQuizzes(quizzes)));
+      })
+      .catch((error) => console.error(error));
+  }
+
+  shuffleQuizzes(quizzes) {
+    // TODO: remove after refactoring
+    randomQuizzes = [];
+    this.randomQuizzes = [];
+
+    for (var i = 0; i < 5; i++) {
+      var randomNumber = Math.floor(Math.random() * quizzes.length);
+  
+      var randomQuiz = quizzes[randomNumber];
+      // TODO: remove after refactoring
+      randomQuizzes.push(randomQuiz);
+      this.randomQuizzes.push(randomQuiz);
+      quizzes.splice(randomNumber, 1);
+    }
+
+    return this.randomQuizzes;
+  }
+
+  restart() {
+    swiperHandler.destroySwiper();
+    currentQuizIndex = 0;
+    timer = null;
+
+    return this.loadQuizzes();
   }
 }
 
@@ -68,7 +125,14 @@ class Controller {
   }
 
   setQuizType(quizType) {
-    this.ui.setQuizLabel(this.game.setQuizType(quizType));
+    const quizLabel = this.game.setQuizType(quizType)
+    this.ui.setQuizLabel(quizLabel);
+    this.game.loadQuizzes().then((randomQuizzes) => this.ui.addQuizzes(randomQuizzes));
+  }
+
+  restart() {
+    this.ui.restart();
+    this.game.restart().then((randomQuizzes) => this.ui.addQuizzes(randomQuizzes));
   }
 }
 
@@ -90,6 +154,12 @@ function eventListeners() {
   ui.menuLinks.forEach((value) => {
     value.onclick = () => ui.openLink(value.dataset.menu);
   });
+
+  ui.restartButtons.forEach((value) => {
+    value.onclick = () => controller.restart();
+  });
+
+  controller.setQuizType('js');
 }
 
 document.addEventListener('DOMContentLoaded', eventListeners);
@@ -268,34 +338,6 @@ function arraysEqual(arr1, arr2) {
   return true;
 }
 
-function loadQuizzes() {
-  fetch(`quizzes/${quizName}.json`)
-    .then((result) => result.json())
-    .then((quizzes) => {
-      shuffleQuizzes(quizzes);
-
-      addQuizzes(); // Add quizzes to the template
-      showTab(currentQuizIndex); // Show the current card
-    })
-    .catch((error) => console.error(error));
-}
-
-function shuffleQuizzes(quizzes) {
-  for (var i = 0; i < 5; i++) {
-    var randomNumber = Math.floor(Math.random() * quizzes.length);
-
-    var randomQuiz = quizzes[randomNumber];
-    randomQuizzes.push(randomQuiz);
-    quizzes.splice(randomNumber, 1);
-  }
-}
-
-function addQuizzes() {
-  var card = document.getElementById("regForm");
-
-  card.innerHTML = randomQuizzes.map(buildQuiz).join('');
-}
-
 function buildQuiz(rawQuiz) {
   var template;
 
@@ -393,25 +435,6 @@ function start() {
   element.classList.toggle('remove-scale');
   
   countdown();
-}
-
-function restart() {
-  swiperHandler.destroySwiper();
-  document.querySelector('.swiper-custom-pagination').classList.add('hide');
-  document.querySelector('#answers').classList.add('hide');
-  document.querySelector('#challenge-steps').classList.remove('hide');
-  document.querySelector('#result-card').classList.add('hide');
-  let steps = document.querySelectorAll('#challenge-steps > .step');
-  [].map.call(steps, (e) => e.className = 'step');
-  document.querySelector("#description").classList.remove('remove-scale');
-  toggleVisibility(document.querySelector("#description"));
-  toggleVisibility(document.querySelector('#description > button'));
-  toggleVisibility(document.querySelector('#submitButton'));
-  document.querySelector('#timeBar').classList.remove('remove-time');
-  document.getElementById('regForm').classList.remove("removed-item");
-  randomQuizzes = [];
-  currentQuizIndex = 0;
-  timer = null;
 }
 
 function showResult() {
