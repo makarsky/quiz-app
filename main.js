@@ -280,14 +280,12 @@ function checkAnswer() {
 
 function fixStepIndicator(n = null) {
   // This function removes the "active" class of all steps...
-  let x = document.getElementsByClassName("step");
+  let steps = Array.from(document.getElementsByClassName("step"));
 
-  for (let i = 0; i < x.length; i++) {
-    x[i].className = x[i].className.replace(" active", "");
-  }
+  steps.forEach((el) => el.classList.remove("active"));
 
   //... and adds the "active" class on the current step:
-  n === null ? null : x[n].classList.add("active");
+  n === null ? null : steps[n].classList.add("active");
 }
 
 function move() {
