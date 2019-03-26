@@ -308,17 +308,6 @@ function move() {
   }
 }
 
-function toggleMenu() {
-  openLink('menu');
-  document.getElementById("navigation").classList.toggle("overlay-opened");
-}
-
-function openLink(id) {
-  var menuSections = document.getElementsByClassName("overlay-content");
-  [].forEach.call(menuSections, (e) => e.style.display = "none");
-  document.getElementById(id).style.display = "block";
-}
-
 function arraysEqual(arr1, arr2) {
   arr1.sort();
   arr2.sort();
