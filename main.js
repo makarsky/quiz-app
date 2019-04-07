@@ -14,9 +14,18 @@ class UI {
     this.navigation = document.getElementById("navigation");
     this.menuSections = document.getElementsByClassName("overlay-content");
     this.quizLabel = document.getElementById("quizLabel");
+    this.quizDescription = document.getElementById('description')
+    this.countdownElement = document.getElementById("countdown");
+    this.quiz = document.getElementById('quiz')
     this.quizTypes = Array.from(document.getElementsByClassName("quiz-type"));
     this.menuLinks = Array.from(document.getElementsByClassName("menu-link"));
     this.restartButtons = Array.from(document.getElementsByClassName('restart'));
+    this.timebar = document.getElementById('timeBar');
+    this.timer = new Timer(this.timebar)
+  }
+
+  toggleVisibility(element) {
+    element.classList.toggle('hide');
   }
 
   toggleMenu() {
@@ -32,6 +41,27 @@ class UI {
   openLink(id) {
     [].forEach.call(this.menuSections, (e) => e.style.display = "none");
     document.getElementById(id).style.display = "block";
+  }
+
+  start() {
+    this.toggleVisibility(this.startButton);
+    this.quizDescription.classList.toggle('remove-scale');
+  }
+
+  countdown() {
+    let counter = 3;
+    
+    let countInterval = setInterval(() => {
+      this.countdownElement.innerHTML = counter--;
+      if (counter === -1) {
+        clearInterval(countInterval);
+        this.countdownElement.innerHTML = "";
+  
+        this.toggleVisibility(this.quiz);
+        // this.timer.start();
+        move();
+      };
+    }, 700)
   }
 
   setQuizLabel(quizLabel) {
@@ -120,6 +150,14 @@ class Controller {
     this.game = game;
   }
 
+  start() {
+    this.ui.start();
+    this.ui.countdown();
+  }
+
+  submitAnswer() {
+  }
+
   toggleMenu() {
     this.ui.toggleMenu();
   }
@@ -141,11 +179,12 @@ function eventListeners() {
   const game = new Game;
   const controller = new Controller(ui, game);
   
-  ui.startButton.onclick = start;
+  ui.startButton.onclick = () => controller.start();
   ui.submitButton.onclick = submitAnswer;
   ui.menuButton.addEventListener('click', () => controller.toggleMenu());
   ui.closeMenuButton.onclick = () => controller.toggleMenu();
   document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
+  document.addEventListener('timeout', (e) => submitAnswer(event.target));
 
   ui.quizTypes.forEach((value) => {
     value.onclick = controller.setQuizType.bind(controller, value.getAttribute('data-quiz-type'));
@@ -163,6 +202,40 @@ function eventListeners() {
 }
 
 document.addEventListener('DOMContentLoaded', eventListeners);
+
+class Timer {
+  constructor(timeBarDOMElement) {
+    this.timeBar = timeBarDOMElement;
+    this.quizTimeLimit = 40;
+  }
+
+  start() {
+    this.timeBar.style.width = '100%';
+    let quizTime = this.quizTimeLimit;
+  
+    timer = setInterval(frame, 5);
+  
+    function frame() {
+      if (quizTime <= 0) {
+        clearInterval(timer);
+        
+        const timerEvent = document.createEvent('Event');
+        timerEvent.initEvent('timeout', false, false);
+        timerEvent.target = document.querySelector('#submitButton');
+        document.dispatchEvent(timerEvent);
+      } else {
+        quizTime -= 0.005
+  
+        width = quizTime / quizTime * 100;
+        this.timeBar.style.width = width + '%';
+      }
+    }
+  }
+}
+
+class QuizService {
+  
+}
 
 class SwiperHandler {
   constructor() {
@@ -398,30 +471,6 @@ function buildCorrectQuizCard(quiz) {
   }
 
   return template;
-}
-
-function countdown() {
-  let counter = 3;
-  let element = document.querySelector("#countdown");
-  
-  let countInterval = setInterval(() => {
-    element.innerHTML = counter--;
-    if (counter === -1) {
-      clearInterval(countInterval);
-      element.innerHTML = "";
-
-      toggleVisibility(document.querySelector('#quiz'));
-      move();
-    };
-  }, 700)
-}
-
-function start() {
-  let element = document.querySelector('#description');
-  toggleVisibility(document.querySelector('#description > button'));
-  element.classList.toggle('remove-scale');
-  
-  countdown();
 }
 
 function showResult() {
