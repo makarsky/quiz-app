@@ -16,12 +16,14 @@ class UI {
     this.quizLabel = document.getElementById("quizLabel");
     this.quizDescription = document.getElementById('description')
     this.countdownElement = document.getElementById("countdown");
-    this.quiz = document.getElementById('quiz')
+    this.quiz = document.getElementById('quiz');
+    this.viewAnswersButton = document.getElementById('view-answers');
     this.quizTypes = Array.from(document.getElementsByClassName("quiz-type"));
     this.menuLinks = Array.from(document.getElementsByClassName("menu-link"));
     this.restartButtons = Array.from(document.getElementsByClassName('restart'));
     this.timebar = document.getElementById('timeBar');
-    this.timer = new Timer(this.timebar)
+    this.timer = new Timer(this.timebar);
+    this.swiperHandler = new SwiperHandler;
   }
 
   toggleVisibility(element) {
@@ -89,6 +91,15 @@ class UI {
     toggleVisibility(document.querySelector('#submitButton'));
     document.querySelector('#timeBar').classList.remove('remove-time');
     document.getElementById('regForm').classList.remove("removed-item");
+    this.swiperHandler.destroySwiper();
+  }
+
+  viewAnswers() {
+    document.querySelector('#result-card').classList.add('hide');
+    document.querySelector('#challenge-steps').classList.add('hide');
+    document.querySelector('#answers').classList.remove('hide');
+    document.querySelector('.swiper-custom-pagination').classList.remove('hide');
+    this.swiperHandler.initSwiper();
   }
 }
 
@@ -136,7 +147,6 @@ class Game {
   }
 
   restart() {
-    swiperHandler.destroySwiper();
     currentQuizIndex = 0;
     timer = null;
 
@@ -172,6 +182,10 @@ class Controller {
     this.ui.restart();
     this.game.restart().then((randomQuizzes) => this.ui.addQuizzes(randomQuizzes));
   }
+
+  viewAnswers() {
+    this.ui.viewAnswers();
+  }
 }
 
 function eventListeners() {
@@ -183,6 +197,7 @@ function eventListeners() {
   ui.submitButton.onclick = submitAnswer;
   ui.menuButton.addEventListener('click', () => controller.toggleMenu());
   ui.closeMenuButton.onclick = () => controller.toggleMenu();
+  ui.viewAnswersButton.onclick = () => controller.viewAnswers();
   document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
   document.addEventListener('timeout', (e) => submitAnswer(event.target));
 
@@ -267,7 +282,6 @@ const quizTime = 40; // Quiz time in seconds
 let currentQuizIndex = 0; // Current card
 let timer = null;
 let quizName = 'js'; // default quiz
-const swiperHandler = new SwiperHandler;
 var description = document.getElementById('description');
 description.addEventListener('webkitAnimationEnd', (event) => toggleVisibility(description), false);
 
@@ -485,12 +499,4 @@ function showResult() {
 
   document.querySelector('#timeBar').classList.add('remove-time');
   fixStepIndicator();
-}
-
-function viewAnswers() {
-  document.querySelector('#result-card').classList.add('hide');
-  document.querySelector('#challenge-steps').classList.add('hide');
-  document.querySelector('#answers').classList.remove('hide');
-  document.querySelector('.swiper-custom-pagination').classList.remove('hide');
-  swiperHandler.initSwiper();
 }
