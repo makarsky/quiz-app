@@ -61,9 +61,17 @@ class UI {
   
         this.toggleVisibility(this.quiz);
         // this.timer.start();
-        move();
+        this.timer.start();
       };
     }, 700)
+  }
+
+  stopTimer() {
+    this.timer.stop();
+  }
+
+  startTimer() {
+    this.timer.start();
   }
 
   setQuizLabel(quizLabel) {
@@ -148,7 +156,6 @@ class Game {
 
   restart() {
     currentQuizIndex = 0;
-    timer = null;
 
     return this.loadQuizzes();
   }
@@ -166,6 +173,14 @@ class Controller {
   }
 
   submitAnswer() {
+  }
+
+  stopTimer() {
+    this.ui.stopTimer();
+  }
+
+  startTimer() {
+    this.ui.startTimer();
   }
 
   toggleMenu() {
@@ -199,7 +214,9 @@ function eventListeners() {
   ui.closeMenuButton.onclick = () => controller.toggleMenu();
   ui.viewAnswersButton.onclick = () => controller.viewAnswers();
   document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
-  document.addEventListener('timeout', (e) => submitAnswer(event.target));
+  document.addEventListener('timeout', () => submitAnswer());
+  document.addEventListener('answerIsSubmitted', () => controller.stopTimer());
+  document.addEventListener('newCardIsShown', () => controller.startTimer());
 
   ui.quizTypes.forEach((value) => {
     value.onclick = controller.setQuizType.bind(controller, value.getAttribute('data-quiz-type'));
@@ -228,23 +245,28 @@ class Timer {
     this.timeBar.style.width = '100%';
     let quizTime = this.quizTimeLimit;
   
-    timer = setInterval(frame, 5);
-  
-    function frame() {
+    // TODO: Replace setting timebar width with css @keyframes animation
+    const frame = () => {
       if (quizTime <= 0) {
-        clearInterval(timer);
+        clearInterval(this.timer);
         
         const timerEvent = document.createEvent('Event');
         timerEvent.initEvent('timeout', false, false);
-        timerEvent.target = document.querySelector('#submitButton');
         document.dispatchEvent(timerEvent);
       } else {
-        quizTime -= 0.005
+        quizTime -= 0.005;
   
-        width = quizTime / quizTime * 100;
+        let width = quizTime / this.quizTimeLimit * 100;
+
         this.timeBar.style.width = width + '%';
       }
     }
+
+    this.timer = setInterval(frame, 5);
+  }
+
+  stop() {
+    clearInterval(this.timer);
   }
 }
 
@@ -278,9 +300,7 @@ class SwiperHandler {
 }
 
 let randomQuizzes = [];
-const quizTime = 40; // Quiz time in seconds
 let currentQuizIndex = 0; // Current card
-let timer = null;
 let quizName = 'js'; // default quiz
 var description = document.getElementById('description');
 description.addEventListener('webkitAnimationEnd', (event) => toggleVisibility(description), false);
@@ -296,9 +316,12 @@ function toggleVisibility(element) {
   element.classList.toggle('hide');
 }
 
-function submitAnswer(e) {
-  toggleVisibility(e.target);
-  clearInterval(timer);
+function submitAnswer() {
+  // stop timebar
+  let event = new Event('answerIsSubmitted');
+  document.dispatchEvent(event);
+
+  toggleVisibility(document.querySelector('#submitButton'));
 
   var x = document.getElementById("regForm");
   var tabs = document.getElementsByClassName("tab");
@@ -325,8 +348,11 @@ function submitAnswer(e) {
 
     x.classList.add("new-item");
     x.classList.remove("removed-item");
-    toggleVisibility(e.target);
-    move();
+    toggleVisibility(document.querySelector('#submitButton'));
+
+    // call event to start timebar
+    let event = new Event('newCardIsShown');
+    document.dispatchEvent(event);
   }, 2000);
 }
 
@@ -373,26 +399,6 @@ function fixStepIndicator(n = null) {
 
   //... and adds the "active" class on the current step:
   n === null ? null : steps[n].classList.add("active");
-}
-
-function move() {
-  var timeBar = document.getElementById("timeBar");
-  timeBar.style.width = '100%';
-  var quizTimeCopy = quizTime;
-
-  timer = setInterval(frame, 5);
-
-  function frame() {
-    if (quizTimeCopy <= 0) {
-      clearInterval(timer);
-      submitAnswer({target: document.querySelector('#submitButton')});
-    } else {
-      quizTimeCopy -= 0.005
-
-      width = quizTimeCopy / quizTime * 100;
-      timeBar.style.width = width + '%';
-    }
-  }
 }
 
 function arraysEqual(arr1, arr2) {
