@@ -194,6 +194,19 @@ button:hover {
     }
 }
 
+.timer-animation {
+    animation: timer-animation 40s linear forwards;
+}
+
+@keyframes timer-animation {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
 .menu-container {
     position: absolute;
     margin: -6px 10px;
