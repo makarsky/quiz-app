@@ -238,35 +238,26 @@ document.addEventListener('DOMContentLoaded', eventListeners);
 class Timer {
   constructor(timeBarDOMElement) {
     this.timeBar = timeBarDOMElement;
-    this.quizTimeLimit = 40;
+    this.quizTime = 40;
   }
 
   start() {
-    this.timeBar.style.width = '100%';
-    let quizTime = this.quizTimeLimit;
-  
-    // TODO: Replace setting timebar width with css @keyframes animation
+    this.timeBar.classList.add('timer-animation');
+    
     const frame = () => {
-      if (quizTime <= 0) {
-        clearInterval(this.timer);
-        
-        const timerEvent = document.createEvent('Event');
-        timerEvent.initEvent('timeout', false, false);
-        document.dispatchEvent(timerEvent);
-      } else {
-        quizTime -= 0.005;
-  
-        let width = quizTime / this.quizTimeLimit * 100;
-
-        this.timeBar.style.width = width + '%';
-      }
+      const timerEvent = document.createEvent('Event');
+      timerEvent.initEvent('timeout', false, false);
+      document.dispatchEvent(timerEvent);
     }
 
-    this.timer = setInterval(frame, 5);
+    this.timer = setTimeout(frame, this.quizTime * 1000);
   }
 
   stop() {
-    clearInterval(this.timer);
+    let width = this.timeBar.getBoundingClientRect().width;
+    this.timeBar.classList.remove('timer-animation');
+    this.timeBar.style.width = width + 'px';
+    clearTimeout(this.timer);
   }
 }
 
