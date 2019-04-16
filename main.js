@@ -293,8 +293,6 @@ class SwiperHandler {
 let randomQuizzes = [];
 let currentQuizIndex = 0; // Current card
 let quizName = 'js'; // default quiz
-var description = document.getElementById('description');
-description.addEventListener('webkitAnimationEnd', (event) => toggleVisibility(description), false);
 
 function showTab(n) {
   var x = document.getElementsByClassName("tab");
