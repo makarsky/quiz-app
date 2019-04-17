@@ -17,6 +17,7 @@ class UI {
     this.quizDescription = document.getElementById('description')
     this.countdownElement = document.getElementById("countdown");
     this.quiz = document.getElementById('quiz');
+    this.quizCard = document.getElementById('quiz-card');
     this.viewAnswersButton = document.getElementById('view-answers');
     this.quizTypes = Array.from(document.getElementsByClassName("quiz-type"));
     this.menuLinks = Array.from(document.getElementsByClassName("menu-link"));
@@ -50,6 +51,22 @@ class UI {
     this.quizDescription.classList.toggle('remove-scale');
   }
 
+  getUserInput() {
+    switch (randomQuizzes[currentQuizIndex].type) {
+      case 'radio':
+        return this.quizCard.querySelector('input[name=answer]:checked').value;
+      case 'input':
+        return this.quizCard.querySelector('input').value;
+      case 'checkbox':
+        return Array.from(this.quizCard.querySelectorAll('input[name=answer]:checked')).map(answers, (e) => e.value);
+      case 'multi-input':
+        return Array.from(this.quizCard.querySelectorAll('input')).map(answers, (e) => e.value);
+        // todo: implement multi-input quizzes
+      default:
+        throw new Error('Unknown quiz type.');
+    }
+  }
+
   countdown() {
     let counter = 3;
     
@@ -60,7 +77,7 @@ class UI {
         this.countdownElement.innerHTML = "";
   
         this.toggleVisibility(this.quiz);
-        // this.timer.start();
+        
         this.timer.start();
       };
     }, 700)
@@ -80,9 +97,9 @@ class UI {
   }
   
   addQuizzes(randomQuizzes) {
-    var card = document.getElementById("regForm");
-    card.innerHTML = randomQuizzes.map(buildQuiz).join('');
+    this.quizCard.innerHTML = randomQuizzes.map(buildQuiz).join('');
 
+    // TODO: remove after refactoring
     showTab(currentQuizIndex); // Show the current card
   }
 
@@ -94,11 +111,10 @@ class UI {
     let steps = document.querySelectorAll('#challenge-steps > .step');
     [].map.call(steps, (e) => e.className = 'step');
     document.querySelector("#description").classList.remove('remove-scale');
-    toggleVisibility(document.querySelector("#description"));
-    toggleVisibility(document.querySelector('#description > button'));
-    toggleVisibility(document.querySelector('#submitButton'));
+    this.toggleVisibility(document.querySelector('#description > button'));
+    this.toggleVisibility(document.querySelector('#submitButton'));
     document.querySelector('#timeBar').classList.remove('remove-time');
-    document.getElementById('regForm').classList.remove("removed-item");
+    document.getElementById('quiz-card').classList.remove("removed-item");
     this.swiperHandler.destroySwiper();
   }
 
@@ -121,7 +137,7 @@ class Game {
 
   setQuizType(quizType) {
     this.quizType = quizType;
-    // TODO: remove the statement below, when refactoring is finished.
+    // TODO: remove after refactoring
     quizName = quizType;
 
     return this.quizNames[quizType];
@@ -141,10 +157,10 @@ class Game {
     randomQuizzes = [];
     this.randomQuizzes = [];
 
-    for (var i = 0; i < 5; i++) {
-      var randomNumber = Math.floor(Math.random() * quizzes.length);
+    for (let i = 0; i < 5; i++) {
+      let randomNumber = Math.floor(Math.random() * quizzes.length);
   
-      var randomQuiz = quizzes[randomNumber];
+      let randomQuiz = quizzes[randomNumber];
       // TODO: remove after refactoring
       randomQuizzes.push(randomQuiz);
       this.randomQuizzes.push(randomQuiz);
@@ -173,6 +189,8 @@ class Controller {
   }
 
   submitAnswer() {
+    let answer = this.ui.getUserAnswer();
+    let isCorrect = this.game.checkUserAnswer(answer);
   }
 
   stopTimer() {
@@ -312,7 +330,7 @@ function submitAnswer() {
 
   toggleVisibility(document.querySelector('#submitButton'));
 
-  var x = document.getElementById("regForm");
+  var x = document.getElementById('quiz-card');
   var tabs = document.getElementsByClassName("tab");
 
   checkAnswer();
