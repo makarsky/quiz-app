@@ -7,6 +7,7 @@ const QUIZ_NAMES = {
 
 class UI {
   constructor() {
+    this.quizzes = [];
     this.menuButton = document.getElementById('menuButton');
     this.closeMenuButton = document.getElementById('closeMenuButton');
     this.startButton = document.getElementById('startButton');
@@ -103,7 +104,35 @@ class UI {
     showTab(currentQuizIndex); // Show the current card
   }
 
+  setQuizzes(quizzes) {
+    this.quizzes = quizzes.map(this.buildQuiz);
+
+    console.log(this.quizzes);
+  }
+
+  buildQuiz(rawQuiz) {
+    const header = `<h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
+    <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
+    <br>`;
+
+    switch (rawQuiz.type) {
+      case 'checkbox':
+      case 'radio':
+        return header + this.buildChoices(rawQuiz.type, rawQuiz.choices);
+      case 'input':
+        return header + `<div class="input-container"><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></div>`;
+    }
+  }
+
+  buildChoices(type, choices) {
+    return choices.map((type => choice =>
+      `<div class="${type}">
+        <label><input type="${type}" name="answer" value="${choice}">${choice}</label>
+      </div>`)(type)).join('');
+  }
+
   restart() {
+    this.quizzes.length = 0;
     document.querySelector('.swiper-custom-pagination').classList.add('hide');
     document.querySelector('#answers').classList.add('hide');
     document.querySelector('#challenge-steps').classList.remove('hide');
@@ -191,6 +220,8 @@ class Controller {
   submitAnswer() {
     let answer = this.ui.getUserAnswer();
     let isCorrect = this.game.checkUserAnswer(answer);
+    this.ui.showIsCorrect(isCorrect);
+    this.ui.nextQuiz();
   }
 
   stopTimer() {
@@ -205,10 +236,17 @@ class Controller {
     this.ui.toggleMenu();
   }
 
+  // todo: rename setQuizzes
   setQuizType(quizType) {
     const quizLabel = this.game.setQuizType(quizType)
     this.ui.setQuizLabel(quizLabel);
-    this.game.loadQuizzes().then((randomQuizzes) => this.ui.addQuizzes(randomQuizzes));
+    this.game.loadQuizzes().then((randomQuizzes) => {
+      // todo: remove after refactoring
+      this.ui.addQuizzes(randomQuizzes);
+
+      // this.game.setQuizzes(randomQuizzes);
+      // this.ui.setQuizzes(randomQuizzes);
+    });
   }
 
   restart() {
@@ -454,18 +492,10 @@ function buildQuiz(rawQuiz) {
 }
 
 function choiceBuilder(type, choices) {
-  switch (type) {
-    case 'checkbox':
-      return choices.map((type => choice =>
-        `<div class="checkbox">
-          <label><input type="checkbox" name="answer" value="${choice}">${choice}</label>
-        </div>`)(type)).join('');
-    case 'radio':
-      return choices.map((type => choice =>
-        `<div class="radio">
-          <label><input type="radio" name="answer" value="${choice}">${choice}</label>
-        </div>`)(type)).join('');
-  }
+  return choices.map((type => choice =>
+    `<div class="${type}">
+      <label><input type="${type}" name="answer" value="${choice}">${choice}</label>
+    </div>`)(type)).join('');
 }
 
 function buildCorrectQuizCard(quiz) {
