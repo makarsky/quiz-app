@@ -52,7 +52,7 @@ class UI {
     this.quizDescription.classList.toggle('remove-scale');
   }
 
-  getUserInput() {
+  getUserAnswer() {
     switch (randomQuizzes[currentQuizIndex].type) {
       case 'radio':
         return this.quizCard.querySelector('input[name=answer]:checked').value;
@@ -105,9 +105,7 @@ class UI {
   }
 
   setQuizzes(quizzes) {
-    this.quizzes = quizzes.map(this.buildQuiz);
-
-    console.log(this.quizzes);
+    this.quizzes = quizzes.map(this.buildQuiz.bind(this));
   }
 
   buildQuiz(rawQuiz) {
@@ -161,7 +159,7 @@ class Game {
     this.quizTime = 40;
     this.quizType = 'js';
     this.quizNames = Object.assign({}, QUIZ_NAMES);
-    this.randomQuizzes = [];
+    this.quizzes = [];
   }
 
   setQuizType(quizType) {
@@ -172,44 +170,20 @@ class Game {
     return this.quizNames[quizType];
   }
 
-  loadQuizzes() {
-    return fetch(`quizzes/${quizName}.json`)
-      .then((result) => result.json())
-      .then((quizzes) => {
-        return new Promise((resolve, reject) => resolve(this.shuffleQuizzes(quizzes)));
-      })
-      .catch((error) => console.error(error));
-  }
-
-  shuffleQuizzes(quizzes) {
-    // TODO: remove after refactoring
-    randomQuizzes = [];
-    this.randomQuizzes = [];
-
-    for (let i = 0; i < 5; i++) {
-      let randomNumber = Math.floor(Math.random() * quizzes.length);
-  
-      let randomQuiz = quizzes[randomNumber];
-      // TODO: remove after refactoring
-      randomQuizzes.push(randomQuiz);
-      this.randomQuizzes.push(randomQuiz);
-      quizzes.splice(randomNumber, 1);
-    }
-
-    return this.randomQuizzes;
+  setQuizzes(quizzes) {
+    this.quizzes = quizzes;
   }
 
   restart() {
     currentQuizIndex = 0;
-
-    return this.loadQuizzes();
   }
 }
 
 class Controller {
-  constructor(ui, game) {
+  constructor(ui, game, quizService) {
     this.ui = ui;
     this.game = game;
+    this.quizService = quizService
   }
 
   start() {
@@ -219,7 +193,7 @@ class Controller {
 
   submitAnswer() {
     let answer = this.ui.getUserAnswer();
-    let isCorrect = this.game.checkUserAnswer(answer);
+    let isCorrect = this.quizService.checkUserAnswer(answer);
     this.ui.showIsCorrect(isCorrect);
     this.ui.nextQuiz();
   }
@@ -240,18 +214,25 @@ class Controller {
   setQuizType(quizType) {
     const quizLabel = this.game.setQuizType(quizType)
     this.ui.setQuizLabel(quizLabel);
-    this.game.loadQuizzes().then((randomQuizzes) => {
-      // todo: remove after refactoring
-      this.ui.addQuizzes(randomQuizzes);
 
-      // this.game.setQuizzes(randomQuizzes);
-      // this.ui.setQuizzes(randomQuizzes);
-    });
+    this.loadQuizzes()
   }
 
   restart() {
     this.ui.restart();
-    this.game.restart().then((randomQuizzes) => this.ui.addQuizzes(randomQuizzes));
+    this.game.restart();
+
+    this.loadQuizzes();
+  }
+
+  loadQuizzes() {
+    this.quizService.loadQuizzes(this.game.quizType).then((randomQuizzes) => {
+      // todo: remove after refactoring
+      this.ui.addQuizzes(randomQuizzes);
+
+      this.game.setQuizzes(randomQuizzes);
+      this.ui.setQuizzes(randomQuizzes);
+    });
   }
 
   viewAnswers() {
@@ -262,7 +243,8 @@ class Controller {
 function eventListeners() {
   const ui = new UI;
   const game = new Game;
-  const controller = new Controller(ui, game);
+  const quizService = new QuizService();
+  const controller = new Controller(ui, game, quizService);
   
   ui.startButton.onclick = () => controller.start();
   ui.submitButton.onclick = submitAnswer;
@@ -318,7 +300,73 @@ class Timer {
 }
 
 class QuizService {
+  loadQuizzes(quizName) {
+    return fetch(`quizzes/${quizName}.json`)
+      .then((result) => result.json())
+      .then((quizzes) => {
+        return new Promise((resolve, reject) => resolve(this.shuffleQuizzes(quizzes)));
+      })
+      .catch((error) => console.error(error));
+  }
+
+  shuffleQuizzes(quizzes) {
+    const shuffledQuizzes = [];
+
+    // todo: remove
+    randomQuizzes.length = 0;
+
+    for (let i = 0; i < 5; i++) {
+      let randomNumber = Math.floor(Math.random() * quizzes.length);
+      let randomQuiz = quizzes[randomNumber];
+      
+      // todo: remove
+      randomQuizzes.push(randomQuiz);
+
+      shuffledQuizzes.push(randomQuiz);
+      quizzes.splice(randomNumber, 1);
+    }
+
+    return shuffledQuizzes;
+  }
+
+  checkUserAnswer(answer, index, quizzes) {
+    let isCorrect = false;
+
+    switch (quizzes[index].type) {
+      case 'radio':
+        answer ? answer.value === quizzes[index].correctAnswer ? isCorrect = true : null : null;
+        break;
+      case 'input':
+        answer.value === quizzes[index].correctAnswer ? isCorrect = true : null;
+        break;
+      case 'checkbox':
+        this.areArraysEqual(answer, quizzes[index].correctAnswer) ? isCorrect = true : null;
+        break;
+      case 'multi-input':
+        // todo: implement multi-input quizzes
+    }
+
+    quizzes[index].isCorrect = isCorrect;
+
+    return isCorrect;
+  }
+
+  areArraysEqual(arr1, arr2) {
+    arr1.sort();
+    arr2.sort();
   
+    if (arr1.length !== arr2.length) {
+      return false;
+    }
+  
+    for (var i = arr1.length; i--;) {
+      if (arr1[i] !== arr2[i]) {
+        return false;
+      }
+    }
+  
+    return true;
+  }
 }
 
 class SwiperHandler {
