@@ -70,19 +70,21 @@ class UI {
   }
 
   countdown() {
-    let counter = 3;
-    
-    let countInterval = setInterval(() => {
-      this.countdownElement.innerHTML = counter--;
-      if (counter === -1) {
-        clearInterval(countInterval);
-        this.countdownElement.innerHTML = "";
-  
-        this.toggleVisibility(this.quiz);
-        
-        this.timer.start();
-      };
-    }, 700)
+    return new Promise((resolve, reject) => {
+      let counter = 3;
+      
+      let countInterval = setInterval(() => {
+        this.countdownElement.innerHTML = counter--;
+        if (counter === -1) {
+          clearInterval(countInterval);
+          this.countdownElement.innerHTML = "";
+
+          this.toggleVisibility(this.quiz);
+
+          resolve();
+        };
+      }, 700)
+    });
   }
 
   stopTimer() {
@@ -211,9 +213,8 @@ class Controller {
 
   start() {
     this.ui.hideDescription();
-    this.ui.countdown();
-
-    // let q = this.ui.renderNextQuiz();
+    // this.ui.renderNextQuiz();
+    this.ui.countdown().then(() => this.ui.startTimer());
   }
 
   submitAnswer() {
@@ -426,8 +427,6 @@ let quizName = 'js'; // default quiz
 function showTab(n) {
   var x = document.getElementsByClassName("tab");
   x[n].style.display = "block";
-
-  fixStepIndicator(n)
 }
 
 function toggleVisibility(element) {
@@ -507,16 +506,6 @@ function checkAnswer() {
   }
 
   return isCorrect; // return isCorrect status
-}
-
-function fixStepIndicator(n = null) {
-  // This function removes the "active" class of all steps...
-  let steps = Array.from(document.getElementsByClassName("step"));
-
-  steps.forEach((el) => el.classList.remove("active"));
-
-  //... and adds the "active" class on the current step:
-  n === null ? null : steps[n].classList.add("active");
 }
 
 function arraysEqual(arr1, arr2) {
@@ -614,5 +603,4 @@ function showResult() {
   document.querySelector('.swiper-wrapper').innerHTML = randomQuizzes.map(buildCorrectQuizCard).join('');
 
   document.querySelector('#timeBar').classList.add('remove-time');
-  fixStepIndicator();
 }
