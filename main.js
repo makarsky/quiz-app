@@ -8,6 +8,7 @@ const QUIZ_NAMES = {
 class UI {
   constructor() {
     this.quizzes = [];
+    this.quizGenerator = null;
     this.menuButton = document.getElementById('menuButton');
     this.closeMenuButton = document.getElementById('closeMenuButton');
     this.startButton = document.getElementById('startButton');
@@ -47,7 +48,7 @@ class UI {
     document.getElementById(id).style.display = "block";
   }
 
-  start() {
+  hideDescription() {
     this.toggleVisibility(this.startButton);
     this.quizDescription.classList.toggle('remove-scale');
   }
@@ -97,6 +98,7 @@ class UI {
     this.closeMenu();
   }
   
+  // todo: remove after refactoring
   addQuizzes(randomQuizzes) {
     this.quizCard.innerHTML = randomQuizzes.map(buildQuiz).join('');
 
@@ -104,8 +106,28 @@ class UI {
     showTab(currentQuizIndex); // Show the current card
   }
 
+  *initQuizGenerator() {
+    for (let quiz of this.quizzes) {
+      yield quiz;
+    }
+  }
+
+  renderNextQuiz() {
+    let quiz = this.quizGenerator.next();
+
+    if (!quiz.done) {
+      this.quizCard.innerHTML = 3 + quiz.value;
+    } else {
+      return false;
+    }
+
+    return true;
+  }
+
   setQuizzes(quizzes) {
     this.quizzes = quizzes.map(this.buildQuiz.bind(this));
+
+    this.quizGenerator = this.initQuizGenerator();
   }
 
   buildQuiz(rawQuiz) {
@@ -156,6 +178,7 @@ class UI {
 
 class Game {
   constructor() {
+    this.numberOfQuizzes = 5;
     this.quizTime = 40;
     this.quizType = 'js';
     this.quizNames = Object.assign({}, QUIZ_NAMES);
@@ -187,8 +210,10 @@ class Controller {
   }
 
   start() {
-    this.ui.start();
+    this.ui.hideDescription();
     this.ui.countdown();
+
+    // let q = this.ui.renderNextQuiz();
   }
 
   submitAnswer() {
