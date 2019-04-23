@@ -15,6 +15,7 @@ class UI {
     this.submitButton = document.getElementById('submitButton');
     this.navigation = document.getElementById("navigation");
     this.menuSections = document.getElementsByClassName("overlay-content");
+    this.indicators = document.getElementsByClassName('indicator');
     this.quizLabel = document.getElementById("quizLabel");
     this.quizDescription = document.getElementById('description')
     this.countdownElement = document.getElementById("countdown");
@@ -118,12 +119,20 @@ class UI {
     let quiz = this.quizGenerator.next();
 
     if (!quiz.done) {
-      this.quizCard.innerHTML = 3 + quiz.value;
+      this.quizCard.innerHTML = quiz.value;
     } else {
       return false;
     }
 
     return true;
+  }
+
+  showIsCorrect(currentQuizIndex, isCorrect = true) {
+    if (isCorrect) {
+      this.indicators[currentQuizIndex].classList.add("correct");
+    } else {
+      this.indicators[currentQuizIndex].classList.add("wrong");
+    }
   }
 
   setQuizzes(quizzes) {
@@ -157,10 +166,10 @@ class UI {
     this.quizzes.length = 0;
     document.querySelector('.swiper-custom-pagination').classList.add('hide');
     document.querySelector('#answers').classList.add('hide');
-    document.querySelector('#challenge-steps').classList.remove('hide');
+    document.querySelector('#quiz-indicators').classList.remove('hide');
     document.querySelector('#result-card').classList.add('hide');
-    let steps = document.querySelectorAll('#challenge-steps > .step');
-    [].map.call(steps, (e) => e.className = 'step');
+    let indicators = document.querySelectorAll('#quiz-indicators > .indicator');
+    [].map.call(indicators, (e) => e.className = 'indicator');
     document.querySelector("#description").classList.remove('remove-scale');
     this.toggleVisibility(document.querySelector('#description > button'));
     this.toggleVisibility(document.querySelector('#submitButton'));
@@ -171,7 +180,7 @@ class UI {
 
   viewAnswers() {
     document.querySelector('#result-card').classList.add('hide');
-    document.querySelector('#challenge-steps').classList.add('hide');
+    document.querySelector('#quiz-indicators').classList.add('hide');
     document.querySelector('#answers').classList.remove('hide');
     document.querySelector('.swiper-custom-pagination').classList.remove('hide');
     this.swiperHandler.initSwiper();
@@ -221,7 +230,7 @@ class Controller {
     let answer = this.ui.getUserAnswer();
     let isCorrect = this.quizService.checkUserAnswer(answer);
     this.ui.showIsCorrect(isCorrect);
-    this.ui.nextQuiz();
+    // this.ui.renderNextQuiz();
   }
 
   stopTimer() {
@@ -500,9 +509,9 @@ function checkAnswer() {
   randomQuizzes[currentQuizIndex].isCorrect = isCorrect;
 
   if (isCorrect) {
-    document.getElementsByClassName("step")[currentQuizIndex].classList.add("correct");
+    document.getElementsByClassName("indicator")[currentQuizIndex].classList.add("correct");
   } else {
-    document.getElementsByClassName("step")[currentQuizIndex].classList.add("wrong");
+    document.getElementsByClassName("indicator")[currentQuizIndex].classList.add("wrong");
   }
 
   return isCorrect; // return isCorrect status
