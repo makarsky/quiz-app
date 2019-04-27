@@ -54,17 +54,17 @@ class UI {
     this.quizDescription.classList.toggle('remove-scale');
   }
 
-  getUserAnswer() {
-    switch (randomQuizzes[currentQuizIndex].type) {
+  getUserAnswer(quizType) {
+    switch (quizType) {
       case 'radio':
-        return this.quizCard.querySelector('input[name=answer]:checked').value;
+        return this.quizCard.querySelector('input[name=answer]:checked');
       case 'input':
-        return this.quizCard.querySelector('input').value;
+        return this.quizCard.querySelector('input');
       case 'checkbox':
-        return Array.from(this.quizCard.querySelectorAll('input[name=answer]:checked')).map(answers, (e) => e.value);
+        return Array.from(this.quizCard.querySelectorAll('input[name=answer]:checked')).map((e) => e.value);
       case 'multi-input':
-        return Array.from(this.quizCard.querySelectorAll('input')).map(answers, (e) => e.value);
         // todo: implement multi-input quizzes
+        return Array.from(this.quizCard.querySelectorAll('input')).map((e) => e.value);
       default:
         throw new Error('Unknown quiz type.');
     }
@@ -100,14 +100,6 @@ class UI {
     this.quizLabel.innerHTML = quizLabel;
     this.closeMenu();
   }
-  
-  // todo: remove after refactoring
-  addQuizzes(randomQuizzes) {
-    this.quizCard.innerHTML = randomQuizzes.map(buildQuiz).join('');
-
-    // TODO: remove after refactoring
-    showTab(currentQuizIndex); // Show the current card
-  }
 
   *initQuizGenerator() {
     for (let quiz of this.quizzes) {
@@ -115,16 +107,35 @@ class UI {
     }
   }
 
+  hideSubmitButton() {
+    this.toggleVisibility(this.submitButton);
+  }
+
   renderNextQuiz() {
     let quiz = this.quizGenerator.next();
 
-    if (!quiz.done) {
-      this.quizCard.innerHTML = quiz.value;
-    } else {
-      return false;
-    }
+    return new Promise((resolve, reject) => {
+      if (!quiz.done) {
+        this.quizCard.innerHTML = quiz.value;
+        this.quizCard.classList.add("new-item");
+        this.quizCard.classList.remove("removed-item");
+        resolve(true);
+      } else {
+        resolve(false);
+      }
 
-    return true;
+      this.toggleVisibility(this.submitButton);
+    });
+  }
+
+  hideCard() {
+    return new Promise((resolve, reject) => {
+      this.quizCard.classList.add("removed-item");
+      this.quizCard.classList.remove("new-item");
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    });
   }
 
   showIsCorrect(currentQuizIndex, isCorrect = true) {
@@ -190,16 +201,27 @@ class UI {
 class Game {
   constructor() {
     this.numberOfQuizzes = 5;
+    this.currentQuizIndex = 0;
     this.quizTime = 40;
     this.quizType = 'js';
     this.quizNames = Object.assign({}, QUIZ_NAMES);
     this.quizzes = [];
   }
 
+  getCurrentQuizIndex() {
+    return this.currentQuizIndex;
+  }
+
+  incrementCurrentQuizIndex() {
+    this.currentQuizIndex++;
+  }
+
+  getCurrentQuizType() {
+    return this.quizzes[this.currentQuizIndex].type;
+  }
+
   setQuizType(quizType) {
     this.quizType = quizType;
-    // TODO: remove after refactoring
-    quizName = quizType;
 
     return this.quizNames[quizType];
   }
@@ -208,8 +230,12 @@ class Game {
     this.quizzes = quizzes;
   }
 
+  getQuizzes() {
+    return this.quizzes;
+  }
+
   restart() {
-    currentQuizIndex = 0;
+    this.currentQuizIndex = 0;
   }
 }
 
@@ -222,15 +248,31 @@ class Controller {
 
   start() {
     this.ui.hideDescription();
-    // this.ui.renderNextQuiz();
+    this.ui.renderNextQuiz();
     this.ui.countdown().then(() => this.ui.startTimer());
   }
 
   submitAnswer() {
-    let answer = this.ui.getUserAnswer();
-    let isCorrect = this.quizService.checkUserAnswer(answer);
-    this.ui.showIsCorrect(isCorrect);
-    // this.ui.renderNextQuiz();
+    let event = new Event('answerIsSubmitted');
+    document.dispatchEvent(event);
+
+    this.ui.hideSubmitButton();
+    let answer = this.ui.getUserAnswer(this.game.getCurrentQuizType());
+    let index = this.game.getCurrentQuizIndex();
+    let isCorrect = this.quizService.checkUserAnswer(answer, index, this.game.getQuizzes());
+    this.ui.showIsCorrect(index, isCorrect);
+    
+    this.ui.hideCard()
+      .then(() => this.ui.renderNextQuiz())
+      .then(result => {
+        if (result) {
+          this.game.incrementCurrentQuizIndex();
+          let event = new Event('newCardIsShown');
+          document.dispatchEvent(event);
+        } else {
+          showResult();
+        }
+      });
   }
 
   stopTimer() {
@@ -250,6 +292,7 @@ class Controller {
     const quizLabel = this.game.setQuizType(quizType)
     this.ui.setQuizLabel(quizLabel);
 
+    // todo: user Promise
     this.loadQuizzes()
   }
 
@@ -262,9 +305,6 @@ class Controller {
 
   loadQuizzes() {
     this.quizService.loadQuizzes(this.game.quizType).then((randomQuizzes) => {
-      // todo: remove after refactoring
-      this.ui.addQuizzes(randomQuizzes);
-
       this.game.setQuizzes(randomQuizzes);
       this.ui.setQuizzes(randomQuizzes);
     });
@@ -282,12 +322,12 @@ function eventListeners() {
   const controller = new Controller(ui, game, quizService);
   
   ui.startButton.onclick = () => controller.start();
-  ui.submitButton.onclick = submitAnswer;
+  ui.submitButton.onclick = () => controller.submitAnswer();
   ui.menuButton.addEventListener('click', () => controller.toggleMenu());
   ui.closeMenuButton.onclick = () => controller.toggleMenu();
   ui.viewAnswersButton.onclick = () => controller.viewAnswers();
   document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
-  document.addEventListener('timeout', () => submitAnswer());
+  document.addEventListener('timeout', () => controller.submitAnswer());
   document.addEventListener('answerIsSubmitted', () => controller.stopTimer());
   document.addEventListener('newCardIsShown', () => controller.startTimer());
 
@@ -369,13 +409,11 @@ class QuizService {
 
     switch (quizzes[index].type) {
       case 'radio':
-        answer ? answer.value === quizzes[index].correctAnswer ? isCorrect = true : null : null;
-        break;
       case 'input':
-        answer.value === quizzes[index].correctAnswer ? isCorrect = true : null;
+        isCorrect = answer ? answer.value === quizzes[index].correctAnswer : false;
         break;
       case 'checkbox':
-        this.areArraysEqual(answer, quizzes[index].correctAnswer) ? isCorrect = true : null;
+        isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
         break;
       case 'multi-input':
         // todo: implement multi-input quizzes
