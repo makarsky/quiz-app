@@ -270,7 +270,7 @@ class Controller {
           let event = new Event('newCardIsShown');
           document.dispatchEvent(event);
         } else {
-          showResult();
+          showResult(this.game.getQuizzes());
         }
       });
   }
@@ -292,7 +292,7 @@ class Controller {
     const quizLabel = this.game.setQuizType(quizType)
     this.ui.setQuizLabel(quizLabel);
 
-    // todo: user Promise
+    // todo: use Promise
     this.loadQuizzes()
   }
 
@@ -387,15 +387,9 @@ class QuizService {
   shuffleQuizzes(quizzes) {
     const shuffledQuizzes = [];
 
-    // todo: remove
-    randomQuizzes.length = 0;
-
     for (let i = 0; i < 5; i++) {
       let randomNumber = Math.floor(Math.random() * quizzes.length);
       let randomQuiz = quizzes[randomNumber];
-      
-      // todo: remove
-      randomQuizzes.push(randomQuiz);
 
       shuffledQuizzes.push(randomQuiz);
       quizzes.splice(randomNumber, 1);
@@ -467,139 +461,6 @@ class SwiperHandler {
   }
 }
 
-let randomQuizzes = [];
-let currentQuizIndex = 0; // Current card
-let quizName = 'js'; // default quiz
-
-function showTab(n) {
-  var x = document.getElementsByClassName("tab");
-  x[n].style.display = "block";
-}
-
-function toggleVisibility(element) {
-  element.classList.toggle('hide');
-}
-
-function submitAnswer() {
-  // stop timebar
-  let event = new Event('answerIsSubmitted');
-  document.dispatchEvent(event);
-
-  toggleVisibility(document.querySelector('#submitButton'));
-
-  var x = document.getElementById('quiz-card');
-  var tabs = document.getElementsByClassName("tab");
-
-  checkAnswer();
-
-  x.classList.add("removed-item");
-  x.classList.remove("new-item");
-
-  setTimeout(function () {
-    // Hide the current tab:
-    tabs[currentQuizIndex].style.display = "none";
-
-    // Increase or decrease the current tab by 1:
-    currentQuizIndex = ++currentQuizIndex;
-
-    // if you have reached the end of the form...
-    if (currentQuizIndex >= tabs.length) {
-      showResult();
-      return false;
-    }
-    // Otherwise, display the correct tab:
-    showTab(currentQuizIndex);
-
-    x.classList.add("new-item");
-    x.classList.remove("removed-item");
-    toggleVisibility(document.querySelector('#submitButton'));
-
-    // call event to start timebar
-    let event = new Event('newCardIsShown');
-    document.dispatchEvent(event);
-  }, 2000);
-}
-
-function checkAnswer() {
-  var x, answer, isCorrect = false;
-  x = document.getElementsByClassName("tab");
-
-  switch (randomQuizzes[currentQuizIndex].type) {
-    case 'radio':
-      answer = x[currentQuizIndex].querySelector('input[name=answer]:checked');
-      answer ? answer.value === randomQuizzes[currentQuizIndex].correctAnswer ? isCorrect = true : null : null;
-      break;
-    case 'input':
-      answer = x[currentQuizIndex].querySelector('input');
-      answer.value === randomQuizzes[currentQuizIndex].correctAnswer ? isCorrect = true : null;
-      break;
-    case 'checkbox':
-      answers = x[currentQuizIndex].querySelectorAll('input[name=answer]:checked');
-      answers = [].map.call(answers, (e) => e.value);
-      arraysEqual(answers, randomQuizzes[currentQuizIndex].correctAnswer) ? isCorrect = true : null;
-      break;
-    case 'multi-input':
-      answers = x[currentQuizIndex].querySelectorAll('input');
-      answers = [].map.call(answers, (e) => e.value);
-    // todo: implement multi-input quizzes
-  }
-
-  randomQuizzes[currentQuizIndex].isCorrect = isCorrect;
-
-  if (isCorrect) {
-    document.getElementsByClassName("indicator")[currentQuizIndex].classList.add("correct");
-  } else {
-    document.getElementsByClassName("indicator")[currentQuizIndex].classList.add("wrong");
-  }
-
-  return isCorrect; // return isCorrect status
-}
-
-function arraysEqual(arr1, arr2) {
-  arr1.sort();
-  arr2.sort();
-
-  if (arr1.length !== arr2.length) {
-    return false;
-  }
-
-  for (var i = arr1.length; i--;) {
-    if (arr1[i] !== arr2[i]) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-function buildQuiz(rawQuiz) {
-  var template;
-
-  switch (rawQuiz.type) {
-    case 'checkbox':
-    case 'radio':
-      template =
-        `<div class="tab">
-        <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
-        <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
-        <br>
-        ${choiceBuilder(rawQuiz.type, rawQuiz.choices)}
-      </div>`;
-      break;
-    case 'input':
-      template =
-        `<div class="tab">
-        <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
-        <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
-        <br>
-        <div class="input-container"><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></div>
-      </div>`;
-      break;
-  }
-
-  return template;
-}
-
 function choiceBuilder(type, choices) {
   return choices.map((type => choice =>
     `<div class="${type}">
@@ -639,15 +500,15 @@ function buildCorrectQuizCard(quiz) {
   return template;
 }
 
-function showResult() {
-  toggleVisibility(document.querySelector('#quiz'));
+function showResult(quizzes) {
+  document.querySelector('#quiz').classList.toggle('hide');
   document.querySelector('#result-card').classList.remove('hide');
 
-  document.querySelector('#result').innerHTML = randomQuizzes.filter(quiz => {
+  document.querySelector('#result').innerHTML = quizzes.filter(quiz => {
     return quiz.isCorrect;
   }).length + '/5';
 
-  document.querySelector('.swiper-wrapper').innerHTML = randomQuizzes.map(buildCorrectQuizCard).join('');
+  document.querySelector('.swiper-wrapper').innerHTML = quizzes.map(buildCorrectQuizCard).join('');
 
   document.querySelector('#timeBar').classList.add('remove-time');
 }
