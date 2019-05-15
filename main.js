@@ -21,6 +21,9 @@ class UI {
     this.countdownElement = document.getElementById("countdown");
     this.quiz = document.getElementById('quiz');
     this.quizCard = document.getElementById('quiz-card');
+    this.resultCard = document.getElementById('result-card');
+    this.result = document.getElementById('result');
+    this.swiperWrapper = document.querySelector('.swiper-wrapper');
     this.viewAnswersButton = document.getElementById('view-answers');
     this.quizTypes = Array.from(document.getElementsByClassName("quiz-type"));
     this.menuLinks = Array.from(document.getElementsByClassName("menu-link"));
@@ -146,31 +149,10 @@ class UI {
     }
   }
 
-  setQuizzes(quizzes) {
-    this.quizzes = quizzes.map(this.buildQuiz.bind(this));
+  setQuizzes(quizzesWithLayout) {
+    this.quizzes = quizzesWithLayout;
 
     this.quizGenerator = this.initQuizGenerator();
-  }
-
-  buildQuiz(rawQuiz) {
-    const header = `<h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
-    <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
-    <br>`;
-
-    switch (rawQuiz.type) {
-      case 'checkbox':
-      case 'radio':
-        return header + this.buildChoices(rawQuiz.type, rawQuiz.choices);
-      case 'input':
-        return header + `<div class="input-container"><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></div>`;
-    }
-  }
-
-  buildChoices(type, choices) {
-    return choices.map((type => choice =>
-      `<div class="${type}">
-        <label><input type="${type}" name="answer" value="${choice}">${choice}</label>
-      </div>`)(type)).join('');
   }
 
   restart() {
@@ -178,7 +160,7 @@ class UI {
     document.querySelector('.swiper-custom-pagination').classList.add('hide');
     document.querySelector('#answers').classList.add('hide');
     document.querySelector('#quiz-indicators').classList.remove('hide');
-    document.querySelector('#result-card').classList.add('hide');
+    this.resultCard.classList.add('hide');
     let indicators = document.querySelectorAll('#quiz-indicators > .indicator');
     [].map.call(indicators, (e) => e.className = 'indicator');
     document.querySelector("#description").classList.remove('remove-scale');
@@ -190,11 +172,22 @@ class UI {
   }
 
   viewAnswers() {
-    document.querySelector('#result-card').classList.add('hide');
+    this.resultCard.classList.add('hide');
     document.querySelector('#quiz-indicators').classList.add('hide');
     document.querySelector('#answers').classList.remove('hide');
     document.querySelector('.swiper-custom-pagination').classList.remove('hide');
     this.swiperHandler.initSwiper();
+  }
+
+  showResult(numberOfCorrectAnswers, cardsWithAnswers) {
+    this.toggleVisibility(this.quiz);
+    this.resultCard.classList.remove('hide');
+  
+    this.result.innerHTML = numberOfCorrectAnswers + '/5';
+  
+    this.swiperWrapper.innerHTML = cardsWithAnswers;
+  
+    this.timebar.classList.add('remove-time');
   }
 }
 
@@ -234,6 +227,10 @@ class Game {
     return this.quizzes;
   }
 
+  getNumberOfCorrectAnswers() {
+    return this.quizzes.filter(quiz => quiz.isCorrect).length;
+  }
+
   restart() {
     this.currentQuizIndex = 0;
   }
@@ -270,7 +267,7 @@ class Controller {
           let event = new Event('newCardIsShown');
           document.dispatchEvent(event);
         } else {
-          showResult(this.game.getQuizzes());
+          this.ui.showResult(this.game.getNumberOfCorrectAnswers(), this.quizService.getQuizzesWithLayout(this.game.getQuizzes()));
         }
       });
   }
@@ -306,7 +303,7 @@ class Controller {
   loadQuizzes() {
     this.quizService.loadQuizzes(this.game.quizType).then((randomQuizzes) => {
       this.game.setQuizzes(randomQuizzes);
-      this.ui.setQuizzes(randomQuizzes);
+      this.ui.setQuizzes(randomQuizzes.map(this.quizService.buildQuiz.bind(this.quizService)));
     });
   }
 
@@ -434,6 +431,39 @@ class QuizService {
   
     return true;
   }
+
+  getQuizzesWithLayout(quizzes) {
+    return quizzes.map(this.buildCorrectQuizCard.bind(this))
+  }
+
+  buildQuiz(rawQuiz) {
+    const header = `<h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
+    <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
+    <br>`;
+
+    switch (rawQuiz.type) {
+      case 'checkbox':
+      case 'radio':
+        return header + this.buildChoices(rawQuiz.type, rawQuiz.choices);
+      case 'input':
+        return header + `<div class="input-container"><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></div>`;
+    }
+  }
+
+  buildChoices(type, choices) {
+    return choices.map((type => choice =>
+      `<div class="${type}">
+        <label><input type="${type}" name="answer" value="${choice}">${choice}</label>
+      </div>`)(type)).join('');
+  }
+
+  buildCorrectQuizCard(quiz) {
+    return `<div class="swiper-slide">
+              <div class="card">
+                ${this.buildQuiz(quiz)}
+              </div>
+            </div>`;
+  }
 }
 
 class SwiperHandler {
@@ -459,56 +489,4 @@ class SwiperHandler {
   swiperExists() {
     return this.instance !== null;
   }
-}
-
-function choiceBuilder(type, choices) {
-  return choices.map((type => choice =>
-    `<div class="${type}">
-      <label><input type="${type}" name="answer" value="${choice}">${choice}</label>
-    </div>`)(type)).join('');
-}
-
-function buildCorrectQuizCard(quiz) {
-  var template;
-
-  switch (quiz.type) {
-    case 'checkbox':
-    case 'radio':
-      template =
-        `<div class="swiper-slide">
-        <div class="card">
-          <h4>${quiz.question ? quiz.question : ''}</h4>
-          <div>${quiz.description ? quiz.description : ''}</div>
-          <br>
-          ${choiceBuilder(quiz.type, quiz.choices)}
-        </div>
-      </div>`;
-      break;
-    case 'input':
-      template =
-        `<div class="swiper-slide">
-        <div class="card">
-          <h4>${quiz.question ? quiz.question : ''}</h4>
-          <div>${quiz.description ? quiz.description : ''}</div>
-          <br>
-          <div class="input-container"><input class="input" value="${quiz.correctAnswer}"></div>
-        </div>
-      </div>`;
-      break;
-  }
-
-  return template;
-}
-
-function showResult(quizzes) {
-  document.querySelector('#quiz').classList.toggle('hide');
-  document.querySelector('#result-card').classList.remove('hide');
-
-  document.querySelector('#result').innerHTML = quizzes.filter(quiz => {
-    return quiz.isCorrect;
-  }).length + '/5';
-
-  document.querySelector('.swiper-wrapper').innerHTML = quizzes.map(buildCorrectQuizCard).join('');
-
-  document.querySelector('#timeBar').classList.add('remove-time');
 }
