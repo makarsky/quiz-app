@@ -309,39 +309,6 @@ class Controller {
   }
 }
 
-function eventListeners() {
-  const ui = new UI;
-  const game = new Game;
-  const quizService = new QuizService();
-  const controller = new Controller(ui, game, quizService);
-  
-  ui.startButton.onclick = () => controller.start();
-  ui.submitButton.onclick = () => controller.submitAnswer();
-  ui.menuButton.addEventListener('click', () => controller.toggleMenu());
-  ui.closeMenuButton.onclick = () => controller.toggleMenu();
-  ui.viewAnswersButton.onclick = () => controller.viewAnswers();
-  document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
-  document.addEventListener('timeout', () => controller.submitAnswer());
-  document.addEventListener('answerIsSubmitted', () => controller.stopTimer());
-  document.addEventListener('newCardIsShown', () => controller.startTimer());
-
-  ui.quizTypes.forEach((value) => {
-    value.onclick = controller.loadQuizzesByType.bind(controller, value.getAttribute('data-quiz-type'));
-  });
-
-  ui.menuLinks.forEach((value) => {
-    value.onclick = () => ui.openLink(value.dataset.menu);
-  });
-
-  ui.restartButtons.forEach((value) => {
-    value.onclick = () => controller.restart();
-  });
-
-  controller.loadQuizzesByType('js');
-}
-
-document.addEventListener('DOMContentLoaded', eventListeners);
-
 class Timer {
   constructor(timeBarDOMElement) {
     this.timeBar = timeBarDOMElement;
@@ -487,3 +454,36 @@ class SwiperHandler {
     return this.instance !== null;
   }
 }
+
+function eventListeners() {
+  const ui = new UI;
+  const game = new Game;
+  const quizService = new QuizService();
+  const controller = new Controller(ui, game, quizService);
+  
+  ui.startButton.onclick = () => controller.start();
+  ui.submitButton.onclick = () => controller.submitAnswer();
+  ui.menuButton.addEventListener('click', () => controller.toggleMenu());
+  ui.closeMenuButton.onclick = () => controller.toggleMenu();
+  ui.viewAnswersButton.onclick = () => controller.viewAnswers();
+  document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
+  document.addEventListener('timeout', () => controller.submitAnswer());
+  document.addEventListener('answerIsSubmitted', () => controller.stopTimer());
+  document.addEventListener('newCardIsShown', () => controller.startTimer());
+
+  ui.quizTypes.forEach((value) => {
+    value.onclick = controller.loadQuizzesByType.bind(controller, value.getAttribute('data-quiz-type'));
+  });
+
+  ui.menuLinks.forEach((value) => {
+    value.onclick = () => ui.openLink(value.dataset.menu);
+  });
+
+  ui.restartButtons.forEach((value) => {
+    value.onclick = () => controller.restart();
+  });
+
+  controller.loadQuizzesByType('js');
+}
+
+document.addEventListener('DOMContentLoaded', eventListeners);
