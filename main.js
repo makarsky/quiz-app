@@ -284,13 +284,9 @@ class Controller {
     this.ui.toggleMenu();
   }
 
-  // todo: rename setQuizzes
   setQuizType(quizType) {
     const quizLabel = this.game.setQuizType(quizType)
     this.ui.setQuizLabel(quizLabel);
-
-    // todo: use Promise
-    this.loadQuizzes()
   }
 
   restart() {
@@ -300,7 +296,8 @@ class Controller {
     this.loadQuizzes();
   }
 
-  loadQuizzes() {
+  loadQuizzesByType(quizType) {
+    this.setQuizType(quizType);
     this.quizService.loadQuizzes(this.game.quizType).then((randomQuizzes) => {
       this.game.setQuizzes(randomQuizzes);
       this.ui.setQuizzes(randomQuizzes.map(this.quizService.buildQuiz.bind(this.quizService)));
@@ -329,7 +326,7 @@ function eventListeners() {
   document.addEventListener('newCardIsShown', () => controller.startTimer());
 
   ui.quizTypes.forEach((value) => {
-    value.onclick = controller.setQuizType.bind(controller, value.getAttribute('data-quiz-type'));
+    value.onclick = controller.loadQuizzesByType.bind(controller, value.getAttribute('data-quiz-type'));
   });
 
   ui.menuLinks.forEach((value) => {
@@ -340,7 +337,7 @@ function eventListeners() {
     value.onclick = () => controller.restart();
   });
 
-  controller.setQuizType('js');
+  controller.loadQuizzesByType('js');
 }
 
 document.addEventListener('DOMContentLoaded', eventListeners);
