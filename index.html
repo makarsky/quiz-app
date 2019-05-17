@@ -17,27 +17,27 @@
   <div id="content">
     <div class="">
       <!-- Menu Icon-->
-      <div class="menu-container" onclick="toggleMenu(this)">
+      <div id="menuButton" class="menu-container">
         <div class="bar1"></div>
         <div class="bar2"></div>
         <div class="bar3"></div>
       </div>
 
       <!-- Quiz Indicators -->
-      <div id="challenge-steps" class="steps">
-        <span class="step"></span>
-        <span class="step"></span>
-        <span class="step"></span>
-        <span class="step"></span>
-        <span class="step"></span>
+      <div id="quiz-indicators" class="indicators">
+        <span class="indicator"></span>
+        <span class="indicator"></span>
+        <span class="indicator"></span>
+        <span class="indicator"></span>
+        <span class="indicator"></span>
       </div>
 
-      <div class="steps swiper-custom-pagination not-displayed">
-        <span class="step swiper-pagination-bullet"></span>
-        <span class="step swiper-pagination-bullet"></span>
-        <span class="step swiper-pagination-bullet"></span>
-        <span class="step swiper-pagination-bullet"></span>
-        <span class="step swiper-pagination-bullet"></span>
+      <div class="indicators swiper-custom-pagination hide">
+        <span class="indicator swiper-pagination-bullet"></span>
+        <span class="indicator swiper-pagination-bullet"></span>
+        <span class="indicator swiper-pagination-bullet"></span>
+        <span class="indicator swiper-pagination-bullet"></span>
+        <span class="indicator swiper-pagination-bullet"></span>
       </div>
     </div>
 
@@ -51,60 +51,62 @@
 
     <!-- Challenge description -->
     <div id="description">
-      <div id="quiz-info" class="card">
-        <h4><span id="quiz-name">JavaScript</span> Quiz</h4>
+      <div id="quiz-info" class="card challange-description-card">
+        <h4><span id="quizLabel">JavaScript</span> Quiz</h4>
         <div><span id="quiz-count">5</span> questions</div>
         <div>Are you ready?</div>
       </div>
-      <button class="submit" onclick="start()">Start</button>
+      <button id="startButton" class="submit">Start</button>
     </div>
 
-    <div id="quiz" class="not-displayed">
-      <div id="regForm" class="card">
+    <!-- Quiz -->
+    <div id="quiz" class="hide">
+      <div id="quiz-card" class="card">
       </div>
 
-      <button id="submitAnswer" class="submit" onclick="submitAnswer()">Submit</button>
+      <button id="submitButton" class="submit hide">Submit</button>
     </div>
 
-    <div id="result-card" class="not-displayed">
+    <!-- Result -->
+    <div id="result-card" class="hide">
       <div class="card">
         <h1>Result</h1>
         <br>
         <h1 id="result">3/5</h1>
         <br>
         <div class="center">
-          <button class="button-default" onclick="viewAnswers()">View correct answers</button>
+          <button id="view-answers" class="button-default">View correct answers</button>
         </div>
       </div>
 
-      <button class="submit" onclick="restart()">Restart</button>
+      <button class="submit restart">Restart</button>
     </div>
 
     <!-- Slides with answers -->
-    <div id="answers" class="not-displayed">
+    <div id="answers" class="hide">
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <!-- Slides -->
         </div>
       </div>
 
-      <button class="submit" onclick="restart()">Restart</button>
+      <button class="submit restart">Restart</button>
     </div>
 
     <!-- Navigation -->
-    <div id="myNav" class="overlay">
+    <div id="navigation" class="overlay">
       <!-- Close button -->
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="javascript:void(0)" id="closeMenuButton" class="closebtn">&times;</a>
 
       <!-- Menu -->
       <div id="menu" class="overlay-content">
-        <a href="#" onclick="openLink('about')">Author</a>
-        <a href="#" onclick="openLink('challenges')">Challenges</a>
+        <a href="#" class="menu-link" data-menu="about">Author</a>
+        <a href="#" class="menu-link" data-menu="challenges">Challenges</a>
       </div>
 
       <!-- About section -->
       <div id="about" class="overlay-content">
-        <a href="#" onclick="openLink('menu')">&larr; Back</a>
+        <a href="#" class="menu-link" data-menu="menu">&larr; Back</a>
         <br>
         <div class="center-block">
           <img src="https://api.sololearn.com/Uploads/Avatars/779917.jpg" class="img-circle" style="width:80px">
@@ -118,12 +120,12 @@
 
       <!-- Challenges section -->
       <div id="challenges" class="overlay-content">
-        <a href="#" onclick="openLink('menu')">&larr; Back</a>
+        <a href="#" class="menu-link" data-menu="menu">&larr; Back</a>
         <br>
-        <a href="#" onclick="selectChallenge('js')">Javascript</a>
-        <a href="#" onclick="selectChallenge('java')">Java</a>
-        <a href="#" onclick="selectChallenge('php')">PHP</a>
-        <a href="#" onclick="selectChallenge('sql')">SQL</a>
+        <a href="#" class="quiz-type" data-quiz-type="js">Javascript</a>
+        <a href="#" class="quiz-type" data-quiz-type="java">Java</a>
+        <a href="#" class="quiz-type" data-quiz-type="php">PHP</a>
+        <a href="#" class="quiz-type" data-quiz-type="sql">SQL</a>
       </div>
 
     </div>
