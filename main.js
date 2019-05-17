@@ -1,355 +1,489 @@
-let randomQuizzes = [];
-const quizTime = 40; // Quiz time in seconds
-let currentTab = 0; // Current card
-let timer = null;
-let quizName = 'js'; // default quiz
-let mySwiper = null;
 const QUIZ_NAMES = {
   'js': 'JavaScript',
   'java': 'Java',
   'php': 'PHP',
   'sql': 'SQL'
 };
-let submitButton = document.querySelector('#submitAnswer');
-var description = document.getElementById('description');
-description.addEventListener('webkitAnimationEnd', (event) => toggleVisibility(description), false);
 
-function showTab(n) {
-  var x = document.getElementsByClassName("tab");
-  x[n].style.display = "block";
+class UI {
+  constructor() {
+    this.quizzes = [];
+    this.quizGenerator = null;
+    this.menuButton = document.getElementById('menuButton');
+    this.closeMenuButton = document.getElementById('closeMenuButton');
+    this.startButton = document.getElementById('startButton');
+    this.submitButton = document.getElementById('submitButton');
+    this.navigation = document.getElementById("navigation");
+    this.menuSections = document.getElementsByClassName("overlay-content");
+    this.indicators = document.getElementsByClassName('indicator');
+    this.quizLabel = document.getElementById("quizLabel");
+    this.quizDescription = document.getElementById('description')
+    this.countdownElement = document.getElementById("countdown");
+    this.quiz = document.getElementById('quiz');
+    this.quizCard = document.getElementById('quiz-card');
+    this.resultCard = document.getElementById('result-card');
+    this.result = document.getElementById('result');
+    this.swiperWrapper = document.querySelector('.swiper-wrapper');
+    this.viewAnswersButton = document.getElementById('view-answers');
+    this.quizTypes = Array.from(document.getElementsByClassName("quiz-type"));
+    this.menuLinks = Array.from(document.getElementsByClassName("menu-link"));
+    this.restartButtons = Array.from(document.getElementsByClassName('restart'));
+    this.timebar = document.getElementById('timeBar');
+    this.timer = new Timer(this.timebar);
+    this.swiperHandler = new SwiperHandler;
+  }
 
-  fixStepIndicator(n)
-}
+  toggleVisibility(element) {
+    element.classList.toggle('hide');
+  }
 
-function toggleVisibility(element) {
-  element.classList.toggle('not-displayed');
-}
+  toggleMenu() {
+    this.openLink('menu');
+    this.navigation.classList.toggle("overlay-opened");
+  }
 
-function submitAnswer() {
-  toggleVisibility(submitButton);
-  clearInterval(timer);
+  closeMenu() {
+    this.openLink('menu');
+    this.navigation.classList.remove("overlay-opened");
+  }
 
-  var x = document.getElementById("regForm");
-  var tabs = document.getElementsByClassName("tab");
+  openLink(id) {
+    [].forEach.call(this.menuSections, (e) => e.style.display = "none");
+    document.getElementById(id).style.display = "block";
+  }
 
-  checkAnswer();
+  hideDescription() {
+    this.toggleVisibility(this.startButton);
+    this.quizDescription.classList.toggle('remove-scale');
+  }
 
-  x.classList.add("removed-item");
-  x.classList.remove("new-item");
-
-  setTimeout(function () {
-    // Hide the current tab:
-    tabs[currentTab].style.display = "none";
-
-    // Increase or decrease the current tab by 1:
-    currentTab = ++currentTab;
-
-    // if you have reached the end of the form...
-    if (currentTab >= tabs.length) {
-      showResult();
-      return false;
+  getUserAnswer(quizType) {
+    switch (quizType) {
+      case 'radio':
+        return this.quizCard.querySelector('input[name=answer]:checked');
+      case 'input':
+        return this.quizCard.querySelector('input');
+      case 'checkbox':
+        return Array.from(this.quizCard.querySelectorAll('input[name=answer]:checked')).map((e) => e.value);
+      case 'multi-input':
+        // todo: implement multi-input quizzes
+        return Array.from(this.quizCard.querySelectorAll('input')).map((e) => e.value);
+      default:
+        throw new Error('Unknown quiz type.');
     }
-    // Otherwise, display the correct tab:
-    showTab(currentTab);
-
-    x.classList.add("new-item");
-    x.classList.remove("removed-item");
-    toggleVisibility(submitButton);
-    move();
-  }, 2000);
-}
-
-function checkAnswer() {
-  var x, answer, isCorrect = false;
-  x = document.getElementsByClassName("tab");
-
-  switch (randomQuizzes[currentTab].type) {
-    case 'radio':
-      answer = x[currentTab].querySelector('input[name=answer]:checked');
-      answer ? answer.value === randomQuizzes[currentTab].correctAnswer ? isCorrect = true : null : null;
-      break;
-    case 'input':
-      answer = x[currentTab].querySelector('input');
-      answer.value === randomQuizzes[currentTab].correctAnswer ? isCorrect = true : null;
-      break;
-    case 'checkbox':
-      answers = x[currentTab].querySelectorAll('input[name=answer]:checked');
-      answers = [].map.call(answers, (e) => e.value);
-      arraysEqual(answers, randomQuizzes[currentTab].correctAnswer) ? isCorrect = true : null;
-      break;
-    case 'multi-input':
-      answers = x[currentTab].querySelectorAll('input');
-      answers = [].map.call(answers, (e) => e.value);
-    // todo: implement multi-input quizzes
   }
 
-  randomQuizzes[currentTab].isCorrect = isCorrect;
+  countdown() {
+    return new Promise((resolve, reject) => {
+      let counter = 3;
+      
+      let countInterval = setInterval(() => {
+        this.countdownElement.innerHTML = counter--;
+        if (counter === -1) {
+          clearInterval(countInterval);
+          this.countdownElement.innerHTML = "";
 
-  if (isCorrect) {
-    document.getElementsByClassName("step")[currentTab].classList.add("correct");
-  } else {
-    document.getElementsByClassName("step")[currentTab].classList.add("wrong");
+          this.toggleVisibility(this.quiz);
+
+          resolve();
+        };
+      }, 700)
+    });
   }
 
-  return isCorrect; // return isCorrect status
-}
-
-function fixStepIndicator(n = null) {
-  // This function removes the "active" class of all steps...
-  let x = document.getElementsByClassName("step");
-
-  for (let i = 0; i < x.length; i++) {
-    x[i].className = x[i].className.replace(" active", "");
+  stopTimer() {
+    this.timer.stop();
   }
 
-  //... and adds the "active" class on the current step:
-  n === null ? null : x[n].classList.add("active");
-}
+  startTimer() {
+    this.timer.start();
+  }
 
-function move() {
-  var timeBar = document.getElementById("timeBar");
-  timeBar.style.width = '100%';
-  var quizTimeCopy = quizTime;
+  setQuizLabel(quizLabel) {
+    this.quizLabel.innerHTML = quizLabel;
+    this.closeMenu();
+  }
 
-  timer = setInterval(frame, 5);
+  *initQuizGenerator() {
+    for (let quiz of this.quizzes) {
+      yield quiz;
+    }
+  }
 
-  function frame() {
-    if (quizTimeCopy <= 0) {
-      clearInterval(timer);
-      submitAnswer();
+  hideSubmitButton() {
+    this.toggleVisibility(this.submitButton);
+  }
+
+  renderNextQuiz() {
+    let quiz = this.quizGenerator.next();
+
+    return new Promise((resolve, reject) => {
+      if (!quiz.done) {
+        this.quizCard.innerHTML = quiz.value;
+        this.quizCard.classList.add("new-item");
+        this.quizCard.classList.remove("removed-item");
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+
+      this.toggleVisibility(this.submitButton);
+    });
+  }
+
+  hideCard() {
+    return new Promise((resolve, reject) => {
+      this.quizCard.classList.add("removed-item");
+      this.quizCard.classList.remove("new-item");
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    });
+  }
+
+  showIsCorrect(currentQuizIndex, isCorrect = true) {
+    if (isCorrect) {
+      this.indicators[currentQuizIndex].classList.add("correct");
     } else {
-      quizTimeCopy -= 0.005
-
-      width = quizTimeCopy / quizTime * 100;
-      timeBar.style.width = width + '%';
+      this.indicators[currentQuizIndex].classList.add("wrong");
     }
   }
-}
 
-function toggleMenu(element) {
-  // element.classList.toggle("change");
-  openLink('menu')
-  document.getElementById("myNav").style.width = "100%";
-}
+  setQuizzes(quizzesWithLayout) {
+    this.quizzes = quizzesWithLayout;
 
-function closeNav() {
-  document.getElementById("myNav").style.width = "0%";
-  openLink('menu')
-}
-
-function openLink(id) {
-  var menuSections = document.getElementsByClassName("overlay-content");
-  [].forEach.call(menuSections, (e) => e.style.display = "none");
-  document.getElementById(id).style.display = "block";
-}
-
-function arraysEqual(arr1, arr2) {
-  arr1.sort();
-  arr2.sort();
-
-  if (arr1.length !== arr2.length) {
-    return false;
+    this.quizGenerator = this.initQuizGenerator();
   }
 
-  for (var i = arr1.length; i--;) {
-    if (arr1[i] !== arr2[i]) {
+  restart() {
+    this.quizzes.length = 0;
+    document.querySelector('.swiper-custom-pagination').classList.add('hide');
+    document.querySelector('#answers').classList.add('hide');
+    document.querySelector('#quiz-indicators').classList.remove('hide');
+    this.resultCard.classList.add('hide');
+    let indicators = document.querySelectorAll('#quiz-indicators > .indicator');
+    [].map.call(indicators, (e) => e.className = 'indicator');
+    document.querySelector("#description").classList.remove('remove-scale');
+    this.toggleVisibility(document.querySelector('#description > button'));
+    this.toggleVisibility(document.querySelector('#submitButton'));
+    document.querySelector('#timeBar').classList.remove('remove-time');
+    document.getElementById('quiz-card').classList.remove("removed-item");
+    this.swiperHandler.destroySwiper();
+  }
+
+  viewAnswers() {
+    this.resultCard.classList.add('hide');
+    document.querySelector('#quiz-indicators').classList.add('hide');
+    document.querySelector('#answers').classList.remove('hide');
+    document.querySelector('.swiper-custom-pagination').classList.remove('hide');
+    this.swiperHandler.initSwiper();
+  }
+
+  showResult(numberOfCorrectAnswers, cardsWithAnswers) {
+    this.toggleVisibility(this.quiz);
+    this.resultCard.classList.remove('hide');
+  
+    this.result.innerHTML = numberOfCorrectAnswers + '/5';
+  
+    this.swiperWrapper.innerHTML = cardsWithAnswers;
+  
+    this.timebar.classList.add('remove-time');
+  }
+}
+
+class Game {
+  constructor() {
+    this.numberOfQuizzes = 5;
+    this.currentQuizIndex = 0;
+    this.quizTime = 40;
+    this.quizType = 'js';
+    this.quizNames = Object.assign({}, QUIZ_NAMES);
+    this.quizzes = [];
+  }
+
+  getCurrentQuizIndex() {
+    return this.currentQuizIndex;
+  }
+
+  incrementCurrentQuizIndex() {
+    this.currentQuizIndex++;
+  }
+
+  getCurrentQuizType() {
+    return this.quizzes[this.currentQuizIndex].type;
+  }
+
+  setQuizType(quizType) {
+    this.quizType = quizType;
+
+    return this.quizNames[quizType];
+  }
+
+  setQuizzes(quizzes) {
+    this.quizzes = quizzes;
+  }
+
+  getQuizzes() {
+    return this.quizzes;
+  }
+
+  getNumberOfCorrectAnswers() {
+    return this.quizzes.filter(quiz => quiz.isCorrect).length;
+  }
+
+  restart() {
+    this.currentQuizIndex = 0;
+  }
+}
+
+class Controller {
+  constructor(ui, game, quizService) {
+    this.ui = ui;
+    this.game = game;
+    this.quizService = quizService
+  }
+
+  start() {
+    this.ui.hideDescription();
+    this.ui.renderNextQuiz();
+    this.ui.countdown().then(() => this.ui.startTimer());
+  }
+
+  submitAnswer() {
+    let event = new Event('answerIsSubmitted');
+    document.dispatchEvent(event);
+
+    this.ui.hideSubmitButton();
+    let answer = this.ui.getUserAnswer(this.game.getCurrentQuizType());
+    let index = this.game.getCurrentQuizIndex();
+    let isCorrect = this.quizService.checkUserAnswer(answer, index, this.game.getQuizzes());
+    this.ui.showIsCorrect(index, isCorrect);
+    
+    this.ui.hideCard()
+      .then(() => this.ui.renderNextQuiz())
+      .then(result => {
+        if (result) {
+          this.game.incrementCurrentQuizIndex();
+          let event = new Event('newCardIsShown');
+          document.dispatchEvent(event);
+        } else {
+          this.ui.showResult(this.game.getNumberOfCorrectAnswers(), this.quizService.getQuizzesWithLayout(this.game.getQuizzes()));
+        }
+      });
+  }
+
+  stopTimer() {
+    this.ui.stopTimer();
+  }
+
+  startTimer() {
+    this.ui.startTimer();
+  }
+
+  toggleMenu() {
+    this.ui.toggleMenu();
+  }
+
+  setQuizType(quizType) {
+    const quizLabel = this.game.setQuizType(quizType)
+    this.ui.setQuizLabel(quizLabel);
+  }
+
+  restart() {
+    this.ui.restart();
+    this.game.restart();
+
+    this.loadQuizzes();
+  }
+
+  loadQuizzesByType(quizType) {
+    this.setQuizType(quizType);
+    this.quizService.loadQuizzes(this.game.quizType).then((randomQuizzes) => {
+      this.game.setQuizzes(randomQuizzes);
+      this.ui.setQuizzes(randomQuizzes.map(this.quizService.buildQuiz.bind(this.quizService)));
+    });
+  }
+
+  viewAnswers() {
+    this.ui.viewAnswers();
+  }
+}
+
+class Timer {
+  constructor(timeBarDOMElement) {
+    this.timeBar = timeBarDOMElement;
+    this.quizTime = 40;
+  }
+
+  start() {
+    this.timeBar.classList.add('timer-animation');
+    
+    const frame = () => {
+      const timerEvent = document.createEvent('Event');
+      timerEvent.initEvent('timeout', false, false);
+      document.dispatchEvent(timerEvent);
+    }
+
+    this.timer = setTimeout(frame, this.quizTime * 1000);
+  }
+
+  stop() {
+    let width = this.timeBar.getBoundingClientRect().width;
+    this.timeBar.classList.remove('timer-animation');
+    this.timeBar.style.width = width + 'px';
+    clearTimeout(this.timer);
+  }
+}
+
+class QuizService {
+  loadQuizzes(quizName) {
+    return fetch(`quizzes/${quizName}.json`)
+      .then((result) => result.json())
+      .then((quizzes) => {
+        return new Promise((resolve, reject) => resolve(this.shuffleQuizzes(quizzes)));
+      })
+      .catch((error) => console.error(error));
+  }
+
+  shuffleQuizzes(quizzes) {
+    const shuffledQuizzes = [];
+
+    for (let i = 0; i < 5; i++) {
+      let randomNumber = Math.floor(Math.random() * quizzes.length);
+      let randomQuiz = quizzes[randomNumber];
+
+      shuffledQuizzes.push(randomQuiz);
+      quizzes.splice(randomNumber, 1);
+    }
+
+    return shuffledQuizzes;
+  }
+
+  checkUserAnswer(answer, index, quizzes) {
+    let isCorrect = false;
+
+    switch (quizzes[index].type) {
+      case 'radio':
+      case 'input':
+        isCorrect = answer ? answer.value === quizzes[index].correctAnswer : false;
+        break;
+      case 'checkbox':
+        isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
+        break;
+      case 'multi-input':
+        // todo: implement multi-input quizzes
+    }
+
+    quizzes[index].isCorrect = isCorrect;
+
+    return isCorrect;
+  }
+
+  areArraysEqual(arr1, arr2) {
+    arr1.sort();
+    arr2.sort();
+  
+    if (arr1.length !== arr2.length) {
       return false;
     }
-  }
-
-  return true;
-}
-
-function loadQuizzes() {
-  var request = new XMLHttpRequest();
-  request.open('GET', `quizzes/${quizName}.json`);
-  request.onload = () => {
-    var loadedQuizzes = JSON.parse(request.responseText);
-
-    for (var i = 0; i < 5; i++) {
-      var randomNumber = Math.floor(Math.random() * loadedQuizzes.length);
-
-      var randomQuiz = loadedQuizzes[randomNumber];
-      randomQuizzes.push(randomQuiz);
-      loadedQuizzes.splice(randomNumber, 1);
+  
+    for (var i = arr1.length; i--;) {
+      if (arr1[i] !== arr2[i]) {
+        return false;
+      }
     }
-
-    addQuizzes(); // Add quizzes to the template
-    showTab(currentTab); // Show the current card
-  };
-
-  request.onerror = () => console.log('Error');
-  request.send();
-}
-
-function addQuizzes() {
-  var card = document.getElementById("regForm");
-
-  card.innerHTML = randomQuizzes.map(buildQuiz).join('');
-}
-
-function buildQuiz(rawQuiz) {
-  var template;
-
-  switch (rawQuiz.type) {
-    case 'checkbox':
-    case 'radio':
-      template =
-        `<div class="tab">
-        <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
-        <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
-        <br>
-        ${choiceBuilder(rawQuiz.type, rawQuiz.choices)}
-      </div>`;
-      break;
-    case 'input':
-      template =
-        `<div class="tab">
-        <h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
-        <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
-        <br>
-        <div class="input-container"><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></div>
-      </div>`;
-      break;
+  
+    return true;
   }
 
-  return template;
-}
+  getQuizzesWithLayout(quizzes) {
+    return quizzes.map(this.buildCorrectQuizCard.bind(this))
+  }
 
-function choiceBuilder(type, choices) {
-  switch (type) {
-    case 'checkbox':
-      return choices.map((type => choice =>
-        `<div class="checkbox">
-          <label><input type="checkbox" name="answer" value="${choice}">${choice}</label>
-        </div>`)(type)).join('');
-    case 'radio':
-      return choices.map((type => choice =>
-        `<div class="radio">
-          <label><input type="radio" name="answer" value="${choice}">${choice}</label>
-        </div>`)(type)).join('');
+  buildQuiz(rawQuiz) {
+    const header = `<h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
+    <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
+    <br>`;
+
+    switch (rawQuiz.type) {
+      case 'checkbox':
+      case 'radio':
+        return header + this.buildChoices(rawQuiz.type, rawQuiz.choices);
+      case 'input':
+        return header + `<div class="input-container"><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></div>`;
+    }
+  }
+
+  buildChoices(type, choices) {
+    return choices.map((type => choice =>
+      `<div class="${type}">
+        <label><input type="${type}" name="answer" value="${choice}">${choice}</label>
+      </div>`)(type)).join('');
+  }
+
+  buildCorrectQuizCard(quiz) {
+    return `<div class="swiper-slide">
+              <div class="card">
+                ${this.buildQuiz(quiz)}
+              </div>
+            </div>`;
   }
 }
 
-function buildCorrectQuizCard(quiz) {
-  var template;
-
-  switch (quiz.type) {
-    case 'checkbox':
-    case 'radio':
-      template =
-        `<div class="swiper-slide">
-        <div class="card">
-          <h4>${quiz.question ? quiz.question : ''}</h4>
-          <div>${quiz.description ? quiz.description : ''}</div>
-          <br>
-          ${choiceBuilder(quiz.type, quiz.choices)}
-        </div>
-      </div>`;
-      break;
-    case 'input':
-      template =
-        `<div class="swiper-slide">
-        <div class="card">
-          <h4>${quiz.question ? quiz.question : ''}</h4>
-          <div>${quiz.description ? quiz.description : ''}</div>
-          <br>
-          <div class="input-container"><input class="input" value="${quiz.correctAnswer}"></div>
-        </div>
-      </div>`;
-      break;
+class SwiperHandler {
+  constructor() {
+    this.instance = null;
   }
 
-  return template;
+  initSwiper() {
+    this.instance = new Swiper('.swiper-container', {
+      direction: 'horizontal',
+      loop: false,
+      pagination: {
+        el: '.swiper-custom-pagination',
+        bulletClass: 'swiper-pagination-bullet'
+      },
+    });
+  }
+  
+  destroySwiper() {
+    this.swiperExists() ? this.instance.destroy() : null;
+  }
+  
+  swiperExists() {
+    return this.instance !== null;
+  }
 }
 
-function countdown() {
-  let counter = 3;
-  let element = document.querySelector("#countdown");
-  loadQuizzes();
+function eventListeners() {
+  const ui = new UI;
+  const game = new Game;
+  const quizService = new QuizService();
+  const controller = new Controller(ui, game, quizService);
+  
+  ui.startButton.onclick = () => controller.start();
+  ui.submitButton.onclick = () => controller.submitAnswer();
+  ui.menuButton.addEventListener('click', () => controller.toggleMenu());
+  ui.closeMenuButton.onclick = () => controller.toggleMenu();
+  ui.viewAnswersButton.onclick = () => controller.viewAnswers();
+  document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
+  document.addEventListener('timeout', () => controller.submitAnswer());
+  document.addEventListener('answerIsSubmitted', () => controller.stopTimer());
+  document.addEventListener('newCardIsShown', () => controller.startTimer());
 
-  let countInterval = setInterval(() => {
-    element.innerHTML = counter--;
-    if (counter === -1) {
-      clearInterval(countInterval);
-      element.innerHTML = "";
-
-      toggleVisibility(document.querySelector('#quiz'));
-      move();
-    };
-  }, 700)
-}
-
-function start() {
-  let element = document.querySelector('#description');
-  toggleVisibility(document.querySelector('#description > button'));
-  element.classList.toggle('remove-scale');
-  countdown();
-}
-
-function restart() {
-  destroySwiper();
-  document.querySelector('.swiper-custom-pagination').classList.add('not-displayed');
-  document.querySelector('#answers').classList.add('not-displayed');
-  document.querySelector('#challenge-steps').classList.remove('not-displayed');
-  document.querySelector('#result-card').classList.add('not-displayed');
-  let steps = document.querySelectorAll('#challenge-steps > .step');
-  [].map.call(steps, (e) => e.className = 'step');
-  document.querySelector("#description").classList.remove('remove-scale');
-  toggleVisibility(document.querySelector("#description"));
-  toggleVisibility(document.querySelector('#description > button'));
-  toggleVisibility(submitButton);
-  document.querySelector('#timeBar').classList.remove('remove-time');
-  document.getElementById('regForm').classList.remove("removed-item");
-  randomQuizzes = [];
-  currentTab = 0; // Current card
-  timer = null;
-}
-
-function showResult() {
-  toggleVisibility(document.querySelector('#quiz'));
-  document.querySelector('#result-card').classList.remove('not-displayed');
-
-  document.querySelector('#result').innerHTML = randomQuizzes.filter(quiz => {
-    return quiz.isCorrect;
-  }).length + '/5';
-
-  document.querySelector('.swiper-wrapper').innerHTML = randomQuizzes.map(buildCorrectQuizCard).join('');
-
-  document.querySelector('#timeBar').classList.add('remove-time');
-  fixStepIndicator();
-}
-
-function viewAnswers() {
-  document.querySelector('#result-card').classList.add('not-displayed');
-  document.querySelector('#challenge-steps').classList.add('not-displayed');
-  document.querySelector('#answers').classList.remove('not-displayed');
-  document.querySelector('.swiper-custom-pagination').classList.remove('not-displayed');
-  initSwiper();
-}
-
-function initSwiper() {
-  mySwiper = new Swiper('.swiper-container', {
-    direction: 'horizontal',
-    loop: false,
-    pagination: {
-      el: '.swiper-custom-pagination',
-      bulletClass: 'swiper-pagination-bullet'
-    },
+  ui.quizTypes.forEach((value) => {
+    value.onclick = controller.loadQuizzesByType.bind(controller, value.getAttribute('data-quiz-type'));
   });
+
+  ui.menuLinks.forEach((value) => {
+    value.onclick = () => ui.openLink(value.dataset.menu);
+  });
+
+  ui.restartButtons.forEach((value) => {
+    value.onclick = () => controller.restart();
+  });
+
+  controller.loadQuizzesByType('js');
 }
 
-function destroySwiper() {
-  swiperExists() ? mySwiper.destroy() : null;
-}
-
-function swiperExists() {
-  return mySwiper !== null;
-}
-
-function selectChallenge(name) {
-  quizName = name;
-
-  document.querySelector("#quiz-name").innerHTML = QUIZ_NAMES[name];
-  closeNav();
-}
+document.addEventListener('DOMContentLoaded', eventListeners);

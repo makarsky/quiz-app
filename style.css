@@ -37,9 +37,14 @@ input {
     margin: 30px auto;
     font-family: Arial;
     padding: 20px 20px 20px 20px;
-    width: 90%;
+    width: 80%;
     min-width: 300px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.challange-description-card {
+    position: absolute;
+    left: 10%;
 }
 
 h1 {
@@ -56,7 +61,7 @@ h1 {
     display: none;
 }
 
-.not-displayed {
+.hide {
     display: none;
 }
 
@@ -93,13 +98,13 @@ button:hover {
     background-color: #bbbbbb;
 }
 
-.steps {
+.indicators {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 8px;
 }
 
-.step {
+.indicator {
     height: 13px;
     width: 13px;
     margin: 0 1px;
@@ -111,15 +116,11 @@ button:hover {
     transition: 0.7s;
 }
 
-.step.active {
-    opacity: 1;
-}
-
-.step.correct {
+.indicator.correct {
     background-color: #4CAF50;
 }
 
-.step.wrong {
+.indicator.wrong {
     background-color: #FD3A0F;
 }
 
@@ -194,6 +195,19 @@ button:hover {
     }
 }
 
+.timer-animation {
+    animation: timer-animation 40s linear forwards;
+}
+
+@keyframes timer-animation {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
 .menu-container {
     position: absolute;
     margin: -6px 10px;
@@ -221,6 +235,10 @@ button:hover {
     background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
     overflow-x: hidden; /* Disable horizontal scroll */
     transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+.overlay-opened {
+    width: 100%;
 }
 
 /* Position the content inside the overlay */
