@@ -1,5 +1,11 @@
 [
     {
+        "question": "What is the purpose of [] in angular.module('myApp', [])?",
+        "choices": ["This is the list of modules myApp depends on.", "This is the list of myApp controllers.", "This is the list of myApp $scope variables."],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
         "question": "Choose HTML valid directives.",
         "choices": ["data-ng-app", "data-ng-bind", "ng-init", "ng-model"],
         "type": "checkbox",
