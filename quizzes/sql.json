@@ -191,5 +191,11 @@
         "choices": ["true", "false"],
         "type": "radio",
         "correctAnswer": "true"
+    },
+    {
+        "question": "What statement can be used to stop duplicate records in MySQL?",
+        "choices": ["INSERT IGNORE INTO", "IGNORE INSERT INTO", "IGNORED INSERT INTO", "INSERT IGNORED INTO"],
+        "type": "radio",
+        "correctAnswer": "INSERT IGNORE INTO"
     }
 ]
