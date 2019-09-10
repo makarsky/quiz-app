@@ -165,5 +165,23 @@
         "choices": ["boolean", "bool", "int", "integer", "error"],
         "type": "radio",
         "correctAnswer": "boolean"
+    },
+    {
+        "question": "Choose new features of PHP 7.0 compared to 5.6",
+        "choices": ["Return type declarations", "Null coalescing operator", "Spaceship operator", "Constant array using the const keyword", "Argument unpacking via ..."],
+        "type": "radio",
+        "correctAnswer": ["Return type declarations", "Null coalescing operator", "Spaceship operator"]
+    },
+    {
+        "question": "Choose new features of PHP 7.0 compared to 5.6",
+        "choices": ["Scalar type declarations", "Anonymous classes", "Group 'use' declarations", "Large file uploads (>2GB)", "Generators added"],
+        "type": "radio",
+        "correctAnswer": ["Scalar type declarations", "Anonymous classes", "Group 'use' declarations"]
+    },
+    {
+        "question": "Choose new features of PHP 7.0 compared to 5.6",
+        "choices": ["Closure::call()", "Generator Return Expressions", "Class member access on cloning, e.g. (clone $foo)->bar()", "foreach now supports list()", "Exponentiation via **"],
+        "type": "radio",
+        "correctAnswer": ["Closure::call()", "Generator Return Expressions", "Class member access on cloning, e.g. (clone $foo)->bar()"]
     }
 ]
