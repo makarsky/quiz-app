@@ -134,5 +134,12 @@
         "choices": ["'textContent' can prevent XSS attacks.", "'innerHTML' parses content as HTML.", "'textContent' uses straight text, does not parse HTML.", "'textContent' is faster", "'innerHTML' is faster", "'innerHTML' can prevent XSS attacks."],
         "type": "checkbox",
         "correctAnswer": ["'textContent' can prevent XSS attacks.", "'innerHTML' parses content as HTML.", "'textContent' uses straight text, does not parse HTML.", "'textContent' is faster"]
+    },
+    {
+        "question": "Is this a preferable way to call independent async functions?",
+        "description": "await Promise.all([\nShop.loadItems(),\nUserProfile.loadData(),\n]);",
+        "choices": ["yes", "no"],
+        "type": "radio",
+        "correctAnswer": "yes"
     }
 ]
