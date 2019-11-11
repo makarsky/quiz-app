@@ -152,14 +152,14 @@
     {
         "question": "How can we append 5 to an array called 'arr'?",
         "description": "Choose all that apply",
-        "choices": ["arr.push(5)", "arr[arr.length] = 5", "arr.splice(5), arr.insert(5)"],
+        "choices": ["arr.splice(5)", "arr.push(5)", "arr[arr.length] = 5", "arr.insert(5)"],
         "type": "checkbox",
         "correctAnswer": ["arr.push(5)", "arr[arr.length] = 5"]
     },
     {
         "question": "What are the ways that we can get an element with id 'div'",
         "description": "Choose all that apply",
-        "choices": ["document.getElementById('div')", "document.querySelector('#div')", "document.getElementById('#div')", "document.select('#div')"],
+        "choices": ["document.getElementById('div')", "document.getElementById('#div')", "document.querySelector('#div')", "document.select('#div')"],
         "type": "checkbox",
         "correctAnswer": ["document.getElementById('div')", "document.querySelector('#div')"]
     },
