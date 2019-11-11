@@ -95,5 +95,30 @@
         "choices": ["true", "false"],
         "type": "radio",
         "correctAnswer": "false"
+    },
+    {
+        "question": "Can we call non-static methods inside a static block?",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": "false"
+    },
+    {
+        "question": "What is the extension of java bytecode files?",
+        "choices": ["byte", "exe", "java", "class"],
+        "type": "radio",
+        "correctAnswer": "class"
+    },
+    {
+        "question": "How can we achieve inheritence in java?",
+        "choices": ["By using inherits keyword", "By using interfaces", "By using extends keyword"],
+        "type": "radio",
+        "correctAnswer": "By using extends keyword"
+    },
+    {
+        "question": "What is the output? (java.util.stream is imported)",
+        "description": "Object[] arr = Stream.of(1, 2, 3, 4, 5, 6, 6).distinct().filter(x -> x % 2 == 0).toArray();\nSystem.out.println(Arrays.toString(arr));",
+        "choices": ["[1, 2, 3, 4, 5, 6, 7]", "[2, 4, 6]", "[2, 4, 6, 6]"],
+        "type": "radio",
+        "correctAnswer": "[2, 4, 6]"
     }
 ]
