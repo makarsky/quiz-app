@@ -148,5 +148,39 @@
         "choices": ["[3, \"foo\"]", 3, "foo", "undefined", "The code outputs the first returned value."],
         "type": "radio",
         "correctAnswer": "[3, \"foo\"]"
+    },
+    {
+        "question": "How can we append 5 to an array called 'arr'?",
+        "description": "Choose all that apply",
+        "choices": ["arr.splice(5)", "arr.push(5)", "arr[arr.length] = 5", "arr.insert(5)"],
+        "type": "checkbox",
+        "correctAnswer": ["arr.push(5)", "arr[arr.length] = 5"]
+    },
+    {
+        "question": "What are the ways that we can get an element with id 'div'",
+        "description": "Choose all that apply",
+        "choices": ["document.getElementById('div')", "document.getElementById('#div')", "document.querySelector('#div')", "document.select('#div')"],
+        "type": "checkbox",
+        "correctAnswer": ["document.getElementById('div')", "document.querySelector('#div')"]
+    },
+    {
+        "question": "What is the output?",
+        "description": "let arr = [1,2,3,4,5,6];\narr.filter(x => x % 2 == 0).forEach(console.log);",
+        "type": "input",
+        "correctAnswer": "2 4 6"
+    },
+    {
+        "question": "What is the output?",
+        "description": "console.log(0b10 + 0b11)",
+        "choices": [ "0b100b11", "8", "Error", "0b1000"],
+        "type": "radio",
+        "correctAnswer": "8"
+    },
+    {
+        "question": "What is the output?",
+        "description": "console.log(typeof NaN)",
+        "choices": ["null", "object", "number"],
+        "type": "radio",
+        "correctAnswer": "number"
     }
 ]
