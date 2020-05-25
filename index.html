@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div id="content">
+  <div class="main-container">
     <div class="">
       <!-- Menu Icon-->
       <div id="menuButton" class="menu-container">
@@ -95,37 +95,44 @@
 
     <!-- Navigation -->
     <div id="navigation" class="overlay">
-      <!-- Close button -->
-      <a href="javascript:void(0)" id="closeMenuButton" class="closebtn">&times;</a>
+      <div class="overlay__header">
+        <span id="closeMenuButton" class="overlay__header__closebtn">&times;</span>
+      </div>
 
       <!-- Menu -->
-      <div id="menu" class="overlay-content">
+      <div id="menu" class="overlay__content">
         <a href="#" class="menu-link" data-menu="about">Author</a>
         <a href="#" class="menu-link" data-menu="challenges">Challenges</a>
       </div>
 
       <!-- About section -->
-      <div id="about" class="overlay-content">
-        <a href="#" class="menu-link" data-menu="menu">&larr; Back</a>
-        <br>
-        <div class="center-block">
-          <img src="https://api.sololearn.com/Uploads/Avatars/779917.jpg" class="img-circle" style="width:80px">
+      <div id="about" class="overlay__content">
+        <div>
+          <a href="#" class="menu-link" data-menu="menu">&larr; Back</a>
         </div>
-        <br>
-        <div style="color:#BBB">
-          <h4 class="media-heading">Igor Makarsky</h4>
-          <p><a href="https://www.sololearn.com/Profile/779917">My Sololearn profile</a></p>
+        <div>
+          <div class="center-block">
+            <img src="https://api.sololearn.com/Uploads/Avatars/779917.jpg" class="img-circle" style="width:80px">
+          </div>
+          <br>
+          <div style="color:#BBB">
+            <h4 class="media-heading">Igor Makarsky</h4>
+            <p><a href="https://www.sololearn.com/Profile/779917">My Sololearn profile</a></p>
+          </div>
         </div>
       </div>
 
       <!-- Challenges section -->
-      <div id="challenges" class="overlay-content">
-        <a href="#" class="menu-link" data-menu="menu">&larr; Back</a>
-        <br>
-        <a href="#" class="quiz-type" data-quiz-type="js">Javascript</a>
-        <a href="#" class="quiz-type" data-quiz-type="java">Java</a>
-        <a href="#" class="quiz-type" data-quiz-type="php">PHP</a>
-        <a href="#" class="quiz-type" data-quiz-type="sql">SQL</a>
+      <div id="challenges" class="overlay__content">
+        <div>
+          <a href="#" class="menu-link" data-menu="menu">&larr; Back</a>
+        </div>
+        <div>
+          <a href="#" class="quiz-type" data-quiz-type="js">Javascript</a>
+          <a href="#" class="quiz-type" data-quiz-type="java">Java</a>
+          <a href="#" class="quiz-type" data-quiz-type="php">PHP</a>
+          <a href="#" class="quiz-type" data-quiz-type="sql">SQL</a>
+        </div>
       </div>
 
     </div>

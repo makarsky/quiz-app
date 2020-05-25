@@ -78,6 +78,7 @@ h1 {
     bottom: 0;
     width: 100%;
     border: 2px solid #ddd;
+    text-transform: uppercase;
 }
 
 .button-default {
@@ -223,31 +224,37 @@ button:hover {
     transition: 0.4s;
 }
 
-.overlay {
-    /* Height & width depends on how you want to reveal the overlay (see JS below) */    
-    height: 100%;
+.overlay {    
+    height: 100vh;
     width: 0;
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    background-color: rgb(0,0,0); /* Black fallback color */
-    background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+    background-color: rgba(0,0,0, 0.9);
     overflow-x: hidden; /* Disable horizontal scroll */
-    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+    transition: 0.4s; /* 0.4 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
 }
 
 .overlay-opened {
-    width: 100%;
+    width: 100vw;
 }
 
-/* Position the content inside the overlay */
-.overlay-content {
-    position: relative;
-    top: 25%; /* 25% from the top */
-    width: 100%; /* 100% width */
-    text-align: center; /* Centered text/links */
-    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+.overlay__content {
+    display: flex;
+    text-align: center;
+}
+
+.overlay__header {
+    display: flex;
+    justify-content: end;
+    color: #818181;
+}
+
+.overlay__header__closebtn {
+    font-size: 60px;
+    padding: 12px 30px;
+    line-height: 1;
 }
 
 .overlay a {
@@ -261,23 +268,6 @@ button:hover {
 
 .overlay a:hover, .overlay a:focus {
     color: #f1f1f1;
-}
-
-.overlay .closebtn {
-    position: absolute;
-    top: 20px;
-    right: 45px;
-    font-size: 60px;
-}
-
-/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
-@media screen and (max-height: 450px) {
-    .overlay a {font-size: 20px}
-    .overlay .closebtn {
-        font-size: 40px;
-        top: 15px;
-        right: 35px;
-    }
 }
 
 .swiper-container {
