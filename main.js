@@ -14,7 +14,7 @@ class UI {
     this.startButton = document.getElementById('startButton');
     this.submitButton = document.getElementById('submitButton');
     this.navigation = document.getElementById("navigation");
-    this.menuSections = document.getElementsByClassName("overlay-content");
+    this.menuSections = document.getElementsByClassName("overlay__content");
     this.indicators = document.getElementsByClassName('indicator');
     this.quizLabel = document.getElementById("quizLabel");
     this.quizDescription = document.getElementById('description')
@@ -76,7 +76,7 @@ class UI {
   countdown() {
     return new Promise((resolve, reject) => {
       let counter = 3;
-      
+
       let countInterval = setInterval(() => {
         this.countdownElement.innerHTML = counter--;
         if (counter === -1) {
@@ -182,11 +182,11 @@ class UI {
   showResult(numberOfCorrectAnswers, cardsWithAnswers) {
     this.toggleVisibility(this.quiz);
     this.resultCard.classList.remove('hide');
-  
+
     this.result.innerHTML = numberOfCorrectAnswers + '/5';
-  
+
     this.swiperWrapper.innerHTML = cardsWithAnswers;
-  
+
     this.timebar.classList.add('remove-time');
   }
 }
@@ -258,7 +258,7 @@ class Controller {
     let index = this.game.getCurrentQuizIndex();
     let isCorrect = this.quizService.checkUserAnswer(answer, index, this.game.getQuizzes());
     this.ui.showIsCorrect(index, isCorrect);
-    
+
     this.ui.hideCard()
       .then(() => this.ui.renderNextQuiz())
       .then(result => {
@@ -317,7 +317,7 @@ class Timer {
 
   start() {
     this.timeBar.classList.add('timer-animation');
-    
+
     const frame = () => {
       const timerEvent = document.createEvent('Event');
       timerEvent.initEvent('timeout', false, false);
@@ -371,7 +371,7 @@ class QuizService {
         isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
         break;
       case 'multi-input':
-        // todo: implement multi-input quizzes
+      // todo: implement multi-input quizzes
     }
 
     quizzes[index].isCorrect = isCorrect;
@@ -382,17 +382,17 @@ class QuizService {
   areArraysEqual(arr1, arr2) {
     arr1.sort();
     arr2.sort();
-  
+
     if (arr1.length !== arr2.length) {
       return false;
     }
-  
+
     for (var i = arr1.length; i--;) {
       if (arr1[i] !== arr2[i]) {
         return false;
       }
     }
-  
+
     return true;
   }
 
@@ -445,11 +445,11 @@ class SwiperHandler {
       },
     });
   }
-  
+
   destroySwiper() {
     this.swiperExists() ? this.instance.destroy() : null;
   }
-  
+
   swiperExists() {
     return this.instance !== null;
   }
@@ -460,7 +460,7 @@ function eventListeners() {
   const game = new Game;
   const quizService = new QuizService();
   const controller = new Controller(ui, game, quizService);
-  
+
   ui.startButton.onclick = () => controller.start();
   ui.submitButton.onclick = () => controller.submitAnswer();
   ui.menuButton.addEventListener('click', () => controller.toggleMenu());
