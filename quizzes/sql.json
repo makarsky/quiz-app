@@ -3,62 +3,62 @@
         "question": "How to select all the fields available in the table?",
         "choices": ["SELECT * FROM table_name;", "SELECT ALL FROM table_name;", "SELECT FROM table_name;", "SELECT # FROM table_name;"],
         "type": "radio",
-        "correctAnswer": "SELECT * FROM table_name;"
+        "correctAnswer": 0
     },
     {
         "question": "Which word is used to filter records?",
         "choices": ["WHERE", "IF", "CONDITION", "FROM"],
         "type": "radio",
-        "correctAnswer": "WHERE"
+        "correctAnswer": 0
     },
     {
         "question": "Is this statement valid?",
         "description": "SELECT LastName, FirstName, Address FROM Persons WHERE Address IS NULL;",
         "choices": ["yes", "no"],
         "type": "radio",
-        "correctAnswer": "yes"
+        "correctAnswer": 0
     },
     {
         "question": "What does RDBMS stand for?",
         "choices": ["Relational Database Management System", "Relational Database Microsoft System", "Relational Database MySQL", "Relational Database MongoDB System"],
         "type": "radio",
-        "correctAnswer": "Relational Database Management System"
+        "correctAnswer": 0
     },
     {
         "question": "What does SQL stand for?",
         "choices": ["Structured Query Language", "Structured Query List", "System Query Language"],
         "type": "radio",
-        "correctAnswer": "Structured Query Language"
+        "correctAnswer": 0
     },
     {
         "question": "What does DDL stand for?",
         "choices": ["Data Definition Language", "Data Destruction Language", "Domain Definition Language"],
         "type": "radio",
-        "correctAnswer": "Data Definition Language"
+        "correctAnswer": 0
     },
     {
         "question": "What does DML stand for?",
         "choices": ["Data Manipulation Language", "Data Manifestation Language", "Domain Manipulation Language"],
         "type": "radio",
-        "correctAnswer": "Data Manipulation Language"
+        "correctAnswer": 0
     },
     {
         "question": "What can SQL do?",
         "choices": ["It can insert records in a database", "It can create views in a database", "It can create new databases", "It can be executed inside HTML document"],
         "type": "checkbox",
-        "correctAnswer": ["It can insert records in a database", "It can create views in a database", "It can create new databases"]
+        "correctAnswer": [0, 1, 2]
     },
     {
         "question": "The OR operator displays a record if ANY conditions listed are true. The AND operator displays a record if ALL of the conditions listed are true.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "Which SQL keyword is used to sort the result-set?",
         "choices": ["ORDER BY", "SORT BY", "SORT", "ORDER"],
         "type": "radio",
-        "correctAnswer": "ORDER BY"
+        "correctAnswer": 0
     },
     {
         "question": "Which operator is used to select values within a range?",
@@ -79,7 +79,7 @@
         "question": "Which operator displays a record if all the conditions separated by it are TRUE?",
         "choices": ["AND", "&&", "OR", "||"],
         "type": "radio",
-        "correctAnswer": "AND"
+        "correctAnswer": 0
     },
     {
         "question": "Write a query to select all columns from the city table",
@@ -95,107 +95,107 @@
         "question": "Choose correct MySQL text data types.",
         "choices": ["LONGTEXT", "BLOB", "SMALLTEXT", "MIDDLEBLOB"],
         "type": "checkbox",
-        "correctAnswer": ["LONGTEXT", "BLOB"]
+        "correctAnswer": [0, 1]
     },
     {
         "question": "Choose correct MySQL number data types.",
         "choices": ["TINYINT", "BIGINT", "MIDDLEINT", "LONG"],
         "type": "checkbox",
-        "correctAnswer": ["TINYINT", "BIGINT"]
+        "correctAnswer": [0, 1]
     },
     {
         "question": "Assuming a database has the following table. Choose valid INSERT statements.",
         "description": "CREATE TABLE STUDENTS (\n  ID INTEGER PRIMARY KEY,\n  FIRST_NAME VARCHAR(50) NOT NULL,\n  LAST_NAME VARCHAR(50) NOT NULL,\n  ADDRESS VARCHAR(100)\n)",
         "choices": ["INSERT INTO students VALUES (3, 'John', 'Doe', NULL);", "insert into students(id, first_name, last_name) values (1, 'Dan', 'Hall');", "INSERT INTO students(id, first_name) VALUES (2, 'Jack');", "INSERT INTO students VALUES (4, NULL, 'Till', NULL);"],
         "type": "radio",
-        "correctAnswer": ["INSERT INTO students VALUES (3, 'John', 'Doe', NULL);"]
+        "correctAnswer": [0]
     },
     {
         "question": "What does this query return?",
         "description":"SELECT COUNT(DISTINCT Country) FROM Customers;",
         "type": "radio",
         "choices": ["Number of unique countries.", "Unique countries.", "Nothing.", "Error."],
-        "correctAnswer": "Number of unique countries."
+        "correctAnswer": 0
     },
     {
         "question": "ORDER BY Syntax allows ordering by multiple columns.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "It is possible to test for NULL values with comparison operators, such as =, <, or <>.",
         "choices": ["false", "true"],
         "type": "radio",
-        "correctAnswer": "false"
+        "correctAnswer": 0
     },
     {
         "question": "If you omit the WHERE clause in the UPDATE statement, all records in the table will be updated.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "Is this statement valid?",
         "description": "UPDATE Customers\nSET name = 'Alfred', city = 'NY'\nWHERE id = 1;",
         "type": "radio",
         "choices": ["yes", "no"],
-        "correctAnswer": "yes"
+        "correctAnswer": 0
     },
     {
         "question": "If you omit the WHERE clause in the DELETE statement, all records in the table will be deleted.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "Choose the right MySQL clause to specify the number of records to return.",
         "choices": ["LIMIT", "SELECT TOP", "ROWNUM"],
         "type": "radio",
-        "correctAnswer": "LIMIT"
+        "correctAnswer": 0
     },
     {
         "question": "What is the equivalent of the following clause?",
         "description": "LIMIT 10 OFFSET 5",
         "choices": ["LIMIT 5, 10", "LIMIT 10, 5", "LIMIT 5 10", "LIMIT 10 5"],
         "type": "radio",
-        "correctAnswer": "LIMIT 5, 10"
+        "correctAnswer": 0
     },
     {
         "question": "Choose the slowest clause.",
         "choices": ["LIMIT 5000, 20", "LIMIT 0, 20", "LIMIT 100, 50", "LIMIT 500, 100"],
         "type": "radio",
-        "correctAnswer": "LIMIT 5000, 20"
+        "correctAnswer": 0
     },
     {
         "question": "Choose functions which return the smallest and the largest value of the selected column.",
         "choices": ["MIN()", "MAX()", "MIN_VALUE()", "MAX_VALUE()"],
         "type": "checkbox",
-        "correctAnswer": ["MIN()", "MAX()"]
+        "correctAnswer": [0, 1]
     },
     {
         "question": "Choose correct statements to insert data in a table.",
         "choices": ["INSERT INTO tablename VALUES (1, 2);", "INSERT INTO tablename (col1, col2) VALUES (1, 2), (3, 4);", "INSERT INTO tablename (col1, col2) VALUES 1, 2;", "INSERT INTO tablename (col1, col2), (col1, col2) VALUES (1, 2), (3, 4);"],
         "type": "checkbox",
-        "correctAnswer": ["INSERT INTO tablename VALUES (1, 2);", "INSERT INTO tablename (col1, col2) VALUES (1, 2), (3, 4);"]
+        "correctAnswer": [0, 1]
     },
     {
         "question": "Which field allows a unique number to be generated automatically when a new record is inserted into a MySQL table?",
         "choices": ["AUTO_INCREMENT", "AUTO INCREMENT", "AUTOINCREMENT", "AUTO (INCREMENT)"],
         "type": "radio",
-        "correctAnswer": "AUTO_INCREMENT"
+        "correctAnswer": 0
     },
     {
         "question": "The following statements will produce the same result set.",
         "description": "SELECT * FROM students WHERE (class = 'first' AND age = 5);\n\nSELECT * FROM students WHERE class = 'first' && age = 5;",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "What statement can be used to stop duplicate records in MySQL?",
         "choices": ["INSERT IGNORE INTO", "IGNORE INSERT INTO", "IGNORED INSERT INTO", "INSERT IGNORED INTO"],
         "type": "radio",
-        "correctAnswer": "INSERT IGNORE INTO"
+        "correctAnswer":  0
     }
 ]
