@@ -3,49 +3,49 @@
         "question": "Final methods can be overloaded.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "An anonymous class cannot have an explicitly declared constructor.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "Java final class can be a superclass.",
-        "choices": ["true", "false"],
+        "choices": ["false", "true"],
         "type": "radio",
-        "correctAnswer": "false"
+        "correctAnswer": 0
     },
     {
         "question": "Methods that are declared as final or static cannot be overridden.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "Super class reference variables can always point to subclass objects.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "In which data types the number 132 can fit?",
         "choices": ["int", "short", "long", "byte"],
         "type": "checkbox",
-        "correctAnswer": ["int", "short", "long"]
+        "correctAnswer": [0, 1, 2]
     },
     {
         "question": "The switch statement works with which of the following?",
         "choices": ["int", "String", "float", "long"],
         "type": "checkbox",
-        "correctAnswer": ["int", "String"]
+        "correctAnswer": [0, 1]
     },
     {
         "question": "There can be only one public top-level class per .java file.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "What is the output?",
@@ -67,58 +67,58 @@
     },
     {
         "question": "A method be private and abstract at the same time.",
-        "choices": ["true", "false"],
+        "choices": ["false", "true"],
         "type": "radio",
-        "correctAnswer": "false"
+        "correctAnswer": 0
     },
     {
         "question": "What is the output?",
         "description": "int x = 17 * 71;\nboolean y = (x * 8 + x - 1) % x == x - 1;\nSystem.out.println(y);",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "main() can be overloaded in Java.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "We can create an object of the Math class.",
-        "choices": ["true", "false"],
+        "choices": ["false", "true"],
         "type": "radio",
-        "correctAnswer": "false"
+        "correctAnswer": 0
     },
     {
         "question": "Java supports default parameter values.",
-        "choices": ["true", "false"],
+        "choices": ["false", "true"],
         "type": "radio",
-        "correctAnswer": "false"
+        "correctAnswer": 0
     },
     {
         "question": "Can we call non-static methods inside a static block?",
-        "choices": ["true", "false"],
+        "choices": ["false", "true"],
         "type": "radio",
-        "correctAnswer": "false"
+        "correctAnswer": 0
     },
     {
         "question": "What is the extension of java bytecode files?",
-        "choices": ["byte", "exe", "java", "class"],
+        "choices": ["class", "byte", "exe", "java"],
         "type": "radio",
-        "correctAnswer": "class"
+        "correctAnswer": 0
     },
     {
         "question": "How can we achieve inheritence in java?",
-        "choices": ["By using inherits keyword", "By using interfaces", "By using extends keyword"],
+        "choices": ["By using extends keyword", "By using inherits keyword", "By using interfaces"],
         "type": "radio",
-        "correctAnswer": "By using extends keyword"
+        "correctAnswer": 0
     },
     {
         "question": "What is the output? (java.util.stream is imported)",
         "description": "Object[] arr = Stream.of(1, 2, 3, 4, 5, 6, 6).distinct().filter(x -> x % 2 == 0).toArray();\nSystem.out.println(Arrays.toString(arr));",
-        "choices": ["[1, 2, 3, 4, 5, 6, 7]", "[2, 4, 6]", "[2, 4, 6, 6]"],
+        "choices": ["[2, 4, 6]", "[1, 2, 3, 4, 5, 6, 7]", "[2, 4, 6, 6]"],
         "type": "radio",
-        "correctAnswer": "[2, 4, 6]"
+        "correctAnswer": 0
     }
 ]
