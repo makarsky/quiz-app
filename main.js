@@ -293,7 +293,7 @@ class Controller {
     this.ui.restart();
     this.game.restart();
 
-    this.loadQuizzes();
+    this.loadQuizzesByType(this.game.quizType);
   }
 
   loadQuizzesByType(quizType) {
@@ -364,6 +364,8 @@ class QuizService {
 
     switch (quizzes[index].type) {
       case 'radio':
+        isCorrect = answer ? +answer.value === quizzes[index].correctAnswer : false;
+        break;
       case 'input':
         isCorrect = answer ? answer.value === quizzes[index].correctAnswer : false;
         break;
@@ -387,8 +389,8 @@ class QuizService {
       return false;
     }
 
-    for (var i = arr1.length; i--;) {
-      if (arr1[i] !== arr2[i]) {
+    for (let i = arr1.length; i--;) {
+      if (+arr1[i] !== arr2[i]) {
         return false;
       }
     }
@@ -415,10 +417,12 @@ class QuizService {
   }
 
   buildChoices(type, choices) {
-    return choices.map((type => choice =>
+    return choices.map(
+      (type => (choice, index) =>
       `<div class="${type}">
-        <label><input type="${type}" name="answer" value="${choice}">${choice}</label>
-      </div>`)(type)).join('');
+        <label><input type="${type}" name="answer" value="${index}">${choice}</label>
+      </div>`)(type)
+    ).join('');
   }
 
   buildCorrectQuizCard(quiz) {
