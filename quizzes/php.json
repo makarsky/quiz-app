@@ -15,7 +15,7 @@
         "question": "A yield statement can be called without an argument.",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "What is the output?",
@@ -28,7 +28,7 @@
         "description": "function func() {}\necho func() . '2';",
         "choices": ["2", "error", "warning", "function2"],
         "type": "radio",
-        "correctAnswer": "2"
+        "correctAnswer": 0
     },
     {
         "question": "What is the output?",
@@ -40,50 +40,50 @@
         "question": "What function is used stop the execution of a php script?",
         "choices": ["exit()", "stop()", "quit()", "drop()"],
         "type": "radio",
-        "correctAnswer": "exit()"
+        "correctAnswer": 0
     },
     {
         "question": "Which magic constant returns the full path and filename of the file with symlinks resolved?",
         "choices": ["_FILE_", "__DIR__", "__CLASS__", "__NAMESPACE__"],
         "type": "radio",
-        "correctAnswer": "_FILE_"
+        "correctAnswer": 0
     },
     {
         "question": "Which magic constant returns the directory of the file?",
         "choices": ["__DIR__", "_FILE_", "__CLASS__", "__NAMESPACE__"],
         "type": "radio",
-        "correctAnswer": "__DIR__"
+        "correctAnswer": 0
     },
     {
         "question": "What is the difference between Sessions and Cookies?",
-        "choices": ["Cookies are stored in browser.", "Cookies are stored in server side.", "Sessions are stored in server side.", "Sessions are stored in browser.", "A cookie can store limited amount of data. It only allows 4KB."],
+        "choices": ["Cookies are stored in browser.", "Sessions are stored in server side.", "A cookie can store limited amount of data. It only allows 4KB.", "Cookies are stored in server side.", "Sessions are stored in browser."],
         "type": "checkbox",
-        "correctAnswer": ["Cookies are stored in browser.", "Sessions are stored in server side.", "A cookie can store limited amount of data. It only allows 4KB."]
+        "correctAnswer": [0, 1, 2]
     },
     {
         "question": "This code tests if there's any cookie enabled.",
         "description": "if (count($_COOKIE) > 0)\n\techo 'cookies are enabled';\nelse\n\techo 'no cookie has been set';",
         "choices": ["true", "false"],
         "type": "radio",
-        "correctAnswer": "true"
+        "correctAnswer": 0
     },
     {
         "question": "Which one of these methods will make a cookie expire?",
         "choices": ["Setting the expiration date a negative value.", "Calling cookie_destroy() function.", "It is impossible to make a cookie expire manually.", "Setting a cookie value to null."],
         "type": "radio",
-        "correctAnswer": "Setting the expiration date a negative value."
+        "correctAnswer": 0
     },
     {
         "question": "Which function returns the type of interface between web server and PHP?",
         "choices": ["php_sapi_name()", "php_api_name()", "sapi_name()", "api_name()"],
         "type": "radio",
-        "correctAnswer": "php_sapi_name()"
+        "correctAnswer": 0
     },
     {
         "question": "Which function generates a single-byte string from a number?",
         "choices": ["chr()", "char()", "character()", "char_gen()"],
         "type": "radio",
-        "correctAnswer": "chr()"
+        "correctAnswer": 0
     },
     {
         "question": "What is the output?",
@@ -95,26 +95,26 @@
         "question": "Choose the equivalent of nl2br($s).",
         "choices": ["str_replace(\"\\n\", \"<br>\", $s);", "str_replace(\"<br>\", \"\\n\", $s);", "str_replace($s, \"<br>\", \"\\n\");"],
         "type": "radio",
-        "correctAnswer": "echo str_replace(\"\\n\", \"<br>\", $s);"
+        "correctAnswer": 0
     },
     {
         "question": "What is the output?",
         "description": "$vars = ['{var1}', '{var2}'];\n$values = [2, 1];\n$template = '{var1}+{var2}=3';\necho str_replace($vars, $values, $template);",
         "choices": ["2+1=3", "{var1}+{var2}=3", "3=3", "error"],
         "type": "radio",
-        "correctAnswer": "2+1=3"
+        "correctAnswer": 0
     },
     {
         "question": "How many error levels does PHP 5 have?",
         "choices": ["16", "15", "14", "13", "12"],
         "type": "radio",
-        "correctAnswer": "16"
+        "correctAnswer": 0
     },
     {
         "question": "Which function encodes JSON data?",
         "choices": ["json_encode()", "encode_json()", "json()", "json_parse()"],
         "type": "radio",
-        "correctAnswer": "json_encode()"
+        "correctAnswer": 0
     },
     {
         "question": "What is the output?",
@@ -132,56 +132,56 @@
         "question": "Which function sorts associative arrays in ascending order, according to the key?",
         "choices": ["ksort()", "krsort()", "arsort()", "asort()"],
         "type": "radio",
-        "correctAnswer": "ksort()"
+        "correctAnswer": 0
     },
     {
         "question": "Which function sorts associative arrays in descending order, according to the value?",
         "choices": ["arsort()", "ksort()", "krsort()", "asort()"],
         "type": "radio",
-        "correctAnswer": "arsort()"
+        "correctAnswer": 0
     },
     {
         "question": "What is the opposite function to htmlentities()?",
         "choices": ["html_entity_decode()", "html_entities_decode()", "decode_html_entity()", "decode_html_entities()"],
         "type": "radio",
-        "correctAnswer": "html_entity_decode()"
+        "correctAnswer": 0
     },
     {
         "question": "What is the output?",
         "description": "echo preg_match('/gi[tm]h.b/', 'github');",
-        "choices": ["true", "false", "1", "0"],
+        "choices": ["1", "true", "false", "0"],
         "type": "radio",
-        "correctAnswer": "1"
+        "correctAnswer": 0
     },
     {
         "question": "Which of the following functions explicitly triggers the destructor function of an object?",
         "choices": ["unset()", "destroy()", "delete()"],
         "type": "radio",
-        "correctAnswer": "unset()"
+        "correctAnswer": 0
     },
     {
         "question": "What is the output?",
         "description": "$x = 12;\n$x = boolval($x);\necho gettype($x);",
         "choices": ["boolean", "bool", "int", "integer", "error"],
         "type": "radio",
-        "correctAnswer": "boolean"
+        "correctAnswer": 0
     },
     {
         "question": "Choose new features of PHP 7.0 compared to 5.6",
         "choices": ["Return type declarations", "Null coalescing operator", "Spaceship operator", "Constant array using the const keyword", "Argument unpacking via ..."],
-        "type": "radio",
-        "correctAnswer": ["Return type declarations", "Null coalescing operator", "Spaceship operator"]
+        "type": "checkbox",
+        "correctAnswer": [0, 1, 2]
     },
     {
         "question": "Choose new features of PHP 7.0 compared to 5.6",
         "choices": ["Scalar type declarations", "Anonymous classes", "Group 'use' declarations", "Large file uploads (>2GB)", "Generators added"],
-        "type": "radio",
-        "correctAnswer": ["Scalar type declarations", "Anonymous classes", "Group 'use' declarations"]
+        "type": "checkbox",
+        "correctAnswer": [0, 1, 2]
     },
     {
         "question": "Choose new features of PHP 7.0 compared to 5.6",
         "choices": ["Closure::call()", "Generator Return Expressions", "Class member access on cloning, e.g. (clone $foo)->bar()", "foreach now supports list()", "Exponentiation via **"],
-        "type": "radio",
-        "correctAnswer": ["Closure::call()", "Generator Return Expressions", "Class member access on cloning, e.g. (clone $foo)->bar()"]
+        "type": "checkbox",
+        "correctAnswer": [0, 1, 2]
     }
 ]
