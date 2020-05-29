@@ -420,7 +420,9 @@ class QuizService {
     return choices.map(
       (type => (choice, index) =>
       `<div class="${type}">
-        <label><input type="${type}" name="answer" value="${index}">${choice}</label>
+        <label>
+          <input type="${type}" name="answer" value="${index}">${this._htmlEntities(choice)}
+        </label>
       </div>`)(type)
     ).join('');
   }
@@ -432,6 +434,14 @@ class QuizService {
               </div>
             </div>`;
   }
+
+  _htmlEntities(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+}
 }
 
 class SwiperHandler {
