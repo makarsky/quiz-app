@@ -22,21 +22,53 @@ body {
     font-size: 10em
 }
 
-input {
-    border: none;
-    border-bottom: 1px solid black;
-    outline-style: none;
-}
+/* start input styles */
 
 .input-container {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.input-sizer {
+    display: inline-grid;
+    vertical-align: top;
+    align-items: center;
+    position: relative;
+    padding: .25em .5em;
+    margin: 5px;
+    background-color: #ddd;
+    font-weight: inherit;
+}   
+.input-sizer::after, .input-sizer input {
+    width: auto;
+    min-width: 1em;
+    grid-area: 1 / 2;
+    font: inherit;
+    /* padding: 0.25em; */
+    margin: 0;
+    background: none;
+    appearance: none;
+    border: none;
+}
+    
+.input-sizer::after {
+    content: attr(data-value) ' ';
+    visibility: hidden;
+    white-space: pre-wrap;
+}
+
+.input-sizer.milti-input {
+    padding: .1em .2em;
+}   
+
+/* end input styles */
 
 .card {
     background-color: #ffffff;
     margin: 30px auto;
     font-family: Arial;
-    padding: 20px 20px 20px 20px;
+    padding: 18px;
     width: 80%;
     min-width: 300px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
