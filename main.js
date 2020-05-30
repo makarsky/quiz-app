@@ -491,7 +491,7 @@ function eventListeners() {
   const controller = new Controller(ui, game, quizService);
 
   ui.startButton.onclick = () => controller.start();
-  ui.submitButton.onclick = () => controller.submitAnswer();
+  ui.quiz.onsubmit = (e) => {e.preventDefault(); controller.submitAnswer()};
   ui.menuButton.addEventListener('click', () => controller.toggleMenu());
   ui.closeMenuButton.onclick = () => controller.toggleMenu();
   ui.viewAnswersButton.onclick = () => controller.viewAnswers();
