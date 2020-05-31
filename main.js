@@ -120,6 +120,19 @@ class UI {
     return new Promise((resolve, reject) => {
       if (!quiz.done) {
         this.quizCard.innerHTML = quiz.value;
+        const inputs = Array.from(this.quizCard.querySelectorAll('input'));
+        inputs.forEach(input => {
+          input.addEventListener('input', (event) => {
+            if (input.textContent.length === 0) {
+              input.classList.remove('input--extendable');
+            } else {
+              input.classList.add('input--extendable');
+            }
+          })
+        });
+        if (inputs[0]) {
+          inputs[0].focus();
+        }
         this.quizCard.classList.add("new-item");
         this.quizCard.classList.remove("removed-item");
         resolve(true);
@@ -195,7 +208,6 @@ class Game {
   constructor() {
     this.numberOfQuizzes = 5;
     this.currentQuizIndex = 0;
-    this.quizTime = 40;
     this.quizType = 'js';
     this.quizNames = Object.assign({}, QUIZ_NAMES);
     this.quizzes = [];
@@ -249,7 +261,7 @@ class Controller {
     this.ui.countdown().then(() => this.ui.startTimer());
   }
 
-  submitAnswer() {
+  async submitAnswer() {
     let event = new Event('answerIsSubmitted');
     document.dispatchEvent(event);
 
@@ -259,17 +271,16 @@ class Controller {
     let isCorrect = this.quizService.checkUserAnswer(answer, index, this.game.getQuizzes());
     this.ui.showIsCorrect(index, isCorrect);
 
-    this.ui.hideCard()
-      .then(() => this.ui.renderNextQuiz())
-      .then(result => {
-        if (result) {
-          this.game.incrementCurrentQuizIndex();
-          let event = new Event('newCardIsShown');
-          document.dispatchEvent(event);
-        } else {
-          this.ui.showResult(this.game.getNumberOfCorrectAnswers(), this.quizService.getQuizzesWithLayout(this.game.getQuizzes()));
-        }
-      });
+    await this.ui.hideCard();
+    let result = await this.ui.renderNextQuiz();
+
+    if (result) {
+      this.game.incrementCurrentQuizIndex();
+      let event = new Event('newCardIsShown');
+      document.dispatchEvent(event);
+    } else {
+      this.ui.showResult(this.game.getNumberOfCorrectAnswers(), this.quizService.getQuizzesWithLayout(this.game.getQuizzes()));
+    }
   }
 
   stopTimer() {
@@ -412,7 +423,11 @@ class QuizService {
       case 'radio':
         return header + this.buildChoices(rawQuiz.type, rawQuiz.choices);
       case 'input':
-        return header + `<div class="input-container"><input class="input" maxlength="${rawQuiz.correctAnswer.length}"></div>`;
+        return header + `<div class="input-container">
+          <label class="input-sizer">
+            <input type="text" onInput="this.parentNode.dataset.value = this.value" size="6" placeholder="Answer">
+          </label>
+        </div>`;
     }
   }
 
@@ -476,7 +491,7 @@ function eventListeners() {
   const controller = new Controller(ui, game, quizService);
 
   ui.startButton.onclick = () => controller.start();
-  ui.submitButton.onclick = () => controller.submitAnswer();
+  ui.quiz.onsubmit = (e) => {e.preventDefault(); controller.submitAnswer()};
   ui.menuButton.addEventListener('click', () => controller.toggleMenu());
   ui.closeMenuButton.onclick = () => controller.toggleMenu();
   ui.viewAnswersButton.onclick = () => controller.viewAnswers();
