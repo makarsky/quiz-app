@@ -378,7 +378,7 @@ class QuizService {
         isCorrect = answer ? +answer.value === quizzes[index].correctAnswer : false;
         break;
       case 'input':
-        isCorrect = answer ? answer.value === quizzes[index].correctAnswer : false;
+        isCorrect = answer ? answer.value.toLowerCase() === quizzes[index].correctAnswer.toLowerCase() : false;
         break;
       case 'checkbox':
         isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
