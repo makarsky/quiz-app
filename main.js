@@ -431,15 +431,27 @@ class QuizService {
     }
   }
 
-  buildChoices(type, choices) {
-    return choices.map(
-      (type => (choice, index) =>
+  buildChoices(type, rawChoices) {
+    const choices = rawChoices.map(
+      (type => (rawChoice, index) =>
       `<div class="${type}">
         <label>
-          <input type="${type}" name="answer" value="${index}">${this._htmlEntities(choice)}
+          <input type="${type}" name="answer" value="${index}">${this._htmlEntities(rawChoice)}
         </label>
       </div>`)(type)
-    ).join('');
+    );
+    this.shuffleChoices(choices);
+
+    return choices.join('');
+  }
+
+  shuffleChoices(choices) {
+    for (let i = choices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * i);
+      const temp = choices[i];
+      choices[i] = choices[j];
+      choices[j] = temp;
+    }
   }
 
   buildCorrectQuizCard(quiz) {
