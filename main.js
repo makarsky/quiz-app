@@ -135,6 +135,8 @@ class UI {
         }
         this.quizCard.classList.add("new-item");
         this.quizCard.classList.remove("removed-item");
+        this.quizCard.classList.remove('card--correct');
+        this.quizCard.classList.remove('card--wrong');
         resolve(true);
       } else {
         resolve(false);
@@ -156,9 +158,11 @@ class UI {
 
   showIsCorrect(currentQuizIndex, isCorrect = true) {
     if (isCorrect) {
-      this.indicators[currentQuizIndex].classList.add("correct");
+      this.indicators[currentQuizIndex].classList.add('indicator--correct');
+      this.quizCard.classList.add('card--correct');
     } else {
-      this.indicators[currentQuizIndex].classList.add("wrong");
+      this.indicators[currentQuizIndex].classList.add('indicator--wrong');
+      this.quizCard.classList.add('card--wrong');
     }
   }
 

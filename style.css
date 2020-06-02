@@ -69,9 +69,17 @@ body {
     margin: 30px auto;
     font-family: Arial;
     padding: 18px;
-    width: 80%;
+    width: 90%;
     min-width: 300px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+
+.card--correct {
+    box-shadow: 0 0 18px rgba(76,175,80); /* #4CAF50 */
+}
+
+.card--wrong {
+    box-shadow: 0 0 18px rgba(228,87,46); /* #E4572E */
 }
 
 .challange-description-card {
@@ -149,12 +157,12 @@ button:hover {
     transition: 0.7s;
 }
 
-.indicator.correct {
+.indicator--correct {
     background-color: #4CAF50;
 }
 
-.indicator.wrong {
-    background-color: #FD3A0F;
+.indicator--wrong{
+    background-color: #E4572E;
 }
 
 .removed-item {
