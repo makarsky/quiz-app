@@ -74,6 +74,8 @@ class UI {
   }
 
   countdown() {
+    this.countdownElement.classList.remove('hide');
+
     return new Promise((resolve, reject) => {
       let counter = 3;
 
@@ -81,7 +83,7 @@ class UI {
         this.countdownElement.innerHTML = counter--;
         if (counter === -1) {
           clearInterval(countInterval);
-          this.countdownElement.innerHTML = "";
+          this.countdownElement.classList.add('hide');
 
           this.toggleVisibility(this.quiz);
 
@@ -120,24 +122,17 @@ class UI {
     return new Promise((resolve, reject) => {
       if (!quiz.done) {
         this.quizCard.innerHTML = quiz.value;
-        const inputs = Array.from(this.quizCard.querySelectorAll('input'));
-        inputs.forEach(input => {
-          input.addEventListener('input', (event) => {
-            if (input.textContent.length === 0) {
-              input.classList.remove('input--extendable');
-            } else {
-              input.classList.add('input--extendable');
-            }
-          })
-        });
-        if (inputs[0]) {
-          inputs[0].focus();
+        const input = this.quizCard.querySelector('input');
+        if (input) {
+          input.focus();
         }
         this.quizCard.classList.add("new-item");
         this.quizCard.classList.remove("removed-item");
         this.quizCard.classList.remove('card--correct');
         this.quizCard.classList.remove('card--wrong');
-        resolve(true);
+
+        // Timeout is for waiting card animation
+        setTimeout(() => resolve(true), 500);
       } else {
         resolve(false);
       }
@@ -259,10 +254,11 @@ class Controller {
     this.quizService = quizService
   }
 
-  start() {
+  async start() {
     this.ui.hideDescription();
-    this.ui.renderNextQuiz();
-    this.ui.countdown().then(() => this.ui.startTimer());
+    await this.ui.countdown();
+    await this.ui.renderNextQuiz();
+    this.ui.startTimer();
   }
 
   async submitAnswer() {
@@ -512,7 +508,7 @@ function eventListeners() {
   ui.closeMenuButton.onclick = () => controller.toggleMenu();
   ui.viewAnswersButton.onclick = () => controller.viewAnswers();
   document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
-  document.addEventListener('timeout', () => controller.submitAnswer());
+  document.addEventListener('timeout', () => controller.submitAnswer(false));
   document.addEventListener('answerIsSubmitted', () => controller.stopTimer());
   document.addEventListener('newCardIsShown', () => controller.startTimer());
 
