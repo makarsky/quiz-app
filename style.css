@@ -11,6 +11,11 @@ body {
     overflow-x: hidden;
 }
 
+.main-container__header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .description {
     white-space: pre-wrap;
 }
@@ -256,17 +261,22 @@ button:hover {
 }
 
 .menu-container {
-    position: absolute;
-    margin: -6px 10px;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     cursor: pointer;
+    width: 42px;
+    padding: 6px;
 }
 
-.bar1, .bar2, .bar3 {
+.menu-container--fake {
+    cursor: initial;
+}
+
+.menu-container__bar {
     width: 30px;
     height: 5px;
     background-color: #bbbbbb;
-    margin: 5px 0;
     transition: 0.4s;
 }
 
