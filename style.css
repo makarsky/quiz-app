@@ -1,7 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
 body {
     display: flex;
     flex-direction: column;
@@ -12,6 +8,11 @@ body {
 }
 
 .main-container__header {
+    display: flex;
+    flex-direction: column;
+}
+
+.interactive-container {
     display: flex;
     justify-content: space-between;
 }
@@ -224,14 +225,14 @@ button:hover {
     }
 }
 
-#myProgress {
+.timer-container {
     width: 100%;
     background-color: #ddd;
 }
 
-#timeBar {
+.timer-container__timer {
     width: 0%;
-    height: 1.5vw;
+    height: 6px;
     background-color: #4CAF50;
     transition-property: width;
     transition-duration: 0s;
