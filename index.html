@@ -16,38 +16,40 @@
 <body>
   <div class="main-container">
     <div class="main-container__header">
-      <!-- Menu Icon-->
-      <div id="menuButton" class="menu-container">
-        <div class="menu-container__bar"></div>
-        <div class="menu-container__bar"></div>
-        <div class="menu-container__bar"></div>
-      </div>
-
-      <!-- Quiz Indicators -->
-      <div>
-        <div id="quiz-indicators" class="indicators">
-          <span class="indicator"></span>
-          <span class="indicator"></span>
-          <span class="indicator"></span>
-          <span class="indicator"></span>
-          <span class="indicator"></span>
+      <div class="interactive-container">
+        <!-- Menu Icon -->
+        <div id="menuButton" class="menu-container">
+          <div class="menu-container__bar"></div>
+          <div class="menu-container__bar"></div>
+          <div class="menu-container__bar"></div>
         </div>
 
-        <div class="indicators swiper-custom-pagination hide">
-          <span class="indicator swiper-pagination-bullet"></span>
-          <span class="indicator swiper-pagination-bullet"></span>
-          <span class="indicator swiper-pagination-bullet"></span>
-          <span class="indicator swiper-pagination-bullet"></span>
-          <span class="indicator swiper-pagination-bullet"></span>
+        <!-- Quiz Indicators -->
+        <div>
+          <div id="quiz-indicators" class="indicators">
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+          </div>
+
+          <div class="indicators swiper-custom-pagination hide">
+            <span class="indicator swiper-pagination-bullet"></span>
+            <span class="indicator swiper-pagination-bullet"></span>
+            <span class="indicator swiper-pagination-bullet"></span>
+            <span class="indicator swiper-pagination-bullet"></span>
+            <span class="indicator swiper-pagination-bullet"></span>
+          </div>
         </div>
+
+        <div class="menu-container menu-container--fake"></div>
       </div>
 
-      <div class="menu-container menu-container--fake"></div>
-    </div>
-
-    <!-- Progress bar -->
-    <div id="myProgress">
-      <div id="timeBar"></div>
+      <!-- Progress bar -->
+      <div class="timer-container">
+        <div id="timeBar" class="timer-container__timer"></div>
+      </div>
     </div>
 
     <!-- Countdown -->
@@ -60,6 +62,7 @@
         <div><span id="quiz-count">5</span> questions</div>
         <div>Are you ready?</div>
       </div>
+
       <button id="startButton" class="submit">Start</button>
     </div>
 
