@@ -53,8 +53,11 @@ class UI {
   }
 
   hideDescription() {
-    this.toggleVisibility(this.startButton);
-    this.quizDescription.classList.toggle('remove-scale');
+    return new Promise((resolve) => {
+      this.toggleVisibility(this.startButton);
+      this.quizDescription.classList.toggle('remove-scale');
+      setTimeout(() => resolve(true), 100);
+    });
   }
 
   getUserAnswer(quizType) {
@@ -74,13 +77,13 @@ class UI {
   }
 
   countdown() {
-    this.countdownElement.classList.remove('hide');
-
     return new Promise((resolve, reject) => {
       let counter = 3;
 
       let countInterval = setInterval(() => {
         this.countdownElement.innerHTML = counter--;
+        this.countdownElement.classList.remove('hide');
+
         if (counter === -1) {
           clearInterval(countInterval);
           this.countdownElement.classList.add('hide');
@@ -255,13 +258,14 @@ class Controller {
   }
 
   async start() {
-    this.ui.hideDescription();
+    await this.ui.hideDescription();
     await this.ui.countdown();
+    // this.ui.showTimer();
     await this.ui.renderNextQuiz();
     this.ui.startTimer();
   }
 
-  async submitAnswer() {
+  async submitAnswer(byUser) {
     let event = new Event('answerIsSubmitted');
     document.dispatchEvent(event);
 
@@ -503,7 +507,7 @@ function eventListeners() {
   const controller = new Controller(ui, game, quizService);
 
   ui.startButton.onclick = () => controller.start();
-  ui.quiz.onsubmit = (e) => {e.preventDefault(); controller.submitAnswer()};
+  ui.quiz.onsubmit = (e) => {e.preventDefault(); controller.submitAnswer(true)};
   ui.menuButton.addEventListener('click', () => controller.toggleMenu());
   ui.closeMenuButton.onclick = () => controller.toggleMenu();
   ui.viewAnswersButton.onclick = () => controller.viewAnswers();
