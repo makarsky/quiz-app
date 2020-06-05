@@ -181,7 +181,6 @@ class UI {
     document.querySelector("#description").classList.remove('remove-scale');
     this.toggleVisibility(document.querySelector('#description > button'));
     this.toggleVisibility(document.querySelector('#submitButton'));
-    document.querySelector('#timeBar').classList.remove('remove-time');
     document.getElementById('quiz-card').classList.remove("removed-item");
     this.swiperHandler.destroySwiper();
   }
@@ -201,8 +200,6 @@ class UI {
     this.result.innerHTML = numberOfCorrectAnswers + '/5';
 
     this.swiperWrapper.innerHTML = cardsWithAnswers;
-
-    this.timebar.classList.add('remove-time');
   }
 }
 
@@ -260,7 +257,6 @@ class Controller {
   async start() {
     await this.ui.hideDescription();
     await this.ui.countdown();
-    // this.ui.showTimer();
     await this.ui.renderNextQuiz();
     this.ui.startTimer();
   }
@@ -331,6 +327,7 @@ class Timer {
   }
 
   start() {
+    this.timeBar.classList.remove('invisible');
     this.timeBar.classList.add('timer-animation');
 
     const frame = () => {
@@ -346,6 +343,7 @@ class Timer {
     let width = this.timeBar.getBoundingClientRect().width;
     this.timeBar.classList.remove('timer-animation');
     this.timeBar.style.width = width + 'px';
+    this.timeBar.classList.add('invisible');
     clearTimeout(this.timer);
   }
 }
