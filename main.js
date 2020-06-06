@@ -13,20 +13,20 @@ class UI {
     this.closeMenuButton = document.getElementById('closeMenuButton');
     this.startButton = document.getElementById('startButton');
     this.submitButton = document.getElementById('submitButton');
-    this.navigation = document.getElementById("navigation");
-    this.menuSections = document.getElementsByClassName("overlay__content");
+    this.navigation = document.getElementById('navigation');
+    this.menuSections = document.getElementsByClassName('overlay__content');
     this.indicators = document.getElementsByClassName('indicator');
-    this.quizLabel = document.getElementById("quizLabel");
-    this.quizDescription = document.getElementById('description')
-    this.countdownElement = document.getElementById("countdown");
+    this.quizLabel = document.getElementById('quiz-label');
+    this.quizDescription = document.getElementById('quiz-description')
+    this.countdownElement = document.getElementById('countdown');
     this.quiz = document.getElementById('quiz');
     this.quizCard = document.getElementById('quiz-card');
     this.resultCard = document.getElementById('result-card');
     this.result = document.getElementById('result');
     this.swiperWrapper = document.querySelector('.swiper-wrapper');
     this.viewAnswersButton = document.getElementById('view-answers');
-    this.quizTypes = Array.from(document.getElementsByClassName("quiz-type"));
-    this.menuLinks = Array.from(document.getElementsByClassName("menu-link"));
+    this.quizTypes = Array.from(document.getElementsByClassName('quiz-type'));
+    this.menuLinks = Array.from(document.getElementsByClassName('menu-link'));
     this.restartButtons = Array.from(document.getElementsByClassName('restart'));
     this.timebar = document.getElementById('timeBar');
     this.timer = new Timer(this.timebar);
@@ -180,10 +180,10 @@ class UI {
     this.resultCard.classList.add('hidden');
     let indicators = document.querySelectorAll('#quiz-indicators > .indicator');
     [].map.call(indicators, (e) => e.className = 'indicator');
-    document.querySelector("#description").classList.remove('remove-scale');
+    this.quizDescription.classList.remove('remove-scale');
     this.quizDescription.classList.remove('hidden');
-    this.toggleVisibility(document.querySelector('#description > button'));
-    this.toggleVisibility(document.querySelector('#submitButton'));
+    this.toggleVisibility(this.startButton);
+    this.toggleVisibility(this.submitButton);
     document.getElementById('quiz-card').classList.remove("removed-item");
     this.swiperHandler.destroySwiper();
   }
@@ -423,8 +423,7 @@ class QuizService {
 
   buildQuiz(rawQuiz) {
     const header = `<h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
-    <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
-    <br>`;
+    <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>`;
 
     switch (rawQuiz.type) {
       case 'checkbox':

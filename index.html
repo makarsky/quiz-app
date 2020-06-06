@@ -3,7 +3,6 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- Swiper -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.6/css/swiper.min.css">
@@ -55,12 +54,14 @@
     <!-- Countdown -->
     <div id="countdown" class="countdown hidden"></div>
 
-    <!-- Challenge description -->
-    <div id="description">
-      <div id="quiz-info" class="card">
-        <h4><span id="quizLabel">JavaScript</span> Quiz</h4>
-        <div><span id="quiz-count">5</span> questions</div>
-        <div>Are you ready?</div>
+    <!-- Quiz description -->
+    <div id="quiz-description">
+      <div class="card text-center">
+        <div class="quiz-description__title">
+          <span id="quiz-label">JavaScript</span> Quiz
+        </div>
+        <span><span id="quiz-count">5</span> questions</span>
+        <span>Are you ready?</div>
       </div>
 
       <button id="startButton" class="submit">Start</button>
@@ -76,12 +77,10 @@
 
     <!-- Result -->
     <div id="result-card" class="hidden">
-      <div class="card">
-        <h1>Result</h1>
-        <br>
-        <h1 id="result">3/5</h1>
-        <br>
-        <div class="center">
+      <div class="card text-center">
+        <div class="quiz-result__title">Result</div>
+        <div id="result" class="quiz-result__title">3/5</div>
+        <div class="quiz-result__button-container">
           <button id="view-answers" class="button-default">View correct answers</button>
         </div>
       </div>
@@ -118,7 +117,7 @@
           <a href="#" class="menu-link" data-menu="menu">&larr; Back</a>
         </div>
         <div>
-          <div class="center-block">
+          <div class="">
             <img src="https://api.sololearn.com/Uploads/Avatars/779917.jpg" class="img-circle" style="width:80px">
           </div>
           <br>
