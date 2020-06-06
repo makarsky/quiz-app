@@ -78,25 +78,20 @@ body {
 
 .card {
     background-color: #ffffff;
-    margin: 30px auto;
+    margin: 18px auto 60px auto;
     font-family: Arial;
-    padding: 18px;
+    padding: 12px;
     width: 90%;
     min-width: 300px;
     box-shadow: 0 0 12px rgba(0,0,0,0.4);
 }
 
 .card--correct {
-    box-shadow: 0 0 18px rgba(76,175,80); /* #4CAF50 */
+    box-shadow: 0 0 12px rgba(76,175,80); /* #4CAF50 */
 }
 
 .card--wrong {
-    box-shadow: 0 0 18px rgba(228,87,46); /* #E4572E */
-}
-
-.challange-description-card {
-    position: absolute;
-    left: 10%;
+    box-shadow: 0 0 12px rgba(228,87,46); /* #E4572E */
 }
 
 h1 {
@@ -108,26 +103,20 @@ h1 {
     background-color: #ffdddd;
 }
 
-/* Hide all cards by default: */
-.tab {
-    display: none;
-}
-
 .hidden {
     display: none;
 }
 
 .submit {
-    background-color: #4CAF50;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 17px;
-    font-family: Raleway;
-    cursor: pointer;
-    width: 100%;
     position: fixed;
     bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    cursor: pointer;
     width: 100%;
     border: 2px solid #ddd;
     text-transform: uppercase;
@@ -198,7 +187,7 @@ button:hover {
 @keyframes new-item-animation {
     from {
         opacity: 0;
-        transform: translateY(-400px);
+        transform: translateY(-900px);
     }
     to {
         opacity: 1;
