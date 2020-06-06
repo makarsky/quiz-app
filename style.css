@@ -1,10 +1,18 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     flex-direction: column;
+    margin: 0;
     background-color: #f1f1f1;
     width: 100%;
     height: 100%;
     overflow-x: hidden;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    color: #333;
 }
 
 .main-container__header {
@@ -40,6 +48,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 12px;
 }
 
 .input-sizer {
@@ -77,26 +86,40 @@ body {
 /* end input styles */
 
 .card {
+    display: flex;
+    flex-direction: column;
     background-color: #ffffff;
-    margin: 30px auto;
+    margin: 18px auto 60px auto;
     font-family: Arial;
-    padding: 18px;
+    padding: 12px;
     width: 90%;
     min-width: 300px;
     box-shadow: 0 0 12px rgba(0,0,0,0.4);
 }
 
+.quiz-description__title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.quiz-result__title {
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.quiz-result__button-container {
+    margin-top: 12px;
+}
+
 .card--correct {
-    box-shadow: 0 0 18px rgba(76,175,80); /* #4CAF50 */
+    box-shadow: 0 0 12px rgba(76,175,80); /* #4CAF50 */
 }
 
 .card--wrong {
-    box-shadow: 0 0 18px rgba(228,87,46); /* #E4572E */
-}
-
-.challange-description-card {
-    position: absolute;
-    left: 10%;
+    box-shadow: 0 0 12px rgba(228,87,46); /* #E4572E */
 }
 
 h1 {
@@ -108,29 +131,25 @@ h1 {
     background-color: #ffdddd;
 }
 
-/* Hide all cards by default: */
-.tab {
-    display: none;
-}
-
-.hide {
-    display: none;
+.hidden {
+    display: none !important;
 }
 
 .submit {
-    background-color: #4CAF50;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 17px;
-    font-family: Raleway;
-    cursor: pointer;
-    width: 100%;
     position: fixed;
     bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    cursor: pointer;
     width: 100%;
     border: 2px solid #ddd;
     text-transform: uppercase;
+
+    -webkit-appearance: button;
 }
 
 .button-default {
@@ -139,16 +158,12 @@ h1 {
     background-color: #e9e9e9;
 }
 
-.center {
+.text-center {
     text-align: center;
 }
 
 button:hover {
     opacity: 0.8;
-}
-
-#prevBtn {
-    background-color: #bbbbbb;
 }
 
 .indicators {
@@ -198,11 +213,11 @@ button:hover {
     opacity: 0;
     animation: new-item-animation .3s linear forwards;
 }
- 
+
 @keyframes new-item-animation {
     from {
         opacity: 0;
-        transform: translateY(-400px);
+        transform: translateY(-300px);
     }
     to {
         opacity: 1;
@@ -211,16 +226,18 @@ button:hover {
 }
 
 .remove-scale {
-    animation: remove-scale-animation .6s cubic-bezier(.55,-0.04,.91,.94) forwards;
+    animation: remove-scale-animation .4s cubic-bezier(.55,-0.04,.91,.94) forwards;
 }
  
 @keyframes remove-scale-animation {
     from {
         opacity: 1;
+        visibility: visible;
         transform: scale(1);
     }
     to {
         opacity: 0;
+        visibility: hidden;
         transform: scale(0);
     }
 }

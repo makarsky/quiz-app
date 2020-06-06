@@ -137,14 +137,14 @@
     },
     {
         "question": "Is this a preferable way to call independent async functions?",
-        "description": "await Promise.all([\nShop.loadItems(),\nUserProfile.loadData(),\n]);",
+        "description": "await Promise.all([\n  Shop.loadItems(),\n  UserProfile.loadData(),\n]);",
         "choices": ["yes", "no"],
         "type": "radio",
         "correctAnswer": 0
     },
     {
         "question": "What is the output if p1 returns 3 and p2 returns 'foo'?",
-        "description": "Promise.all([p1, p2]).then(result => {\nconsole.log(result);\n});",
+        "description": "Promise.all([p1, p2]).then(result => {\n  console.log(result);\n});",
         "choices": ["[3, \"foo\"]", 3, "foo", "undefined", "The code outputs the first returned value."],
         "type": "radio",
         "correctAnswer": 0
@@ -165,9 +165,9 @@
     },
     {
         "question": "What is the output?",
-        "description": "let arr = [1,2,3,4,5,6];\narr.filter(x => x % 2 == 0).forEach(console.log);",
+        "description": "let arr = [1,2,3,4,5,6];\narr.filter(x => x % 2 == 0).join('');",
         "type": "input",
-        "correctAnswer": "2 4 6"
+        "correctAnswer": "246"
     },
     {
         "question": "What is the output?",
