@@ -13,20 +13,20 @@ class UI {
     this.closeMenuButton = document.getElementById('closeMenuButton');
     this.startButton = document.getElementById('startButton');
     this.submitButton = document.getElementById('submitButton');
-    this.navigation = document.getElementById("navigation");
-    this.menuSections = document.getElementsByClassName("overlay__content");
+    this.navigation = document.getElementById('navigation');
+    this.menuSections = document.getElementsByClassName('overlay__content');
     this.indicators = document.getElementsByClassName('indicator');
-    this.quizLabel = document.getElementById("quizLabel");
-    this.quizDescription = document.getElementById('description')
-    this.countdownElement = document.getElementById("countdown");
+    this.quizLabel = document.getElementById('quiz-label');
+    this.quizDescription = document.getElementById('quiz-description')
+    this.countdownElement = document.getElementById('countdown');
     this.quiz = document.getElementById('quiz');
     this.quizCard = document.getElementById('quiz-card');
     this.resultCard = document.getElementById('result-card');
     this.result = document.getElementById('result');
     this.swiperWrapper = document.querySelector('.swiper-wrapper');
     this.viewAnswersButton = document.getElementById('view-answers');
-    this.quizTypes = Array.from(document.getElementsByClassName("quiz-type"));
-    this.menuLinks = Array.from(document.getElementsByClassName("menu-link"));
+    this.quizTypes = Array.from(document.getElementsByClassName('quiz-type'));
+    this.menuLinks = Array.from(document.getElementsByClassName('menu-link'));
     this.restartButtons = Array.from(document.getElementsByClassName('restart'));
     this.timebar = document.getElementById('timeBar');
     this.timer = new Timer(this.timebar);
@@ -34,7 +34,7 @@ class UI {
   }
 
   toggleVisibility(element) {
-    element.classList.toggle('hide');
+    element.classList.toggle('hidden');
   }
 
   toggleMenu() {
@@ -56,7 +56,10 @@ class UI {
     return new Promise((resolve) => {
       this.toggleVisibility(this.startButton);
       this.quizDescription.classList.toggle('remove-scale');
-      setTimeout(() => resolve(true), 100);
+      setTimeout(() => {
+        this.quizDescription.classList.add('hidden');
+        resolve(true);
+      }, 400);
     });
   }
 
@@ -79,14 +82,15 @@ class UI {
   countdown() {
     return new Promise((resolve, reject) => {
       let counter = 3;
+      this.countdownElement.innerHTML = counter--;
+      this.countdownElement.classList.remove('hidden');
 
       let countInterval = setInterval(() => {
         this.countdownElement.innerHTML = counter--;
-        this.countdownElement.classList.remove('hide');
 
         if (counter === -1) {
           clearInterval(countInterval);
-          this.countdownElement.classList.add('hide');
+          this.countdownElement.classList.add('hidden');
 
           this.toggleVisibility(this.quiz);
 
@@ -139,8 +143,6 @@ class UI {
       } else {
         resolve(false);
       }
-
-      this.toggleVisibility(this.submitButton);
     });
   }
 
@@ -172,30 +174,31 @@ class UI {
 
   restart() {
     this.quizzes.length = 0;
-    document.querySelector('.swiper-custom-pagination').classList.add('hide');
-    document.querySelector('#answers').classList.add('hide');
-    document.querySelector('#quiz-indicators').classList.remove('hide');
-    this.resultCard.classList.add('hide');
+    document.querySelector('.swiper-custom-pagination').classList.add('hidden');
+    document.querySelector('#answers').classList.add('hidden');
+    document.querySelector('#quiz-indicators').classList.remove('hidden');
+    this.resultCard.classList.add('hidden');
     let indicators = document.querySelectorAll('#quiz-indicators > .indicator');
     [].map.call(indicators, (e) => e.className = 'indicator');
-    document.querySelector("#description").classList.remove('remove-scale');
-    this.toggleVisibility(document.querySelector('#description > button'));
-    this.toggleVisibility(document.querySelector('#submitButton'));
+    this.quizDescription.classList.remove('remove-scale');
+    this.quizDescription.classList.remove('hidden');
+    this.toggleVisibility(this.startButton);
+    this.toggleVisibility(this.submitButton);
     document.getElementById('quiz-card').classList.remove("removed-item");
     this.swiperHandler.destroySwiper();
   }
 
   viewAnswers() {
-    this.resultCard.classList.add('hide');
-    document.querySelector('#quiz-indicators').classList.add('hide');
-    document.querySelector('#answers').classList.remove('hide');
-    document.querySelector('.swiper-custom-pagination').classList.remove('hide');
+    this.resultCard.classList.add('hidden');
+    document.querySelector('#quiz-indicators').classList.add('hidden');
+    document.querySelector('#answers').classList.remove('hidden');
+    document.querySelector('.swiper-custom-pagination').classList.remove('hidden');
     this.swiperHandler.initSwiper();
   }
 
   showResult(numberOfCorrectAnswers, cardsWithAnswers) {
     this.toggleVisibility(this.quiz);
-    this.resultCard.classList.remove('hide');
+    this.resultCard.classList.remove('hidden');
 
     this.result.innerHTML = numberOfCorrectAnswers + '/5';
 
@@ -255,10 +258,12 @@ class Controller {
   }
 
   async start() {
+    this.ui.toggleVisibility(this.ui.submitButton);
     await this.ui.hideDescription();
     await this.ui.countdown();
     await this.ui.renderNextQuiz();
     this.ui.startTimer();
+    this.ui.toggleVisibility(this.ui.submitButton);
   }
 
   async submitAnswer(byUser) {
@@ -278,6 +283,7 @@ class Controller {
       this.game.incrementCurrentQuizIndex();
       let event = new Event('newCardIsShown');
       document.dispatchEvent(event);
+      this.ui.toggleVisibility(this.ui.submitButton);
     } else {
       this.ui.showResult(this.game.getNumberOfCorrectAnswers(), this.quizService.getQuizzesWithLayout(this.game.getQuizzes()));
     }
@@ -417,8 +423,7 @@ class QuizService {
 
   buildQuiz(rawQuiz) {
     const header = `<h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
-    <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>
-    <br>`;
+    <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>`;
 
     switch (rawQuiz.type) {
       case 'checkbox':
