@@ -53,8 +53,11 @@ class UI {
   }
 
   hideDescription() {
-    this.toggleVisibility(this.startButton);
-    this.quizDescription.classList.toggle('remove-scale');
+    return new Promise((resolve) => {
+      this.toggleVisibility(this.startButton);
+      this.quizDescription.classList.toggle('remove-scale');
+      setTimeout(() => resolve(true), 100);
+    });
   }
 
   getUserAnswer(quizType) {
@@ -79,9 +82,11 @@ class UI {
 
       let countInterval = setInterval(() => {
         this.countdownElement.innerHTML = counter--;
+        this.countdownElement.classList.remove('hide');
+
         if (counter === -1) {
           clearInterval(countInterval);
-          this.countdownElement.innerHTML = "";
+          this.countdownElement.classList.add('hide');
 
           this.toggleVisibility(this.quiz);
 
@@ -120,22 +125,17 @@ class UI {
     return new Promise((resolve, reject) => {
       if (!quiz.done) {
         this.quizCard.innerHTML = quiz.value;
-        const inputs = Array.from(this.quizCard.querySelectorAll('input'));
-        inputs.forEach(input => {
-          input.addEventListener('input', (event) => {
-            if (input.textContent.length === 0) {
-              input.classList.remove('input--extendable');
-            } else {
-              input.classList.add('input--extendable');
-            }
-          })
-        });
-        if (inputs[0]) {
-          inputs[0].focus();
+        const input = this.quizCard.querySelector('input');
+        if (input) {
+          input.focus();
         }
         this.quizCard.classList.add("new-item");
         this.quizCard.classList.remove("removed-item");
-        resolve(true);
+        this.quizCard.classList.remove('card--correct');
+        this.quizCard.classList.remove('card--wrong');
+
+        // Timeout is for waiting card animation
+        setTimeout(() => resolve(true), 500);
       } else {
         resolve(false);
       }
@@ -156,9 +156,11 @@ class UI {
 
   showIsCorrect(currentQuizIndex, isCorrect = true) {
     if (isCorrect) {
-      this.indicators[currentQuizIndex].classList.add("correct");
+      this.indicators[currentQuizIndex].classList.add('indicator--correct');
+      this.quizCard.classList.add('card--correct');
     } else {
-      this.indicators[currentQuizIndex].classList.add("wrong");
+      this.indicators[currentQuizIndex].classList.add('indicator--wrong');
+      this.quizCard.classList.add('card--wrong');
     }
   }
 
@@ -179,7 +181,6 @@ class UI {
     document.querySelector("#description").classList.remove('remove-scale');
     this.toggleVisibility(document.querySelector('#description > button'));
     this.toggleVisibility(document.querySelector('#submitButton'));
-    document.querySelector('#timeBar').classList.remove('remove-time');
     document.getElementById('quiz-card').classList.remove("removed-item");
     this.swiperHandler.destroySwiper();
   }
@@ -199,8 +200,6 @@ class UI {
     this.result.innerHTML = numberOfCorrectAnswers + '/5';
 
     this.swiperWrapper.innerHTML = cardsWithAnswers;
-
-    this.timebar.classList.add('remove-time');
   }
 }
 
@@ -255,13 +254,14 @@ class Controller {
     this.quizService = quizService
   }
 
-  start() {
-    this.ui.hideDescription();
-    this.ui.renderNextQuiz();
-    this.ui.countdown().then(() => this.ui.startTimer());
+  async start() {
+    await this.ui.hideDescription();
+    await this.ui.countdown();
+    await this.ui.renderNextQuiz();
+    this.ui.startTimer();
   }
 
-  async submitAnswer() {
+  async submitAnswer(byUser) {
     let event = new Event('answerIsSubmitted');
     document.dispatchEvent(event);
 
@@ -327,6 +327,7 @@ class Timer {
   }
 
   start() {
+    this.timeBar.classList.remove('invisible');
     this.timeBar.classList.add('timer-animation');
 
     const frame = () => {
@@ -342,6 +343,7 @@ class Timer {
     let width = this.timeBar.getBoundingClientRect().width;
     this.timeBar.classList.remove('timer-animation');
     this.timeBar.style.width = width + 'px';
+    this.timeBar.classList.add('invisible');
     clearTimeout(this.timer);
   }
 }
@@ -503,12 +505,12 @@ function eventListeners() {
   const controller = new Controller(ui, game, quizService);
 
   ui.startButton.onclick = () => controller.start();
-  ui.quiz.onsubmit = (e) => {e.preventDefault(); controller.submitAnswer()};
+  ui.quiz.onsubmit = (e) => {e.preventDefault(); controller.submitAnswer(true)};
   ui.menuButton.addEventListener('click', () => controller.toggleMenu());
   ui.closeMenuButton.onclick = () => controller.toggleMenu();
   ui.viewAnswersButton.onclick = () => controller.viewAnswers();
   document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
-  document.addEventListener('timeout', () => controller.submitAnswer());
+  document.addEventListener('timeout', () => controller.submitAnswer(false));
   document.addEventListener('answerIsSubmitted', () => controller.stopTimer());
   document.addEventListener('newCardIsShown', () => controller.startTimer());
 
