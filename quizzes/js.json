@@ -165,9 +165,9 @@
     },
     {
         "question": "What is the output?",
-        "description": "let arr = [1,2,3,4,5,6];\narr.filter(x => x % 2 == 0).forEach(console.log);",
+        "description": "let arr = [1,2,3,4,5,6];\narr.filter(x => x % 2 == 0).join('');",
         "type": "input",
-        "correctAnswer": "2 4 6"
+        "correctAnswer": "246"
     },
     {
         "question": "What is the output?",
