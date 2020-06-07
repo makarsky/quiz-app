@@ -188,12 +188,19 @@ class UI {
     this.swiperHandler.destroySwiper();
   }
 
-  viewAnswers() {
+  viewAnswers(quizzesWithAnswers) {
     this.resultCard.classList.add('hidden');
     document.querySelector('#quiz-indicators').classList.add('hidden');
     document.querySelector('#answers').classList.remove('hidden');
     document.querySelector('.swiper-custom-pagination').classList.remove('hidden');
     this.swiperHandler.initSwiper();
+
+    Array.from(document.querySelectorAll('.swiper-custom-pagination > .indicator'))
+      .forEach((e, i) => {
+        quizzesWithAnswers[i].isCorrect
+          ? e.classList.add('indicator--correct')
+          : e.classList.add('indicator--wrong');
+      });
   }
 
   showResult(numberOfCorrectAnswers, cardsWithAnswers) {
@@ -202,7 +209,7 @@ class UI {
 
     this.result.innerHTML = numberOfCorrectAnswers + '/5';
 
-    this.swiperWrapper.innerHTML = cardsWithAnswers;
+    this.swiperWrapper.innerHTML = cardsWithAnswers.join('');
   }
 }
 
@@ -285,6 +292,7 @@ class Controller {
       document.dispatchEvent(event);
       this.ui.toggleVisibility(this.ui.submitButton);
     } else {
+      // console.log(this.game.getQuizzes());
       this.ui.showResult(this.game.getNumberOfCorrectAnswers(), this.quizService.getQuizzesWithLayout(this.game.getQuizzes()));
     }
   }
@@ -322,7 +330,7 @@ class Controller {
   }
 
   viewAnswers() {
-    this.ui.viewAnswers();
+    this.ui.viewAnswers(this.game.getQuizzes());
   }
 }
 
@@ -489,8 +497,8 @@ class SwiperHandler {
       loop: false,
       pagination: {
         el: '.swiper-custom-pagination',
-        bulletClass: 'swiper-pagination-bullet'
-      },
+        bulletClass: 'indicator'
+      }
     });
   }
 

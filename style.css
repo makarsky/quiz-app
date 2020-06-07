@@ -175,7 +175,7 @@ button:hover {
 .indicator {
     height: 13px;
     width: 13px;
-    margin: 0 1px;
+    margin: 0 3px;
     background-color: #bbbbbb;
     border: none;  
     border-radius: 50%;
@@ -344,18 +344,16 @@ button:hover {
     width: 100%;
 }
 
-.swiper-pagination-bullet {
-    height: 13px;
-    width: 13px;
-    margin: 0 3px;
-}
-
-.swiper-pagination-bullet-active {
-    background-color: #818181;
+.indicators.swiper-custom-pagination > .swiper-pagination-bullet-active {
+    opacity: 1;
 }
 
 .swiper-custom-pagination {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 8px;
+}
+
+.swiper-custom-pagination > .indicator {
+    opacity: 0.6;
 }
