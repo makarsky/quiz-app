@@ -148,7 +148,7 @@ h1 {
     width: 100%;
     border: 2px solid #ddd;
     text-transform: uppercase;
-
+    z-index: 1;
     -webkit-appearance: button;
 }
 
@@ -175,7 +175,7 @@ button:hover {
 .indicator {
     height: 13px;
     width: 13px;
-    margin: 0 1px;
+    margin: 0 3px;
     background-color: #bbbbbb;
     border: none;  
     border-radius: 50%;
@@ -342,21 +342,18 @@ button:hover {
 
 .swiper-container {
     width: 100%;
-    height: 300px;
 }
 
-.swiper-pagination-bullet {
-    height: 13px;
-    width: 13px;
-    margin: 0 3px;
-}
-
-.swiper-pagination-bullet-active {
-    background-color: #818181;
+.indicators.swiper-custom-pagination > .swiper-pagination-bullet-active {
+    opacity: 1;
 }
 
 .swiper-custom-pagination {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 8px;
+}
+
+.swiper-custom-pagination > .indicator {
+    opacity: 0.6;
 }
