@@ -66,11 +66,11 @@ class UI {
   getUserAnswer(quizType) {
     switch (quizType) {
       case 'radio':
-        return this.quizCard.querySelector('input[name=answer]:checked');
+        return this.quizCard.querySelector('input:checked');
       case 'input':
         return this.quizCard.querySelector('input');
       case 'checkbox':
-        return Array.from(this.quizCard.querySelectorAll('input[name=answer]:checked')).map((e) => e.value);
+        return Array.from(this.quizCard.querySelectorAll('input:checked')).map((e) => e.value);
       case 'multi-input':
         // todo: implement multi-input quizzes
         return Array.from(this.quizCard.querySelectorAll('input')).map((e) => e.value);
@@ -292,8 +292,10 @@ class Controller {
       document.dispatchEvent(event);
       this.ui.toggleVisibility(this.ui.submitButton);
     } else {
-      // console.log(this.game.getQuizzes());
-      this.ui.showResult(this.game.getNumberOfCorrectAnswers(), this.quizService.getQuizzesWithLayout(this.game.getQuizzes()));
+      this.ui.showResult(
+        this.game.getNumberOfCorrectAnswers(),
+        this.quizService.getQuizzesWithLayout(this.game.getQuizzes())
+      );
     }
   }
 
@@ -325,7 +327,9 @@ class Controller {
     this.setQuizType(quizType);
     this.quizService.loadQuizzes(this.game.quizType).then((randomQuizzes) => {
       this.game.setQuizzes(randomQuizzes);
-      this.ui.setQuizzes(randomQuizzes.map(this.quizService.buildQuiz.bind(this.quizService)));
+      this.ui.setQuizzes(randomQuizzes.map(
+        this.quizService.buildQuiz.bind(this.quizService))
+      );
     });
   }
 
@@ -429,35 +433,54 @@ class QuizService {
     return quizzes.map(this.buildCorrectQuizCard.bind(this))
   }
 
-  buildQuiz(rawQuiz) {
+  buildQuiz(rawQuiz, rawQuizIndex, rawQuizzes, showAnswer) {
     const header = `<h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
-    <div class="description">${rawQuiz.description ? rawQuiz.description : ''}</div>`;
+      <div class="description">${rawQuiz.description ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
 
     switch (rawQuiz.type) {
       case 'checkbox':
       case 'radio':
-        return header + this.buildChoices(rawQuiz.type, rawQuiz.choices);
+        return header + this._buildChoices(rawQuiz, rawQuizIndex, showAnswer);
       case 'input':
-        return header + `<div class="input-container">
-          <label class="input-sizer">
-            <input type="text" onInput="this.parentNode.dataset.value = this.value" size="6" placeholder="Answer">
-          </label>
-        </div>`;
+        return header + this._buildInput(rawQuiz, showAnswer);
     }
   }
 
-  buildChoices(type, rawChoices) {
-    const choices = rawChoices.map(
-      (type => (rawChoice, index) =>
-      `<div class="${type}">
-        <label>
-          <input type="${type}" name="answer" value="${index}">${this._htmlEntities(rawChoice)}
-        </label>
-      </div>`)(type)
+  _buildChoices(rawQuiz, rawQuizIndex, showAnswer) {
+    const choices = rawQuiz.choices.map(
+      ((type, correctAnswer, showAnswer) => (rawChoice, index) =>
+        `<div class="${type}">
+          <label>
+            <input type="${type}"
+              name="answer${rawQuizIndex}"
+              value="${index}"
+              ${showAnswer ? (
+                typeof correctAnswer === 'number'
+                  ? (index === correctAnswer ? 'checked' : '')
+                  : (correctAnswer.includes(index) ? 'checked' : '')
+              ) : ''}
+              ${showAnswer ? 'disabled' : ''}
+            >${this._htmlEntities(rawChoice)}
+          </label>
+        </div>`)(rawQuiz.type, rawQuiz.correctAnswer, showAnswer)
     );
     this.shuffleChoices(choices);
 
     return choices.join('');
+  }
+
+  _buildInput(rawQuiz, showAnswer) {
+    return `<div class="input-container">
+      <label class="input-sizer">
+        <input type="text"
+          onInput="this.parentNode.dataset.value = this.value"
+          size="6"
+          placeholder="Answer"
+          value="${showAnswer ? rawQuiz.correctAnswer : ''}"
+          ${showAnswer ? 'disabled' : ''}
+        >
+      </label>
+    </div>`;
   }
 
   shuffleChoices(choices) {
@@ -469,10 +492,10 @@ class QuizService {
     }
   }
 
-  buildCorrectQuizCard(quiz) {
+  buildCorrectQuizCard(quiz, quizIndex, quizzes) {
     return `<div class="swiper-slide">
               <div class="card">
-                ${this.buildQuiz(quiz)}
+                ${this.buildQuiz(quiz, quizIndex, quizzes, true)}
               </div>
             </div>`;
   }
