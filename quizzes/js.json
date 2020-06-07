@@ -91,12 +91,6 @@
         "correctAnswer": "a"
     },
     {
-        "question": "List types of scopes available in Javascript?",
-        "choices": ["Global Scope", "Local Scope", "Function Scope", "Class Scope"],
-        "type": "checkbox",
-        "correctAnswer": [0, 1]
-    },
-    {
         "question": "What is the output?",
         "description": "console.log(parseInt('1001', 2));",
         "type": "input",
@@ -104,7 +98,7 @@
     },
     {
         "question": "This code generates an error.",
-        "description": "'use strict';\nv = 17;",
+        "description": "'use strict';\nv = 21;",
         "choices": ["yes", "no"],
         "type": "radio",
         "correctAnswer": 0
