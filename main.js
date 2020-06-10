@@ -449,8 +449,7 @@ class QuizService {
   _buildChoices(rawQuiz, rawQuizIndex, showAnswer) {
     const choices = rawQuiz.choices.map(
       ((type, correctAnswer, showAnswer) => (rawChoice, index) =>
-        `<div class="${type}">
-          <label>
+        `<label class="input-label">
             <input type="${type}"
               name="answer${rawQuizIndex}"
               value="${index}"
@@ -460,13 +459,14 @@ class QuizService {
                   : (correctAnswer.includes(index) ? 'checked' : '')
               ) : ''}
               ${showAnswer ? 'disabled' : ''}
-            >${this._htmlEntities(rawChoice)}
-          </label>
-        </div>`)(rawQuiz.type, rawQuiz.correctAnswer, showAnswer)
+            >
+            <div class="choice-icon ${type}-icon"></div>
+            ${this._htmlEntities(rawChoice)}
+          </label>`)(rawQuiz.type, rawQuiz.correctAnswer, showAnswer)
     );
     this.shuffleChoices(choices);
 
-    return choices.join('');
+    return `<div class="choices-container">${choices.join('')}</div>`;
   }
 
   _buildInput(rawQuiz, showAnswer) {
