@@ -361,6 +361,8 @@ button:hover {
 
 
 
+
+
 /* choice input style start */
 
 .choices-container {
@@ -370,7 +372,7 @@ button:hover {
 .input-label {
     display: flex;
     align-items: center;
-    padding: 10px 10px;
+    padding: 12px 10px;
     margin-bottom: 0;
     font-weight: initial;
     cursor: pointer;
