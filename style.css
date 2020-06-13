@@ -33,12 +33,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 0;
-    left: 0;
     font-size: 5em;
-    height: 100vh;
-    width: 100vw;
+    height: 80vh;
     z-index: 2;
 }
 
@@ -366,13 +362,13 @@ button:hover {
 /* choice input style start */
 
 .choices-container {
-    margin-top: 18px;
+    margin-top: 10px;
 }
 
 .input-label {
     display: flex;
     align-items: center;
-    padding: 12px 10px;
+    padding: 10px 10px;
     margin-bottom: 0;
     font-weight: initial;
     cursor: pointer;
