@@ -31,10 +31,18 @@ class UI {
     this.timebar = document.getElementById('timeBar');
     this.timer = new Timer(this.timebar);
     this.swiperHandler = new SwiperHandler;
+    this.hideDescriptionTimeout = null;
+    this.hideCardTimeout = null;
+    this.renderNextQuizTimeout = null;
+    this.countInterval = null;
   }
 
-  toggleVisibility(element) {
-    element.classList.toggle('hidden');
+  showElement(element) {
+    element.classList.remove('hidden');
+  }
+
+  hideElement(element) {
+    element.classList.add('hidden');
   }
 
   toggleMenu() {
@@ -54,9 +62,9 @@ class UI {
 
   hideDescription() {
     return new Promise((resolve) => {
-      this.toggleVisibility(this.startButton);
+      this.hideElement(this.startButton);
       this.quizDescription.classList.toggle('remove-scale');
-      setTimeout(() => {
+      this.hideDescriptionTimeout = setTimeout(() => {
         this.quizDescription.classList.add('hidden');
         resolve(true);
       }, 400);
@@ -85,14 +93,14 @@ class UI {
       this.countdownElement.innerHTML = counter--;
       this.countdownElement.classList.remove('hidden');
 
-      let countInterval = setInterval(() => {
+      this.countInterval = setInterval(() => {
         this.countdownElement.innerHTML = counter--;
 
         if (counter === -1) {
-          clearInterval(countInterval);
+          clearInterval(this.countInterval);
           this.countdownElement.classList.add('hidden');
 
-          this.toggleVisibility(this.quiz);
+          this.showElement(this.quiz);
 
           resolve();
         };
@@ -120,7 +128,7 @@ class UI {
   }
 
   hideSubmitButton() {
-    this.toggleVisibility(this.submitButton);
+    this.hideElement(this.submitButton);
   }
 
   renderNextQuiz() {
@@ -133,13 +141,13 @@ class UI {
         if (input) {
           input.focus();
         }
-        this.quizCard.classList.add("new-item");
-        this.quizCard.classList.remove("removed-item");
+        this.quizCard.classList.add('new-item');
+        this.quizCard.classList.remove('removed-item');
         this.quizCard.classList.remove('card--correct');
         this.quizCard.classList.remove('card--wrong');
 
         // Timeout is for waiting card animation
-        setTimeout(() => resolve(true), 500);
+        this.renderNextQuizTimeout = setTimeout(() => resolve(true), 500);
       } else {
         resolve(false);
       }
@@ -148,9 +156,9 @@ class UI {
 
   hideCard() {
     return new Promise((resolve, reject) => {
-      this.quizCard.classList.add("removed-item");
-      this.quizCard.classList.remove("new-item");
-      setTimeout(() => {
+      this.quizCard.classList.add('removed-item');
+      this.quizCard.classList.remove('new-item');
+      this.hideCardTimeout = setTimeout(() => {
         resolve();
       }, 2000);
     });
@@ -172,7 +180,15 @@ class UI {
     this.quizGenerator = this.initQuizGenerator();
   }
 
+  _clearTimeouts() {
+    clearTimeout(this.renderNextQuizTimeout);
+    clearTimeout(this.hideCardTimeout);
+    clearTimeout(this.hideDescriptionTimeout);
+    clearInterval(this.countInterval);
+  }
+
   restart() {
+    this._clearTimeouts();
     this.quizzes.length = 0;
     document.querySelector('.swiper-custom-pagination').classList.add('hidden');
     document.querySelector('#answers').classList.add('hidden');
@@ -182,8 +198,8 @@ class UI {
     [].map.call(indicators, (e) => e.className = 'indicator');
     this.quizDescription.classList.remove('remove-scale');
     this.quizDescription.classList.remove('hidden');
-    this.toggleVisibility(this.startButton);
-    this.toggleVisibility(this.submitButton);
+    this.showElement(this.startButton);
+    this.showElement(this.submitButton);
     document.getElementById('quiz-card').classList.remove("removed-item");
     this.swiperHandler.destroySwiper();
   }
@@ -204,7 +220,7 @@ class UI {
   }
 
   showResult(numberOfCorrectAnswers, cardsWithAnswers) {
-    this.toggleVisibility(this.quiz);
+    this.hideElement(this.quiz);
     this.resultCard.classList.remove('hidden');
 
     this.result.innerHTML = numberOfCorrectAnswers + '/5';
@@ -265,17 +281,16 @@ class Controller {
   }
 
   async start() {
-    this.ui.toggleVisibility(this.ui.submitButton);
+    this.ui.hideElement(this.ui.submitButton);
     await this.ui.hideDescription();
     await this.ui.countdown();
     await this.ui.renderNextQuiz();
     this.ui.startTimer();
-    this.ui.toggleVisibility(this.ui.submitButton);
+    this.ui.showElement(this.ui.submitButton);
   }
 
   async submitAnswer(byUser) {
-    let event = new Event('answerIsSubmitted');
-    document.dispatchEvent(event);
+    this.stopTimer();
 
     this.ui.hideSubmitButton();
     let answer = this.ui.getUserAnswer(this.game.getCurrentQuizType());
@@ -288,9 +303,8 @@ class Controller {
 
     if (result) {
       this.game.incrementCurrentQuizIndex();
-      let event = new Event('newCardIsShown');
-      document.dispatchEvent(event);
-      this.ui.toggleVisibility(this.ui.submitButton);
+      this.startTimer()
+      this.ui.showElement(this.ui.submitButton);
     } else {
       this.ui.showResult(
         this.game.getNumberOfCorrectAnswers(),
@@ -317,13 +331,15 @@ class Controller {
   }
 
   restart() {
-    this.ui.restart();
-    this.game.restart();
-
     this.loadQuizzesByType(this.game.quizType);
   }
 
   loadQuizzesByType(quizType) {
+    this.stopTimer();
+    this.ui.hideElement(this.ui.quiz);
+    this.ui.restart();
+    this.game.restart();
+
     this.setQuizType(quizType);
     this.quizService.loadQuizzes(this.game.quizType).then((randomQuizzes) => {
       this.game.setQuizzes(randomQuizzes);
@@ -342,6 +358,7 @@ class Timer {
   constructor(timeBarDOMElement) {
     this.timeBar = timeBarDOMElement;
     this.quizTime = 40;
+    this.timerTimeout = null;
   }
 
   start() {
@@ -354,7 +371,7 @@ class Timer {
       document.dispatchEvent(timerEvent);
     }
 
-    this.timer = setTimeout(frame, this.quizTime * 1000);
+    this.timerTimeout = setTimeout(frame, this.quizTime * 1000);
   }
 
   stop() {
@@ -362,7 +379,7 @@ class Timer {
     this.timeBar.classList.remove('timer-animation');
     this.timeBar.style.width = width + 'px';
     this.timeBar.classList.add('invisible');
-    clearTimeout(this.timer);
+    clearTimeout(this.timerTimeout);
   }
 }
 
@@ -434,7 +451,7 @@ class QuizService {
   }
 
   buildQuiz(rawQuiz, rawQuizIndex, rawQuizzes, showAnswer) {
-    const header = `<h4>${rawQuiz.question ? rawQuiz.question : ''}</h4>
+    const header = `<h4>${rawQuiz.question ? this._htmlEntities(rawQuiz.question) : ''}</h4>
       <div class="description">${rawQuiz.description ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
 
     switch (rawQuiz.type) {
@@ -506,7 +523,7 @@ class QuizService {
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
-}
+  }
 }
 
 class SwiperHandler {
@@ -547,8 +564,6 @@ function eventListeners() {
   ui.viewAnswersButton.onclick = () => controller.viewAnswers();
   document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
   document.addEventListener('timeout', () => controller.submitAnswer(false));
-  document.addEventListener('answerIsSubmitted', () => controller.stopTimer());
-  document.addEventListener('newCardIsShown', () => controller.startTimer());
 
   ui.quizTypes.forEach((value) => {
     value.onclick = controller.loadQuizzesByType.bind(controller, value.getAttribute('data-quiz-type'));
