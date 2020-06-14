@@ -98,6 +98,32 @@ class UI {
     return answer;
   }
 
+  showEmptyAnswerAnimation(quizType) {
+    let elements = [];
+
+    switch (quizType) {
+      case 'input':
+        elements.push(this.quizCard.querySelector('.input-sizer'));
+        break;
+      case 'radio':
+      case 'checkbox':
+        Array.from(this.quizCard.querySelectorAll('input ~ .choice-icon'))
+          .forEach((e) => elements.push(e));
+        break;
+      case 'multi-input':
+        Array.from(this.quizCard.querySelectorAll('input'))
+          .forEach((e) => elements.push(e));
+        break;
+      default:
+        throw new Error('Unknown quiz type.');
+    }
+
+    elements.forEach((e) => {
+      e.classList.add('shake');
+      e.addEventListener('animationend', () => e.classList.remove('shake'));
+    });
+  }
+
   countdown() {
     return new Promise((resolve, reject) => {
       let counter = 3;
@@ -304,7 +330,7 @@ class Controller {
     let answer = this.ui.getUserAnswer(this.game.getCurrentQuizType());
 
     if (!answer && byUser) {
-      // this.ui.showEmptyAnswerAnimation(this.game.getCurrentQuizType());
+      this.ui.showEmptyAnswerAnimation(this.game.getCurrentQuizType());
       return;
     }
 
@@ -486,18 +512,20 @@ class QuizService {
     const choices = rawQuiz.choices.map(
       ((type, correctAnswer, showAnswer) => (rawChoice, index) =>
         `<label class="input-label">
-            <input type="${type}"
-              name="answer${rawQuizIndex}"
-              value="${index}"
-              ${showAnswer ? (
-                typeof correctAnswer === 'number'
-                  ? (index === correctAnswer ? 'checked' : '')
-                  : (correctAnswer.includes(index) ? 'checked' : '')
-              ) : ''}
-              ${showAnswer ? 'disabled' : ''}
-            >
-            <div class="choice-icon ${type}-icon"></div>
-            ${this._htmlEntities(rawChoice)}
+            <div>
+              <input type="${type}"
+                name="answer${rawQuizIndex}"
+                value="${index}"
+                ${showAnswer ? (
+                  typeof correctAnswer === 'number'
+                    ? (index === correctAnswer ? 'checked' : '')
+                    : (correctAnswer.includes(index) ? 'checked' : '')
+                ) : ''}
+                ${showAnswer ? 'disabled' : ''}
+              >
+              <div class="choice-icon ${type}-icon"></div>
+            </div>
+            <div>${this._htmlEntities(rawChoice)}</div>
           </label>`)(rawQuiz.type, rawQuiz.correctAnswer, showAnswer)
     );
     this.shuffleChoices(choices);

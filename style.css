@@ -473,4 +473,5 @@ button:hover {
 
 .shake {
     animation-name: shake;
+    animation-duration: 1s;
 }
