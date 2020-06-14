@@ -72,19 +72,56 @@ class UI {
   }
 
   getUserAnswer(quizType) {
+    let answer = false, element = null, values = [];
+
     switch (quizType) {
       case 'radio':
-        return this.quizCard.querySelector('input:checked');
+        element = this.quizCard.querySelector('input:checked');
+        answer = element ? element.value : false;
+        break;
       case 'input':
-        return this.quizCard.querySelector('input');
+        element = this.quizCard.querySelector('input');
+        answer = element && element.value.length !== 0 ? element.value : false;
+        break;
       case 'checkbox':
-        return Array.from(this.quizCard.querySelectorAll('input:checked')).map((e) => e.value);
+        values = Array.from(this.quizCard.querySelectorAll('input:checked')).map((e) => e.value);
+        answer = values.length !== 0 ? values : false;
+        break;
       case 'multi-input':
-        // todo: implement multi-input quizzes
-        return Array.from(this.quizCard.querySelectorAll('input')).map((e) => e.value);
+        values = Array.from(this.quizCard.querySelectorAll('input')).map((e) => e.value);
+        answer = values.length !== 0 ? values : false;
+        break;
       default:
         throw new Error('Unknown quiz type.');
     }
+
+    return answer;
+  }
+
+  showEmptyAnswerAnimation(quizType) {
+    let elements = [];
+
+    switch (quizType) {
+      case 'input':
+        elements.push(this.quizCard.querySelector('.input-sizer'));
+        break;
+      case 'radio':
+      case 'checkbox':
+        Array.from(this.quizCard.querySelectorAll('input ~ .choice-icon'))
+          .forEach((e) => elements.push(e));
+        break;
+      case 'multi-input':
+        Array.from(this.quizCard.querySelectorAll('input'))
+          .forEach((e) => elements.push(e));
+        break;
+      default:
+        throw new Error('Unknown quiz type.');
+    }
+
+    elements.forEach((e) => {
+      e.classList.add('shake');
+      e.addEventListener('animationend', () => e.classList.remove('shake'));
+    });
   }
 
   countdown() {
@@ -290,10 +327,16 @@ class Controller {
   }
 
   async submitAnswer(byUser) {
-    this.stopTimer();
-
-    this.ui.hideSubmitButton();
     let answer = this.ui.getUserAnswer(this.game.getCurrentQuizType());
+
+    if (!answer && byUser) {
+      this.ui.showEmptyAnswerAnimation(this.game.getCurrentQuizType());
+      return;
+    }
+
+    this.stopTimer();
+    this.ui.hideSubmitButton();
+
     let index = this.game.getCurrentQuizIndex();
     let isCorrect = this.quizService.checkUserAnswer(answer, index, this.game.getQuizzes());
     this.ui.showIsCorrect(index, isCorrect);
@@ -410,18 +453,20 @@ class QuizService {
   checkUserAnswer(answer, index, quizzes) {
     let isCorrect = false;
 
-    switch (quizzes[index].type) {
-      case 'radio':
-        isCorrect = answer ? +answer.value === quizzes[index].correctAnswer : false;
-        break;
-      case 'input':
-        isCorrect = answer ? answer.value.toLowerCase() === quizzes[index].correctAnswer.toLowerCase() : false;
-        break;
-      case 'checkbox':
-        isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
-        break;
-      case 'multi-input':
-      // todo: implement multi-input quizzes
+    if (answer) {
+      switch (quizzes[index].type) {
+        case 'radio':
+          isCorrect = +answer === quizzes[index].correctAnswer;
+          break;
+        case 'input':
+          isCorrect = answer.toLowerCase() === quizzes[index].correctAnswer.toLowerCase();
+          break;
+        case 'checkbox':
+          isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
+          break;
+        case 'multi-input':
+          isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
+      }
     }
 
     quizzes[index].isCorrect = isCorrect;
@@ -467,18 +512,20 @@ class QuizService {
     const choices = rawQuiz.choices.map(
       ((type, correctAnswer, showAnswer) => (rawChoice, index) =>
         `<label class="input-label">
-            <input type="${type}"
-              name="answer${rawQuizIndex}"
-              value="${index}"
-              ${showAnswer ? (
-                typeof correctAnswer === 'number'
-                  ? (index === correctAnswer ? 'checked' : '')
-                  : (correctAnswer.includes(index) ? 'checked' : '')
-              ) : ''}
-              ${showAnswer ? 'disabled' : ''}
-            >
-            <div class="choice-icon ${type}-icon"></div>
-            ${this._htmlEntities(rawChoice)}
+            <div>
+              <input type="${type}"
+                name="answer${rawQuizIndex}"
+                value="${index}"
+                ${showAnswer ? (
+                  typeof correctAnswer === 'number'
+                    ? (index === correctAnswer ? 'checked' : '')
+                    : (correctAnswer.includes(index) ? 'checked' : '')
+                ) : ''}
+                ${showAnswer ? 'disabled' : ''}
+              >
+              <div class="choice-icon ${type}-icon"></div>
+            </div>
+            <div>${this._htmlEntities(rawChoice)}</div>
           </label>`)(rawQuiz.type, rawQuiz.correctAnswer, showAnswer)
     );
     this.shuffleChoices(choices);

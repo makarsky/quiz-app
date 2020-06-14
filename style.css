@@ -10,7 +10,7 @@ body {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     color: #333;
 }
@@ -38,6 +38,7 @@ body {
     z-index: 2;
 }
 
+
 /* start input styles */
 
 .input-container {
@@ -56,8 +57,10 @@ body {
     margin: 5px;
     background-color: #ddd;
     font-weight: inherit;
-}   
-.input-sizer::after, .input-sizer input {
+}
+
+.input-sizer::after,
+.input-sizer input {
     width: auto;
     min-width: 1em;
     grid-area: 1 / 2;
@@ -68,7 +71,7 @@ body {
     appearance: none;
     border: none;
 }
-    
+
 .input-sizer::after {
     content: attr(data-value) ' ';
     visibility: hidden;
@@ -77,7 +80,8 @@ body {
 
 .input-sizer.milti-input {
     padding: .1em .2em;
-}   
+}
+
 
 /* end input styles */
 
@@ -90,7 +94,7 @@ body {
     padding: 12px;
     width: 90%;
     min-width: 300px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
 }
 
 .quiz-description__title {
@@ -111,18 +115,22 @@ body {
 }
 
 .card--correct {
-    box-shadow: 0 0 12px rgba(76,175,80); /* #4CAF50 */
+    box-shadow: 0 0 12px rgba(76, 175, 80);
+    /* #4CAF50 */
 }
 
 .card--wrong {
-    box-shadow: 0 0 12px rgba(228,87,46); /* #E4572E */
+    box-shadow: 0 0 12px rgba(228, 87, 46);
+    /* #E4572E */
 }
 
 h1 {
-    text-align: center;  
+    text-align: center;
 }
 
+
 /* Mark input boxes that gets an error on validation: */
+
 .invalid {
     background-color: #ffdddd;
 }
@@ -173,7 +181,7 @@ button:hover {
     width: 13px;
     margin: 0 3px;
     background-color: #bbbbbb;
-    border: none;  
+    border: none;
     border-radius: 50%;
     display: inline-block;
     opacity: 0.7;
@@ -184,7 +192,7 @@ button:hover {
     background-color: #4CAF50;
 }
 
-.indicator--wrong{
+.indicator--wrong {
     background-color: #E4572E;
 }
 
@@ -193,7 +201,7 @@ button:hover {
     /*transform origin is moved to the bottom left corner*/
     transform-origin: 0% 100%;
 }
- 
+
 @keyframes removed-item-animation {
     75% {
         opacity: 1;
@@ -217,14 +225,14 @@ button:hover {
     }
     to {
         opacity: 1;
-        transform : translateY(0);
+        transform: translateY(0);
     }
 }
 
 .remove-scale {
-    animation: remove-scale-animation .4s cubic-bezier(.55,-0.04,.91,.94) forwards;
+    animation: remove-scale-animation .4s cubic-bezier(.55, -0.04, .91, .94) forwards;
 }
- 
+
 @keyframes remove-scale-animation {
     from {
         opacity: 1;
@@ -290,16 +298,18 @@ button:hover {
     transition: 0.4s;
 }
 
-.overlay {    
+.overlay {
     height: 100vh;
     width: 0;
     position: fixed;
     z-index: 1;
     left: 0;
     top: 0;
-    background-color: rgba(0,0,0, 0.9);
-    overflow-x: hidden; /* Disable horizontal scroll */
-    transition: 0.4s; /* 0.4 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    transition: 0.4s;
+    /* 0.4 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
 }
 
 .overlay-opened {
@@ -328,11 +338,14 @@ button:hover {
     text-decoration: none;
     font-size: 36px;
     color: #818181;
-    display: block; /* Display block instead of inline */
-    transition: 0.3s; /* Transition effects on hover (color) */
+    display: block;
+    /* Display block instead of inline */
+    transition: 0.3s;
+    /* Transition effects on hover (color) */
 }
 
-.overlay a:hover, .overlay a:focus {
+.overlay a:hover,
+.overlay a:focus {
     color: #f1f1f1;
 }
 
@@ -340,7 +353,7 @@ button:hover {
     width: 100%;
 }
 
-.indicators.swiper-custom-pagination > .swiper-pagination-bullet-active {
+.indicators.swiper-custom-pagination>.swiper-pagination-bullet-active {
     opacity: 1;
 }
 
@@ -350,13 +363,9 @@ button:hover {
     margin-bottom: 8px;
 }
 
-.swiper-custom-pagination > .indicator {
+.swiper-custom-pagination>.indicator {
     opacity: 0.5;
 }
-
-
-
-
 
 
 /* choice input style start */
@@ -405,12 +414,14 @@ button:hover {
     width: 16px;
 }
 
-.input-label input:checked ~ .checkbox-icon, .input-label input:checked ~ .radio-icon {
+.input-label input:checked~.checkbox-icon,
+.input-label input:checked~.radio-icon {
     background-color: #4CAF50;
     border: 2px solid transparent;
 }
 
-.checkbox-icon:after, .radio-icon:after {
+.checkbox-icon:after,
+.radio-icon:after {
     content: "";
 }
 
@@ -437,4 +448,30 @@ button:hover {
     background: white;
 }
 
+
 /* choice input style end */
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translate3d(-2px, 0, 0);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+}
+
+.shake {
+    animation-name: shake;
+    animation-duration: 1s;
+}
