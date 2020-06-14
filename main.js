@@ -72,19 +72,30 @@ class UI {
   }
 
   getUserAnswer(quizType) {
+    let answer = false, element = null, values = [];
+
     switch (quizType) {
       case 'radio':
-        return this.quizCard.querySelector('input:checked');
+        element = this.quizCard.querySelector('input:checked');
+        answer = element ? element.value : false;
+        break;
       case 'input':
-        return this.quizCard.querySelector('input');
+        element = this.quizCard.querySelector('input');
+        answer = element && element.value.length !== 0 ? element.value : false;
+        break;
       case 'checkbox':
-        return Array.from(this.quizCard.querySelectorAll('input:checked')).map((e) => e.value);
+        values = Array.from(this.quizCard.querySelectorAll('input:checked')).map((e) => e.value);
+        answer = values.length !== 0 ? values : false;
+        break;
       case 'multi-input':
-        // todo: implement multi-input quizzes
-        return Array.from(this.quizCard.querySelectorAll('input')).map((e) => e.value);
+        values = Array.from(this.quizCard.querySelectorAll('input')).map((e) => e.value);
+        answer = values.length !== 0 ? values : false;
+        break;
       default:
         throw new Error('Unknown quiz type.');
     }
+
+    return answer;
   }
 
   countdown() {
@@ -290,10 +301,16 @@ class Controller {
   }
 
   async submitAnswer(byUser) {
-    this.stopTimer();
-
-    this.ui.hideSubmitButton();
     let answer = this.ui.getUserAnswer(this.game.getCurrentQuizType());
+
+    if (!answer && byUser) {
+      // this.ui.showEmptyAnswerAnimation(this.game.getCurrentQuizType());
+      return;
+    }
+
+    this.stopTimer();
+    this.ui.hideSubmitButton();
+
     let index = this.game.getCurrentQuizIndex();
     let isCorrect = this.quizService.checkUserAnswer(answer, index, this.game.getQuizzes());
     this.ui.showIsCorrect(index, isCorrect);
@@ -410,18 +427,20 @@ class QuizService {
   checkUserAnswer(answer, index, quizzes) {
     let isCorrect = false;
 
-    switch (quizzes[index].type) {
-      case 'radio':
-        isCorrect = answer ? +answer.value === quizzes[index].correctAnswer : false;
-        break;
-      case 'input':
-        isCorrect = answer ? answer.value.toLowerCase() === quizzes[index].correctAnswer.toLowerCase() : false;
-        break;
-      case 'checkbox':
-        isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
-        break;
-      case 'multi-input':
-      // todo: implement multi-input quizzes
+    if (answer) {
+      switch (quizzes[index].type) {
+        case 'radio':
+          isCorrect = +answer === quizzes[index].correctAnswer;
+          break;
+        case 'input':
+          isCorrect = answer.toLowerCase() === quizzes[index].correctAnswer.toLowerCase();
+          break;
+        case 'checkbox':
+          isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
+          break;
+        case 'multi-input':
+          isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
+      }
     }
 
     quizzes[index].isCorrect = isCorrect;
