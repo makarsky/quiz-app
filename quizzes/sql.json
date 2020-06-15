@@ -114,7 +114,7 @@
         "question": "What does this query return?",
         "description":"SELECT COUNT(DISTINCT Country) FROM Customers;",
         "type": "radio",
-        "choices": ["Number of unique countries.", "Unique countries.", "Nothing.", "Error."],
+        "choices": ["The number of unique countries.", "Unique countries.", "Nothing.", "Error."],
         "correctAnswer": 0
     },
     {
