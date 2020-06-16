@@ -339,7 +339,7 @@ class Controller {
   async submitAnswer(byUser) {
     let answer = this.ui.getUserAnswer(this.game.getCurrentQuizType());
 
-    if (!answer && byUser) {
+    if (answer === false && byUser) {
       this.ui.showEmptyAnswerAnimation(this.game.getCurrentQuizType());
       return;
     }
@@ -463,7 +463,7 @@ class QuizService {
   checkUserAnswer(answer, index, quizzes) {
     let isCorrect = false;
 
-    if (answer) {
+    if (answer !== false) {
       switch (quizzes[index].type) {
         case 'radio':
           isCorrect = answer === quizzes[index].correctAnswer;
