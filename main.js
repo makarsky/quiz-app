@@ -2,7 +2,7 @@ const QUIZ_NAMES = {
   'js': 'JavaScript',
   'java': 'Java',
   'php': 'PHP',
-  'sql': 'SQL'
+  'sql': 'SQL (MySQL)'
 };
 
 class UI {
@@ -486,9 +486,6 @@ class QuizService {
   }
 
   areArraysEqual(arr1, arr2, useSorting) {
-    arr1.sort();
-    arr2.sort();
-
     if (useSorting) {
       arr1.sort();
       arr2.sort();
@@ -578,15 +575,14 @@ class QuizService {
     }
 
     let splittedDescription = rawQuiz.description.split('<in>');
-    let answers = rawQuiz.correctAnswer;
 
     function *initInputGenerator() {
       for (let answer of rawQuiz.correctAnswer) {
-        yield `<label class="input-sizer">
+        yield `<label class="input-sizer input-sizer--inline"
+          ${showAnswer ? `data-value="${answer}"` : ''}>
           <input type="text"
             onInput="this.parentNode.dataset.value = this.value"
-            size="6"
-            placeholder="Answer"
+            size="2"
             value="${showAnswer ? answer : ''}"
             maxlength="${answer.length}"
             ${showAnswer ? 'disabled' : ''}
