@@ -77,19 +77,23 @@ class UI {
     switch (quizType) {
       case 'radio':
         element = this.quizCard.querySelector('input:checked');
-        answer = element ? element.value : false;
+        answer = element ? +element.value : false;
         break;
       case 'input':
         element = this.quizCard.querySelector('input');
-        answer = element && element.value.length !== 0 ? element.value : false;
+        answer = element && element.value.length !== 0
+          ? element.value.trim()
+          : false;
         break;
       case 'checkbox':
-        values = Array.from(this.quizCard.querySelectorAll('input:checked')).map((e) => e.value);
+        values = Array.from(this.quizCard.querySelectorAll('input:checked'))
+          .map((e) => +e.value);
         answer = values.length !== 0 ? values : false;
         break;
       case 'multi-input':
-        values = Array.from(this.quizCard.querySelectorAll('input')).map((e) => e.value);
-        answer = values.length !== 0 ? values : false;
+        values = Array.from(this.quizCard.querySelectorAll('input'))
+          .map((e) => e.value.trim());
+        answer = values.includes('') ? false : values;
         break;
       default:
         throw new Error('Unknown quiz type.');
@@ -111,8 +115,12 @@ class UI {
           .forEach((e) => elements.push(e));
         break;
       case 'multi-input':
-        Array.from(this.quizCard.querySelectorAll('input'))
-          .forEach((e) => elements.push(e));
+        Array.from(this.quizCard.querySelectorAll('.input-sizer'))
+          .forEach((e) => {
+            if (e.querySelector('input').value.length === 0) {
+              elements.push(e);
+            }
+          });
         break;
       default:
         throw new Error('Unknown quiz type.');
@@ -120,7 +128,9 @@ class UI {
 
     elements.forEach((e) => {
       e.classList.add('shake');
-      e.addEventListener('animationend', () => e.classList.remove('shake'));
+      e.addEventListener('animationend', () =>
+        e.classList.remove('shake')
+      );
     });
   }
 
@@ -456,16 +466,17 @@ class QuizService {
     if (answer) {
       switch (quizzes[index].type) {
         case 'radio':
-          isCorrect = +answer === quizzes[index].correctAnswer;
+          isCorrect = answer === quizzes[index].correctAnswer;
           break;
         case 'input':
           isCorrect = answer.toLowerCase() === quizzes[index].correctAnswer.toLowerCase();
           break;
         case 'checkbox':
-          isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
+          isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer, true);
           break;
         case 'multi-input':
-          isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer);
+          isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer, false);
+          break;
       }
     }
 
@@ -474,16 +485,21 @@ class QuizService {
     return isCorrect;
   }
 
-  areArraysEqual(arr1, arr2) {
+  areArraysEqual(arr1, arr2, useSorting) {
     arr1.sort();
     arr2.sort();
+
+    if (useSorting) {
+      arr1.sort();
+      arr2.sort();
+    }
 
     if (arr1.length !== arr2.length) {
       return false;
     }
 
     for (let i = arr1.length; i--;) {
-      if (+arr1[i] !== arr2[i]) {
+      if (arr1[i] !== arr2[i]) {
         return false;
       }
     }
@@ -496,16 +512,25 @@ class QuizService {
   }
 
   buildQuiz(rawQuiz, rawQuizIndex, rawQuizzes, showAnswer) {
-    const header = `<h4>${rawQuiz.question ? this._htmlEntities(rawQuiz.question) : ''}</h4>
-      <div class="description">${rawQuiz.description ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
+    const question = `<h4>${rawQuiz.question ? this._htmlEntities(rawQuiz.question) : ''}</h4>`;
+    let description = '', inputs = '';
 
     switch (rawQuiz.type) {
       case 'checkbox':
       case 'radio':
-        return header + this._buildChoices(rawQuiz, rawQuizIndex, showAnswer);
+        description = `<div class="description">${rawQuiz.description ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
+        inputs = this._buildChoices(rawQuiz, rawQuizIndex, showAnswer);
+        break;
       case 'input':
-        return header + this._buildInput(rawQuiz, showAnswer);
+        description = `<div class="description">${rawQuiz.description ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
+        inputs = this._buildInput(rawQuiz, showAnswer);
+        break;
+      case 'multi-input':
+        description = this._buildMultiInputDescription(rawQuiz, showAnswer);
+        break;
     }
+
+    return question + description + inputs;
   }
 
   _buildChoices(rawQuiz, rawQuizIndex, showAnswer) {
@@ -545,6 +570,39 @@ class QuizService {
         >
       </label>
     </div>`;
+  }
+
+  _buildMultiInputDescription(rawQuiz, showAnswer) {
+    if (!rawQuiz.description) {
+      throw new Error('Empty description in the multi-input quiz type.');
+    }
+
+    let splittedDescription = rawQuiz.description.split('<in>');
+    let answers = rawQuiz.correctAnswer;
+
+    function *initInputGenerator() {
+      for (let answer of rawQuiz.correctAnswer) {
+        yield `<label class="input-sizer">
+          <input type="text"
+            onInput="this.parentNode.dataset.value = this.value"
+            size="6"
+            placeholder="Answer"
+            value="${showAnswer ? answer : ''}"
+            maxlength="${answer.length}"
+            ${showAnswer ? 'disabled' : ''}
+          >
+        </label>`;
+      }
+    }
+
+    let inputGenerator = initInputGenerator();
+
+    return `<div class="description">${splittedDescription.map((d) => 
+      this._htmlEntities(d)).map((d) => {
+        let {value, done} = inputGenerator.next();
+        return d + (done ? '' : value);
+      }).join('')
+    }</div>`;
   }
 
   shuffleChoices(choices) {
