@@ -27,6 +27,7 @@ body {
 
 .description {
     white-space: pre-wrap;
+    line-height: 24px;
 }
 
 .countdown {
@@ -59,13 +60,18 @@ body {
     font-weight: inherit;
 }
 
+.input-sizer.input-sizer--inline {
+    margin: 1px 0;
+    padding: 0 1px;
+    line-height: 20px
+}
+
 .input-sizer::after,
 .input-sizer input {
     width: auto;
     min-width: 1em;
     grid-area: 1 / 2;
     font: inherit;
-    /* padding: 0.25em; */
     margin: 0;
     background: none;
     appearance: none;
@@ -448,8 +454,11 @@ button:hover {
     background: white;
 }
 
-
 /* choice input style end */
+
+
+
+
 
 @keyframes shake {
     0%,
