@@ -510,7 +510,13 @@ class QuizService {
 
   buildQuiz(rawQuiz, rawQuizIndex, rawQuizzes, showAnswer) {
     const question = `<h4>${rawQuiz.question ? this._htmlEntities(rawQuiz.question) : ''}</h4>`;
-    let description = '', inputs = '';
+    let description = '', inputs = '', madeBy = '';
+
+    if (rawQuiz.madeBy) {
+      madeBy = `<div class="made-by">by ${
+        this._htmlEntities(rawQuiz.madeBy)
+      }</div>`;
+    }
 
     switch (rawQuiz.type) {
       case 'checkbox':
@@ -527,7 +533,7 @@ class QuizService {
         break;
     }
 
-    return question + description + inputs;
+    return question + description + madeBy + inputs;
   }
 
   _buildChoices(rawQuiz, rawQuizIndex, showAnswer) {

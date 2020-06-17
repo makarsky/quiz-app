@@ -30,6 +30,17 @@ body {
     line-height: 24px;
 }
 
+.made-by {
+    color: #666;
+    font-size: 12px;
+    text-align: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 48px;
+    margin-top: 6px;
+}
+
 .countdown {
     display: flex;
     align-items: center;
