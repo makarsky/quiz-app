@@ -181,6 +181,7 @@
         "question": "Fill in the blanks to output 2.",
         "description": "function* generate() {\n  <in> 2;\n}\nlet generator = generate();\nlet result = generator.<in>();\nconsole.log(result.value)",
         "type": "multi-input",
-        "correctAnswer": ["yield", "next"]
+        "correctAnswer": ["yield", "next"],
+        "madeBy": "Igor Makarsky"
     }
 ]
