@@ -17,7 +17,7 @@ class UI {
     this.menuSections = document.getElementsByClassName('overlay__content');
     this.indicators = document.getElementsByClassName('indicator');
     this.quizLabel = document.getElementById('quiz-label');
-    this.quizDescription = document.getElementById('quiz-description')
+    this.quizDescription = document.getElementById('quiz-description');
     this.countdownElement = document.getElementById('countdown');
     this.quiz = document.getElementById('quiz');
     this.quizCard = document.getElementById('quiz-card');
@@ -62,8 +62,8 @@ class UI {
 
   hideDescription() {
     return new Promise((resolve) => {
-      this.hideElement(this.startButton);
-      this.quizDescription.classList.toggle('remove-scale');
+      this.hideStartButton();
+      this.quizDescription.firstChild.classList.toggle('remove-scale');
       this.hideDescriptionTimeout = setTimeout(() => {
         this.quizDescription.classList.add('hidden');
         resolve(true);
@@ -175,7 +175,27 @@ class UI {
   }
 
   hideSubmitButton() {
-    this.hideElement(this.submitButton);
+    this.submitButton.classList.add('submit--hidden');
+  }
+
+  showSubmitButton() {
+    this.submitButton.classList.remove('submit--hidden');
+  }
+
+  hideStartButton() {
+    this.startButton.classList.add('submit--hidden');
+  }
+
+  showStartButton() {
+    this.startButton.classList.remove('submit--hidden');
+  }
+
+  hideRestartButton() {
+    this.submitButton.classList.add('submit--hidden');
+  }
+
+  showRestartButton() {
+    this.submitButton.classList.remove('submit--hidden');
   }
 
   renderNextQuiz() {
@@ -192,6 +212,8 @@ class UI {
         this.quizCard.classList.remove('removed-item');
         this.quizCard.classList.remove('card--correct');
         this.quizCard.classList.remove('card--wrong');
+
+        window.scrollTo(0, 0);
 
         // Timeout is for waiting card animation
         this.renderNextQuizTimeout = setTimeout(() => resolve(true), 500);
@@ -243,10 +265,9 @@ class UI {
     this.resultCard.classList.add('hidden');
     let indicators = document.querySelectorAll('#quiz-indicators > .indicator');
     [].map.call(indicators, (e) => e.className = 'indicator');
-    this.quizDescription.classList.remove('remove-scale');
+    this.quizDescription.firstChild.classList.remove('remove-scale');
     this.quizDescription.classList.remove('hidden');
-    this.showElement(this.startButton);
-    this.showElement(this.submitButton);
+    this.showStartButton();
     document.getElementById('quiz-card').classList.remove("removed-item");
     this.swiperHandler.destroySwiper();
   }
@@ -324,26 +345,35 @@ class Controller {
   constructor(ui, game, quizService) {
     this.ui = ui;
     this.game = game;
-    this.quizService = quizService
+    this.quizService = quizService;
+    this.isSubmittingAnswer = false;
   }
 
   async start() {
-    this.ui.hideElement(this.ui.submitButton);
+    this.ui.hideSubmitButton();
     await this.ui.hideDescription();
     await this.ui.countdown();
     await this.ui.renderNextQuiz();
     this.ui.startTimer();
-    this.ui.showElement(this.ui.submitButton);
+    this.ui.showSubmitButton();
   }
 
   async submitAnswer(byUser) {
+    if (this.isSubmittingAnswer) {
+      return;
+    }
+
+    this.isSubmittingAnswer = true;
+
     let answer = this.ui.getUserAnswer(this.game.getCurrentQuizType());
 
     if (answer === false && byUser) {
       this.ui.showEmptyAnswerAnimation(this.game.getCurrentQuizType());
+      this.isSubmittingAnswer = false;
       return;
     }
 
+    window.scrollTo(0, 0);
     this.stopTimer();
     this.ui.hideSubmitButton();
 
@@ -357,13 +387,15 @@ class Controller {
     if (result) {
       this.game.incrementCurrentQuizIndex();
       this.startTimer()
-      this.ui.showElement(this.ui.submitButton);
+      this.ui.showSubmitButton();
     } else {
       this.ui.showResult(
         this.game.getNumberOfCorrectAnswers(),
         this.quizService.getQuizzesWithLayout(this.game.getQuizzes())
       );
     }
+
+    this.isSubmittingAnswer = false;
   }
 
   stopTimer() {
@@ -475,7 +507,11 @@ class QuizService {
           isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer, true);
           break;
         case 'multi-input':
-          isCorrect = this.areArraysEqual(answer, quizzes[index].correctAnswer, false);
+          isCorrect = this.areArraysEqual(
+            answer.map(a => a.toLowerCase()),
+            quizzes[index].correctAnswer.map(a => a.toLowerCase()),
+            false
+          );
           break;
       }
     }
