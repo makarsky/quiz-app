@@ -171,6 +171,13 @@ h1 {
     text-transform: uppercase;
     z-index: 1;
     -webkit-appearance: button;
+    opacity: 1;
+    transition: bottom .2s ease-in-out, opacity .2s ease-in-out;
+}
+
+.submit.submit--hidden {
+    bottom: -42px;
+    opacity: 0;
 }
 
 .button-default {
@@ -215,18 +222,20 @@ button:hover {
 
 .removed-item {
     animation: removed-item-animation 2s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
-    /*transform origin is moved to the bottom left corner*/
+    /* transform origin is moved to the bottom left corner */
     transform-origin: 0% 100%;
 }
 
 @keyframes removed-item-animation {
-    75% {
+    50% {
         opacity: 1;
+    }
+    75% {
         transform: rotateZ(0);
     }
     100% {
         opacity: 0;
-        transform: translateY(600px) rotateZ(90deg);
+        transform: translateY(400px) rotateZ(60deg);
     }
 }
 
