@@ -171,6 +171,13 @@ h1 {
     text-transform: uppercase;
     z-index: 1;
     -webkit-appearance: button;
+    opacity: 1;
+    transition: bottom .2s ease-in-out, opacity .2s ease-in-out;
+}
+
+.submit.submit--hidden {
+    bottom: -42px;
+    opacity: 0;
 }
 
 .button-default {
