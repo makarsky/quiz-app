@@ -213,6 +213,8 @@ class UI {
         this.quizCard.classList.remove('card--correct');
         this.quizCard.classList.remove('card--wrong');
 
+        window.scrollTo(0, 0);
+
         // Timeout is for waiting card animation
         this.renderNextQuizTimeout = setTimeout(() => resolve(true), 500);
       } else {
@@ -371,6 +373,7 @@ class Controller {
       return;
     }
 
+    window.scrollTo(0, 0);
     this.stopTimer();
     this.ui.hideSubmitButton();
 
