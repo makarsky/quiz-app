@@ -204,10 +204,13 @@ class UI {
     return new Promise((resolve, reject) => {
       if (!quiz.done) {
         this.quizCard.innerHTML = quiz.value;
-        const input = this.quizCard.querySelector('input');
-        if (input) {
-          input.focus();
-        }
+        
+        // Sets autofocus
+        // const input = this.quizCard.querySelector('input');
+        // if (input) {
+        //   input.focus();
+        // }
+
         this.quizCard.classList.add('new-item');
         this.quizCard.classList.remove('removed-item');
         this.quizCard.classList.remove('card--correct');
