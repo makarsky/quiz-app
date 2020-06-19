@@ -1,9 +1,9 @@
-const QUIZ_NAMES = {
-  'js': 'JavaScript',
-  'java': 'Java',
-  'php': 'PHP',
-  'sql': 'SQL (MySQL)'
-};
+const QUIZ_CATEGORIES = [
+  {category: 'js', title: 'JavaScript'},
+  {category: 'java', title: 'Java'},
+  {category: 'php', title: 'PHP'},
+  {category: 'sql', title: 'SQL (MySQL)'}
+];
 
 class UI {
   constructor() {
@@ -25,7 +25,7 @@ class UI {
     this.result = document.getElementById('result');
     this.swiperWrapper = document.querySelector('.swiper-wrapper');
     this.viewAnswersButton = document.getElementById('view-answers');
-    this.quizTypes = Array.from(document.getElementsByClassName('quiz-type'));
+    this.quizCategories = Array.from(document.getElementsByClassName('quiz-category'));
     this.menuLinks = Array.from(document.getElementsByClassName('menu-link'));
     this.restartButtons = Array.from(document.getElementsByClassName('restart'));
     this.timebar = document.getElementById('timeBar');
@@ -301,8 +301,7 @@ class Game {
   constructor() {
     this.numberOfQuizzes = 5;
     this.currentQuizIndex = 0;
-    this.quizType = 'js';
-    this.quizNames = Object.assign({}, QUIZ_NAMES);
+    this.quizCategory = null;
     this.quizzes = [];
   }
 
@@ -318,10 +317,8 @@ class Game {
     return this.quizzes[this.currentQuizIndex].type;
   }
 
-  setQuizType(quizType) {
-    this.quizType = quizType;
-
-    return this.quizNames[quizType];
+  setQuizCategory(quizCategory) {
+    this.quizCategory = quizCategory;
   }
 
   setQuizzes(quizzes) {
@@ -410,23 +407,26 @@ class Controller {
     this.ui.toggleMenu();
   }
 
-  setQuizType(quizType) {
-    const quizLabel = this.game.setQuizType(quizType)
-    this.ui.setQuizLabel(quizLabel);
+  setQuizCategory(quizCategory, quizTitle) {
+    this.game.setQuizCategory(quizCategory)
+
+    if (quizTitle) {
+      this.ui.setQuizLabel(quizTitle);
+    }
   }
 
   restart() {
-    this.loadQuizzesByType(this.game.quizType);
+    this.loadQuizzesByType(this.game.quizCategory);
   }
 
-  loadQuizzesByType(quizType) {
+  loadQuizzesByType(quizCategory, quizTitle) {
     this.stopTimer();
     this.ui.hideElement(this.ui.quiz);
     this.ui.restart();
     this.game.restart();
 
-    this.setQuizType(quizType);
-    this.quizService.loadQuizzes(this.game.quizType).then((randomQuizzes) => {
+    this.setQuizCategory(quizCategory, quizTitle);
+    this.quizService.loadQuizzes(this.game.quizCategory).then((randomQuizzes) => {
       this.game.setQuizzes(randomQuizzes);
       this.ui.setQuizzes(randomQuizzes.map(
         this.quizService.buildQuiz.bind(this.quizService))
@@ -557,11 +557,13 @@ class QuizService {
     switch (rawQuiz.type) {
       case 'checkbox':
       case 'radio':
-        description = `<div class="description">${rawQuiz.description ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
+        description = `<div class="description">${rawQuiz.description
+          ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
         inputs = this._buildChoices(rawQuiz, rawQuizIndex, showAnswer);
         break;
       case 'input':
-        description = `<div class="description">${rawQuiz.description ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
+        description = `<div class="description">${rawQuiz.description
+          ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
         inputs = this._buildInput(rawQuiz, showAnswer);
         break;
       case 'multi-input':
@@ -695,6 +697,12 @@ class SwiperHandler {
 }
 
 function eventListeners() {
+  let quizCategories = QUIZ_CATEGORIES.map((data) => {
+    return `<a href="#" class="quiz-category" data-quiz-category="${data.category}" data-quiz-title="${data.title}">${data.title}</a>`;
+  });
+
+  document.getElementById('quiz-categories').innerHTML = quizCategories.join('');
+
   const ui = new UI;
   const game = new Game;
   const quizService = new QuizService();
@@ -708,8 +716,12 @@ function eventListeners() {
   document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
   document.addEventListener('timeout', () => controller.submitAnswer(false));
 
-  ui.quizTypes.forEach((value) => {
-    value.onclick = controller.loadQuizzesByType.bind(controller, value.getAttribute('data-quiz-type'));
+  ui.quizCategories.forEach((value) => {
+    value.onclick = controller.loadQuizzesByType.bind(
+      controller,
+      value.getAttribute('data-quiz-category'),
+      value.getAttribute('data-quiz-title')
+    );
   });
 
   ui.menuLinks.forEach((value) => {
@@ -720,7 +732,10 @@ function eventListeners() {
     value.onclick = () => controller.restart();
   });
 
-  controller.loadQuizzesByType('js');
+  controller.loadQuizzesByType(
+    QUIZ_CATEGORIES[0].category,
+    QUIZ_CATEGORIES[0].title
+  );
 }
 
 document.addEventListener('DOMContentLoaded', eventListeners);
