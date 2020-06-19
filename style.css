@@ -87,6 +87,7 @@ body {
     background: none;
     appearance: none;
     border: none;
+    outline: none;
 }
 
 .input-sizer::after {
@@ -362,12 +363,10 @@ button:hover {
 .overlay a {
     padding: 8px;
     text-decoration: none;
-    font-size: 36px;
+    font-size: 30px;
     color: #818181;
     display: block;
-    /* Display block instead of inline */
-    transition: 0.3s;
-    /* Transition effects on hover (color) */
+    transition: color 0.3s;
 }
 
 .overlay a:hover,
