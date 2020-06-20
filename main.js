@@ -5,6 +5,13 @@ const QUIZ_CATEGORIES = [
   {category: 'sql', title: 'SQL (MySQL)'}
 ];
 
+const SUPPORTED_QUIZ_TYPES = [
+  'input',
+  'radio',
+  'checkbox',
+  'multi-input'
+];
+
 class UI {
   constructor() {
     this.quizzes = [];
@@ -475,7 +482,11 @@ class QuizService {
   loadQuizzes(quizName) {
     return fetch(`quizzes/${quizName}.json`)
       .then((result) => result.json())
+      .then((quizzes) => quizzes.filter(q => SUPPORTED_QUIZ_TYPES.includes(q.type)))
       .then((quizzes) => {
+        if (quizzes.length < 5) {
+          throw new Error('There are not enough quizzes');
+        }
         return new Promise((resolve, reject) => resolve(this.shuffleQuizzes(quizzes)));
       })
       .catch((error) => console.error(error));
