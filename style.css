@@ -87,6 +87,7 @@ body {
     background: none;
     appearance: none;
     border: none;
+    outline: none;
 }
 
 .input-sizer::after {
@@ -333,12 +334,10 @@ button:hover {
     top: 0;
     background-color: rgba(0, 0, 0, 0.9);
     overflow-x: hidden;
-    /* Disable horizontal scroll */
-    transition: 0.4s;
-    /* 0.4 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+    transition: width 0.4s;
 }
 
-.overlay-opened {
+.overlay--opened {
     width: 100vw;
 }
 
@@ -349,29 +348,37 @@ button:hover {
 
 .overlay__header {
     display: flex;
-    justify-content: end;
-    color: #818181;
+    justify-content: space-between;
 }
 
-.overlay__header__closebtn {
-    font-size: 60px;
-    padding: 12px 30px;
-    line-height: 1;
+.overlay__header .overlay__header__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    height: 60px;
+    width: 60px;
+    padding: 0;
 }
 
 .overlay a {
-    padding: 8px;
+    padding: 8px 0;
     text-decoration: none;
-    font-size: 36px;
-    color: #818181;
+    font-size: 24px;
+    color: transparent;
     display: block;
-    /* Display block instead of inline */
-    transition: 0.3s;
-    /* Transition effects on hover (color) */
+    transition: color 0.2s;
+    outline: none;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-.overlay a:hover,
-.overlay a:focus {
+.overlay.overlay--opened a {
+    color: #818181;
+}
+
+.overlay.overlay--opened a:hover,
+.overlay.overlay--opened a:focus {
     color: #f1f1f1;
 }
 
@@ -504,3 +511,109 @@ button:hover {
     animation-name: shake;
     animation-duration: 1s;
 }
+
+
+
+
+
+
+/* Loader start */
+
+.loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) translateY(-50%);
+    transition: opacity .4s;
+    opacity: 1;
+    z-index: 2;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    animation: 5s linear infinite loader-rotation;
+}
+
+.loader:before {
+    content: '';
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    border: 5px solid transparent;
+    border-top-color: #4CAF50;
+    border-radius: 50%;
+    animation: 2s linear infinite loader-before-rotation;
+}
+
+.loader:after {
+    content: '';
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    border: 5px solid transparent;
+    border-top-color: #4CAF50;
+    border-radius: 50%;
+    animation: 2s linear infinite loader-after-rotation;
+}
+
+.loader--visible {
+    opacity: 1;
+}
+
+@keyframes loader-rotation {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(180deg); }
+    50% { transform: rotate(360deg); }
+    75% { transform: rotate(720deg); }
+    100% { transform: rotate(1080deg); }
+}
+
+@keyframes loader-before-rotation {
+    0% { transform: rotate(0deg); }
+    9.9% { border-left-color: transparent; }
+    10% { transform: rotate(90deg); border-left-color: #4CAF50; }
+    20% { transform: rotate(180deg); border-left-color: #4CAF50; }
+    30% { transform: rotate(180deg); border-left-color: #4CAF50; }
+    39.9% { transform: rotate(180deg); border-left-color: #4CAF50; }
+    40% { transform: rotate(180deg); border-left-color: transparent; }
+    50% { transform: rotate(180deg); border-left-color: transparent; }
+
+    59.9% { border-left-color: transparent; }
+    60% { transform: rotate(270deg); border-left-color: #4CAF50; }
+    70% { transform: rotate(360deg); border-left-color: #4CAF50; }
+    80% { transform: rotate(360deg); border-left-color: #4CAF50; }
+    89.9% { transform: rotate(360deg); border-left-color: #4CAF50; }
+    90% { transform: rotate(360deg); border-left-color: transparent; }
+
+    100% { transform: rotate(360deg); border-left-color: transparent}
+}
+
+@keyframes loader-after-rotation {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(0deg); }
+    20% { transform: rotate(0deg); }
+    30% { transform: rotate(0deg); }
+    40% { transform: rotate(100deg); }
+    50% { transform: rotate(180deg); }
+
+    60% { transform: rotate(180deg); }
+    70% { transform: rotate(180deg); }
+    80% { transform: rotate(180deg); }
+    90% { transform: rotate(280deg); }
+
+    100% { transform: rotate(360deg); }
+}
+
+/* Loader end */

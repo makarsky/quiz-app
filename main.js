@@ -1,9 +1,16 @@
-const QUIZ_NAMES = {
-  'js': 'JavaScript',
-  'java': 'Java',
-  'php': 'PHP',
-  'sql': 'SQL (MySQL)'
-};
+const QUIZ_CATEGORIES = [
+  {category: 'js', title: 'JavaScript'},
+  {category: 'java', title: 'Java'},
+  {category: 'php', title: 'PHP'},
+  {category: 'sql', title: 'SQL (MySQL)'}
+];
+
+const SUPPORTED_QUIZ_TYPES = [
+  'input',
+  'radio',
+  'checkbox',
+  'multi-input'
+];
 
 class UI {
   constructor() {
@@ -25,16 +32,18 @@ class UI {
     this.result = document.getElementById('result');
     this.swiperWrapper = document.querySelector('.swiper-wrapper');
     this.viewAnswersButton = document.getElementById('view-answers');
-    this.quizTypes = Array.from(document.getElementsByClassName('quiz-type'));
+    this.quizCategories = Array.from(document.getElementsByClassName('quiz-category'));
     this.menuLinks = Array.from(document.getElementsByClassName('menu-link'));
     this.restartButtons = Array.from(document.getElementsByClassName('restart'));
     this.timebar = document.getElementById('timeBar');
+    this.loader = document.getElementById('loader');
     this.timer = new Timer(this.timebar);
     this.swiperHandler = new SwiperHandler;
     this.hideDescriptionTimeout = null;
     this.hideCardTimeout = null;
     this.renderNextQuizTimeout = null;
     this.countInterval = null;
+    this.loaderTimeout = null;
   }
 
   showElement(element) {
@@ -45,14 +54,27 @@ class UI {
     element.classList.add('hidden');
   }
 
+  showLoader() {
+    // Timeout in case Github is down.
+    this.loaderTimeout = setTimeout(
+      () => this.showElement(this.loader),
+      1000
+    );
+  }
+
+  hideLoader() {
+    clearTimeout(this.loaderTimeout);
+    this.hideElement(this.loader);
+  }
+
   toggleMenu() {
     this.openLink('menu');
-    this.navigation.classList.toggle("overlay-opened");
+    this.navigation.classList.toggle('overlay--opened');
   }
 
   closeMenu() {
     this.openLink('menu');
-    this.navigation.classList.remove("overlay-opened");
+    this.navigation.classList.remove('overlay--opened');
   }
 
   openLink(id) {
@@ -204,10 +226,13 @@ class UI {
     return new Promise((resolve, reject) => {
       if (!quiz.done) {
         this.quizCard.innerHTML = quiz.value;
-        const input = this.quizCard.querySelector('input');
-        if (input) {
-          input.focus();
-        }
+        
+        // Sets autofocus
+        // const input = this.quizCard.querySelector('input');
+        // if (input) {
+        //   input.focus();
+        // }
+
         this.quizCard.classList.add('new-item');
         this.quizCard.classList.remove('removed-item');
         this.quizCard.classList.remove('card--correct');
@@ -254,6 +279,7 @@ class UI {
     clearTimeout(this.hideCardTimeout);
     clearTimeout(this.hideDescriptionTimeout);
     clearInterval(this.countInterval);
+    clearTimeout(this.loaderTimeout);
   }
 
   restart() {
@@ -301,8 +327,7 @@ class Game {
   constructor() {
     this.numberOfQuizzes = 5;
     this.currentQuizIndex = 0;
-    this.quizType = 'js';
-    this.quizNames = Object.assign({}, QUIZ_NAMES);
+    this.quizCategory = null;
     this.quizzes = [];
   }
 
@@ -318,10 +343,8 @@ class Game {
     return this.quizzes[this.currentQuizIndex].type;
   }
 
-  setQuizType(quizType) {
-    this.quizType = quizType;
-
-    return this.quizNames[quizType];
+  setQuizCategory(quizCategory) {
+    this.quizCategory = quizCategory;
   }
 
   setQuizzes(quizzes) {
@@ -410,27 +433,32 @@ class Controller {
     this.ui.toggleMenu();
   }
 
-  setQuizType(quizType) {
-    const quizLabel = this.game.setQuizType(quizType)
-    this.ui.setQuizLabel(quizLabel);
+  setQuizCategory(quizCategory, quizTitle) {
+    this.game.setQuizCategory(quizCategory)
+
+    if (quizTitle) {
+      this.ui.setQuizLabel(quizTitle);
+    }
   }
 
   restart() {
-    this.loadQuizzesByType(this.game.quizType);
+    this.loadQuizzesByType(this.game.quizCategory);
   }
 
-  loadQuizzesByType(quizType) {
+  loadQuizzesByType(quizCategory, quizTitle) {
     this.stopTimer();
     this.ui.hideElement(this.ui.quiz);
     this.ui.restart();
     this.game.restart();
+    this.ui.showLoader();
 
-    this.setQuizType(quizType);
-    this.quizService.loadQuizzes(this.game.quizType).then((randomQuizzes) => {
+    this.setQuizCategory(quizCategory, quizTitle);
+    this.quizService.loadQuizzes(this.game.quizCategory).then((randomQuizzes) => {
       this.game.setQuizzes(randomQuizzes);
       this.ui.setQuizzes(randomQuizzes.map(
         this.quizService.buildQuiz.bind(this.quizService))
       );
+      this.ui.hideLoader();
     });
   }
 
@@ -472,7 +500,11 @@ class QuizService {
   loadQuizzes(quizName) {
     return fetch(`quizzes/${quizName}.json`)
       .then((result) => result.json())
+      .then((quizzes) => quizzes.filter(q => SUPPORTED_QUIZ_TYPES.includes(q.type)))
       .then((quizzes) => {
+        if (quizzes.length < 5) {
+          throw new Error('There are not enough quizzes');
+        }
         return new Promise((resolve, reject) => resolve(this.shuffleQuizzes(quizzes)));
       })
       .catch((error) => console.error(error));
@@ -557,11 +589,13 @@ class QuizService {
     switch (rawQuiz.type) {
       case 'checkbox':
       case 'radio':
-        description = `<div class="description">${rawQuiz.description ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
+        description = `<div class="description">${rawQuiz.description
+          ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
         inputs = this._buildChoices(rawQuiz, rawQuizIndex, showAnswer);
         break;
       case 'input':
-        description = `<div class="description">${rawQuiz.description ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
+        description = `<div class="description">${rawQuiz.description
+          ? this._htmlEntities(rawQuiz.description) : ''}</div>`;
         inputs = this._buildInput(rawQuiz, showAnswer);
         break;
       case 'multi-input':
@@ -695,6 +729,12 @@ class SwiperHandler {
 }
 
 function eventListeners() {
+  let quizCategories = QUIZ_CATEGORIES.map((data) => {
+    return `<a href="#" class="quiz-category" data-quiz-category="${data.category}" data-quiz-title="${data.title}">${data.title}</a>`;
+  });
+
+  document.getElementById('quiz-categories').innerHTML = quizCategories.join('');
+
   const ui = new UI;
   const game = new Game;
   const quizService = new QuizService();
@@ -708,8 +748,12 @@ function eventListeners() {
   document.body.onkeyup = (e) => e.key === "Escape" ? controller.toggleMenu() : null;
   document.addEventListener('timeout', () => controller.submitAnswer(false));
 
-  ui.quizTypes.forEach((value) => {
-    value.onclick = controller.loadQuizzesByType.bind(controller, value.getAttribute('data-quiz-type'));
+  ui.quizCategories.forEach((value) => {
+    value.onclick = controller.loadQuizzesByType.bind(
+      controller,
+      value.getAttribute('data-quiz-category'),
+      value.getAttribute('data-quiz-title')
+    );
   });
 
   ui.menuLinks.forEach((value) => {
@@ -720,7 +764,10 @@ function eventListeners() {
     value.onclick = () => controller.restart();
   });
 
-  controller.loadQuizzesByType('js');
+  controller.loadQuizzesByType(
+    QUIZ_CATEGORIES[0].category,
+    QUIZ_CATEGORIES[0].title
+  );
 }
 
 document.addEventListener('DOMContentLoaded', eventListeners);

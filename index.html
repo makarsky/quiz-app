@@ -48,6 +48,11 @@
     <!-- Countdown -->
     <div id="countdown" class="countdown hidden"></div>
 
+    <!-- Loader -->
+    <div id="loader" class="loader-container hidden">
+      <div class="loader"></div>
+    </div>
+
     <!-- Quiz description -->
     <div id="quiz-description"><div class="card text-center">
         <div class="quiz-description__title">
@@ -95,44 +100,31 @@
     <!-- Navigation -->
     <div id="navigation" class="overlay">
       <div class="overlay__header">
-        <span id="closeMenuButton" class="overlay__header__closebtn">&times;</span>
+        <a href="#" class="menu-link overlay__header__link" data-menu="menu">&larr;</a>
+        <a href="#" id="closeMenuButton" class="overlay__header__link">&times;</a>
       </div>
 
       <!-- Menu -->
       <div id="menu" class="overlay__content">
         <a href="#" class="menu-link" data-menu="about">Author</a>
-        <a href="#" class="menu-link" data-menu="challenges">Challenges</a>
+        <a href="#" class="menu-link" data-menu="challenges">Quizzes</a>
+        <a href="https://github.com/makarsky/quiz-app" >Do you want to add a quiz?</a>
       </div>
 
       <!-- About section -->
       <div id="about" class="overlay__content">
         <div>
-          <a href="#" class="menu-link" data-menu="menu">&larr; Back</a>
+          <img src="https://api.sololearn.com/Uploads/Avatars/779917.jpg" alt="Avatar" class="img-circle"
+            style="width:80px">
         </div>
         <div>
-          <div class="">
-            <img src="https://api.sololearn.com/Uploads/Avatars/779917.jpg" alt="Avatar" class="img-circle"
-              style="width:80px">
-          </div>
-          <br>
-          <div style="color:#BBB">
-            <h4 class="media-heading">Igor Makarsky</h4>
-            <p><a href="https://www.sololearn.com/Profile/779917">My Sololearn profile</a></p>
-          </div>
+          <a href="https://www.sololearn.com/Profile/779917">Igor Makarsky</a>
         </div>
       </div>
 
       <!-- Challenges section -->
       <div id="challenges" class="overlay__content">
-        <div>
-          <a href="#" class="menu-link" data-menu="menu">&larr; Back</a>
-        </div>
-        <div class="quiz-types">
-          <a href="#" class="quiz-type" data-quiz-type="js">Javascript</a>
-          <a href="#" class="quiz-type" data-quiz-type="java">Java</a>
-          <a href="#" class="quiz-type" data-quiz-type="php">PHP</a>
-          <a href="#" class="quiz-type" data-quiz-type="sql">SQL</a>
-        </div>
+        <div id="quiz-categories"></div>
       </div>
 
     </div>
