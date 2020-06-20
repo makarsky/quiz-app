@@ -47,12 +47,12 @@ class UI {
 
   toggleMenu() {
     this.openLink('menu');
-    this.navigation.classList.toggle("overlay-opened");
+    this.navigation.classList.toggle('overlay--opened');
   }
 
   closeMenu() {
     this.openLink('menu');
-    this.navigation.classList.remove("overlay-opened");
+    this.navigation.classList.remove('overlay--opened');
   }
 
   openLink(id) {
