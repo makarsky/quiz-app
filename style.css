@@ -334,12 +334,10 @@ button:hover {
     top: 0;
     background-color: rgba(0, 0, 0, 0.9);
     overflow-x: hidden;
-    /* Disable horizontal scroll */
-    transition: 0.4s;
-    /* 0.4 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+    transition: width 0.4s;
 }
 
-.overlay-opened {
+.overlay--opened {
     width: 100vw;
 }
 
@@ -350,27 +348,37 @@ button:hover {
 
 .overlay__header {
     display: flex;
-    justify-content: end;
-    color: #818181;
+    justify-content: space-between;
 }
 
-.overlay__header__closebtn {
-    font-size: 60px;
-    padding: 12px 30px;
-    line-height: 1;
+.overlay__header .overlay__header__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    height: 60px;
+    width: 60px;
+    padding: 0;
 }
 
 .overlay a {
-    padding: 8px;
+    padding: 8px 0;
     text-decoration: none;
-    font-size: 30px;
-    color: #818181;
+    font-size: 24px;
+    color: transparent;
     display: block;
-    transition: color 0.3s;
+    transition: color 0.2s;
+    outline: none;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-.overlay a:hover,
-.overlay a:focus {
+.overlay.overlay--opened a {
+    color: #818181;
+}
+
+.overlay.overlay--opened a:hover,
+.overlay.overlay--opened a:focus {
     color: #f1f1f1;
 }
 
