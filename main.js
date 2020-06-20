@@ -36,12 +36,14 @@ class UI {
     this.menuLinks = Array.from(document.getElementsByClassName('menu-link'));
     this.restartButtons = Array.from(document.getElementsByClassName('restart'));
     this.timebar = document.getElementById('timeBar');
+    this.loader = document.getElementById('loader');
     this.timer = new Timer(this.timebar);
     this.swiperHandler = new SwiperHandler;
     this.hideDescriptionTimeout = null;
     this.hideCardTimeout = null;
     this.renderNextQuizTimeout = null;
     this.countInterval = null;
+    this.loaderTimeout = null;
   }
 
   showElement(element) {
@@ -50,6 +52,19 @@ class UI {
 
   hideElement(element) {
     element.classList.add('hidden');
+  }
+
+  showLoader() {
+    // Timeout in case Github is down.
+    this.loaderTimeout = setTimeout(
+      () => this.showElement(this.loader),
+      1000
+    );
+  }
+
+  hideLoader() {
+    clearTimeout(this.loaderTimeout);
+    this.hideElement(this.loader);
   }
 
   toggleMenu() {
@@ -264,6 +279,7 @@ class UI {
     clearTimeout(this.hideCardTimeout);
     clearTimeout(this.hideDescriptionTimeout);
     clearInterval(this.countInterval);
+    clearTimeout(this.loaderTimeout);
   }
 
   restart() {
@@ -434,6 +450,7 @@ class Controller {
     this.ui.hideElement(this.ui.quiz);
     this.ui.restart();
     this.game.restart();
+    this.ui.showLoader();
 
     this.setQuizCategory(quizCategory, quizTitle);
     this.quizService.loadQuizzes(this.game.quizCategory).then((randomQuizzes) => {
@@ -441,6 +458,7 @@ class Controller {
       this.ui.setQuizzes(randomQuizzes.map(
         this.quizService.buildQuiz.bind(this.quizService))
       );
+      this.ui.hideLoader();
     });
   }
 
