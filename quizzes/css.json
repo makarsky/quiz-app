@@ -1,0 +1,44 @@
+[
+    {
+        "question": "Fill in the blanks to put the content of a div in the center of the screen.",
+        "description": "div {\n  display: <in>;\n  <in>-content: center;\n  align-items: <in>;\n  height: 100vh;\n  width: 100vw;\n}",
+        "type": "multi-input",
+        "correctAnswer": ["flex", "justify", "center"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Fill in the blanks to make text content red and underlined for all div elements with 'underlined' set within its class attribute.",
+        "description": "<in> {\n  <in>: red;\n  text-<in>: underline;\n}",
+        "type": "multi-input",
+        "correctAnswer": ["div.underlined", "color", "decoration"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Which selector does select all <span> elements that are placed immediately after <input> elements?",
+        "type": "radio",
+        "choices": ["input > span", "input + span", "input, span", "input span"],
+        "correctAnswer": 1,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Fill in the blanks to make the bottom border invisible of the last element with the class \"block\".",
+        "description": ".block {\n  border-bottom: 2px solid red;\n}\n.block:last-of-<in> {\n  border-bottom-color: <in>;\n}",
+        "type": "multi-input",
+        "correctAnswer": ["type", "transparent"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "An element with the class \"text\" will have changed its text color during runtime. Fill in the blanks to make this change smooth with duration of 1 second.",
+        "description": ".text {\n  color: green;\n  <in>: color <in>;\n}",
+        "type": "multi-input",
+        "correctAnswer": ["transition", "1s"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Fill in the blanks to stick the element with a class \"bottom\" to the bottom of the page.",
+        "description": ".bottom {\n  <in>: <in>;\n  bottom: 0;\n}",
+        "type": "multi-input",
+        "correctAnswer": ["position", "fixed"],
+        "madeBy": "Igor Makarsky"
+    }
+]
