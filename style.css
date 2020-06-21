@@ -421,8 +421,8 @@ button:hover {
     border-bottom: 1px solid #ddd;
 }
 
-.input-label:last-child {
-    border-bottom: transparent;
+.input-label:last-of-type {
+    border-bottom-color: transparent;
 }
 
 .input-label input {
@@ -526,13 +526,8 @@ button:hover {
     width: 100vw;
     height: 100vh;
     position: absolute;
-    top: 50%;
-    bottom: auto;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%) translateY(-50%);
-    transition: opacity .4s;
-    opacity: 1;
+    top: 0;
+    left: 0;
     z-index: 2;
 }
 
@@ -566,10 +561,6 @@ button:hover {
     border-top-color: #4CAF50;
     border-radius: 50%;
     animation: 2s linear infinite loader-after-rotation;
-}
-
-.loader--visible {
-    opacity: 1;
 }
 
 @keyframes loader-rotation {
