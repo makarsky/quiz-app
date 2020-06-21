@@ -2,7 +2,8 @@ const QUIZ_CATEGORIES = [
   {category: 'js', title: 'JavaScript'},
   {category: 'java', title: 'Java'},
   {category: 'php', title: 'PHP'},
-  {category: 'sql', title: 'SQL (MySQL)'}
+  {category: 'sql', title: 'SQL (MySQL)'},
+  {category: 'css', title: 'CSS'}
 ];
 
 const SUPPORTED_QUIZ_TYPES = [
@@ -288,6 +289,7 @@ class UI {
     document.querySelector('.swiper-custom-pagination').classList.add('hidden');
     document.querySelector('#answers').classList.add('hidden');
     document.querySelector('#quiz-indicators').classList.remove('hidden');
+    this.countdownElement.classList.add('hidden');
     this.resultCard.classList.add('hidden');
     let indicators = document.querySelectorAll('#quiz-indicators > .indicator');
     [].map.call(indicators, (e) => e.className = 'indicator');
