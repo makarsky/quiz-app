@@ -653,6 +653,16 @@ class QuizService {
       throw new Error('Empty description in the multi-input quiz type.');
     }
 
+    const onInput = () => {
+      this.parentNode.dataset.value = this.value;
+
+      if (this.value.length === +this.attributes.maxlength.value) {
+        let inputs = Array.from(this.parentNode.parentNode.querySelectorAll('input'));
+        let index = inputs.indexOf(this);
+        index === inputs.length - 1 ? this.blur() : inputs[index + 1].focus();
+      }
+    };
+
     let splittedDescription = rawQuiz.description.split('<in>');
 
     function *initInputGenerator() {
@@ -660,7 +670,7 @@ class QuizService {
         yield `<label class="input-sizer input-sizer--inline"
           ${showAnswer ? `data-value="${answer}"` : ''}>
           <input type="text"
-            onInput="this.parentNode.dataset.value = this.value"
+            onInput="(${onInput})()"
             size="2"
             value="${showAnswer ? answer : ''}"
             maxlength="${answer.length}"
