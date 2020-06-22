@@ -1,0 +1,38 @@
+[
+    {
+        "question": "Complete the command to identify the shell which is currently being used.",
+        "description": "$ echo $<in>",
+        "type": "multi-input",
+        "correctAnswer": ["SHELL"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Fill in the blanks to write \"hello\" to a file and print the contents of that file.",
+        "description": "$ touch file.txt\n$ <in> \"hello\" >> file.txt\n$ <in> file.txt",
+        "type": "multi-input",
+        "correctAnswer": ["echo", "cat"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the difference between > and >> in the following context?",
+        "description": "$ echo \"text\" > file.txt\n$ echo \"text\" >> file.txt",
+        "type": "checkbox",
+        "choices": ["The >> appends the string to the file or creates the file if it doesn't exist.", "The > overwrites the file if it exists or creates it if it doesn't exist.", "The >> overwrites the file if it exists or creates it if it doesn't exist.", "The > appends the string to the file or creates the file if it doesn't exist."],
+        "correctAnswer": [0, 1],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Complete the command to uninstall rpm package.",
+        "description": "$ rpm -<in> telnet.rpm",
+        "type": "multi-input",
+        "correctAnswer": ["e"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Complete the command to start MySQL service.",
+        "description": "$ sudo <in> mysql <in>",
+        "type": "multi-input",
+        "correctAnswer": ["service", "start"],
+        "madeBy": "Igor Makarsky"
+    }
+]

@@ -151,7 +151,7 @@
         "correctAnswer": [0, 1]
     },
     {
-        "question": "What are the ways that we can get an element with id 'div'",
+        "question": "What are the ways that we can get an element with id 'div'?",
         "description": "Choose all that apply",
         "choices": ["document.getElementById('div')", "document.querySelector('#div')", "document.getElementById('#div')", "document.select('#div')"],
         "type": "checkbox",
