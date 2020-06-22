@@ -3,7 +3,8 @@ const QUIZ_CATEGORIES = [
   {category: 'java', title: 'Java'},
   {category: 'php', title: 'PHP'},
   {category: 'sql', title: 'SQL (MySQL)'},
-  {category: 'css', title: 'CSS'}
+  {category: 'css', title: 'CSS'},
+  {category: 'bash', title: 'Bash'}
 ];
 
 const SUPPORTED_QUIZ_TYPES = [
