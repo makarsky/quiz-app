@@ -24,3 +24,4 @@ Submit a Pull Request, with your quiz added to the `quizzes/{category}.json` fil
 - <in> wildcard represents an input for multi-input quizzes.
 - Values in inputs are trimmed for text input type quizzes.
 - There are no limits for the number of choices for radio and checkbox quiz types. However, let's keep this number reasonable. 
+- Text input values cannot start with a whitespace.

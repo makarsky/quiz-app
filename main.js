@@ -654,12 +654,20 @@ class QuizService {
     }
 
     const onInput = () => {
+      if (this.value === ' ') {
+          // This prevents from autocompletion whitespaces
+          this.value = '';
+      }
       this.parentNode.dataset.value = this.value;
 
       if (this.value.length === +this.attributes.maxlength.value) {
         let inputs = Array.from(this.parentNode.parentNode.querySelectorAll('input'));
         let index = inputs.indexOf(this);
-        index === inputs.length - 1 ? this.blur() : inputs[index + 1].focus();
+        if (index === inputs.length - 1) {
+          this.blur();
+        } else {
+          inputs[index + 1].focus();
+        }
       }
     };
 
