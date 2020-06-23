@@ -311,7 +311,7 @@ button:hover {
     justify-content: space-between;
     cursor: pointer;
     width: 42px;
-    padding: 9px;
+    padding: 9px 12px;
 }
 
 .menu-container--fake {
