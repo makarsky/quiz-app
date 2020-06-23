@@ -42,7 +42,7 @@
         "madeBy": "Igor Makarsky"
     },
     {
-        "question": "The following margin options are interchangeable.",
+        "question": "The following margin properties are interchangeable.",
         "description": "1. margin: 10px 15px;\n2. margin: 10px 15px 10px 15px;\n3. margin: 10px 15px 10px;",
         "type": "radio",
         "choices": ["true", "false"],
@@ -65,7 +65,7 @@
         "madeBy": "Igor Makarsky"
     },
     {
-        "question": "The following padding options are interchangeable.",
+        "question": "The following padding properties are interchangeable.",
         "description": "1. padding: 20px 5px;\n2. padding: 20px 5px 20px 5px;\n3. padding: 20px 5px 20px;",
         "type": "radio",
         "choices": ["true", "false"],
@@ -78,6 +78,44 @@
         "type": "radio",
         "choices": ["A circle", "A square", "A triangle", "This rule is invalid"],
         "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "The following CSS rule is valid.",
+        "description": ".element {\n  position: relative;\n  border: 5px dash green;\n  width: 100px;\n  height: 100px;\n  margin: 20px;\n}",
+        "type": "radio",
+        "choices": ["true", "false"],
+        "correctAnswer": 1,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "The following properties are equivalent.",
+        "description": "1. border: 2px solid #000;\n\n2. border-width: 2px;\n    border-styling: solid;\n    border-color: #000;",
+        "type": "radio",
+        "choices": ["true", "false"],
+        "correctAnswer": 1,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Complete the rule to hide scroll bars.",
+        "description": "body {\n  <in>: <in>;\n}",
+        "type": "multi-input",
+        "correctAnswer": ["overflow", "hidden"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Select screen widths to which the following rule will be applied.",
+        "description": "@media screen and (max-width: 640px) {\n  .element {\n    background-color: green;\n  }\n}",
+        "type": "checkbox",
+        "choices": ["640px", "639px", "320px", "641px", "1280px"],
+        "correctAnswer": [0, 1, 2],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Which property specifies the spacing behavior between tags and words?",
+        "type": "radio",
+        "choices": ["text-spacing", "word-spacing", "tag-spacing", "alpha-spacing"],
+        "correctAnswer": 1,
         "madeBy": "Igor Makarsky"
     }
 ]
