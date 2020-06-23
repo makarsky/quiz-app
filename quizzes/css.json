@@ -117,5 +117,18 @@
         "choices": ["text-spacing", "word-spacing", "tag-spacing", "alpha-spacing"],
         "correctAnswer": 1,
         "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Which CSS selector has the highest priority if they all match the same element?",
+        "choices": [".element", "input#name[type=\"text\"]", "#name.element", "input#name"],
+        "type": "radio",
+        "correctAnswer": 1
+    },
+    {
+        "question": "The following rules match the same element. Which background color will the element have?",
+        "description": ".element {background-color: green;}\n#el {background-color: #00F;}\ndiv#el {background-color: #f00;}\n#el.element {background-color: yellow;}",
+        "choices": ["yellow", "green", "#00F", "#f00"],
+        "type": "radio",
+        "correctAnswer": 0
     }
 ]
