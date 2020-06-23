@@ -40,5 +40,44 @@
         "type": "multi-input",
         "correctAnswer": ["position", "fixed"],
         "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "The following margin options are interchangeable.",
+        "description": "1. margin: 10px 15px;\n2. margin: 10px 15px 10px 15px;\n3. margin: 10px 15px 10px;",
+        "type": "radio",
+        "choices": ["true", "false"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Complete the following CSS rule to center selected elements on a page horizontally.",
+        "description": ".center {\n  width: 70%;\n  margin: 0 <in>;\n}",
+        "type": "multi-input",
+        "correctAnswer": ["auto"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Negative margins can be used to overlap elements without absolute positioning.",
+        "description": ".overlap {\n  margin-left: -30px;\n}",
+        "type": "radio",
+        "choices": ["true", "false"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "The following padding options are interchangeable.",
+        "description": "1. padding: 20px 5px;\n2. padding: 20px 5px 20px 5px;\n3. padding: 20px 5px 20px;",
+        "type": "radio",
+        "choices": ["true", "false"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the result of the following CSS rule?",
+        "description": ".shape {\n  width: 150px;\n  height: 150px;\n  border-radius: 50%;\n}",
+        "type": "radio",
+        "choices": ["A circle", "A square", "A triangle", "This rule is invalid"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
     }
 ]
