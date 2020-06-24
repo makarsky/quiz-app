@@ -1,4 +1,12 @@
 [
+     {
+     "question": "my name ",
+     "description": "A description is required only for multi-input type",
+     "type": "checkbox / radio / input / multi-input",
+     "choices": ["answer1", "answer2", "answer3"], 
+     "correctAnswer": "A single string for input type. A number for radio type. An array of numbers for checkbox type. An array of strings for multi-input type.",
+     "madeBy": "your name / github nickname"
+    },
     {
         "question": "What is the output?",
         "description": "alert(typeof(NaN));",
