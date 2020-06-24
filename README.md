@@ -2,7 +2,7 @@
 
 ## Got a good quiz?
 
-Submit a Pull Request, with your quiz added to the `quizzes/{category}.json` file. Make sure the quiz is in this format:
+Submit a Pull Request, with your quiz added to the END of `quizzes/{category}.json` file. Make sure the quiz is in this format:
 
 ```
 {
