@@ -130,5 +130,33 @@
         "choices": ["yellow", "green", "#00F", "#f00"],
         "type": "radio",
         "correctAnswer": 0
+    },
+    {
+        "question": "Which declaration is used to override the usual specificity in a stylesheet by giving a higher priority to a rule?",
+        "choices": ["!important", "important", "override", "!override"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "Select valid pseudo-elements.",
+        "type": "checkbox",
+        "choices": ["::after", "::before", "::first-line", "::selection", "::first-word"],
+        "correctAnswer": [0, 1, 2, 3],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Select valid display property values.",
+        "type": "checkbox",
+        "choices": ["none", "table-cell", "list-item", "inline-flex", "radio-item"],
+        "correctAnswer": [0, 1, 2, 3],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "The following declarations will result in the same output.",
+        "description": ".transform1 {\n  transform: rotate(5deg) translateX(200px);\n}\n.transform2 {\n  transform: translateX(200px) rotate(5deg);\n}",
+        "type": "radio",
+        "choices": ["true", "false"],
+        "correctAnswer": 1,
+        "madeBy": "Igor Makarsky"
     }
 ]
