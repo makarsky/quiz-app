@@ -4,7 +4,8 @@ const QUIZ_CATEGORIES = [
   {category: 'php', title: 'PHP'},
   {category: 'sql', title: 'SQL (MySQL)'},
   {category: 'css', title: 'CSS'},
-  {category: 'bash', title: 'Bash'}
+  {category: 'bash', title: 'Bash'},
+  {category: 'dart', title: 'Dart'}
 ];
 
 const SUPPORTED_QUIZ_TYPES = [
