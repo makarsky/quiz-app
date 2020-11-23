@@ -1,0 +1,329 @@
+[
+    {
+        "question": "What is the output?",
+        "description": "main () {\n  var a = 'a';\n  String b = 'b';\n  print(a + b);\n}",
+        "type": "input",
+        "correctAnswer": "ab",
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output if the input string is 'John'?",
+        "description": "import 'dart:io';\n\nmain() {\n  stdout.writeln('What is your name?');\n  String name = stdin.readLineSync();\n  print('My name is $name');\n}",
+        "type": "radio",
+        "choices": ["My name is John", "Error", "My name is $John", "My name is 4"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  int x1 = 10;\n  double x2 = 20;\n  print(x1 + x2);\n}",
+        "type": "radio",
+        "choices": ["30", "30.0", "Error"],
+        "correctAnswer": 1,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  bool y = true;\n  int x = 2;\n  print(y + x);\n}",
+        "type": "radio",
+        "choices": ["2", "3", "Error", "true", "false"],
+        "correctAnswer": 2,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  dynamic y = true;\n  int x = 2;\n  print(y + x);\n}",
+        "type": "radio",
+        "choices": ["2", "3", "Error", "true", "false"],
+        "correctAnswer": 2,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  String s1 = r'Two lines\\n string';\n  String s2 = 'Two lines\\n string';\n  print(s1 == s2);\n}",
+        "type": "radio",
+        "choices": ["true", "false", "Error"],
+        "correctAnswer": 1,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  String s1 = r'Two lines\\n string';\n  String s2 = r'Two lines\\n string';\n  print(s1 == s2);\n}",
+        "type": "radio",
+        "choices": ["true", "false", "Error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  String s1 = '''Two\n  lines string''';\n  String s2 = \"\"\"Two\n  lines string\"\"\";\n  print(s1 == s2);\n}",
+        "type": "radio",
+        "choices": ["true", "false", "Error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  int x1 = int.parse('1');\n  assert(x1 == 1);\n  double x2 = double.parse('1.3');\n  assert(x2 == 1.3);\n}",
+        "type": "radio",
+        "choices": ["No output", "truefalse", "truetrue", "falsefalse", "FormatException"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  print(3.14159.toStringAsFixed(2));\n}",
+        "type": "input",
+        "correctAnswer": "3.14",
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Choose correct statements.",
+        "type": "checkbox",
+        "choices": ["A variable with the final keyword is initialized at runtime and can only be assigned once.", "A variable with the const keyword is initialized at compile-time and is already assigned when at runtime.", "In a class and function, you can define a final variable.", "You can’t define const inside a class. But you can in a function.", "In a class and function, you can define a const variable.", "You can’t define final inside a class. But you can in a function."],
+        "correctAnswer": [0, 1, 2, 3],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  dynamic x = 'cat';\n  x = 123;\n  var y;\n  y = 'cat';\n  y = 123;\n  print(x == y);\n}",
+        "type": "radio",
+        "choices": ["true", "false", "Error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  dynamic x = 'cat';\n  x = 123;\n  var y = 'cat';\n  y = 123;\n  print(x == y);\n}",
+        "type": "radio",
+        "choices": ["true", "false", "Error"],
+        "correctAnswer": 2,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Fill in the blank to output the type of the constant.",
+        "description": "main() {\n  const x = 'cat';\n  print(x.<in>);\n}",
+        "type": "multi-input",
+        "correctAnswer": ["runtimeType"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  int x;\n  print(x);\n}",
+        "type": "radio",
+        "choices": ["null", "0", "Error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "class Person {\n  int age = 30;\n}\n\nvoid main() {\n  Person p;\n  print(p?.age);\n}",
+        "type": "radio",
+        "choices": ["null", "NoSuchMethodError", "false", "30"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "class Person {\n  int age = 30;\n}\n\nvoid main() {\n  Person p;\n  print(p?.age ?? 18);\n}",
+        "type": "radio",
+        "choices": ["18", "null", "NoSuchMethodError", "false", "30"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "class Person {\n  int age;\n}\n\nvoid main() {\n  Person p = Person();\n  p.age ??= 20;\n  print(p.age);\n}",
+        "type": "radio",
+        "choices": ["20", "null", "Error", "false"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Fill in the blanks to print the variable if it is an integer.",
+        "description": "void main() {\n  var x = 12;\n\n  if (x <in> int) {\n    print(<in>);\n  }\n}",
+        "type": "multi-input",
+        "correctAnswer": ["is", "x"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "The following loops have the same output.",
+        "description": "void main () {\n  var nums = [1, 2, 3];\n\n  for (int i in nums) {\n    print(i);\n  }\n\n  nums.forEach(print);\n}",
+        "type": "radio",
+        "choices": ["true", "false"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  List<double> nums = [2];\n\n  nums.forEach(print);\n}",
+        "type": "radio",
+        "choices": ["2", "2.0", "Error", "null"],
+        "correctAnswer": 1,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  List<int> nums = const [2];\n  nums.add(3);\n\n  nums.forEach(print);\n}",
+        "type": "radio",
+        "choices": ["Exception", "23", "2", "null"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  List x = [1];\n  List y = [...x, 2];\n\n  y.forEach(print);\n}",
+        "type": "input",
+        "correctAnswer": "12",
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  Set x = {3, 2, 3, 1};\n\n  x.forEach(print);\n}",
+        "type": "radio",
+        "choices": ["321", "123", "Error", "3231", "1233"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  var x = {1, 2, 2, 3};\n  print(x.length);\n}",
+        "type": "input",
+        "correctAnswer": "3",
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  var x = {\n    'name': 'John',\n    'age': 22,\n  };\n  print(x.name);\n}",
+        "type": "radio",
+        "choices": ["Error", "John", "null"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  Map x = {\n    'name': 'John',\n    'age': 22,\n  };\n  x.addAll({\n    'level': 80,\n    'role': 'admin',\n    'age': 30,\n  });\n  print(x.length);\n}",
+        "type": "input",
+        "correctAnswer": "4",
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  print(square(2));\n}\n\ndouble square(var x) => x * x;",
+        "type": "radio",
+        "choices": ["Unhandled exception", "2", "2.0"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  print(divide(y: 2, x: 4));\n}\n\nint divide({x, y}) => (x / y).floor();",
+        "type": "input",
+        "correctAnswer": "2",
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  print(sum(2));\n}\n\nint sum(int x, {int y}) {\n  return x + (y ?? 0);\n}",
+        "type": "radio",
+        "choices": ["2", "0", "NoSuchMethodError"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  print(sum(4));\n}\nint sum(int x, {int y = 0}) {\n  return x + y;\n}",
+        "type": "radio",
+        "choices": ["4", "0", "NoSuchMethodError"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  print(sum(2));\n}\nint sum(int x, [int y = 5]) {\n  return x + y;\n}",
+        "type": "radio",
+        "choices": ["7", "5", "NoSuchMethodError"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "class Car {\n  String brand;\n  int mileage;\n  void printProperties() {\n    print(brand);\n    print(mileage);\n  }\n}\nvoid main() {\n  Car car = Car();\n  car.printProperties();\n}",
+        "type": "radio",
+        "choices": ["nullnull", "No output", "Error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "class Car {\n  String brand;\n  int mileage;\n  Car(this.brand, [this.mileage = 100]);\n}\nvoid main() {\n  Car car = Car('Pontiac');\n  print('${car.brand} ${car.mileage}');\n}",
+        "type": "radio",
+        "choices": ["Pontiac 100", "Pontiac null", "Error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "class Car {\n  int mileage;\n  Car.customConstructor([this.mileage = 1000]);\n}\nvoid main() {\n  Car car = Car.customConstructor();\n  print(car.mileage);\n}",
+        "type": "radio",
+        "choices": ["1000", "null", "Error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "class Robot {\n  final name;\n  Robot([this.name = 'Stem']);\n}\nvoid main() {\n  Robot r = Robot('Wall-e');\n  print(r.name);\n}",
+        "type": "radio",
+        "choices": ["Wall-e", "null", "Error", "Stem"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "class Robot {\n  static const int wheels = 2;\n}\nvoid main() {\n  Robot r = Robot();\n  print(r.wheels);\n}",
+        "type": "radio",
+        "choices": ["Error", "null", "2"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "abstract class MeleeWeapon {\n  int damage;\n  MeleeWeapon([this.damage = 4]);\n}\nclass Shovel extends MeleeWeapon {\n  Shovel([int damage]) : super(damage);\n}\nvoid main() {\n  Shovel s = Shovel();\n  print(s.damage);\n}",
+        "type": "radio",
+        "choices": ["null", "Error", "4"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "class Circle {\n  num x, y, r;\n  Circle(this.x, this.y, this.r);\n  num get diameter => 2 * r;\n  set diameter(num d) {\n    this.r = d / 2;\n  }\n}\nvoid main() {\n  Circle c = Circle(0, 0, 3);\n  c.diameter = 8;\n  print(c.r);\n}",
+        "type": "radio",
+        "choices": ["4.0", "4", "Error", "null", "3", "3.0"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  print(divide(2, 0));\n}\n\nnum divide(x, y) => x / y;",
+        "type": "radio",
+        "choices": ["Infinity", "0", "Error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  try {\n    print(divide(2, 0));\n  } on Exception catch (e) {\n  } finally {\n    print('Exception was thrown');\n  }\n}\nnum divide(x, y) {\n  if (y == 0) {\n    throw Exception('Division by zero');\n  }\n  return x / y;\n}",
+        "type": "radio",
+        "choices": ["Exception was thrown", "Division by zero", "No output", "Infinity"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "void main() {\n  print('a' * 3);\n}",
+        "type": "radio",
+        "choices": ["aaa", "a", "3", "a3", "Error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    }
+]
