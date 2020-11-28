@@ -325,5 +325,59 @@
         "choices": ["aaa", "a", "3", "a3", "Error"],
         "correctAnswer": 0,
         "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() async {\n  final values = await Future.wait([\n    Future.value(1),\n    Future.value(2),\n    Future.value(3),\n  ]);\n  print(values);\n}",
+        "type": "radio",
+        "choices": ["[1, 2, 3]", "[3, 2, 1]", "Error", "The result is unpredictable"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "Fill in the  blanks to output 'true'",
+        "description": "class NameValidator {\n  bool <in>(String name) {\n    return name.length > 3;\n  }\n}\nmain() {\n  final validator = new NameValidator();\n  <in>(validator('John'));\n}",
+        "type": "multi-input",
+        "correctAnswer": ["call", "print"],
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "print10([callback]) {\n  print(10);\n  callback?.call();\n}\nmain() {\n  print10();\n}",
+        "type": "radio",
+        "choices": ["10", "null", "No output", "Error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  const bool addSkills = true;\n  const Map skills = {\n    'hunting': 99,\n    'cooking': 1,\n  };\n  const Map searchParams = {\n    'name': 'John',\n    'age': 25,\n    if (addSkills) ...skills,\n  };\n  print(searchParams.length);\n}",
+        "type": "input",
+        "correctAnswer": "4",
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "How many rows will be printed?",
+        "description": "main() {\n  const Map skills = <String, int>{\n    'hunting': 99,\n    null: null,\n  };\n  for (final s in skills.entries) {\n    print('${s.key} ${s.value}');\n  }\n}",
+        "type": "radio",
+        "choices": ["2", "1", "No output", "There will be an error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  final list1 = [1, 2, 3, 1];\n  final list2 = {1, 2, 3, 1};\n  print(list1.length == list2.length);\n}",
+        "type": "radio",
+        "choices": ["false", "true", "Error"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
+    },
+    {
+        "question": "What is the output?",
+        "description": "main() {\n  const list1 = [1, 2, 3, 2];\n  const list2 = {1, 2, 3, 2};\n  print(list1.length == list2.length);\n}",
+        "type": "radio",
+        "choices": ["Error", "false", "true"],
+        "correctAnswer": 0,
+        "madeBy": "Igor Makarsky"
     }
 ]
