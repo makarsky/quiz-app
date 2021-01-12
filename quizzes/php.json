@@ -183,5 +183,11 @@
         "choices": ["Closure::call()", "Generator Return Expressions", "Class member access on cloning, e.g. (clone $foo)->bar()", "foreach now supports list()", "Exponentiation via **"],
         "type": "checkbox",
         "correctAnswer": [0, 1, 2]
+    },
+    {
+        "question": "How do you catch a PHP fatal (E_ERROR) error?",
+        "choices": ["Using the register_shutdown_function", "Using the try-cacth", "This type of error is not possible to catch"],
+        "type": "radio",
+        "correctAnswer": [0]
     }
 ]
