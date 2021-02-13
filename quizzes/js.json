@@ -118,6 +118,17 @@
         "correctAnswer": 0
     },
     {
+        "question": "Which value of the 'position' parameter of the insertAdjacentElement() allows to insert a child element after the current element?",
+        "choices": ["afterend", "afterbegin", "beforeend", "beforebegin"],
+        "type": "radio",
+        "correctAnswer": "afterend"
+    },
+    {
+        "question": "Which value of the 'position' parameter of the insertAdjacentElement() allows to insert a child element before the end of the current element (as the last child)?",
+        "choices": ["beforeend", "beforebegin", "afterbegin", "afterend"],
+        "type": "radio",
+        "correctAnswer": "beforeend"
+    },
         "question": "What is the difference between 'var' and 'let'?",
         "choices": ["'var' declares a function-scoped variable.", "'let' declares a block-scoped variable.", "'let' declares a function-scoped variable.", "'var' declares a block-scoped variable."],
         "type": "checkbox",

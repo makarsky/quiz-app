@@ -1,0 +1,237 @@
+[
+    {
+        "question": "What is the purpose of [] in angular.module('myApp', [])?",
+        "choices": ["This is the list of modules myApp depends on.", "This is the list of myApp controllers.", "This is the list of myApp $scope variables."],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "Choose HTML valid directives.",
+        "choices": ["data-ng-app", "data-ng-bind", "ng-init", "ng-model"],
+        "type": "checkbox",
+        "correctAnswer": [0, 1]
+    },
+    {
+        "question": "Choose valid ways to invoke the testDirective.",
+        "choices": ["&lt;test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: test-directive --&gt;"],
+        "type": "checkbox",
+        "correctAnswer": [0, 1, 2, 3]
+    },
+    {
+        "question": "Choose ways to invoke the testDirective which don't require any specified restrictions.",
+        "choices": ["&lt;test-directive&gt;&lt;/test-directive&gt;", "&lt;div test-directive&gt;&lt;/div&gt;", "&lt;div class=\"test-directive\"&gt;&lt;/div&gt;", "&lt;!-- directive: test-directive --&gt;"],
+        "type": "checkbox",
+        "correctAnswer": [0, 1]
+    },
+    {
+        "question": "What directive repeats an HTML element?",
+        "choices": ["ng-repeat", "ng-for", "ng-while", "ng-loop"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "What directive provides a two-way binding between the model and the view?",
+        "choices": ["ng-model", "ng-bind", "ng-link", "ng-controller"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "What is the $scope?",
+        "choices": ["It is the application object; the owner of application variables and functions.", "It is a controller.", "It is a directive, which binds input fields to controller properties"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "What is the $scope?",
+        "description": "If we consider an AngularJS application to consist of:\nView, which is the HTML.\nModel, which is the data available for the current view.\nController, which is the JavaScript function that makes/changes/removes/controls the data.",
+        "choices": ["Model", "View", "Controller", "Neither"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "If a variable has the same name in both the current scope and in the rootScope, from which scope does the application use the variable?",
+        "choices": ["current scope", "rootScope"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "Is this a valid way to add the 'orderBy' filter?",
+        "description": "&lt;li ng-repeat=\"x in names | orderBy:'country'\"&gt;\n  {{ x.name + ', ' + x.country }}\n&lt;/li&gt;",
+        "choices": ["Yes", "Yes, if user has implemented the 'orderBy' filter", "No"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "What is the name of the method of the $location service, which returns the url of the current web page?",
+        "type": "input",
+        "correctAnswer": "absUrl"
+    },
+    {
+        "question": "In order to use a service in a controller, what do you need to do?",
+        "choices": ["Define a service as a dependency", "Simply access the service object", "It is not possible"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "What service is AngularJS' version of the window.setTimeout function?",
+        "type": "input",
+        "correctAnswer": "$timeout"
+    },
+    {
+        "question": "What service is AngularJS' version of the window.setInterval function?",
+        "type": "input",
+        "correctAnswer": "$interval"
+    },
+    {
+        "question": "We can use a custom service inside a filter.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "What AngularJS service is used for reading data from remote servers?",
+        "type": "input",
+        "correctAnswer": "$http"
+    },
+    {
+        "question": "How to handle errors of $http service?",
+        "choices": ["Add the second callback to the .then() method.", "Call the .error() function right after .then().", "It is not possible."],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "Do we need to parse a JSON object received from a server with $http service?",
+        "choices": ["No, the data you get from the response is expected to be in JSON format.", "Yes, the data you get from the response is expected to be in string format."],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "What do we need to insert into {{ }} To display the table row index?",
+        "type": "input",
+        "correctAnswer": "$index"
+    },
+    {
+        "question": "What does the following string mean, if 'names' is an array of strings?",
+        "description": "&lt;select ng-model=\"selectedName\" ng-options=\"x for x in names\"&gt;\n&lt;/select&gt;",
+        "choices": ["This will create a dropdown list, based on the 'names' array.", "ng-options directive is wrong, should be 'x in names'.", "ng-options directive is wrong, should be 'x for names'."],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "What does the following string mean, if 'cars' is an object which has other objects inside of it?",
+        "description": "&lt;select ng-model=\"selectedCar\" ng-options=\"y.color for (x, y) in cars\"&gt;\n&lt;/select&gt;",
+        "choices": ["This will create a dropdown list, based on the 'cars' object: {x1: {color: 'white'}}.", "ng-options directive is wrong, should be 'x.color for (x, y) in cars'.", "ng-options directive is wrong, should be 'y.color in cars'.", "This will create a dropdown list, based on the 'cars' object: {color: 'white'}."],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "Is the following syntax valid?",
+        "description": "&lt;p ng-show=\"15 &gt; 12\"&gt;I am visible.&lt;/p&gt;",
+        "choices": ["Yes", "No"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "Which directive can be used to make a button disabled?",
+        "choices": ["ng-disabled", "ng-enabled", "ng-disable", "ng-enable"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "Which directives can be used to hide an element?",
+        "choices": ["ng-show", "ng-hide", "ng-disabled", "ng-enabled", "ng-showed", "ng-hidden"],
+        "type": "checkbox",
+        "correctAnswer": [0, 1]
+    },
+    {
+        "question": "Choose valid directives.",
+        "choices": ["ng-blur", "ng-paste", "ng-dblclick", "ng-cut", "ng-mouseenter", "ng-mousecenter", "ng-insert"],
+        "type": "checkbox",
+        "correctAnswer": [0, 1, 2, 3, 4]
+    },
+    {
+        "question": "You can pass the $event object as an argument when calling the function.",
+        "choices": ["Yes", "No"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "AngularJS holds information about whether input fields have been touched.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "How to find out whether the following input is valid?",
+        "description": "&lt;form name=\"my\"&gt;\n&lt;input name=\"x\" ng-model=\"y\" required&gt;\n&lt;/form&gt;",
+        "choices": ["my.x.$valid", "my.y.$valid", "x.$valid", "y.$valid"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "Choose existing form states.",
+        "choices": ["$pristine", "$dirty", "$submitted", "$invalid", "$valid", "$touched", "$untouched"],
+        "type": "checkbox",
+        "correctAnswer": [0, 1, 2, 3, 4]
+    },
+    {
+        "question": "Choose existing input states.",
+        "choices": ["$pristine", "$dirty", "$invalid", "$valid", "$touched", "$untouched", "$submitted"],
+        "type": "checkbox",
+        "correctAnswer": [0, 1, 2, 3, 4, 5]
+    },
+    {
+        "question": "AngularJS adds CSS classes to forms and input fields depending on their states.",
+        "choices": ["true", "false"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "How to implement custom input validation?",
+        "choices": ["You have to add a new directive, and deal with the validation inside a function.", "It is not possible.", "You have to implement validation outside of AngularJS."],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "Which function checks if a variable has string type?",
+        "choices": ["angular.isString()", "angular.hasString()", "angular.string?()", "There is no such function in AngularJS."],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "Choose the valid way of watching the 'pass' variable?",
+        "choices": ["$scope.$watch('pass', function() {$scope.test();});", "$scope.$watch('pass', $scope.test);", "$scope.$watch('pass', $scope.test(newValue, oldValue, scope));"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "Choose the correct way of inserting HTML from an external file.",
+        "choices": ["ng-include=\"'file.htm'\"", "ng-include=\"file.htm\"", "ng-insert=\"'file.htm'\"", "ng-insert=\"file.htm\"", "ng-require=\"'file.htm'\"", "ng-require=\"file.htm\""],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "What dependency should you add in your application module to add animations?",
+        "description": "The AngularJS Animate library is included.",
+        "type": "input",
+        "correctAnswer": "ngAnimate"
+    },
+    {
+        "question": "What dependency should you add in your application module to work with routing?",
+        "description": "The AngularJS Route module is included.",
+        "type": "input",
+        "correctAnswer": "ngRoute"
+    },
+    {
+        "question": "What service should you pass as a dependency to the application's configuration to configure routes?",
+        "choices": ["$routeProvider", "$routingProvider", "$router", "$route", "$routeService", "$routingService"],
+        "type": "radio",
+        "correctAnswer": 0
+    },
+    {
+        "question": "What function creates a deep copy of an object or an array?",
+        "choices": ["angular.copy()", "angular.clone()", "angular.createCopy()", "angular.createClone()"],
+        "type": "checkbox",
+        "correctAnswer": [0]
+    }
+]
