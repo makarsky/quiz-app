@@ -189,5 +189,12 @@
         "choices": ["Using the register_shutdown_function", "Using the try-cacth", "This type of error is not possible to catch"],
         "type": "radio",
         "correctAnswer": [0]
+    },
+    {
+        "question": "What is the output?",
+        "description": "$a = true AND false;\n$b = true && false;\n\nif ($a === $b) {\n\techo 'equal';\n} else {\n\techo 'not equal';\n}",
+        "choices": ["not equal", "equal"],
+        "type": "radio",
+        "correctAnswer": [0]
     }
 ]
